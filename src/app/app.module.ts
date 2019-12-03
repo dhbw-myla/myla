@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdditionalprofilesettingsComponent } from './components/additionalprofilesettings/additionalprofilesettings.component';
@@ -10,6 +14,9 @@ import { MiscellaneousComponent } from './components/miscellaneous/miscellaneous
 import { NotauthorizedComponent } from './components/notauthorized/notauthorized.component';
 import { ProfessordashboardComponent } from './components/professordashboard/professordashboard.component';
 import { UseinformationbannerComponent } from './components/useinformationbanner/useinformationbanner.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 @NgModule({
   declarations: [
@@ -20,13 +27,19 @@ import { UseinformationbannerComponent } from './components/useinformationbanner
     MiscellaneousComponent,
     NotauthorizedComponent,
     ProfessordashboardComponent,
-    UseinformationbannerComponent
+    UseinformationbannerComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [BsDropdownModule, TooltipModule, ModalModule]
 })
 export class AppModule { }
