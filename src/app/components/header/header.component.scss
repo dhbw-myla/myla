@@ -1,5 +1,22 @@
 img{
     width:auto;
     height:40px;
-    margin-right: 1vw;
+    margin-left: 1vw;
+}
+
+button{
+    position: absolute;
+    right: 1vw;
+}
+button:hover{
+    background: white;
+    color: black;
+    fill:black;
+    svg{
+        fill:black;
+    }
+}
+
+svg{
+    fill: white;
 }

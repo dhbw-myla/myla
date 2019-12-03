@@ -8,11 +8,11 @@
   }
 body {
     background-color:#FFFFFF;
-    height:100vh; 
+    height:100%; 
     overflow-y:auto;
     overflow-x: hidden;
+    position: relative;
   }
-  
 .content{
     color: #000000;
     height:95%;
@@ -20,7 +20,6 @@ body {
     padding-top:2%;
     padding-left:4%;
     padding-right:4%;
-    padding-bottom:4%;
   }
   
 p{

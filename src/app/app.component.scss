@@ -1,7 +1,14 @@
 @import "../styles.scss";
 
-.navigationBar{
-    background: #e2001a;
-    width: 100vw;
-    height: 7.5vh;
+.contentRouter{
+    padding-bottom: 100px;
+}
+.mitte{
+    padding-bottom: 10vh;
+}
+.unten{
+    position: absolute;
+    bottom: 0;
+    height: 10vh;
+    width: 100%;
 }
