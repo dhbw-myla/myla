@@ -17,6 +17,8 @@ import { UseinformationbannerComponent } from './components/useinformationbanner
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { StartseiteComponent } from './components/startseite/startseite.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { StartseiteComponent } from './components/startseite/startseite.componen
     UseinformationbannerComponent,
     HeaderComponent,
     FooterComponent,
-    StartseiteComponent
+    StartseiteComponent,
+    SignupComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
