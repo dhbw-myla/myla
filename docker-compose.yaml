@@ -1,0 +1,43 @@
+version: '3'
+services:
+  myla:
+    image: myla
+    build:
+      context: .
+    ports:
+      - 4200:4200
+    networks:
+      - myla
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:12
+    hostname: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${postgres_password}
+      POSTGRES_USER: ${postgres_user}
+    networks:
+      - myla
+    volumes:
+      - ./database/:/docker-entrypoint-initdb.d/
+
+  pgadmin:
+    image: dpage/pgadmin4:4.16
+    hostname: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${pgadmin_user} 
+      PGADMIN_DEFAULT_PASSWORD: ${pgadmin_password}
+    networks:
+      - myla
+    depends_on:
+      - postgres
+    ports:
+      - 80:80
+    logging:
+      driver: none
+        
+
+networks:
+  myla:
