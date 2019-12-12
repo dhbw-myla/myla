@@ -1,14 +1,28 @@
 @import "../styles.scss";
 
 .contentRouter{
-    padding-bottom: 100px;
+    padding-bottom: 0px;
 }
 .mitte{
-    padding-bottom: 10vh;
+    height: 86.5%;
+    min-height: 86.5vh;
+}
+.top{
+    height: 10%;
 }
 .unten{
-    position: absolute;
-    bottom: 0;
-    height: 10vh;
+    height: 10%;
     width: 100%;
+}
+
+.routerWrapper{
+    width: 100%;
+    flex: 1 0 auto;
+    background-color: #CCCCCC;
+}
+app-footer{
+    flex: none;
+    margin: 0;
+    padding: 0;
+    background-color: #CCCCCC;
 }

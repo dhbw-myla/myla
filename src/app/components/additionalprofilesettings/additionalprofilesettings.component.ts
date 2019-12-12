@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./additionalprofilesettings.component.scss']
 })
 export class AdditionalprofilesettingsComponent implements OnInit {
-
+  public arrowpagetwo : boolean = true;
   constructor() { }
 
   ngOnInit() {

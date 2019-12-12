@@ -16,6 +16,7 @@ import { ProfessordashboardComponent } from './components/professordashboard/pro
 import { UseinformationbannerComponent } from './components/useinformationbanner/useinformationbanner.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { StartseiteComponent } from './components/startseite/startseite.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ProfessordashboardComponent,
     UseinformationbannerComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    StartseiteComponent
   ],
   imports: [
     BrowserModule,
