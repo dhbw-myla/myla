@@ -2,13 +2,16 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <input class="form-control" placeholder="Surveycode"><br>
-        <button type="button" class="btn hundertProzent pressButton">Enter</button>
+        <label for="username">Surveycode</label>
+        <input id="Surveycode" class="form-control"><br>
+        <button type="button" class="btn hundertProzent pressButton" (click)="routeToSurvey()">Enter</button>
       </div>
       <hr class="horizontalLine">
       <div class="col-sm">
-        <input class="form-control" placeholder="Username" name="username" id="username"><br>
-        <input class="form-control" placeholder="Password" name="password" id="password"><br>
+          <label for="username">Username</label>
+        <input class="form-control" name="username" id="username"><br>
+        <label for="username">Password</label>
+        <input class="form-control" name="password" id="password"><br>
         <button id="username" type="button" class="btn twoButtons pressButton">Login</button>
         <button  routerLink="../signup" type="button" class="btn twoButtons pressButton">Sign Up</button>
       </div>
