@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-sm">
         <label for="username">Surveycode</label>
-        <input id="Surveycode" class="form-control"><br>
-        <button type="button" class="btn hundertProzent pressButton" (click)="routeToSurvey()">Enter</button>
+        <input #survey id="Surveycode" class="form-control"><br>
+        <button type="button" class="btn hundertProzent pressButton" (click)="routeToSurvey(survey.value)">Enter</button>
       </div>
       <hr class="horizontalLine">
       <div class="col-sm">

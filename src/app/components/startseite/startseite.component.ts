@@ -12,8 +12,8 @@ export class StartseiteComponent implements OnInit {
 
   ngOnInit() {
   }
-  routeToSurvey(){
-    this.router.navigate(['/survey/'+document.getElementById("Surveycode").value]);
+  routeToSurvey(surveyCode){
+    this.router.navigate(['/survey/'+surveyCode]);
   }
 
 }
