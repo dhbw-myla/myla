@@ -13,7 +13,7 @@ export class StartseiteComponent implements OnInit {
   ngOnInit() {
   }
   routeToSurvey(){
-    console.log(document.getElementById("Surveycode").value);
+    this.router.navigate(['/survey/'+document.getElementById("Surveycode").value]);
   }
 
 }
