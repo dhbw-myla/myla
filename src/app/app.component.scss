@@ -19,6 +19,9 @@
     width: 100%;
     flex: 1 0 auto;
     background-color: #CCCCCC;
+    -webkit-box-shadow: 0px 0px 45px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 45px -5px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 45px -5px rgba(0,0,0,0.75);
 }
 app-footer{
     flex: none;
