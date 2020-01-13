@@ -139,9 +139,9 @@ const checkIfGroupIdIsAllowedForUser = function (groupId, username) {
         db.query(`SELECT * FROM users u JOIN survey_master_group g ON g.user_id = u.user_id
                     WHERE u.username = $1 AND g.group_id = $2;`, [username, groupId], (err, result) => {
             if (err || result.rows.length !== 1) {
-                resolve(false); }
-            else {
-                resolve(true)
+                resolve(false);
+            } else {
+                resolve(true);
             }
         });
     });
@@ -240,9 +240,9 @@ const checkIfSurveyMasterIdIsAllowedForUser = function (surveyMasterId, username
         db.query(`SELECT * FROM users u JOIN survey_master m ON m.user_id = g.user_id
                     WHERE m.survey_master_id = $1 AND u.username = $2;`, [surveyMasterId, username], (err, result) => {
             if (err || result.rows.length !== 1) {
-                resolve(false); }
-            else {
-                resolve(true)
+                resolve(false);
+            } else {
+                resolve(true);
             }
         });
     });
@@ -367,6 +367,76 @@ exports.submitComment = function (request, response) {
         if (err) { response.send('Error'); return; }
         response.send("Ok");
     });
+};
+
+// Admin routes
+const checkIfUserIsAdmin = function (username) {
+    return new Promise(resolve => {
+        db.query(`SELECT * FROM users
+                    WHERE username = $1 AND is_admin = true;`, [username], (err, result) => {
+            if (err || result.rows.length !== 1) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        });
+    });
+};
+
+exports.getUsers = function (request, response) {
+    const username = request.body.username;
+    const isAdmin = await checkIfUserIsAdmin(username);
+    if (!isAdmin) { response.send("Error"); return; }
+
+    db.query(`SELECT user_id, username, is_admin, password_change_required
+                FROM users;`, (err, result) => {
+        response.send(result.rows);
+    });
+};
+
+exports.createUser = function (request, response) {
+    const username = request.body.username;
+    const isAdmin = await checkIfUserIsAdmin(username);
+    if (!isAdmin) { response.send("Error"); return; }
+    console.log("Not yet implemented");
+};
+
+exports.setRegisterKey = function (request, response) {
+    const username = request.body.username;
+    const isAdmin = await checkIfUserIsAdmin(username);
+    if (!isAdmin) { response.send("Error"); return; }
+
+    const registerKey = request.body.registerKey;
+
+    fs.writeFile(filePathRegisterKey, registerKey, "utf-8", function(err) {
+        if(err) { console.log(err); response.send("Error"); return; }
+        response.send("Ok");
+    });
+};
+
+exports.getRegisterKey = function (request, response) {
+    const username = request.body.username;
+    const isAdmin = await checkIfUserIsAdmin(username);
+    if (!isAdmin) { response.send("Error"); return; }
+
+    fs.readFile(filePathRegisterKey, "utf-8", (err, registerKeyFile) => {
+        if (err) { console.log(err); response.send('Error'); return; }
+        response.send(registerKeyFile);
+    });
+};
+
+exports.resetPasswordOfUser = function (request, response) {
+    const username = request.body.username;
+    const isAdmin = await checkIfUserIsAdmin(username);
+    if (!isAdmin) { response.send("Error"); return; }
+    console.log("Not yet implemented");
+};
+
+exports.deleteUser = function (request, response) {
+    const username = request.body.username;
+    const isAdmin = await checkIfUserIsAdmin(username);
+    if (!isAdmin) { response.send("Error"); return; }
+    console.log("Not yet implemented");
 };
 
 

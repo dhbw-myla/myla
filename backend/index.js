@@ -60,6 +60,14 @@ app.get('/getSurveyBySurveyCode/:surveyCode', routes.getSurveyBySurveyCode);
 app.post('/submitSurvey/:surveyCode', routes.submitSurvey);
 app.post('/submitComment/:surveyCode', routes.submitComment);
 
+// Admin sites
+app.post('/getUsers', routes.getUsers);
+app.post('/createUser', routes.createUser);
+app.post('/setRegisterKey', routes.setRegisterKey);
+app.post('/getRegisterKey', routes.getRegisterKey);
+app.post('/resetPasswordOfUser', routes.resetPasswordOfUser);
+app.post('/deleteUser', routes.deleteUser);
+
 // Testing
 app.get('/', function (request, response) {
     response.sendFile(__dirname + '/test.html');
