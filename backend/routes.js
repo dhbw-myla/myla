@@ -289,18 +289,28 @@ exports.submitSurvey = function (request, response) {
             return;
         }
     }
-    db.query(`SELECT survey_id FROM survey WHERE survey_code = $1
+    db.query(`SELECT survey.survey_id, survey.survey_master_id, question.question_id
+                FROM survey INNER JOIN
+                    question on survey.survey_master_id = question.survey_master_id
+                WHERE survey_code = $1
                 AND timestamp_start < $2
-                AND (timestamp_end IS NULL OR timestamp_end > $2);`, // TODO: check whether question_id and survey_id fit together
+                AND (timestamp_end IS NULL OR timestamp_end > $2);`,
             [surveyCode, new Date().toISOString()], (err, result) => {
-        if (err || result.rows.length !== 1) { response.send('Error'); return; }
+        if (err || result.rows.length < 1) { response.send('Error'); return; }
         let surveyId = result.rows[0].survey_id;
+
+        let questionIds = [];
+        for (let row of result.rows) {
+            questionIds.push(row.question_id);
+        }
 
         try {
             for (let a of answers) {
-                db.query(`INSERT INTO answer (answer, survey_id, question_id, timestamp)
-                            VALUES ($1, $2, $3, $4);`,
-                        [a.answer, surveyId, a.questionId, new Date().toISOString()]);
+                if (questionIds.includes(a.questionId)) {
+                    db.query(`INSERT INTO answer (answer, survey_id, question_id, timestamp)
+                                VALUES ($1, $2, $3, $4);`,
+                            [a.answer, surveyId, a.questionId, new Date().toISOString()]);
+                }
             }
         } catch (err) {
             response.send("Error");
