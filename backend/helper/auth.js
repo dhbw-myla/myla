@@ -15,8 +15,8 @@ exports.createSessionId = function () {
 };
 
 exports.checkUserAuthorization = function (request, callback) {
-    const username = request.cookies.username;
-    const sessionId = request.cookies.sessionId;
+    const username = request.body.username;
+    const sessionId = request.body.sessionId;
     if (username === undefined || sessionId === undefined) { callback(false); return; }
     db.query('SELECT * FROM users WHERE username = $1 AND session_id = $2;', [username, sessionId], (err, dbResult) => {
         if (err || dbResult.rows.length !== 1) {

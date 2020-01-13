@@ -52,7 +52,7 @@ exports.changePassword = function (request, response) {
 };
 
 exports.logout = function (request, response) {
-    const { username, sessionId } = request.cookies;
+    const { username, sessionId } = request.body;
     if (username === undefined || sessionId === undefined) { response.send('Error'); return; }
     db.query('UPDATE users SET session_id = NULL WHERE username = $1 AND session_id = $2;', [username, sessionId], (err, result) => {
         if (err) { response.send('Error'); return; }
@@ -62,7 +62,7 @@ exports.logout = function (request, response) {
 
 exports.getAllOwnSurveys = function (request, response) {
     // request.cookies.username is verified by auth-check before routes are handled
-    const username = request.cookies.username;
+    const username = request.body.username;
     db.query(`SELECT *
                 FROM survey s JOIN (SELECT * FROM survey_master
                                     WHERE user_id = (SELECT user_id FROM users WHERE username = $1)) sm
@@ -75,7 +75,7 @@ exports.getAllOwnSurveys = function (request, response) {
 };
 
 exports.getAllSurveyMasterTemplates = function (request, response) {
-    const username = request.cookies.username;
+    const username = request.body.username;
     db.query(`SELECT u.username, sm.survey_master_id, sm.title, sm.description, sm.group_id
                 FROM survey_master sm JOIN users u ON sm.user_id = u.user_id
                 WHERE (u.username = $1 AND sm.is_template = TRUE)
@@ -87,7 +87,7 @@ exports.getAllSurveyMasterTemplates = function (request, response) {
 };
 
 exports.getAllQuestionTemplates = function (request, response) {
-    const username = request.cookies.username;
+    const username = request.body.username;
     db.query(`SELECT u.username, q.question_id, q.question_json
                 FROM question q JOIN survey_master sm ON q.survey_master_id = sm.survey_master_id
                         JOIN users u ON sm.user_id = u.user_id
@@ -138,7 +138,7 @@ const createSurveyHelper = function (response, surveyMasterId, timestampStart, t
 };
 
 exports.createSurvey = async function (request, response) {
-    const username = request.cookies.username;
+    const username = request.body.username;
     let { title, description, timestampStart, timestampEnd, resultsVisible, isTemplate, isPublicTemplate, questions, groupId } = request.body;
 
     // make sure that no one tries to create a survey in the group of someone else
@@ -214,7 +214,7 @@ const checkIfSurveyMasterIdIsAllowedForUser = function (surveyMasterId, username
 };
 
 exports.createSurveyBasedOnMaster = async function (request, response) {
-    const username = request.cookies.username;
+    const username = request.body.username;
     let surveyMasterId = request.params.masterId;
     let { timestampStart, timestampEnd } = request.body;
     
@@ -236,7 +236,7 @@ exports.getSurveyDetails = function (request, response) {
 };
 
 exports.getAllOwnGroups = function (request, response) {
-    const username = request.cookies.username;
+    const username = request.body.username;
     db.query(`SELECT g.group_id, g.name as group_name, u.username
                 FROM survey_master_group g JOIN users u ON g.user_id = u.user_id
                 WHERE u.username = $1;`, [username], (err, result) => {
@@ -246,7 +246,7 @@ exports.getAllOwnGroups = function (request, response) {
 };
 
 exports.createGroup = function (request, response) {
-    const username = request.cookies.username;
+    const username = request.body.username;
     const { name } = request.body;
     db.query(`INSERT INTO survey_master_group (name, user_id)
                 VALUES ($1, (SELECT user_id FROM users WHERE username = $2))

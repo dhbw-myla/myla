@@ -40,15 +40,15 @@ app.post('/changePassword', routes.changePassword);
 app.get('/logout', routes.logout);
 
 // Sites for registered users
-app.get('/getAllOwnSurveys', routes.getAllOwnSurveys);
-app.get('/getAllSurveyMasterTemplates', routes.getAllSurveyMasterTemplates);
-app.get('/getAllQuestionTemplates', routes.getAllQuestionTemplates);
+app.post('/getAllOwnSurveys', routes.getAllOwnSurveys);
+app.post('/getAllSurveyMasterTemplates', routes.getAllSurveyMasterTemplates);
+app.post('/getAllQuestionTemplates', routes.getAllQuestionTemplates);
 
 app.post('/createSurvey', routes.createSurvey);
 app.post('/createSurveyBasedOnMaster/:masterId', routes.createSurveyBasedOnMaster);
 
-app.get('/getSurveyMasterDetails', routes.getSurveyMasterDetails);
-app.get('/getSurveyDetails', routes.getSurveyDetails);
+app.post('/getSurveyMasterDetails', routes.getSurveyMasterDetails);
+app.post('/getSurveyDetails', routes.getSurveyDetails);
 
 app.get('/getAllOwnGroups', routes.getAllOwnGroups);
 app.post('/createGroup', routes.createGroup);
@@ -64,7 +64,7 @@ app.post('/submitComment/:surveyCode', routes.submitComment);
 app.get('/', function (request, response) {
     response.sendFile(__dirname + '/test.html');
 });
-app.get('/secretpage', function (request, response) {
+app.post('/secretpage', function (request, response) {
     response.send('You\'re in!');
 });
 app.get('/createExampleDatabase', routes.createExampleDatabase);

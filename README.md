@@ -44,7 +44,8 @@ await fetch ("http://localhost:3000/route", {
 If something fails the response will be `Error`.
 If something was created the response will be the Id of the created object.
 
-The most routes are restricted to logged-in users. The credentials need to be specified in cookies `username` and `sessionId` as they are set by `/register` or `/login`.
+The most routes are restricted to logged-in users.
+The credentials need to be specified in body parameters `username` and `sessionId` as they are set by `/register` or `/login`.
 
 ### `POST /register`
 body:
@@ -70,13 +71,21 @@ username = user
 sessionId = 5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77
 ```
 
-### `GET /logout`
+### `POST /logout`
+body:
+```
+{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
 response:
 ```
 Ok
 ```
 
-### `GET /getAllOwnSurveys`
+### `POST /getAllOwnSurveys`
+body:
+```
+{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
 response:
 ```
 [{survey_id: 69,
@@ -96,7 +105,11 @@ response:
 ]
 ```
 
-### `GET /getAllSurveyMasterTemplates`
+### `POST /getAllSurveyMasterTemplates`
+body:
+```
+{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
 response:
 ```
 [{username: "user2",
@@ -108,7 +121,11 @@ response:
 ]
 ```
 
-### `GET /getAllQuestionTemplates`
+### `POST /getAllQuestionTemplates`
+body:
+```
+{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
 response:
 ```
 [{username: "user",
@@ -121,7 +138,9 @@ response:
 ### `POST /createSurvey`
 body:
 ```
-{ title: "My first survey",
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  title: "My first survey",
   description: "It's a survey obviously.",
   timestampStart: "2019-12-01 00:00:00",
   timestampEnd: "2019-12-31 23:59:59",
@@ -148,14 +167,21 @@ In the URL you need to replace `:surveyMasterId` with the real Id to specify on 
 
 body:
 ```
-{ timestampStart: "2019-12-01 00:00:00", timestampEnd: "2019-12-31 23:59:59" }
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  timestampStart: "2019-12-01 00:00:00",
+  timestampEnd: "2019-12-31 23:59:59" }
 ```
 response:
 ```
 25
 ```
 
-### `GET /getAllOwnGroups`
+### `POST /getAllOwnGroups`
+body:
+```
+{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
 response:
 ```
 [{group_id: 7,
@@ -168,16 +194,22 @@ response:
 ### `POST /createGroup`
 body:
 ```
-{ name: "New Group" }
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  name: "New Group" }
 ```
 response:
 ```
 8
 ```
 
-### `GET /getSurveyBySurveyCode/:surveyCode`
+### `POST /getSurveyBySurveyCode/:surveyCode`
 Replace `:surveyCode` with the survey code of the survey you want to get, e.g. `II41KMQAUM`.
 
+body:
+```
+{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
 response:
 ```
 {survey: {
@@ -209,10 +241,13 @@ Replace `:surveyCode` with the survey code of the survey you want to submit, e.g
 
 body:
 ```
-[
- { questionId: 314, answer: "yes"},
- ...
-]
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  answers: [
+    { questionId: 314, answer: "yes"},
+    ...
+  ]
+}
 ```
 response:
 ```
@@ -224,7 +259,9 @@ Replace `:surveyCode` with the survey code of the survey you want to comment, e.
 
 body:
 ```
-{ comment: "What do you think of One-Time-Pad and using the message as key too?" }
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  comment: "What do you think of One-Time-Pad and using the message as key too?" }
 ```
 response:
 ```
