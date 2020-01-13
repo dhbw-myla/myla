@@ -5,6 +5,7 @@ import Home from './component/home/home';
 import User from './component/users';
 import Login from './component/login/login';
 import Admin from './component/admin/admin';
+import Signup from './component/signup/signup';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
       </Route>
       <Route exact path="/admin">
         <Admin />
+      </Route>
+      <Route exact path="/signup">
+        <Signup />
       </Route>
     </Router>
   );
