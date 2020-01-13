@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <p>You are now on the main page from where you can submit requests to different routes</p>
+        <h1>Register</h1>
+        <form action="/register" method="POST">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Submit">
+        </form>
+
+        <h1>Login</h1>
+        <form action="/login" method="POST">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Submit">
+        </form>
+
+        <h1>Logout</h1>
+        <a href="/logout">/logout</a>
+
+        <h1>Secret Page</h1>
+        <a href="/secretpage">/secretpage</a>
+        
+        <h1>Create Example Database</h1>
+        <a href="/createExampleDatabase">/createExampleDatabase</a>
+
+        <h1>Routes</h1>
+        <a href="/getAllOwnSurveys">/getAllOwnSurveys</a>
+        <a href="/getAllSurveyMasterTemplates">/getAllSurveyMasterTemplates</a>
+        <a href="/getAllQuestionTemplates">/getAllQuestionTemplates</a>
+
+        <h2>Create Survey</h2>
+        <form action="/createSurvey" method="POST">
+            <input type="text" name="title" placeholder="Title" value="My first survey">
+            <input type="text" name="description" placeholder="Description" value="It's a survey obviously.">
+            <input type="text" name="timestampStart" placeholder="Timestamp Start" value="2019-12-01 00:00:00">
+            <input type="text" name="timestampEnd" placeholder="Timestamp End" value="2019-12-31 23:59:59">
+            <input type="checkbox" name="resultsVisible"> results visible?
+            <input type="checkbox" name="isTemplate"> is template?
+            <input type="checkbox" name="isPublicTemplate"> is public template?
+            <input type="text" name="questions" placeholder="Questions" value="">
+            <input type="text" name="groupId" placeholder="Group Id" value="">
+            <input type="submit" value="Submit">
+        </form>
+
+        <h2>Create Group</h2>
+        <form action="/createGroup" method="POST">
+            <input type="text" name="name" placeholder="Name" value="My first group">
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
