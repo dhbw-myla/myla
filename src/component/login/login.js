@@ -13,65 +13,62 @@ class Login extends Component {
         const { user } = this.state;
 
         return (
-            <div className="content">
+            <div className="container">
+                <form action="senden.html" id="person">
+                    <label className="h2" form="person">Sign Up</label>
 
-                <div className="container">
-                    <form action="senden.html" id="person">
-                        <label className="h2" form="person">Sign Up</label>
+                    <br />
 
-                        <br />
+                    <label htmlFor="username">Username</label>
+                    <input
+                        className="form-control"
+                        type="text" name="username"
+                        id="username"
+                        maxLength="30"
+                        defaultValue={user.username}
+                    />
 
-                        <label htmlFor="username">Username</label>
-                        <input
-                            className="form-control"
-                            type="text" name="username"
-                            id="username"
-                            maxLength="30"
-                            defaultValue={user.username}
-                        />
+                    <br />
 
-                        <br />
+                    <label htmlFor="mail">E-Mail</label>
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="mail"
+                        id="mail"
+                        maxLength="50"
+                    />
 
-                        <label htmlFor="mail">E-Mail</label>
-                        <input
-                            className="form-control"
-                            type="text"
-                            name="mail"
-                            id="mail"
-                            maxLength="50"
-                        />
+                    <br />
 
-                        <br />
+                    <label htmlFor="password">Password</label>
+                    <input
+                        className="form-control"
+                        type="password"
+                        name="password"
+                        id="password"
+                        maxLength="50"
+                        defaultValue={user.password}
+                    />
 
-                        <label htmlFor="password">Password</label>
-                        <input
-                            className="form-control"
-                            type="password"
-                            name="password"
-                            id="password"
-                            maxLength="50"
-                            defaultValue={user.password}
-                        />
+                    <br />
 
-                        <br />
+                    <label htmlFor="password-repeat">Repeat Password</label>
+                    <input
+                        className="form-control"
+                        type="password"
+                        name="password-repeat"
+                        id="passwordWDH"
+                        maxLength="50"
+                    />
 
-                        <label htmlFor="password-repeat">Repeat Password</label>
-                        <input
-                            className="form-control"
-                            type="password"
-                            name="password-repeat"
-                            id="passwordWDH"
-                            maxLength="50"
-                        />
+                    <br />
 
-                        <br />
-
-                        <button id="resetBtn" className="btn twoButtons pressButton" type="reset">Reset</button>
-                        <button
-                            className="btn twoButtons pressButton"
-                            type="submit">Submit</button>
-                    </form>
-                </div>
+                    <button id="resetBtn" className="btn twoButtons pressButton" type="reset">Reset</button>
+                    <button
+                        className="btn twoButtons pressButton"
+                        type="submit">Submit</button>
+                </form>
             </div>
         );
     }

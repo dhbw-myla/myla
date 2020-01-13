@@ -6,7 +6,7 @@ class Users extends Component {
         this.state = {}
     }
 
-    changePassword = ({username}) => {
+    changePassword = ({id, username}) => {
         const newPassword = document.getElementById('new-password').value;
         alert('PW has changed for ' + username + " pw: " + newPassword);
         console.log('user PW changed to ' + newPassword);
@@ -26,10 +26,10 @@ class Users extends Component {
                     name='new-password'
                     type='text'
                     id='new-password'
+                    placeholder='password'
                 />
                 <button type='button' onClick={() => this.changePassword(user)}>Change</button>
                 <button type='button' onClick={() => this.deleteUser(user)}>Delete</button>
-                <p>register-key</p>
             </div>
         );
     }

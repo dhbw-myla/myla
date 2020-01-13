@@ -17,7 +17,7 @@ class Signup extends Component {
         this.state.user[name] = value;
     }
 
-    resetForm = () => {
+    resethtmlForm = () => {
         this.setState({ user: {} })
     }
 
@@ -40,11 +40,11 @@ class Signup extends Component {
             <div className="content">
                 <div className="container">
                     <form action="senden.html" id="person">
-                        <label className="h2" form="person">Sign Up</label>
+                        <label className="h2" htmlForm="person">Sign Up</label>
 
                         <br />
 
-                        <label for="username">Username</label>
+                        <label htmlFor="username">Username</label>
                         <input
                             className="form-control"
                             type="text"
@@ -56,7 +56,7 @@ class Signup extends Component {
 
                         <br />
 
-                        <label for="mail">E-Mail</label>
+                        <label htmlFor="mail">E-Mail</label>
                         <input
                             className="form-control"
                             type="text" name="email"
@@ -66,17 +66,17 @@ class Signup extends Component {
 
                         <br />
 
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input className="form-control" type="password" name="password" id="password" maxlength="50" onChange={e => this.handleOnChange(e)} />
 
                         <br />
 
-                        <label for="password-repeat">Repeat Password</label>
+                        <label htmlFor="password-repeat">Repeat Password</label>
                         <input className="form-control" type="password" name="passwordRepeat" id="passwordWDH" maxlength="50" onChange={e => this.handleOnChange(e)} />
 
                         <br />
 
-                        <button id="resetBtn" className="btn twoButtons pressButton" type="reset" onClick={this.resetForm}>Reset</button>
+                        <button id="resetBtn" className="btn twoButtons pressButton" type="reset" onClick={this.resethtmlForm}>Reset</button>
                         <button className="btn twoButtons pressButton" type="button" onClick={this.createUser}>Submit</button>
                     </form>
                 </div>
