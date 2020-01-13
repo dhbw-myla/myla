@@ -398,7 +398,15 @@ exports.createUser = function (request, response) {
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { response.send("Error"); return; }
-    console.log("Not yet implemented");
+
+    const preparedPassword = authHelper.preparePassword(password);
+    bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
+        if (err) { console.log(err); response.send('Error'); return; }
+        db.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id;', [username, hash], (err, result) => {
+            if (err || result.rows.length !== 1) { response.send('Error'); return; }
+            response.send(result.rows[0].user_id);
+        });
+    });
 };
 
 exports.setRegisterKey = function (request, response) {
@@ -429,7 +437,22 @@ exports.resetPasswordOfUser = function (request, response) {
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { response.send("Error"); return; }
-    console.log("Not yet implemented");
+
+    const usernameForPasswordReset = request.body.usernameForPasswordReset;
+    const newPassword = request.body.newPassword;
+    const preparedPassword = authHelper.preparePassword(newPassword);
+    bcrypt.hash(preparedNewPassword, BCRYPT_SALT, function(err, hash) {
+        if (err) { console.log(err); response.send('Error'); return; }
+        db.query(`UPDATE users
+                    SET password = $1
+                        password_change_required = true
+                        session_id = NULL
+                    WHERE username = $2`,
+        [hash, usernameForPasswordReset], (err, result) => {
+            if (err) { response.send('Error'); return; }
+            response.send("Ok");
+        });
+    });
 };
 
 exports.deleteUser = function (request, response) {
