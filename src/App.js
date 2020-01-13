@@ -7,15 +7,14 @@ import Login from './component/login/login';
 import Admin from './component/admin/admin';
 import Signup from './component/signup/signup';
 import Dashboard from './component/dashboard/dashboard';
+import SurveyCreator from './component/survey-creator/survey-creator';
+import Survey from './component/survey/survey';
 
 function App() {
   return (
     <Router>
       <Route exact path="/">
         <Home />
-      </Route>
-      <Route exact path="/users">
-        <User />
       </Route>
       <Route exact path="/login">
         <Login />
@@ -28,6 +27,12 @@ function App() {
       </Route>
       <Route exact path="/dashboard">
         <Dashboard />
+      </Route>
+      <Route exact path="/survey/create">
+        <SurveyCreator />
+      </Route>
+      <Route exact path="/survey/participate">
+        <Survey />
       </Route>
     </Router>
   );
