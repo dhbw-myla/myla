@@ -3,15 +3,25 @@ const db = require('./db');
 const bcrypt = require('bcryptjs');
 const authHelper = require('./helper/auth');
 
+const fs = require('fs'),
+    path = require('path'),    
+    filePathRegisterKey = path.join(__dirname, 'registerKey.txt');
+
+const BCRYPT_SALT = 12;
+
 exports.register = function (request, response) {
-    const { username, password } = request.body;
+    const { username, password, registerKey } = request.body;
     const preparedPassword = authHelper.preparePassword(password);
     const sessionId = authHelper.createSessionId();
-    bcrypt.hash(preparedPassword, 12, function(err, hash) {
+    fs.readFile(filePathRegisterKey, "utf-8", (err, registerKeyFile) => {
         if (err) { console.log(err); response.send('Error'); return; }
-        db.query('INSERT INTO users (username, password, session_id) VALUES ($1, $2, $3);', [username, hash, sessionId], (err, result) => {
-            if (err) { response.send('Error'); return; }
-            response.cookie('username', username).cookie('sessionId', sessionId).redirect('/');
+        if (registerKey !== registerKeyFile) { response.send("Error"); return; }
+        bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
+            if (err) { console.log(err); response.send('Error'); return; }
+            db.query('INSERT INTO users (username, password, session_id) VALUES ($1, $2, $3);', [username, hash, sessionId], (err, result) => {
+                if (err) { response.send('Error'); return; }
+                response.json({ username: username, sessionId: sessionId });
+            });
         });
     });
 };
@@ -23,13 +33,14 @@ exports.login = function (request, response) {
         if (err || dbResult.rows.length !== 1) { response.send('Error'); return; }
         const dbPassword = dbResult.rows[0].password;
         const dbSessionId = dbResult.rows[0].session_id;
+        const isPasswordChangeRequired = dbResult.rows[0].password_change_required;
         bcrypt.compare(preparedPassword, dbPassword, function(err, bcryptResult) {
             if (err) { console.log(err); response.send('Error'); return; }
             if (bcryptResult !== true) {
                 response.send('Error'); return;
             } else {
                 let respond = function (response, username, sessionId) {
-                    response.cookie('username', username).cookie('sessionId', sessionId).redirect('/');
+                    response.json({ username: username, sessionId: sessionId, isPasswordChangeRequired: isPasswordChangeRequired });
                 };
                 let sessionId;
                 if (!dbSessionId ) {
@@ -48,7 +59,31 @@ exports.login = function (request, response) {
 };
 
 exports.changePassword = function (request, response) {
-    response.send("Not yet implemented");
+    const { username, password, newPassword } = request.body;
+    const preparedPassword = authHelper.preparePassword(password);
+    db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
+        if (err || dbResult.rows.length !== 1) { response.send('Error'); return; }
+        const dbPassword = dbResult.rows[0].password;
+        bcrypt.compare(preparedPassword, dbPassword, function(err, bcryptResult) {
+            if (err) { console.log(err); response.send('Error'); return; }
+            if (bcryptResult !== true) {
+                response.send('Error'); return;
+            } else {
+                const preparedNewPassword = authHelper.preparePassword(newPassword);
+                bcrypt.hash(preparedNewPassword, BCRYPT_SALT, function(err, hash) {
+                    if (err) { console.log(err); response.send('Error'); return; }
+                    db.query(`UPDATE users
+                                SET password = $1
+                                    password_change_required = false
+                                WHERE username = $2`,
+                    [hash, username], (err, result) => {
+                        if (err) { response.send('Error'); return; }
+                        response.send("Ok");
+                    });
+                });
+            }
+        });
+    });
 };
 
 exports.logout = function (request, response) {

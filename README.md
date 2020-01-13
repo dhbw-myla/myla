@@ -21,6 +21,11 @@ module.exports = {
 };
 ```
 
+_registerKey.js_:
+```
+thisIsTheReg1sterK3y,butUcanALSOkeepTHISfileBLANK-onlyNeccessaryToCreateThisF1le
+```
+
 Run following commands to install all packages and start the server.
 ```
 npm install

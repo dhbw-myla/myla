@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 /* * * * * * * * * * * * * * * * * * */
-const AUTH_WHITELIST = ["/", "/login", "/register",
+const AUTH_WHITELIST = ["/", "/login", "/register", "/changePassword",
                         "/getSurveyBySurveyCode", "/submitSurvey", "/submitComment",
                         "/createExampleDatabase"];
 function auth (request, response, next) {
@@ -20,12 +20,12 @@ function auth (request, response, next) {
         // whitelisted
         next();
     } else {
-        authHelper.checkUserAuthorization(request, (isAuthorized) => {
+        authHelper.checkUserAuthorization(request, (isAuthorized, errorMessage) => {
             if (isAuthorized === true) {
                 // user is authorized
                 next();
             } else {
-                response.send("Error");
+                response.send(errorMessage || "Error");
             }
         });
     }
@@ -37,7 +37,7 @@ app.use(auth);
 app.post('/register', routes.register);
 app.post('/login', routes.login);
 app.post('/changePassword', routes.changePassword);
-app.get('/logout', routes.logout);
+app.post('/logout', routes.logout);
 
 // Sites for registered users
 app.post('/getAllOwnSurveys', routes.getAllOwnSurveys);

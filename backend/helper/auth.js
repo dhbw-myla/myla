@@ -21,6 +21,8 @@ exports.checkUserAuthorization = function (request, callback) {
     db.query('SELECT * FROM users WHERE username = $1 AND session_id = $2;', [username, sessionId], (err, dbResult) => {
         if (err || dbResult.rows.length !== 1) {
             callback(false);
+        } else if (dbResult.rows[0].password_change_required) {
+            callback(false, "Error: Password change required");
         } else {
             callback(true);
         }
