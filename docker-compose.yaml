@@ -1,11 +1,21 @@
 version: '3'
 services:
-  myla:
-    image: myla
+  myla-frontend:
+    image: myla-frontend
+    hostname: myla-frontend
     build:
-      context: .
-    ports:
-      - 4200:4200
+      context: ./frontend
+    networks:
+      - myla
+    depends_on:
+      - postgres
+      - myla-backend
+
+  myla-backend:
+    image: myla-backend
+    hostname: myla-backend
+    build:
+      context: ./backend
     networks:
       - myla
     depends_on:
@@ -34,10 +44,24 @@ services:
     depends_on:
       - postgres
     ports:
-      - 80:80
+      - 8080:80
     logging:
       driver: none
-        
+  
+  nginx: 
+    image: nginx:latest
+    hostname: nginx
+    container_name: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    networks:
+     - myla
+    depends_on: 
+      - postgres
+      - myla-frontend
+      - myla-backend
 
 networks:
   myla:
