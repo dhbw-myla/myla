@@ -10,12 +10,14 @@ const fs = require('fs'),
 const BCRYPT_SALT = 12;
 
 exports.register = function (request, response) {
+    // creates a user if registerKey is correct
+    // returns session id
     const { username, password, registerKey } = request.body;
     const preparedPassword = authHelper.preparePassword(password);
     const sessionId = authHelper.createSessionId();
     fs.readFile(filePathRegisterKey, "utf-8", (err, registerKeyFile) => {
         if (err) { console.log(err); response.send('Error'); return; }
-        if (registerKey !== registerKeyFile) { response.send("Error"); return; }
+        if (registerKey !== registerKeyFile || registerKeyFile === "") { response.send("Error"); return; }
         bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
             if (err) { console.log(err); response.send('Error'); return; }
             db.query('INSERT INTO users (username, password, session_id) VALUES ($1, $2, $3);', [username, hash, sessionId], (err, result) => {
@@ -27,6 +29,8 @@ exports.register = function (request, response) {
 };
 
 exports.login = function (request, response) {
+    // checks whether password is correct
+    // returns session id from db or creates one if there is none
     const { username, password } = request.body;
     const preparedPassword = authHelper.preparePassword(password);
     db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
@@ -59,6 +63,8 @@ exports.login = function (request, response) {
 };
 
 exports.changePassword = function (request, response) {
+    // check whether old password is correct
+    // updates password and generates new session id which is returned
     const { username, password, newPassword } = request.body;
     const preparedPassword = authHelper.preparePassword(password);
     db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
@@ -72,13 +78,15 @@ exports.changePassword = function (request, response) {
                 const preparedNewPassword = authHelper.preparePassword(newPassword);
                 bcrypt.hash(preparedNewPassword, BCRYPT_SALT, function(err, hash) {
                     if (err) { console.log(err); response.send('Error'); return; }
+                    let sessionId = authHelper.createSessionId();
                     db.query(`UPDATE users
                                 SET password = $1
                                     password_change_required = false
-                                WHERE username = $2`,
-                    [hash, username], (err, result) => {
+                                    session_id = $2
+                                WHERE username = $3`,
+                    [hash, sessionId, username], (err, result) => {
                         if (err) { response.send('Error'); return; }
-                        response.send("Ok");
+                        response.json({ sessionId: sessionId });
                     });
                 });
             }
@@ -87,16 +95,17 @@ exports.changePassword = function (request, response) {
 };
 
 exports.logout = function (request, response) {
-    const { username, sessionId } = request.body;
-    if (username === undefined || sessionId === undefined) { response.send('Error'); return; }
-    db.query('UPDATE users SET session_id = NULL WHERE username = $1 AND session_id = $2;', [username, sessionId], (err, result) => {
+    // logs out user by removing session id from db
+    // only working if logged in -> is checked in index.js/auth-check
+    const { username } = request.body;
+    db.query('UPDATE users SET session_id = NULL WHERE username = $1;', [username], (err, result) => {
         if (err) { response.send('Error'); return; }
         response.send("Ok");
     });
 };
 
 exports.getAllOwnSurveys = function (request, response) {
-    // request.cookies.username is verified by auth-check before routes are handled
+    // returns a list of surveys of the logged-in user
     const username = request.body.username;
     db.query(`SELECT *
                 FROM survey s JOIN (SELECT * FROM survey_master
@@ -110,6 +119,7 @@ exports.getAllOwnSurveys = function (request, response) {
 };
 
 exports.getAllSurveyMasterTemplates = function (request, response) {
+    // returns list of templates (own templates and public templates)
     const username = request.body.username;
     db.query(`SELECT u.username, sm.survey_master_id, sm.title, sm.description, sm.group_id
                 FROM survey_master sm JOIN users u ON sm.user_id = u.user_id
@@ -122,6 +132,7 @@ exports.getAllSurveyMasterTemplates = function (request, response) {
 };
 
 exports.getAllQuestionTemplates = function (request, response) {
+    // returns all question templates (own templates and public templates)
     const username = request.body.username;
     db.query(`SELECT u.username, q.question_id, q.question_json
                 FROM question q JOIN survey_master sm ON q.survey_master_id = sm.survey_master_id
@@ -254,6 +265,7 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
     let { timestampStart, timestampEnd } = request.body;
     
     // make sure that no one tries to create a survey based on a survey master which is by someone else
+    // not to be confused with: creating survey master based on template
     let isAllowed = await checkIfSurveyMasterIdIsAllowedForUser(surveyMasterId, username);
     if (!isAllowed) {
         response.send("Error");
@@ -263,11 +275,11 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
 };
 
 exports.getSurveyMasterDetails = function (request, response) {
-    response.send("Not yet implemented");
+    response.send("Not yet implemented"); // TODO
 };
 
 exports.getSurveyDetails = function (request, response) {
-    response.send("Not yet implemented");
+    response.send("Not yet implemented"); // TODO
 };
 
 exports.getAllOwnGroups = function (request, response) {
@@ -383,7 +395,8 @@ const checkIfUserIsAdmin = function (username) {
     });
 };
 
-exports.getUsers = function (request, response) {
+exports.getUsers = async function (request, response) {
+    // returns list of users (this route is only for admins)
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { response.send("Error"); return; }
@@ -394,22 +407,23 @@ exports.getUsers = function (request, response) {
     });
 };
 
-exports.createUser = function (request, response) {
-    const username = request.body.username;
+exports.createUser = async function (request, response) {
+    const { username, newUsername, newPassword } = request.body;
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { response.send("Error"); return; }
 
-    const preparedPassword = authHelper.preparePassword(password);
+    const preparedPassword = authHelper.preparePassword(newPassword);
     bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
         if (err) { console.log(err); response.send('Error'); return; }
-        db.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id;', [username, hash], (err, result) => {
+        db.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id;', [newUsername, hash], (err, result) => {
             if (err || result.rows.length !== 1) { response.send('Error'); return; }
-            response.send(result.rows[0].user_id);
+            response.send(""+result.rows[0].user_id);
         });
     });
 };
 
-exports.setRegisterKey = function (request, response) {
+exports.setRegisterKey = async function (request, response) {
+    // writes specified register key to local file
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { response.send("Error"); return; }
@@ -422,7 +436,8 @@ exports.setRegisterKey = function (request, response) {
     });
 };
 
-exports.getRegisterKey = function (request, response) {
+exports.getRegisterKey = async function (request, response) {
+    // reads register key from local file
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { response.send("Error"); return; }
@@ -433,14 +448,15 @@ exports.getRegisterKey = function (request, response) {
     });
 };
 
-exports.resetPasswordOfUser = function (request, response) {
+exports.resetPasswordOfUser = async function (request, response) {
+    // let's admin reset users password which then must be changed by user after next login
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { response.send("Error"); return; }
 
     const usernameForPasswordReset = request.body.usernameForPasswordReset;
     const newPassword = request.body.newPassword;
-    const preparedPassword = authHelper.preparePassword(newPassword);
+    const preparedNewPassword = authHelper.preparePassword(newPassword);
     bcrypt.hash(preparedNewPassword, BCRYPT_SALT, function(err, hash) {
         if (err) { console.log(err); response.send('Error'); return; }
         db.query(`UPDATE users
@@ -455,11 +471,13 @@ exports.resetPasswordOfUser = function (request, response) {
     });
 };
 
-exports.deleteUser = function (request, response) {
+exports.deleteUser = async function (request, response) {
+    // deletes user and all corresponding surveys etc.
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { response.send("Error"); return; }
-    console.log("Not yet implemented");
+
+    console.log("Not yet implemented"); // TODO
 };
 
 

@@ -50,18 +50,19 @@ If something fails the response will be `Error`.
 If something was created the response will be the Id of the created object.
 
 The most routes are restricted to logged-in users.
-The credentials need to be specified in body parameters `username` and `sessionId` as they are set by `/register` or `/login`.
+The credentials need to be specified in body parameters `username` and `sessionId` as they are returned by `/register`, `/login` or `/changePassword`.
 
 ### `POST /register`
 body:
 ```
-{ username: "user", password: "password" }
+{ username: "user",
+  password: "password"
+  registerKey: "https://knowyourmeme.com/memes/let-me-in"
+}
 ```
 response:
 ```
-Cookies:
-username = user
-sessionId = 5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77
+{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
 ```
 
 ### `POST /login`
@@ -71,9 +72,24 @@ body:
 ```
 response:
 ```
-Cookies:
-username = user
-sessionId = 5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  isPasswordChangeRequired: false
+}
+```
+
+### `POST /changePassword`
+body:
+```
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  password: "password",
+  newPassword: "pa55w0rd"
+}
+```
+response:
+```
+{ username: "user", sessionId: "6a2e2d2d1814bb98fb1fc875e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6728e130f86" }
 ```
 
 ### `POST /logout`
@@ -267,6 +283,80 @@ body:
 { username: "user",
   sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
   comment: "What do you think of One-Time-Pad and using the message as key too?" }
+```
+response:
+```
+Ok
+```
+
+### `POST /getUsers` (only for admins)
+body:
+```
+{ username: "admin", sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c" }
+```
+response:
+```
+[{"user_id": 25,
+  "username": "user",
+  "is_admin": false,
+  "password_change_required": false
+ },
+ {"user_id": 24,
+  "username": "admin",
+  "is_admin": true,
+  "password_change_required": false
+ }
+]
+```
+
+### `POST /createUser` (only for admins)
+body:
+```
+{ username: "admin",
+  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
+  newUsername: "user2",
+  newPassword: "pw"
+}
+```
+response:
+```
+26
+```
+
+### `POST /setRegisterKey` (only for admins)
+Use an empty string to reset register key (so that no registration is possible for new users).
+body:
+```
+{ username: "admin",
+  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
+  registerKey: "newRegisterKey"
+}
+```
+response:
+```
+Ok
+```
+
+### `POST /getRegisterKey` (only for admins)
+body:
+```
+{ username: "admin",
+  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
+}
+```
+response:
+```
+newRegisterKey
+```
+
+### `POST /resetPasswordOfUser` (only for admins)
+body:
+```
+{ username: "admin",
+  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
+  usernameForPasswordReset: "user",
+  newPassword: "youbetternotforgetyourpasswordagain"
+}
 ```
 response:
 ```
