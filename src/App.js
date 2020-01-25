@@ -9,10 +9,13 @@ import Signup from './component/signup/signup';
 import Dashboard from './component/dashboard/dashboard';
 import SurveyCreator from './component/survey-creator/survey-creator';
 import Survey from './component/survey/survey';
+import Header from './component/header/header';
+import Footer from './component/footer/footer';
 
 function App() {
   return (
     <Router>
+      <Header/>
       <Route exact path="/">
         <Home />
       </Route>
@@ -34,6 +37,7 @@ function App() {
       <Route exact path="/survey/participate">
         <Survey />
       </Route>
+      <Footer/>
     </Router>
   );
 }

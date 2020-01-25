@@ -6,7 +6,17 @@ class Footer extends Component {
         this.state = {  }
     }
     render() { 
-        return (  null );
+        return (     
+            <footer className="footer">
+            <div className="container">
+                <div className="has-text-centered">
+                <p>
+                    footer content
+                </p>
+                </div>
+            </div>
+            </footer>
+         );
     }
 }
  

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { verifySignup } from '../../auth/verifyPw';
+import "./signup.css"
 
 class Signup extends Component {
     constructor(props) {
