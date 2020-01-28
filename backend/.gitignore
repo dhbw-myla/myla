@@ -1,0 +1,4 @@
+node_modules/
+db/dbconfig.js
+secret.js
+registerKey.txt

@@ -1,5 +1,4 @@
-
-FROM node:12-alpine
+FROM node:12.2.0-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -9,16 +8,13 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install -g @angular/cli
 RUN npm install
-
+RUN npm install react-scripts@3.0.1 -g --silent
 # If you are building your code for production
 # RUN npm ci --only=production
 
 # Bundle app source
 COPY . .
 
-RUN npm run build
-
-EXPOSE 4200
-CMD ng serve --host 0.0.0.0
+EXPOSE 3000
+CMD [ "npm", "start" ]
