@@ -18,7 +18,7 @@ class Signup extends Component {
         this.state.user[name] = value;
     }
 
-    resethtmlForm = () => {
+    resetHtmlForm = () => {
         this.setState({ user: {} })
     }
 
@@ -40,46 +40,44 @@ class Signup extends Component {
         return (
             <div className="content">
                 <div className="container">
-                    <form action="senden.html" id="person">
-                        <label className="h2" htmlForm="person">Sign Up</label>
+                    <label className="h2" htmlForm="person">Sign Up</label>
 
-                        <br />
+                    <br />
 
-                        <label htmlFor="username">Username</label>
-                        <input
-                            className="form-control"
-                            type="text"
-                            name="username"
-                            id="username"
-                            maxlength="30"
-                            onChange={e => this.handleOnChange(e)}
-                        />
+                    <label htmlFor="username">Username</label>
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="username"
+                        id="username"
+                        maxlength="30"
+                        onChange={e => this.handleOnChange(e)}
+                    />
 
-                        <br />
+                    <br />
 
-                        <label htmlFor="mail">E-Mail</label>
-                        <input
-                            className="form-control"
-                            type="text" name="email"
-                            id="email" maxlength="50"
-                            onChange={e => this.handleOnChange(e)}
-                        />
+                    <label htmlFor="email">E-Mail</label>
+                    <input
+                        className="form-control"
+                        type="text" name="email"
+                        id="email" maxlength="50"
+                        onChange={e => this.handleOnChange(e)}
+                    />
 
-                        <br />
+                    <br />
 
-                        <label htmlFor="password">Password</label>
-                        <input className="form-control" type="password" name="password" id="password" maxlength="50" onChange={e => this.handleOnChange(e)} />
+                    <label htmlFor="password">Password</label>
+                    <input className="form-control" type="password" name="password" id="password" maxlength="50" onChange={e => this.handleOnChange(e)} />
 
-                        <br />
+                    <br />
 
-                        <label htmlFor="password-repeat">Repeat Password</label>
-                        <input className="form-control" type="password" name="passwordRepeat" id="passwordWDH" maxlength="50" onChange={e => this.handleOnChange(e)} />
+                    <label htmlFor="password-repeat">Repeat Password</label>
+                    <input className="form-control" type="password" name="passwordRepeat" id="passwordWDH" maxlength="50" onChange={e => this.handleOnChange(e)} />
 
-                        <br />
+                    <br />
 
-                        <button id="resetBtn" className="btn twoButtons pressButton" type="reset" onClick={this.resethtmlForm}>Reset</button>
-                        <button className="btn twoButtons pressButton" type="button" onClick={this.createUser}>Submit</button>
-                    </form>
+                    <button id="resetBtn" className="btn twoButtons pressButton" type="reset" onClick={this.resetHtmlForm}>Reset</button>
+                    <button className="btn twoButtons pressButton" type="button" onClick={this.createUser}>Submit</button>
                 </div>
             </div>
         );

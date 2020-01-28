@@ -15,7 +15,7 @@ class Login extends Component {
         return (
             <div className="container">
                 <form action="senden.html" id="person">
-                    <label className="h2" form="person">Sign Up</label>
+                    <label className="h2" form="person">Login</label>
 
                     <br />
 
