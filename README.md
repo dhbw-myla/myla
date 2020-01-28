@@ -1,6 +1,7 @@
 # Backend
 ## setup
 There are some config files which you need to create.
+Paths are relative to _backend/_.
 Their content could look like this:
 
 _db/dbconfig.js_:
@@ -21,7 +22,7 @@ module.exports = {
 };
 ```
 
-_registerKey.js_:
+_registerKey.txt_ (content is not important):
 ```
 thisIsTheReg1sterK3y,butUcanALSOkeepTHISfileBLANK-onlyNeccessaryToCreateThisF1le
 ```
