@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { verifySignup } from '../../auth/verifyPw';
 import "./signup.css"
-import { register } from '../../database/database';
+import { register, test } from '../../database/database';
 import SweetAlert from 'sweetalert-react';
 
 class Signup extends Component {
@@ -31,7 +31,7 @@ class Signup extends Component {
         const pwMatch = verifySignup(password, passwordRepeat);
 
         if (pwMatch) {
-            const registeredUser = await register(user);
+            const registeredUser = await test(user);
             console.log('pw match - registeredUser', registeredUser);
         } else {
             console.log('pw does not match');
