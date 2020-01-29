@@ -45,9 +45,10 @@ class Home extends Component {
         }
         else if (participate) {
             return (
-                <Redirect from={currentComponent} to="/dashboard" />
+                <Redirect from={currentComponent} to="/survey/participate" />
             )
-        } else if (login) {
+        }
+        else if (login) {
             return (
                 <Redirect from={currentComponent} to="/dashboard" />
             )
