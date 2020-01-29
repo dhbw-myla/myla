@@ -25,7 +25,7 @@ function auth (request, response, next) {
                 // user is authorized
                 next();
             } else {
-                response.send(errorMessage || "Error");
+                response.status(401).json({ error: errorMessage || "Unauthorized" });
             }
         });
     }

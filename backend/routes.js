@@ -16,13 +16,31 @@ exports.register = function (request, response) {
     const preparedPassword = authHelper.preparePassword(password);
     const sessionId = authHelper.createSessionId();
     fs.readFile(filePathRegisterKey, "utf-8", (err, registerKeyFile) => {
-        if (err) { console.log(err); response.send('Error'); return; }
-        if (registerKey !== registerKeyFile || registerKeyFile === "") { response.send("Error"); return; }
+        if (err) {
+            // reading file failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        if (registerKey !== registerKeyFile || registerKeyFile === "") {
+            // wrong register key or register not possible
+            response.status(400).json({ error: "Register Failed" });
+            return;
+        }
         bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
-            if (err) { console.log(err); response.send('Error'); return; }
+            if (err) {
+                // hashing failed
+                console.log(err);
+                response.status(500).json({ error: "Internal Server Error" });
+                return;
+            }
             db.query('INSERT INTO users (username, password, session_id) VALUES ($1, $2, $3);', [username, hash, sessionId], (err, result) => {
-                if (err) { response.send('Error'); return; }
-                response.json({ username: username, sessionId: sessionId });
+                if (err) {
+                    // db failed
+                    response.status(500).json({ error: "Internal Server Error" });
+                    return;
+                }
+                response.status(201).json({ username: username, sessionId: sessionId });
             });
         });
     });
@@ -34,23 +52,39 @@ exports.login = function (request, response) {
     const { username, password } = request.body;
     const preparedPassword = authHelper.preparePassword(password);
     db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
-        if (err || dbResult.rows.length !== 1) { response.send('Error'); return; }
+        if (err || dbResult.rows.length !== 1) {
+            // user not found
+            response.status(400).json({ error: "Login Failed" });
+            return;
+        }
         const dbPassword = dbResult.rows[0].password;
         const dbSessionId = dbResult.rows[0].session_id;
         const isPasswordChangeRequired = dbResult.rows[0].password_change_required;
         bcrypt.compare(preparedPassword, dbPassword, function(err, bcryptResult) {
-            if (err) { console.log(err); response.send('Error'); return; }
+            if (err) {
+                // hashing failed
+                console.log(err);
+                response.status(500).json({ error: "Internal Server Error" });
+                return;
+            }
             if (bcryptResult !== true) {
-                response.send('Error'); return;
+                // wrong password
+                response.status(400).json({ error: "Login Failed" });
+                return;
             } else {
                 let respond = function (response, username, sessionId) {
-                    response.json({ username: username, sessionId: sessionId, isPasswordChangeRequired: isPasswordChangeRequired });
+                    response.status(200).json({ username: username, sessionId: sessionId, isPasswordChangeRequired: isPasswordChangeRequired });
                 };
                 let sessionId;
                 if (!dbSessionId ) {
                     sessionId = authHelper.createSessionId();
                     db.query('UPDATE users SET session_id = $1 WHERE username = $2;', [sessionId, username], (err, result) => {
-                        if (err) { console.log(err); response.send('Error'); return; }
+                        if (err) {
+                            // db failed
+                            console.log(err);
+                            response.status(500).json({ error: "Internal Server Error" });
+                            return;
+                        }
                         respond(response, username, sessionId);
                     });
                 } else {
@@ -68,16 +102,37 @@ exports.changePassword = function (request, response) {
     const { username, password, newPassword } = request.body;
     const preparedPassword = authHelper.preparePassword(password);
     db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
-        if (err || dbResult.rows.length !== 1) { response.send('Error'); return; }
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        } else if (dbResult.rows.length !== 1) {
+            // user not found
+            response.status(400).json({ error: "Password Change Failed" });
+            return;
+        }
         const dbPassword = dbResult.rows[0].password;
         bcrypt.compare(preparedPassword, dbPassword, function(err, bcryptResult) {
-            if (err) { console.log(err); response.send('Error'); return; }
+            if (err) {
+                // hashing failed
+                console.log(err);
+                response.status(500).json({ error: "Internal Server Error" });
+                return;
+            }
             if (bcryptResult !== true) {
-                response.send('Error'); return;
+                // wrong (old) password
+                response.status(400).json({ error: "Password Change Failed" });
+                return;
             } else {
                 const preparedNewPassword = authHelper.preparePassword(newPassword);
                 bcrypt.hash(preparedNewPassword, BCRYPT_SALT, function(err, hash) {
-                    if (err) { console.log(err); response.send('Error'); return; }
+                    if (err) {
+                        // hashing failed
+                        console.log(err);
+                        response.status(500).json({ error: "Internal Server Error" });
+                        return;
+                    }
                     let sessionId = authHelper.createSessionId();
                     db.query(`UPDATE users
                                 SET password = $1
@@ -85,8 +140,13 @@ exports.changePassword = function (request, response) {
                                     session_id = $2
                                 WHERE username = $3`,
                     [hash, sessionId, username], (err, result) => {
-                        if (err) { response.send('Error'); return; }
-                        response.json({ sessionId: sessionId });
+                        if (err) {
+                            // db failed
+                            console.log(err);
+                            response.status(500).json({ error: "Internal Server Error" });
+                            return;
+                        }
+                        response.status(200).json({ sessionId: sessionId });
                     });
                 });
             }
@@ -99,8 +159,13 @@ exports.logout = function (request, response) {
     // only working if logged in -> is checked in index.js/auth-check
     const { username } = request.body;
     db.query('UPDATE users SET session_id = NULL WHERE username = $1;', [username], (err, result) => {
-        if (err) { response.send('Error'); return; }
-        response.send("Ok");
+        if (err) {
+            // db failed?
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json({ message: "Logged Out Successfully" });
     });
 };
 
@@ -113,8 +178,13 @@ exports.getAllOwnSurveys = function (request, response) {
                     ON s.survey_master_id = sm.survey_master_id
                     LEFT JOIN survey_master_group g ON g.group_id = sm.group_id;`,
             [username], (err, result) => {
-        if (err) { console.log(err); response.send("Error"); return; }
-        response.send(result.rows);
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json(result.rows);
     });
 };
 
@@ -126,8 +196,13 @@ exports.getAllSurveyMasterTemplates = function (request, response) {
                 WHERE (u.username = $1 AND sm.is_template = TRUE)
                     OR (u.username != $1 AND sm.is_public_template = TRUE)`,
             [username], (err, result) => {
-        if (err) { console.log(err); response.send("Error"); return; }
-        response.send(result.rows);
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json(result.rows);
     });
 };
 
@@ -140,8 +215,13 @@ exports.getAllQuestionTemplates = function (request, response) {
                 WHERE (u.username = $1 AND q.is_template = TRUE)
                     OR (u.username != $1 AND q.is_public_template = TRUE)`,
             [username], (err, result) => {
-        if (err) { console.log(err); response.send("Error"); return; }
-        response.send(result.rows);
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json(result.rows);
     });
 };
 
@@ -177,9 +257,14 @@ const createSurveyHelper = function (response, surveyMasterId, timestampStart, t
     db.query(`INSERT INTO survey (survey_code, timestamp_start, timestamp_end, survey_master_id)
                     VALUES ($1, $2, $3, $4) RETURNING survey_id;`,
             [surveyCode, timestampStart, timestampEnd, surveyMasterId], (err, result) => {
-        if (err) { console.log(err); response.send("Error"); return; }
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
         let survey_id = result.rows[0].survey_id;
-        response.send(""+survey_id);
+        response.status(201).json({ surveyId: survey_id });
     });
 };
 
@@ -191,7 +276,7 @@ exports.createSurvey = async function (request, response) {
     if (groupId) {
         let isAllowed = await checkIfGroupIdIsAllowedForUser(groupId, username);
         if (!isAllowed) {
-            response.send("Error");
+            response.status(403).json({ error: "Forbidden" });
             return;
         }
     }
@@ -202,7 +287,7 @@ exports.createSurvey = async function (request, response) {
         try {
             questions = JSON.parse(questions);
         } catch (err) {
-            response.send("Error");
+            response.status(400).json({ error: "Parsing of Questions Failed" });
             return;
         }
     }
@@ -228,7 +313,12 @@ exports.createSurvey = async function (request, response) {
     if (groupId) { args.push(+groupId); }
 
     db.query(sqlStatement, args, (err, result) => {
-        if (err) { console.log(err); response.send("Error"); return; }
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
         let surveyMasterId = result.rows[0].survey_master_id;
         
         // create survey
@@ -268,18 +358,18 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
     // not to be confused with: creating survey master based on template
     let isAllowed = await checkIfSurveyMasterIdIsAllowedForUser(surveyMasterId, username);
     if (!isAllowed) {
-        response.send("Error");
+        response.status(403).json({ error: "Forbidden" });
         return;
     }
     createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd);
 };
 
 exports.getSurveyMasterDetails = function (request, response) {
-    response.send("Not yet implemented"); // TODO
+    response.status(501).json({ error: "Not Yet Implemented" }); // TODO
 };
 
 exports.getSurveyDetails = function (request, response) {
-    response.send("Not yet implemented"); // TODO
+    response.status(501).json({ error: "Not Yet Implemented" }); // TODO
 };
 
 exports.getAllOwnGroups = function (request, response) {
@@ -287,8 +377,13 @@ exports.getAllOwnGroups = function (request, response) {
     db.query(`SELECT g.group_id, g.name as group_name, u.username
                 FROM survey_master_group g JOIN users u ON g.user_id = u.user_id
                 WHERE u.username = $1;`, [username], (err, result) => {
-        if (err) { response.send('Error'); return; }
-        response.send(result.rows);
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json(result.rows);
     });
 };
 
@@ -299,8 +394,13 @@ exports.createGroup = function (request, response) {
                 VALUES ($1, (SELECT user_id FROM users WHERE username = $2))
                 RETURNING group_id;`,
             [name, username], (err, result) => {
-        if (err) { console.log(err); response.send('Error'); return; }
-        response.send(""+result.rows[0].group_id);
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(201).json({ groupId: result.rows[0].group_id });
     });
 };
 
@@ -310,15 +410,28 @@ exports.getSurveyBySurveyCode = function (request, response) {
     let result = {};
     db.query(`SELECT *
                 FROM survey s JOIN survey_master m ON s.survey_master_id = m.survey_master_id
-                WHERE s.survey_code = $1`, [surveyCode], (err, resultSurvey) => {
-        if (err) { response.send('Error'); return; }
+                WHERE s.survey_code = $1`, [surveyCode], (err, resultSurvey) => { // TODO: check for date?
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        } else if (resultSurvey.rows.length === 0) {
+            response.status(404).json({ error: "No Survey Found" });
+            return;
+        }
         result.survey = resultSurvey.rows[0];
         db.query(`SELECT * FROM question q
                     WHERE q.survey_master_id = $1`,
                 [result.survey.survey_master_id], (err, resultQuestions) => {
-            if (err) { response.send('Error'); return; }
+            if (err) {
+                // db failed
+                console.log(err);
+                response.status(500).json({ error: "Internal Server Error" });
+                return;
+            }
             result.questions = resultQuestions.rows;
-            response.send(result);
+            response.status(200).json(result);
         });
     });
 };
@@ -332,7 +445,7 @@ exports.submitSurvey = function (request, response) {
         try {
             answers = JSON.parse(answers);
         } catch (err) {
-            response.send("Error");
+            response.status(400).json({ error: "Parsing of Answers Failed" });
             return;
         }
     }
@@ -343,7 +456,16 @@ exports.submitSurvey = function (request, response) {
                 AND timestamp_start < $2
                 AND (timestamp_end IS NULL OR timestamp_end > $2);`,
             [surveyCode, new Date().toISOString()], (err, result) => {
-        if (err || result.rows.length < 1) { response.send('Error'); return; }
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        } else if (result.rows.length < 1) {
+            // no survey
+            response.status(404).json({ error: "No Survey Found"});
+            return;
+        }
         let surveyId = result.rows[0].survey_id;
 
         let questionIds = [];
@@ -360,10 +482,12 @@ exports.submitSurvey = function (request, response) {
                 }
             }
         } catch (err) {
-            response.send("Error");
+            // db failed?
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
             return;
         }
-        response.send("Ok");
+        response.status(200).json({ message: "Submitted Survey Successfully" });
     });
 };
 
@@ -376,8 +500,13 @@ exports.submitComment = function (request, response) {
                                 AND (timestamp_end IS NULL OR timestamp_end > $3)),
                         $3);`,
             [comment, surveyCode, new Date().toISOString()], (err, result) => {
-        if (err) { response.send('Error'); return; }
-        response.send("Ok");
+        if (err) {
+            // db failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json({ message: "Submitted Comment Successfully" });
     });
 };
 
@@ -399,25 +528,40 @@ exports.getUsers = async function (request, response) {
     // returns list of users (this route is only for admins)
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.send("Error"); return; }
+    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
 
     db.query(`SELECT user_id, username, is_admin, password_change_required
                 FROM users;`, (err, result) => {
-        response.send(result.rows);
+        if (err) {
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json(result.rows);
     });
 };
 
 exports.createUser = async function (request, response) {
     const { username, newUsername, newPassword } = request.body;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.send("Error"); return; }
+    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
 
     const preparedPassword = authHelper.preparePassword(newPassword);
     bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
-        if (err) { console.log(err); response.send('Error'); return; }
+        if (err) {
+            // hashing failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
         db.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id;', [newUsername, hash], (err, result) => {
-            if (err || result.rows.length !== 1) { response.send('Error'); return; }
-            response.send(""+result.rows[0].user_id);
+            if (err || result.rows.length !== 1) {
+                // db failed
+                console.log(err);
+                response.status(500).json({ error: "Internal Server Error" });
+                return;
+            }
+            response.status(201).json({ userId: result.rows[0].user_id });
         });
     });
 };
@@ -426,13 +570,18 @@ exports.setRegisterKey = async function (request, response) {
     // writes specified register key to local file
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.send("Error"); return; }
+    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
 
     const registerKey = request.body.registerKey;
 
     fs.writeFile(filePathRegisterKey, registerKey, "utf-8", function(err) {
-        if(err) { console.log(err); response.send("Error"); return; }
-        response.send("Ok");
+        if(err) {
+            // writing file failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json({ message: "Set Register Key Successfully" });
     });
 };
 
@@ -440,11 +589,16 @@ exports.getRegisterKey = async function (request, response) {
     // reads register key from local file
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.send("Error"); return; }
+    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
 
     fs.readFile(filePathRegisterKey, "utf-8", (err, registerKeyFile) => {
-        if (err) { console.log(err); response.send('Error'); return; }
-        response.send(registerKeyFile);
+        if (err) {
+            // reading file failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
+        response.status(200).json({ registerKey: registerKeyFile });
     });
 };
 
@@ -452,21 +606,31 @@ exports.resetPasswordOfUser = async function (request, response) {
     // let's admin reset users password which then must be changed by user after next login
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.send("Error"); return; }
+    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
 
     const usernameForPasswordReset = request.body.usernameForPasswordReset;
     const newPassword = request.body.newPassword;
     const preparedNewPassword = authHelper.preparePassword(newPassword);
     bcrypt.hash(preparedNewPassword, BCRYPT_SALT, function(err, hash) {
-        if (err) { console.log(err); response.send('Error'); return; }
+        if (err) {
+            // hashing failed
+            console.log(err);
+            response.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
         db.query(`UPDATE users
                     SET password = $1
                         password_change_required = true
                         session_id = NULL
                     WHERE username = $2`,
         [hash, usernameForPasswordReset], (err, result) => {
-            if (err) { response.send('Error'); return; }
-            response.send("Ok");
+            if (err) {
+                // db failed
+                console.log(err);
+                response.status(500).json({ error: "Internal Server Error" });
+                return;
+            }
+            response.status(200).json({ message: "Resetted Password Successfully" });
         });
     });
 };
@@ -475,9 +639,9 @@ exports.deleteUser = async function (request, response) {
     // deletes user and all corresponding surveys etc.
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.send("Error"); return; }
+    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
 
-    console.log("Not yet implemented"); // TODO
+    response.status(501).json({ error: "Not Yet Implemented" }); // TODO
 };
 
 
@@ -529,5 +693,5 @@ exports.createExampleDatabase = function (request, response) {
             });
         });
     });
-    response.send("ok");
+    response.status(200).json({ message: "Created Example Database Successfully" });
 };
