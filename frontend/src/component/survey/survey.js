@@ -6,7 +6,13 @@ class Survey extends Component {
         this.state = {  }
     }
     render() { 
-        return ( null );
+        return (
+        <div className="content">
+            <div className="container">
+                <p>Hallo Martin</p>
+            </div>
+        </div>
+        );
     }
 }
  
