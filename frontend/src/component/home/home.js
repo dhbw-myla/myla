@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router'
 
 import "./home.css"
-import Signup from '../signup/signup';
 import { verifyUser } from '../../auth/verifyPw';
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +12,7 @@ class Home extends Component {
 
     handleOnChange = (event) => {
         const { name, value, type } = event.target;
-        this.state[name] = value;
+        this.state.user[name] = value;
         this.forceUpdate();
     }
     handleParticipate = () => {
@@ -24,8 +24,8 @@ class Home extends Component {
     }
 
     handleLogin = () => {
-        const { username, password } = this.state;
-        const userIsVerified = verifyUser(username, password);
+        const { user } = this.state;
+        const userIsVerified = verifyUser(user);
         if (userIsVerified)
         {
             this.setState({ login: true });
@@ -37,7 +37,7 @@ class Home extends Component {
     render() {
         console.log('state', this.state);
         const { signUp, participate, login } = this.state;
-        const currentComponent = "home";
+        const currentComponent = "/home";
         if (signUp) {
             return (
                 <Redirect from={currentComponent} to="/signup" />
