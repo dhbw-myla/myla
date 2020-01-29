@@ -28,6 +28,7 @@ services:
     environment:
       POSTGRES_PASSWORD: ${postgres_password}
       POSTGRES_USER: ${postgres_user}
+      POSTGRES_DB: myla
     networks:
       - myla
     volumes:

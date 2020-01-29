@@ -1,11 +1,12 @@
+import { login } from "../database/database";
 
 
 export function verifySignup(password, passwordRepeat) {
     return password === passwordRepeat;
 }
 
-export function verifyUser(username, password) {
-    // { username: "user", password: "password" }
-    // todo ask backend
-    return true;
+export async function verifyUser(user) {
+    console.log('verifyUser', user);
+    const myLogin = await login(user);
+    return myLogin;
 }

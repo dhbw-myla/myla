@@ -13,8 +13,8 @@ class Groups extends Component {
     render() {
         const { groups } = this.state;
         return (
-            groups.map(g => (
-                <p>{g.name}</p>
+            groups.map((g, key) => (
+                <p key={key}>{g.name}</p>
             ))
         );
     }

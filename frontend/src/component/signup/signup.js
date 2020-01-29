@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { verifySignup } from '../../auth/verifyPw';
 import "./signup.css"
+import { register } from '../../database/database';
+import SweetAlert from 'sweetalert-react';
 
 class Signup extends Component {
     constructor(props) {
@@ -19,20 +21,21 @@ class Signup extends Component {
     }
 
     resetHtmlForm = () => {
+        console.log('resetHtmlForm');
         this.setState({ user: {} })
     }
 
-    createUser = () => {
+    createUser = async () => {
         const { user } = this.state;
         const { password, passwordRepeat } = user;
         const pwMatch = verifySignup(password, passwordRepeat);
 
         if (pwMatch) {
-            console.log('pw match');
+            const registeredUser = await register(user);
+            console.log('pw match - registeredUser', registeredUser);
         } else {
             console.log('pw does not match');
         }
-
         console.log('user to create', user);
     }
 
@@ -41,16 +44,14 @@ class Signup extends Component {
             <div className="content">
                 <div className="container">
                     <label className="h2" htmlForm="person">Sign Up</label>
-
                     <br />
-
                     <label htmlFor="username">Username</label>
                     <input
                         className="form-control"
                         type="text"
                         name="username"
                         id="username"
-                        maxlength="30"
+                        maxLength="30"
                         onChange={e => this.handleOnChange(e)}
                     />
 
@@ -60,24 +61,49 @@ class Signup extends Component {
                     <input
                         className="form-control"
                         type="text" name="email"
-                        id="email" maxlength="50"
+                        id="email" maxLength="50"
                         onChange={e => this.handleOnChange(e)}
                     />
 
                     <br />
 
                     <label htmlFor="password">Password</label>
-                    <input className="form-control" type="password" name="password" id="password" maxlength="50" onChange={e => this.handleOnChange(e)} />
+                    <input
+                        className="form-control"
+                        type="password"
+                        name="password"
+                        id="password"
+                        maxLength="50"
+                        onChange={e => this.handleOnChange(e)}
+                    />
 
                     <br />
 
                     <label htmlFor="password-repeat">Repeat Password</label>
-                    <input className="form-control" type="password" name="passwordRepeat" id="passwordWDH" maxlength="50" onChange={e => this.handleOnChange(e)} />
+                    <input
+                        className="form-control"
+                        type="password"
+                        name="passwordRepeat"
+                        id="passwordWDH"
+                        maxLength="50"
+                        onChange={e => this.handleOnChange(e)}
+                    />
 
                     <br />
 
-                    <button id="resetBtn" className="btn twoButtons pressButton" type="reset" onClick={this.resetHtmlForm}>Reset</button>
-                    <button className="btn twoButtons pressButton" type="button" onClick={this.createUser}>Submit</button>
+                    <button
+                        id="resetBtn"
+                        className="btn twoButtons pressButton"
+                        type="reset"
+                        onClick={this.resetHtmlForm}
+                    >Reset
+                    </button>
+                    <button
+                        className="btn twoButtons pressButton"
+                        type="button"
+                        onClick={this.createUser}
+                    >Submit
+                    </button>
                 </div>
             </div>
         );
