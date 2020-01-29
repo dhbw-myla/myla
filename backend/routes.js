@@ -23,8 +23,7 @@ exports.register = function (request, response) {
         }
         if (registerKey !== registerKeyFile || registerKeyFile === "") {
             // wrong register key or register not possible
-            response.status(400).json({ error: "Register Failed" });
-            return;
+            return responseHelper.sendClientError(response, "Register Failed");
         }
         bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
             if (err) {
@@ -50,8 +49,7 @@ exports.login = function (request, response) {
     db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
         if (err || dbResult.rows.length !== 1) {
             // user not found
-            response.status(400).json({ error: "Login Failed" });
-            return;
+            return responseHelper.sendClientError(response, "Login Failed");
         }
         const dbPassword = dbResult.rows[0].password;
         const dbSessionId = dbResult.rows[0].session_id;
@@ -63,8 +61,7 @@ exports.login = function (request, response) {
             }
             if (bcryptResult !== true) {
                 // wrong password
-                response.status(400).json({ error: "Login Failed" });
-                return;
+                return responseHelper.sendClientError(response, "Login Failed");
             } else {
                 let respond = function (response, username, sessionId) {
                     response.status(200).json({ username: username, sessionId: sessionId, isPasswordChangeRequired: isPasswordChangeRequired });
@@ -99,8 +96,7 @@ exports.changePassword = function (request, response) {
             return responseHelper.sendInternalServerError(response, err);
         } else if (dbResult.rows.length !== 1) {
             // user not found
-            response.status(400).json({ error: "Password Change Failed" });
-            return;
+            return responseHelper.sendClientError(response, "Password Change Failed");
         }
         const dbPassword = dbResult.rows[0].password;
         bcrypt.compare(preparedPassword, dbPassword, function(err, bcryptResult) {
@@ -110,8 +106,7 @@ exports.changePassword = function (request, response) {
             }
             if (bcryptResult !== true) {
                 // wrong (old) password
-                response.status(400).json({ error: "Password Change Failed" });
-                return;
+                return responseHelper.sendClientError(response, "Password Change Failed");
             } else {
                 const preparedNewPassword = authHelper.preparePassword(newPassword);
                 bcrypt.hash(preparedNewPassword, BCRYPT_SALT, function(err, hash) {
@@ -250,8 +245,7 @@ exports.createSurvey = async function (request, response) {
     if (groupId) {
         let isAllowed = await checkIfGroupIdIsAllowedForUser(groupId, username);
         if (!isAllowed) {
-            response.status(403).json({ error: "Forbidden" });
-            return;
+            return responseHelper.sendClientError(response, 403);
         }
     }
 
@@ -261,8 +255,7 @@ exports.createSurvey = async function (request, response) {
         try {
             questions = JSON.parse(questions);
         } catch (err) {
-            response.status(400).json({ error: "Parsing of Questions Failed" });
-            return;
+            return responseHelper.sendClientError(response, "Parsing of Questions Failed");
         }
     }
 
@@ -330,8 +323,7 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
     // not to be confused with: creating survey master based on template
     let isAllowed = await checkIfSurveyMasterIdIsAllowedForUser(surveyMasterId, username);
     if (!isAllowed) {
-        response.status(403).json({ error: "Forbidden" });
-        return;
+        return responseHelper.sendClientError(response, 403);
     }
     createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd);
 };
@@ -383,8 +375,7 @@ exports.getSurveyBySurveyCode = function (request, response) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
         } else if (resultSurvey.rows.length === 0) {
-            response.status(404).json({ error: "No Survey Found" });
-            return;
+            return responseHelper.sendClientError(response, 404, "No Survey Found");
         }
         result.survey = resultSurvey.rows[0];
         db.query(`SELECT * FROM question q
@@ -409,8 +400,7 @@ exports.submitSurvey = function (request, response) {
         try {
             answers = JSON.parse(answers);
         } catch (err) {
-            response.status(400).json({ error: "Parsing of Answers Failed" });
-            return;
+            return responseHelper.sendClientError(response, "Parsing of Answers Failed");
         }
     }
     db.query(`SELECT survey.survey_id, survey.survey_master_id, question.question_id
@@ -425,8 +415,7 @@ exports.submitSurvey = function (request, response) {
             return responseHelper.sendInternalServerError(response, err);
         } else if (result.rows.length < 1) {
             // no survey
-            response.status(404).json({ error: "No Survey Found"});
-            return;
+            return responseHelper.sendClientError(response, 404, "No Survey Found");
         }
         let surveyId = result.rows[0].survey_id;
 
@@ -486,7 +475,7 @@ exports.getUsers = async function (request, response) {
     // returns list of users (this route is only for admins)
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
+    if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
 
     db.query(`SELECT user_id, username, is_admin, password_change_required
                 FROM users;`, (err, result) => {
@@ -500,7 +489,7 @@ exports.getUsers = async function (request, response) {
 exports.createUser = async function (request, response) {
     const { username, newUsername, newPassword } = request.body;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
+    if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
 
     const preparedPassword = authHelper.preparePassword(newPassword);
     bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
@@ -522,7 +511,7 @@ exports.setRegisterKey = async function (request, response) {
     // writes specified register key to local file
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
+    if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
 
     const registerKey = request.body.registerKey;
 
@@ -539,7 +528,7 @@ exports.getRegisterKey = async function (request, response) {
     // reads register key from local file
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
+    if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
 
     fs.readFile(filePathRegisterKey, "utf-8", (err, registerKeyFile) => {
         if (err) {
@@ -554,7 +543,7 @@ exports.resetPasswordOfUser = async function (request, response) {
     // let's admin reset users password which then must be changed by user after next login
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
+    if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
 
     const usernameForPasswordReset = request.body.usernameForPasswordReset;
     const newPassword = request.body.newPassword;
@@ -583,7 +572,7 @@ exports.deleteUser = async function (request, response) {
     // deletes user and all corresponding surveys etc.
     const username = request.body.username;
     const isAdmin = await checkIfUserIsAdmin(username);
-    if (!isAdmin) { response.status(403).json({ error: "Forbidden" }); return; }
+    if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
 
     response.status(501).json({ error: "Not Yet Implemented" }); // TODO
 };

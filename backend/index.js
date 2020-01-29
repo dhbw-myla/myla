@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const routes = require('./routes');
 const authHelper = require('./helper/auth');
+const responseHelper = require('./helper/responseHelper');
 
 const app = express();
 app.use(cookieParser());
@@ -25,7 +26,7 @@ function auth (request, response, next) {
                 // user is authorized
                 next();
             } else {
-                response.status(401).json({ error: errorMessage || "Unauthorized" });
+                responseHelper.sendClientError(response, 401, errorMessage);
             }
         });
     }
