@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { verifySignup } from '../../auth/verifyPw';
 import "./signup.css"
 import { register, test } from '../../database/database';
-import SweetAlert from 'sweetalert-react';
+import Swal from 'sweetalert2'
 
 class Signup extends Component {
     constructor(props) {
@@ -34,7 +34,12 @@ class Signup extends Component {
             const registeredUser = await test(user);
             console.log('pw match - registeredUser', registeredUser);
         } else {
-            console.log('pw does not match');
+            Swal.fire({
+                title: 'Error!',
+                text: 'Passwords didn\'t match',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
         }
         console.log('user to create', user);
     }
