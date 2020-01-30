@@ -1,0 +1,25 @@
+img{
+    width:auto;
+    height:40px;
+    margin-left: 1vw;
+}
+
+.Header button{
+    position: absolute;
+    right: 1vw;
+}
+
+.Header button:hover{
+    background: white;
+    color: black;
+    fill:black;
+}
+
+.Header svg{
+    fill: white;
+}
+.Header .headerTop{
+    -webkit-box-shadow: 0px 0px 45px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 45px -5px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 45px -5px rgba(0,0,0,0.75);
+}
