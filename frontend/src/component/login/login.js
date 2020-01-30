@@ -1,76 +1,92 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router'
 
 import './login.css'
+import { verifyUser } from '../../auth/verifyPw';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: { username: "Hallo", password: "1234" }
+            user: { username: "", password: "" }
         }
     }
-    render() {
+
+    handleOnChange = (event) => {
+        const { name, value, type } = event.target;
+        this.state.user[name] = value;
+        this.forceUpdate();
+    }
+
+    handleSignup = () => {
+        this.setState({ signUp: true })
+    }
+
+    handleLogin = () => {
         const { user } = this.state;
+        const userIsVerified = verifyUser(user);
+        if (userIsVerified) {
+            this.setState({ isLoggedIn: true });
+        } else {
+            throw Error("Not Implemented");
+        }
+    }
 
-        return (
-            <div className="container">
-                <form action="senden.html" id="person">
-                    <label className="h2" form="person">Login</label>
+    render() {
+        const { user, signUp, isLoggedIn } = this.state;
+        const { username, password } = user;
 
-                    <br />
-
+        const currentComponent = "/home";
+        if (signUp) {
+            return (
+                <Redirect from={currentComponent} to="/signup" />
+            )
+        }
+        else if (isLoggedIn) {
+            return (
+                <Redirect from={currentComponent} to="/dashboard" />
+            )
+        }
+        else {
+            return (
+                <div className="col-sm">
                     <label htmlFor="username">Username</label>
                     <input
+                        type="email"
                         className="form-control"
-                        type="text" name="username"
+                        name="username"
                         id="username"
-                        maxLength="30"
-                        defaultValue={user.username}
+                        onChange={e => this.handleOnChange(e)}
+                        defaultValue={username}
                     />
-
                     <br />
-
-                    <label htmlFor="mail">E-Mail</label>
+                    <label htmlFor="username">Password</label>
                     <input
-                        className="form-control"
-                        type="text"
-                        name="mail"
-                        id="mail"
-                        maxLength="50"
-                    />
-
-                    <br />
-
-                    <label htmlFor="password">Password</label>
-                    <input
-                        className="form-control"
                         type="password"
+                        className="form-control"
                         name="password"
                         id="password"
-                        maxLength="50"
-                        defaultValue={user.password}
+                        onChange={e => this.handleOnChange(e)}
+                        defaultValue={password}
                     />
-
                     <br />
-
-                    <label htmlFor="password-repeat">Repeat Password</label>
-                    <input
-                        className="form-control"
-                        type="password"
-                        name="password-repeat"
-                        id="passwordWDH"
-                        maxLength="50"
-                    />
-
-                    <br />
-
-                    <button id="resetBtn" className="btn twoButtons pressButton" type="reset">Reset</button>
                     <button
+                        id="username"
+                        type="button"
                         className="btn twoButtons pressButton"
-                        type="submit">Submit</button>
-                </form>
-            </div>
-        );
+                        onClick={this.handleLogin}
+                    >
+                        Login
+                </button>
+                    <button
+                        type="button"
+                        className="btn twoButtons pressButton"
+                        onClick={this.handleSignup}
+                    >Sign Up
+                </button>
+                </div>
+            );
+        }
     }
 }
 

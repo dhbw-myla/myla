@@ -1,8 +1,7 @@
 import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+//import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './component/home/home';
-import Login from './component/login/login';
 import Admin from './component/admin/admin';
 import Signup from './component/signup/signup';
 import Dashboard from './component/dashboard/dashboard';
@@ -14,29 +13,18 @@ import Footer from './component/footer/footer';
 function App() {
   return (
     <Router>
-      <Header/>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route exact path="/login">
-        <Login />
-      </Route>
-      <Route exact path="/admin">
-        <Admin />
-      </Route>
-      <Route exact path="/signup">
-        <Signup />
-      </Route>
-      <Route exact path="/dashboard">
-        <Dashboard />
-      </Route>
-      <Route exact path="/survey/create">
-        <SurveyCreator />
-      </Route>
-      <Route exact path="/survey/participate">
-        <Survey />
-      </Route>
-      <Footer/>
+      <div className="App">
+        <Header />
+        <Switch >
+          <Route exact path="/" component={Home} />
+          <Route exact path="/admin" component={Admin} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/survey/create" component={SurveyCreator} />
+          <Route exact path="/survey/participate" component={Survey} />
+        </Switch>
+        <Footer />
+      </div>
     </Router>
   );
 }
