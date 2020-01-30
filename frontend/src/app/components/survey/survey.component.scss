@@ -1,0 +1,37 @@
+.hoveranswer:hover{
+    background: white;
+    color: rgba(93, 104, 110, 1);
+    opacity: 0.75;
+    border-style: round($number: 17);
+    border-radius: 25px;
+}
+.card{
+    position: relative;
+    vertical-align: middle;
+    width: 75%;
+    margin: 0 12.5%;
+    margin-bottom: 2%;
+    top: 7.5%;
+    background-color: rgba(93, 104, 110, 0.6);
+}
+.hoveranswer{
+    padding: 0 5%;
+}
+.svgButton{
+    margin-top: 5%;
+    float: right;
+}
+.hovered{
+    background: white;
+    color: rgba(93, 104, 110, 1);
+    opacity: 0.75;
+    border-style: round($number: 17);
+    border-radius: 25px;
+}
+.clickable{
+    pointer-events: none;
+    
+}
+.whiteColor {
+    color: green;
+   }

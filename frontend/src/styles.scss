@@ -1,0 +1,95 @@
+:root {
+  --main-dark-blue: #384B5F;
+  --main-medium-blue: #45637C;
+  --main-light-blue: #4B677F;
+}
+
+html {
+  zoom: reset !important;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+app-root {
+  background-color: #FFFFFF;
+  height: 100%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.75); 
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(93, 104, 110, 0.6); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+background: rgba(255,0,0,0.4); 
+}
+
+body {
+  background-color: #CCCCCC;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  color: #000000;
+  height: 100%;
+  width: 100%;
+  background-color: #FFFFFF;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  z-index: 10;
+}
+
+p {
+  color: #000000;
+  font-size: 2rem;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  color: #000000;
+  font-size: 1.1vw;
+  font-weight: lighter;
+  //padding-top:2%;
+}
+
+.pressButton{
+  background-color: #E10217; 
+  color: #FFFFFF;
+}
+.hundertProzent{
+  width: 100%;
+}
+h1 {
+  color: #000000;
+  font-size: 1.6vw;
+  font-weight: bold;
+}
+
+h2 {
+  color: #000000;
+  font-size: 1.3vw;
+  font-weight: bold;
+}

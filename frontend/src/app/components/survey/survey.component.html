@@ -1,0 +1,35 @@
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let question of surveyQuestion; let i = index" class="card text-white" style="max-width: 100%;">
+        <div class="card-header">{{ question.question }}</div>
+        <div class="card-body">
+          <h5 id="{{ 'answer-' + i +k }}" *ngFor="let answer of question.answers; let k = index"
+            [ngClass]=" {whiteColor: isStyleRequired(i,k)}"
+            (click)="alert($event)" class="card-title">
+            <!--[ngClass]="{'hovered': 'questionid' + question.id + 'answerid' + answer.id }"   id="{{ 'answer-' + $i +$k }}"-->
+            <div class="hoveranswer">{{ answer.answer }}</div>
+          </h5>
+        </div>
+      </div>
+      <svg *ngIf="buttonClickable" (click)="alert('button')" class="svgButton" xmlns="http://www.w3.org/2000/svg"
+        x="0px" y="0px" width="2.5vw" height="2.5vw" viewBox="0 0 172 172" style=" fill:#000000;">
+        <g transform="">
+          <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+            stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+            font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+            <path d="M0,172v-172h172v172z" fill="none"></path>
+            <g>
+              <path
+                d="M2.65391,86c0,-46.02344 37.32266,-83.34609 83.34609,-83.34609c46.02344,0 83.34609,37.32266 83.34609,83.34609c0,46.02344 -37.32266,83.34609 -83.34609,83.34609c-46.02344,0 -83.34609,-37.32266 -83.34609,-83.34609z"
+                fill="#666666"></path>
+              <path
+                d="M120.06406,79.88594c-12.63125,-12.63125 -25.2625,-25.2625 -37.89375,-37.89375c-9.00313,-9.00313 -22.91094,5.00547 -13.87422,14.04219c10.27969,10.27969 20.59297,20.55937 30.87266,30.87266c-10.31328,10.31328 -20.62656,20.62656 -30.93984,30.93984c-9.00313,9.00312 5.00547,22.91094 14.04219,13.87422c12.63125,-12.63125 25.2625,-25.2625 37.89375,-37.89375c3.7625,-3.79609 3.66172,-10.17891 -0.10078,-13.94141z"
+                fill="#ffffff"></path>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>

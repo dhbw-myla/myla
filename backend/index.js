@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const routes = require('./routes');
 const authHelper = require('./helper/auth');
+const responseHelper = require('./helper/responseHelper');
 
 const app = express();
 app.use(cookieParser());
@@ -25,7 +26,7 @@ function auth (request, response, next) {
                 // user is authorized
                 next();
             } else {
-                response.send(errorMessage || "Error");
+                responseHelper.sendClientError(response, 401, errorMessage);
             }
         });
     }
@@ -82,4 +83,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('App listening on port ' + port);
 });
-
