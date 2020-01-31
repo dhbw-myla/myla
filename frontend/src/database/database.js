@@ -46,25 +46,21 @@ export async function register({ username, password }) {
     const userToRegister = {
         username: username,
         password: password,
-        registerKey: "IsisIstToll"
+        registerKey: "thisIsTheReg1sterK3y,butUcanALSOkeepTHISfileBLANK-onlyNeccessaryToCreateThisF1le"
     }
     try {
         const myBody = JSON.stringify(userToRegister);
-        console.log('stringify register', userToRegister);
         const url = PATH_BASE_URL + PATH_REGISTER;
-        console.log('path', url);
         const data = await fetch(url, {
             method: 'POST',
             body: myBody,
-            mode: 'no-cors', // no-cors, *cors, same-origin
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-            .catch(err => {
+        }).catch(err => {
                 console.log('verifyUser', err);
             })
-        return await data.json();
+        return data.json();
     } catch (error) {
         console.log('error register', error);
     }

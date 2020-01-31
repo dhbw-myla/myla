@@ -31,7 +31,7 @@ class Signup extends Component {
         const pwMatch = verifySignup(password, passwordRepeat);
 
         if (pwMatch) {
-            const registeredUser = await test(user);
+            const registeredUser = await register(user);
             console.log('pw match - registeredUser', registeredUser);
         } else {
             Swal.fire({
