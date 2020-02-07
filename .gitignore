@@ -50,3 +50,4 @@ testem.log
 /backend/node_modules/
 /backend/db/dbconfig.js
 /backend/secret.js
+.DS_Store
