@@ -6,7 +6,19 @@ export function verifySignup(password, passwordRepeat) {
 }
 
 export async function verifyUser(user) {
-    console.log('verifyUser', user);
     const myLogin = await login(user);
-    return myLogin;
+    if (myLogin !== undefined && myLogin.sessionId !== undefined) {
+        return myLogin;
+    }
+    return undefined;
+}
+
+export function verifySession(){
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if (user) {
+        if (user.sessionId !== undefined){       
+            return true;
+        }
+    } 
+    return false;
 }

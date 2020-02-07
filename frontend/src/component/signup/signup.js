@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
 import { verifySignup } from '../../auth/verifyPw';
 import "./signup.css"
-import { register, test } from '../../database/database';
+import {register} from '../../database/database';
 import Swal from 'sweetalert2'
+import { Redirect } from 'react-router'
 
 class Signup extends Component {
     constructor(props) {
         super(props);
-        this.state = { user: {} }
+        this.state = { 
+            user: {}
+        }
     }
 
     handleOnChange = (event) => {
-        console.log('event', event);
-        const { value, name, type } = event.target;
-
-        console.log('name', name);
-        console.log('value', value);
-
+        const { value, name } = event.target;
         this.state.user[name] = value;
     }
 
     resetHtmlForm = () => {
-        console.log('resetHtmlForm');
         this.setState({ user: {} })
     }
 
@@ -32,7 +29,20 @@ class Signup extends Component {
 
         if (pwMatch) {
             const registeredUser = await register(user);
-            console.log('pw match - registeredUser', registeredUser);
+            console.log(registeredUser)
+            if (registeredUser !== undefined && registeredUser.sessionId !== undefined) {
+                sessionStorage.setItem("user", JSON.stringify(registeredUser))
+                this.setState({ isLoggedIn: true });
+                this.state.user = registeredUser
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Error on registering',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
+            }
+
         } else {
             Swal.fire({
                 title: 'Error!',
@@ -41,10 +51,16 @@ class Signup extends Component {
                 confirmButtonText: 'OK'
             })
         }
-        console.log('user to create', user);
     }
 
     render() {
+        const currentComponent = "/signup";
+        const { isLoggedIn } = this.state;
+        if ((isLoggedIn)) {
+            return (
+                <Redirect from={currentComponent} to="/dashboard" />
+            )
+        }
         return (
             <div className="content">
                 <div className="container">
@@ -62,11 +78,11 @@ class Signup extends Component {
 
                     <br />
 
-                    <label htmlFor="email">E-Mail</label>
+                    <label htmlFor="registerKey">Register Key</label>
                     <input
                         className="form-control"
-                        type="text" name="email"
-                        id="email" maxLength="50"
+                        type="text" name="registerKey"
+                        id="registerKey" maxLength="200"
                         onChange={e => this.handleOnChange(e)}
                     />
 

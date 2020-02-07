@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router'
+import Swal from 'sweetalert2'
 
 import './login.css'
 import { verifyUser } from '../../auth/verifyPw';
@@ -13,7 +14,7 @@ class Login extends Component {
     }
 
     handleOnChange = (event) => {
-        const { name, value, type } = event.target;
+        const { name, value } = event.target;
         this.state.user[name] = value;
         this.forceUpdate();
     }
@@ -22,13 +23,21 @@ class Login extends Component {
         this.setState({ signUp: true })
     }
 
-    handleLogin = () => {
+    handleLogin = async () => {
         const { user } = this.state;
-        const userIsVerified = verifyUser(user);
-        if (userIsVerified) {
+        const verifiedUser = await verifyUser(user);
+        if (verifiedUser) {
+            console.log(verifiedUser)
+            sessionStorage.setItem("user", JSON.stringify(verifiedUser))
             this.setState({ isLoggedIn: true });
+            this.setState({ user: verifiedUser })
         } else {
-            throw Error("Not Implemented");
+            Swal.fire({
+                title: 'Error!',
+                text: 'Error on login',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
         }
     }
 
@@ -44,7 +53,10 @@ class Login extends Component {
         }
         else if (isLoggedIn) {
             return (
-                <Redirect from={currentComponent} to="/dashboard" />
+                <Redirect from={currentComponent} to={{
+                    pathname: '/dashboard',
+                    state: { user: user }
+                }} />
             )
         }
         else {
@@ -52,7 +64,7 @@ class Login extends Component {
                 <div className="col-sm">
                     <label htmlFor="username">Username</label>
                     <input
-                        type="email"
+                        type="text"
                         className="form-control"
                         name="username"
                         id="username"
@@ -60,7 +72,7 @@ class Login extends Component {
                         defaultValue={username}
                     />
                     <br />
-                    <label htmlFor="username">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input
                         type="password"
                         className="form-control"
