@@ -1,6 +1,15 @@
 .twoButtons{
     width: 47%;
 }
-#resetBtn{
-    margin-right: 6%;
+
+.threeButtons{
+    width: 31%;
+}
+
+.threeButtons:first-child{
+    margin-right: auto;
+}
+
+.threeButtons:last-child {
+    margin-left: auto;
 }

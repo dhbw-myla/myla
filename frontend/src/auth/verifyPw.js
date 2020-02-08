@@ -1,6 +1,4 @@
-import {
-  login
-} from "../database/database";
+import { login } from "../database/database";
 import * as util from "../util/util";
 
 export function verifySignup(password, passwordRepeat) {

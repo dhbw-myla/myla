@@ -5,6 +5,8 @@ import { register } from "../../database/database";
 import Swal from "sweetalert2";
 import { Redirect } from "react-router";
 
+import * as swalTypes from "../../util/swal";
+
 import * as util from "../../util/util";
 
 class Signup extends Component {
@@ -20,9 +22,9 @@ class Signup extends Component {
     this.state.user[name] = value;
   };
 
-  resetHtmlForm = () => {
+  resetForm = () => {
     this.setState({
-      user: {}
+      user: { username: "", registerKey: "", password: "", passwordRepeat: "" }
     });
   };
 
@@ -33,7 +35,6 @@ class Signup extends Component {
 
     if (pwMatch) {
       const registeredUser = await register(user);
-      console.log(registeredUser);
       if (
         !util.checkIfUndefiniedOrNull(registeredUser) &&
         !util.checkIfUndefiniedOrNull(registeredUser.sessionId)
@@ -49,7 +50,7 @@ class Signup extends Component {
         Swal.fire({
           title: "Error!",
           text: "Error on registering",
-          icon: "error",
+          icon: swalTypes.ERROR,
           confirmButtonText: "OK"
         });
       }
@@ -57,17 +58,23 @@ class Signup extends Component {
       Swal.fire({
         title: "Error!",
         text: "Passwords didn't match",
-        icon: "error",
+        icon: swalTypes.ERROR,
         confirmButtonText: "OK"
       });
     }
   };
 
+  renderRedirect = () => {
+    this.setState({ redirectToHome: true });
+  };
+
   render() {
     const currentComponent = "/signup";
-    const { isLoggedIn } = this.state;
-    if (isLoggedIn) {
+    const { isLoggedIn, user, redirectToHome } = this.state;
+    if (isLoggedIn && !redirectToHome) {
       return <Redirect from={currentComponent} to="/dashboard" />;
+    } else if (redirectToHome) {
+      return <Redirect to="/" />;
     }
     return (
       <div className="content">
@@ -75,62 +82,78 @@ class Signup extends Component {
           <label className="h2" htmlForm="person">
             Sign Up
           </label>
-          <br />
-          <label htmlFor="username"> Username </label>
-          <input
-            className="form-control"
-            type="text"
-            name="username"
-            id="username"
-            maxLength="30"
-            onChange={e => this.handleOnChange(e)}
-          />
-          <br />
-          <label htmlFor="registerKey"> Register Key </label>
-          <input
-            className="form-control"
-            type="text"
-            name="registerKey"
-            id="registerKey"
-            maxLength="200"
-            onChange={e => this.handleOnChange(e)}
-          />
-          <br />
-          <label htmlFor="password"> Password </label>
-          <input
-            className="form-control"
-            type="password"
-            name="password"
-            id="password"
-            maxLength="50"
-            onChange={e => this.handleOnChange(e)}
-          />
-          <br />
-          <label htmlFor="password-repeat"> Repeat Password </label>{" "}
-          <input
-            className="form-control"
-            type="password"
-            name="passwordRepeat"
-            id="passwordWDH"
-            maxLength="50"
-            onChange={e => this.handleOnChange(e)}
-          />
-          <br />
-          <button
-            id="resetBtn"
-            className="btn twoButtons pressButton"
-            type="reset"
-            onClick={this.resetHtmlForm}
-          >
-            Reset
-          </button>
-          <button
-            className="btn twoButtons pressButton"
-            type="button"
-            onClick={this.createUser}
-          >
-            Submit
-          </button>
+          <div className="row">
+            <label htmlFor="username"> Username </label>
+            <input
+              className="form-control"
+              type="text"
+              name="username"
+              id="username"
+              maxLength="30"
+              value={user.username}
+              onChange={e => this.handleOnChange(e)}
+            />
+          </div>
+          <div className="row">
+            <label htmlFor="registerKey"> Register Key </label>
+            <input
+              className="form-control"
+              type="text"
+              name="registerKey"
+              id="registerKey"
+              maxLength="200"
+              value={user.registerKey}
+              onChange={e => this.handleOnChange(e)}
+            />
+          </div>
+          <div className="row">
+            <label htmlFor="password"> Password </label>
+            <input
+              className="form-control"
+              type="password"
+              name="password"
+              id="password"
+              maxLength="50"
+              value={user.password}
+              onChange={e => this.handleOnChange(e)}
+            />
+          </div>
+          <div className="row">
+            <label htmlFor="password-repeat"> Repeat Password </label>{" "}
+            <input
+              className="form-control"
+              type="password"
+              name="passwordRepeat"
+              id="passwordWDH"
+              maxLength="50"
+              value={user.passwordRepeat}
+              onChange={e => this.handleOnChange(e)}
+            />
+          </div>
+          <div className="row mt-5">
+            <button
+              id="resetBtn"
+              className="btn pressButton threeButtons"
+              type="reset"
+              onClick={this.resetForm}
+            >
+              Reset
+            </button>
+            <button
+              className="btn pressButton threeButtons"
+              type="button"
+              onClick={this.createUser}
+            >
+              Submit
+            </button>
+            <button
+              className="btn pressButton threeButtons"
+              type="button"
+              onClick={this.renderRedirect}
+            >
+              Login
+            </button>
+          </div>
         </div>
       </div>
     );
