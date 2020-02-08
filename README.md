@@ -136,6 +136,7 @@ responses:
       sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
     }
 400 { error: "Register Failed" }
+400 { error: "Username Already Exists" }
 500 { error: "Internal Server Error" }
 ```
 

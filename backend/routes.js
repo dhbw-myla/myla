@@ -33,6 +33,9 @@ exports.register = function (request, response) {
             db.query('INSERT INTO users (username, password, session_id) VALUES ($1, $2, $3);', [username, hash, sessionId], (err, result) => {
                 if (err) {
                     // db failed
+                    if (err.code === "23505" || err.constraint === "unique_username") {
+                        return responseHelper.sendClientError(response, "Username Already Exists");
+                    }
                     return responseHelper.sendInternalServerError(response, err);
                 }
                 response.status(201).json({ username: username, sessionId: sessionId });
