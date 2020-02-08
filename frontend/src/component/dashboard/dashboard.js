@@ -3,6 +3,7 @@ import Groups from "./groups";
 import Charts from "./charts";
 import { verifySession } from "../../auth/verifyPw";
 import { Redirect } from "react-router";
+import NavbarComponent from "../Navbar/NavbarComponent";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -18,14 +19,17 @@ class Dashboard extends Component {
       return <Redirect from={currentComponent} to="/" />;
     }
     return (
-      <div className="container">
-        <h1>Dashboard</h1>
-        <div className="row">
-          <div className="col col-lg-2">
-            <Groups />
-          </div>
-          <div className="col col-lg-10">
-            <Charts />
+      <div>
+        <NavbarComponent />
+        <div className="container">
+          <h1>Dashboard</h1>
+          <div className="row">
+            <div className="col col-lg-2">
+              <Groups />
+            </div>
+            <div className="col col-lg-10">
+              <Charts />
+            </div>
           </div>
         </div>
       </div>

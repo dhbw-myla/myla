@@ -7,13 +7,30 @@ export function verifySignup(password, passwordRepeat) {
 
 export async function verifyUser(user) {
   const myLogin = await login(user);
-  if (!util.checkIfUndefiniedOrNull(myLogin) && !util.checkIfUndefiniedOrNull(myLogin.sessionId)) {
+  if (
+    !util.checkIfUndefiniedOrNull(myLogin) &&
+    !util.checkIfUndefiniedOrNull(myLogin.sessionId)
+  ) {
     return myLogin;
   }
   return undefined;
 }
 
+const getUserFromStorage = () => {
+  return sessionStorage.getItem("user");
+};
+
 export function verifySession() {
-  const user = util.parseToJsonObject(sessionStorage.getItem("user"));
-  return !util.checkIfUndefiniedOrNull(user) && !util.checkIfUndefiniedOrNull(user.sessionId);
+  const user = util.parseToJsonObject(getUserFromStorage());
+  return (
+    !util.checkIfUndefiniedOrNull(user) &&
+    !util.checkIfUndefiniedOrNull(user.sessionId)
+  );
+}
+
+export function getStoredUser() {
+  if (verifySession()) {
+    return getUserFromStorage();
+  }
+  return undefined;
 }
