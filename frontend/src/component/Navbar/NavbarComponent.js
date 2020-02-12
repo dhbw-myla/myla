@@ -68,11 +68,6 @@ class NavbarPage extends Component {
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink className="waves-effect waves-light" to="#!">
-                  <MDBIcon fab icon="google-plus-g" />
-                </MDBNavLink>
-              </MDBNavItem>
-              <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
                     <MDBIcon icon="user" />
