@@ -33,7 +33,7 @@ class ParticipateComponent extends Component {
 				<>
 					<MDBCol md="3">
 						<div className="md-form">
-							<label className={active ? "active" : ""} for="survey-code">
+							<label className={active ? "active" : ""} htmlFor="survey-code">
 								Survey Code
 							</label>
 							<input type="text" id="survey-code" class="form-control" onChange={e => this.handleOnChange(e)} />
