@@ -1,24 +1,34 @@
 import { login } from "../database/database";
-
+import * as util from "../util/util";
 
 export function verifySignup(password, passwordRepeat) {
-    return password === passwordRepeat;
+	return password === passwordRepeat;
 }
 
 export async function verifyUser(user) {
-    const myLogin = await login(user);
-    if (myLogin !== undefined && myLogin.sessionId !== undefined) {
-        return myLogin;
-    }
-    return undefined;
+	const myLogin = await login(user);
+	if (!util.checkIfUndefiniedOrNull(myLogin) && !util.checkIfUndefiniedOrNull(myLogin.sessionId)) {
+		return myLogin;
+	}
+	return undefined;
 }
 
-export function verifySession(){
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    if (user) {
-        if (user.sessionId !== undefined){       
-            return true;
-        }
-    } 
-    return false;
+const getUserFromStorage = () => {
+	return sessionStorage.getItem("user");
+};
+
+export function verifySession() {
+	const user = util.parseToJsonObject(getUserFromStorage());
+	return !util.checkIfUndefiniedOrNull(user) && !util.checkIfUndefiniedOrNull(user.sessionId);
+}
+
+export function getStoredUser() {
+	if (verifySession()) {
+		return getUserFromStorage();
+	}
+	return undefined;
+}
+
+export function clearSessionStorage() {
+	sessionStorage.clear();
 }
