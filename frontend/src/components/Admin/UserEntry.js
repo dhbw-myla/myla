@@ -19,9 +19,9 @@ class UserEntry extends Component {
     this.state = {};
   }
   render() {
+    debugger;
     const { entry } = this.props;
-    const { firstname, name } = entry;
-    const user = name + ", " + firstname;
+    const { username } = entry;
     return (
       <MDBCol md="4">
         <MDBAnimation reveal type="">
@@ -29,15 +29,15 @@ class UserEntry extends Component {
             <MDBCardBody cascade className="text-center">
               <MDBCardTitle>
                 <MDBIcon icon="users" className="blue-text pr-2" />
-                <strong>{user}</strong>
+                <strong>{username}</strong>
               </MDBCardTitle>
-              <MDBCardText>Edit details for {user}</MDBCardText>
+              <MDBCardText>Edit details for {username}</MDBCardText>
               <MDBNavLink
                 tag="button"
                 to="#"
                 color="mdb-color"
                 className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
-                onClick={() => this.editUser(user)}
+                onClick={() => this.editUser(entry)}
               >
                 Edit
               </MDBNavLink>

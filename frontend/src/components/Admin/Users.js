@@ -8,24 +8,26 @@ class UsersComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [{ name: "Spengler", firstname: "Michael" }]
-      //user: []
+      users: []
     };
   }
 
   getUsersFromDB = async () => {
     const user = getStoredUser();
     const usersInDB = await getAllUsers(user);
-    console.log('asdwe', usersInDB);
+    console.log("asdwe", usersInDB);
     return usersInDB;
   };
 
-  componentDidMount() {
-    const users = this.getUsersFromDB();
-    // this.setState({ users });
-  }
+  componentDidMount = async () => {
+    const users = await this.getUsersFromDB();
+    console.log("users", users);
+    this.setState({ users: users });
+  };
 
   render() {
+    const { users } = this.state;
+    debugger;
     return (
       <MDBContainer>
         <MDBRow>
@@ -35,7 +37,7 @@ class UsersComponent extends Component {
           </MDBCol>
         </MDBRow>
         <MDBRow>
-          {this.state.users.map((user, key) => (
+          {users.map((user, key) => (
             <UserEntry entry={user} key={key} />
           ))}
         </MDBRow>
