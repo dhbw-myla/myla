@@ -16,9 +16,9 @@ class ChangePassword extends Component {
     this.setState({ [name]: value });
   };
 
-  handleOnSave = () => {
+  handleOnSave = async () => {
     const { newPassword, repeatPassword, oldPassword } = this.state;
-    
+
     if (newPassword.length === 0) {
       return swalHelper.error("Can't be empty");
     }
@@ -26,7 +26,12 @@ class ChangePassword extends Component {
     if (verifyPassword(newPassword, repeatPassword)) {
       const user = getStoredUser();
       user.newPassword = newPassword;
-      changePassword(user);
+      user.password = oldPassword;
+      const response = await changePassword(user);
+      const { status } = response;
+      status === 200
+        ? swalHelper.success("Password has been changed!")
+        : swalHelper.error("Password has not been changed!");
     } else {
       swalHelper.error("Password didn't match");
     }
