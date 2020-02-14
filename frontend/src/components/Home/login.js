@@ -4,41 +4,35 @@ import * as swalHelper from "../../util/swalHelper";
 
 import { withRouter } from "react-router-dom";
 
-// import "./login.css";
 import { verifyUser } from "../../auth/verifyPw";
-import { MDBCol, MDBInput } from "mdbreact";
+import { MDBCol, MDBInput, MDBRow, MDBBtn } from "mdbreact";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: { username: "", password: "" },
-      activeUserName: false,
-      activePassword: false,
       isLoggedIn: false
     };
   }
 
   handleOnChange = event => {
     const { name, value } = event.target;
-    this.state.user[name] = value;
-
-    const { user, activePassword, activeUserName } = this.state;
-    if (user.username.trim().length > 0 && !activeUserName) {
-      this.state.activeUserName = true;
-    } else if (user.username.trim().length === 0) {
-      this.state.activeUserName = false;
-    }
-    if (user.password.length > 0 && !activePassword) {
-      this.state.activePassword = true;
-    } else if (user.password.length === 0) {
-      this.state.activePassword = false;
-    }
-    this.forceUpdate();
+    this.setState(prevState => ({
+      user: {
+        // object that we want to update
+        ...prevState.user, // keep all other key-value pairs
+        [name]: value // update the value of specific key
+      }
+    }));
   };
 
   handleSignup = () => {
     this.setState({ signUp: true });
+  };
+
+  handleShowLogin = () => {
+    this.setState({ signUp: false });
   };
 
   handleLogin = async () => {
@@ -50,7 +44,7 @@ class Login extends Component {
       sessionStorage.setItem("user", JSON.stringify(jsonPayload));
       this.setState({
         isLoggedIn: true,
-        user: response.jsonPayload,
+        user: jsonPayload,
         isPasswordChangeRequired: jsonPayload.isPasswordChangeRequired
       });
     } else {
@@ -60,23 +54,10 @@ class Login extends Component {
 
   buttonsLogin = () => {
     return (
-      <div>
-        <button
-          id="username"
-          type="button"
-          className="btn twoButtons pressButton"
-          onClick={this.handleLogin}
-        >
-          Login
-        </button>
-        <button
-          type="button"
-          className="btn twoButtons pressButton"
-          onClick={this.handleSignup}
-        >
-          Sign Up
-        </button>
-      </div>
+      <MDBRow>
+        <MDBBtn onClick={this.handleLogin}>Login</MDBBtn>
+        <MDBBtn onClick={this.props.handleShowLogin}>Sign Up</MDBBtn>
+      </MDBRow>
     );
   };
 
@@ -86,17 +67,22 @@ class Login extends Component {
       signUp,
       isLoggedIn,
       isLoading,
-      activePassword,
-      activeUserName,
       isPasswordChangeRequired
     } = this.state;
     const { username, password } = user;
 
-    const currentComponent = "/home";
+    console.log("login state", this.state);
 
-    debugger;
+    const currentComponent = "/home";
     if (signUp) {
-      return <Redirect from={currentComponent} to="/signup" />;
+      return (
+        <Redirect
+          from={currentComponent}
+          to={{
+            pathname: "/signup"
+          }}
+        />
+      );
     } else if (isLoggedIn && !isPasswordChangeRequired) {
       return (
         <Redirect
@@ -118,45 +104,29 @@ class Login extends Component {
       );
     } else {
       return (
-        <>
+        <MDBRow>
           <MDBCol md="12">
-            <div className="md-form">
-              <label
-                className={activeUserName ? "active" : ""}
-                htmlFor="username"
-              >
-                Username
-              </label>
-              <MDBInput
-                type="text"
-                className="form-control"
-                name="username"
-                id="username"
-                onChange={e => this.handleOnChange(e)}
-                value={username}
-              />
-            </div>
+            <MDBInput
+              label="Username"
+              type="text"
+              className="form-control"
+              name="username"
+              id="username"
+              onChange={e => this.handleOnChange(e)}
+              value={username}
+            />
           </MDBCol>
           <MDBCol md="12">
-            <div className="md-form">
-              <label
-                className={activePassword ? "active" : ""}
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <MDBInput
-                type="password"
-                className="form-control"
-                name="password"
-                id="password"
-                onChange={e => this.handleOnChange(e)}
-                value={password}
-              />
-            </div>
+            <MDBInput
+              label="Password"
+              type="password"
+              name="password"
+              onChange={e => this.handleOnChange(e)}
+              value={password}
+            />
           </MDBCol>
           {this.buttonsLogin()}
-        </>
+        </MDBRow>
       );
     }
   }

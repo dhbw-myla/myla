@@ -1,28 +1,33 @@
 import React, { Component } from "react";
 
-import { MDBRow } from "mdbreact";
-// import "./home.css"
 import Login from "./login";
 import ParticipateComponent from "./participate";
+import Signup from "../signup/signup";
 
 class Startpage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { showLogin: true };
   }
 
+  handleShowLogin = () => {
+    this.setState({ showLogin: !this.state.showLogin });
+  };
+
   render() {
-    return (
-      <div>
-        <MDBRow>
+    const { showLogin } = this.state;
+
+    if (showLogin) {
+      return (
+        <>
           <ParticipateComponent />
-        </MDBRow>
-        <hr className="horizontalLine" />
-        <MDBRow>
-          <Login />
-        </MDBRow>
-      </div>
-    );
+          <hr className="horizontalLine" />
+          <Login handleShowLogin={this.handleShowLogin} />
+        </>
+      );
+    } else {
+      return <Signup handleShowLogin={this.handleShowLogin} />;
+    }
   }
 }
 

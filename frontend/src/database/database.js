@@ -47,7 +47,6 @@ export async function login(user) {
     const url = PATH_BASE_URL + PATH_LOGIN;
     return fetch(url, POST_METHOD(user))
       .then(data => {
-        console.log('login db', data);
         return createResponseObject(data)
       })
       .catch(err => {
