@@ -44,10 +44,13 @@ export async function getAllUsers(user) {
 export async function login(user) {
   try {
     const url = PATH_BASE_URL + PATH_LOGIN;
-    const data = await fetch(url, POST_METHOD(user)).catch(err => {
-      console.log("verifyUser", err);
-    });
-    return await data.json();
+    return await fetch(url, POST_METHOD(user))
+      .then(data => {
+        return createResponseObject(data);
+      })
+      .catch(err => {
+        console.log("verifyUser", err);
+      });
   } catch (error) {
     console.log("error on login", error);
   }

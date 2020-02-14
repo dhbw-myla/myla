@@ -31,11 +31,20 @@ class UsersComponent extends Component {
     this.setState({ editUser: true, userToEdit: userToEdit });
   };
 
+  handleBack = () => {
+    this.setState({ editUser: false, userToEdit: null });
+  };
+
   render() {
     const { users, editUser, userToEdit } = this.state;
 
     if (editUser) {
-      return <EditUserComponent userToEdit={userToEdit} />;
+      return (
+        <EditUserComponent
+          userToEdit={userToEdit}
+          handleOnBack={this.handleBack}
+        />
+      );
     } else {
       return (
         <MDBContainer>

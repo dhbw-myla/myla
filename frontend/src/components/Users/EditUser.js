@@ -3,8 +3,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 import { resetPasswordOfUser } from "../../database/database";
 import { getStoredUser } from "../../auth/verifyPw";
 
-import Swal from "sweetalert2";
-import * as swalTypes from "../../util/swal";
+import * as swalHelper from "../../util/swalHelper";
 
 class EditUserComponent extends Component {
   constructor(props) {
@@ -21,6 +20,11 @@ class EditUserComponent extends Component {
 
   handleOnSave = async () => {
     const { newPassword } = this.state;
+
+    if (newPassword.length === 0) {
+      return swalHelper.error("Password can't be empty");
+    }
+
     const { userToEdit } = this.props;
     const admin = getStoredUser();
     admin.newPassword = newPassword;
@@ -29,19 +33,9 @@ class EditUserComponent extends Component {
     const response = await resetPasswordOfUser(admin);
     console.log("status", response.status);
     if (response.status === 200) {
-      Swal.fire({
-        title: swalTypes.SUCCESS + "!",
-        text: "Successfully changed password",
-        icon: swalTypes.SUCCESS,
-        confirmButtonText: "OK"
-      });
+      swalHelper.success("Successfully changed password");
     } else {
-      Swal.fire({
-        title: swalTypes.ERROR + "!",
-        text: "Password change went wrong",
-        icon: swalTypes.ERROR,
-        confirmButtonText: "OK"
-      });
+      swalHelper.error("Password change went wrong");
     }
   };
 
@@ -79,6 +73,7 @@ class EditUserComponent extends Component {
         </MDBRow>
         <MDBRow>
           <MDBBtn onClick={this.handleOnSave}>Save</MDBBtn>
+          <MDBBtn onClick={this.props.handleOnBack}>Back</MDBBtn>
         </MDBRow>
       </MDBContainer>
     );

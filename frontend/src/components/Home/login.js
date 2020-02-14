@@ -5,7 +5,7 @@ import * as swalTypes from "../../util/swal";
 
 // import "./login.css";
 import { verifyUser } from "../../auth/verifyPw";
-import { MDBRow, MDBCol } from "mdbreact";
+import { MDBRow, MDBCol, MDBInput } from "mdbreact";
 
 class Login extends Component {
   constructor(props) {
@@ -122,7 +122,7 @@ class Login extends Component {
               >
                 Username
               </label>
-              <input
+              <MDBInput
                 type="text"
                 className="form-control"
                 name="username"
@@ -140,7 +140,7 @@ class Login extends Component {
               >
                 Password
               </label>
-              <input
+              <MDBInput
                 type="password"
                 className="form-control"
                 name="password"
