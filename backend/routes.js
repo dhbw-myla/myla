@@ -119,8 +119,8 @@ exports.changePassword = function (request, response) {
                     }
                     let sessionId = authHelper.createSessionId();
                     db.query(`UPDATE users
-                                SET password = $1
-                                    password_change_required = false
+                                SET password = $1,
+                                    password_change_required = false,
                                     session_id = $2
                                 WHERE username = $3`,
                     [hash, sessionId, username], (err, result) => {
