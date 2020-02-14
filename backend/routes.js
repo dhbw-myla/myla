@@ -557,8 +557,8 @@ exports.resetPasswordOfUser = async function (request, response) {
             return responseHelper.sendInternalServerError(response, err);
         }
         db.query(`UPDATE users
-                    SET password = $1
-                        password_change_required = true
+                    SET password = $1,
+                        password_change_required = true,
                         session_id = NULL
                     WHERE username = $2`,
         [hash, usernameForPasswordReset], (err, result) => {
