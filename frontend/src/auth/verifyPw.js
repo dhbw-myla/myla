@@ -2,14 +2,20 @@ import { login } from "../database/database";
 import * as util from "../util/util";
 
 export function verifySignup(password, passwordRepeat) {
+  verifyPassword(password, passwordRepeat);
+}
+
+export function verifyPassword(password, passwordRepeat) {
   return password === passwordRepeat;
 }
 
 export async function verifyUser(user) {
   const myLogin = await login(user);
+  console.log("myLogin", myLogin);
+  debugger;
   if (
-    !util.checkIfUndefiniedOrNull(myLogin) &&
-    !util.checkIfUndefiniedOrNull(myLogin.sessionId)
+    !util.checkIfUndefiniedOrNull(myLogin.jsonPayload) &&
+    !util.checkIfUndefiniedOrNull(myLogin.jsonPayload.sessionId)
   ) {
     return myLogin;
   }
@@ -23,6 +29,7 @@ const getUserFromStorage = () => {
 };
 
 export function verifySession() {
+  debugger;
   const user = getUserFromStorage();
   return (
     !util.checkIfUndefiniedOrNull(user) &&

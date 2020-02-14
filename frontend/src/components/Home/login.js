@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
-import Swal from "sweetalert2";
-import * as swalTypes from "../../util/swal";
+import * as swalHelper from "../../util/swalHelper";
+
+import { withRouter } from "react-router-dom";
 
 // import "./login.css";
 import { verifyUser } from "../../auth/verifyPw";
-import { MDBRow, MDBCol, MDBInput } from "mdbreact";
+import { MDBCol, MDBInput } from "mdbreact";
 
 class Login extends Component {
   constructor(props) {
@@ -42,26 +43,18 @@ class Login extends Component {
 
   handleLogin = async () => {
     const { user } = this.state;
-    this.setState({ isLoading: true });
-    const verifiedUser = await verifyUser(user);
-    if (verifiedUser) {
-      console.log(verifiedUser);
-      Swal.fire({
-        title: swalTypes.SUCCESS + "!",
-        text: "Successfully logged in",
-        icon: swalTypes.SUCCESS,
-        confirmButtonText: "OK"
+    const response = await verifyUser(user);
+    if (response.status === 200) {
+      const { jsonPayload } = response;
+      swalHelper.success("Successfully logged in");
+      sessionStorage.setItem("user", JSON.stringify(jsonPayload));
+      this.setState({
+        isLoggedIn: true,
+        user: response.jsonPayload,
+        isPasswordChangeRequired: jsonPayload.isPasswordChangeRequired
       });
-      sessionStorage.setItem("user", JSON.stringify(verifiedUser));
-      this.setState({ isLoggedIn: true });
-      this.setState({ user: verifiedUser });
     } else {
-      Swal.fire({
-        title: "Error!",
-        text: "Error on login",
-        icon: swalTypes.ERROR,
-        confirmButtonText: "OK"
-      });
+      swalHelper.error("Error on login");
     }
   };
 
@@ -94,20 +87,32 @@ class Login extends Component {
       isLoggedIn,
       isLoading,
       activePassword,
-      activeUserName
+      activeUserName,
+      isPasswordChangeRequired
     } = this.state;
     const { username, password } = user;
 
     const currentComponent = "/home";
+
+    debugger;
     if (signUp) {
       return <Redirect from={currentComponent} to="/signup" />;
-    } else if (isLoggedIn) {
+    } else if (isLoggedIn && !isPasswordChangeRequired) {
       return (
         <Redirect
           from={currentComponent}
           to={{
             pathname: "/dashboard",
             state: { user: user }
+          }}
+        />
+      );
+    } else if (isPasswordChangeRequired) {
+      return (
+        <Redirect
+          from={currentComponent}
+          to={{
+            pathname: "/myaccount/passwordchange"
           }}
         />
       );
@@ -157,4 +162,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

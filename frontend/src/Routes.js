@@ -8,6 +8,7 @@ import SurveyComponent from "./components/Survey/SurveyComponent";
 import SurveyCreateComponent from "./components/Survey/SurveyCreateComponent";
 import AdminComponent from "./components/Admin/AdminComponent";
 import UsersComponent from "./components/Admin/Users";
+import ChangePassword from "./components/Users/ChangePassword";
 
 class Routes extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class Routes extends Component {
           <Route exact path="/admin" component={AdminComponent} />
           <Route exact path="/dashboard" component={ChartPageComponent} />
           <Route exact path="/admin/users" component={UsersComponent} />
+          <Route exact path="/myaccount/passwordchange" component={ChangePassword} />
           <Route exact path="/" component={MainScreen} />
         </Switch>
       );

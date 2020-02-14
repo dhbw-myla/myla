@@ -13,8 +13,6 @@ class EditUserComponent extends Component {
 
   handleOnChange = event => {
     const { name, value } = event.target;
-    console.log("name", name);
-    console.log("value", value);
     this.setState({ [name]: value });
   };
 

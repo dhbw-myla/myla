@@ -7,6 +7,7 @@ const PATH_REGISTER = "register/";
 const PATH_LOGIN = "login/";
 const PATH_ALL_USERS = "getUsers/";
 const PATH_ResetPasswordOfUser = "resetPasswordOfUser/";
+const PATH_CHANGE_PASSWORD = "changePassword";
 
 const POST_METHOD = body => {
   return {
@@ -44,9 +45,10 @@ export async function getAllUsers(user) {
 export async function login(user) {
   try {
     const url = PATH_BASE_URL + PATH_LOGIN;
-    return await fetch(url, POST_METHOD(user))
+    return fetch(url, POST_METHOD(user))
       .then(data => {
-        return createResponseObject(data);
+        console.log('login db', data);
+        return createResponseObject(data)
       })
       .catch(err => {
         console.log("verifyUser", err);
@@ -71,6 +73,17 @@ export async function register(user) {
 export async function resetPasswordOfUser(admin) {
   const url = PATH_BASE_URL + PATH_ResetPasswordOfUser;
   return await fetch(url, POST_METHOD(admin))
+    .then(data => {
+      return createResponseObject(data);
+    })
+    .catch(err => {
+      console.log("resetPasswordOfUseryUser", err);
+    });
+}
+
+export async function changePassword(user) {
+  const url = PATH_BASE_URL + PATH_CHANGE_PASSWORD;
+  return await fetch(url, POST_METHOD(user))
     .then(data => {
       return createResponseObject(data);
     })

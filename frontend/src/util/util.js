@@ -23,6 +23,11 @@ export const parseToJsonObject = obj => {
   }
 };
 
-export const createResponseObject = response => {
-  return { status: response.status, jsonPayload: response.json() };
+export const createResponseObject = async response => {
+  console.log('asd', response);
+  const payload = await response.json();
+  return {
+    status: response.status,
+    jsonPayload: payload
+  };
 };
