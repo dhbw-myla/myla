@@ -3,12 +3,14 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import UserEntry from "./UserEntry";
 import { getAllUsers } from "../../database/database";
 import { getStoredUser } from "../../auth/verifyPw";
+import EditUserComponent from "../Users/EditUser";
 
 class UsersComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      users: [],
+      editUser: false
     };
   }
 
@@ -25,24 +27,36 @@ class UsersComponent extends Component {
     this.setState({ users: users });
   };
 
+  handleEditUser = userToEdit => {
+    this.setState({ editUser: true, userToEdit: userToEdit });
+  };
+
   render() {
-    const { users } = this.state;
-    debugger;
-    return (
-      <MDBContainer>
-        <MDBRow>
-          <MDBCol md="12" className="text-center my-5 font-weight-bold">
-            <h2>Users on System</h2>
-            <hr className="mt-5" />
-          </MDBCol>
-        </MDBRow>
-        <MDBRow>
-          {users.map((user, key) => (
-            <UserEntry entry={user} key={key} />
-          ))}
-        </MDBRow>
-      </MDBContainer>
-    );
+    const { users, editUser, userToEdit } = this.state;
+
+    if (editUser) {
+      return <EditUserComponent userToEdit={userToEdit} />;
+    } else {
+      return (
+        <MDBContainer>
+          <MDBRow>
+            <MDBCol md="12" className="text-center my-5 font-weight-bold">
+              <h2>Users on System</h2>
+              <hr className="mt-5" />
+            </MDBCol>
+          </MDBRow>
+          <MDBRow>
+            {users.map((user, key) => (
+              <UserEntry
+                entry={user}
+                key={key}
+                handleOnEditUser={this.handleEditUser}
+              />
+            ))}
+          </MDBRow>
+        </MDBContainer>
+      );
+    }
   }
 }
 

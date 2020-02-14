@@ -37,7 +37,7 @@ class UserEntry extends Component {
                 to="#"
                 color="mdb-color"
                 className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
-                onClick={() => this.editUser(entry)}
+                onClick={() => this.props.handleOnEditUser(entry)}
               >
                 Edit
               </MDBNavLink>

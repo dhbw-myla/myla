@@ -1,9 +1,12 @@
+import { createResponseObject } from "../util/util";
+
 const PATH_SERVER = "http://localhost/";
 const PATH_API = "api/";
 const PATH_BASE_URL = PATH_SERVER + PATH_API;
 const PATH_REGISTER = "register/";
 const PATH_LOGIN = "login/";
 const PATH_ALL_USERS = "getUsers/";
+const PATH_ResetPasswordOfUser = "resetPasswordOfUser/";
 
 const POST_METHOD = body => {
   return {
@@ -60,4 +63,15 @@ export async function register(user) {
   } catch (error) {
     console.log("error on register", error);
   }
+}
+
+export async function resetPasswordOfUser(admin) {
+  const url = PATH_BASE_URL + PATH_ResetPasswordOfUser;
+  return await fetch(url, POST_METHOD(admin))
+    .then(data => {
+      return createResponseObject(data);
+    })
+    .catch(err => {
+      console.log("resetPasswordOfUseryUser", err);
+    });
 }
