@@ -79,6 +79,7 @@ class ChangePassword extends Component {
         </MDBRow>
         <MDBRow>
           <MDBBtn onClick={this.handleOnSave}>Save</MDBBtn>
+          <MDBBtn onClick={this.props.handleOnClickUserProfil}>Back</MDBBtn>
         </MDBRow>
       </MDBContainer>
     );
