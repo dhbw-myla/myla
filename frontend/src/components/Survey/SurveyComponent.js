@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBNavLink
-} from "mdbreact";
+import { MDBContainer, MDBCol, MDBRow, MDBNavLink } from "mdbreact";
 import SurveyDetails from "./SurveyDetails";
 import { create_UUID } from "../../util/util";
 import MySurveyCardComponent from "./MySurveyCard";
@@ -310,45 +305,43 @@ class SurveyComponent extends Component {
   render() {
     const { showSurvey } = this.state;
     return (
-      <>
-        <MDBContainer>
-          <MDBRow>
-            <MDBCol md="12" className="mt-4">
-              <h2 className="text-center my-5 font-weight-bold">
-                {this.getHeading(showSurvey)}
-              </h2>
+      <MDBContainer>
+        <MDBRow>
+          <MDBCol md="12" className="mt-4">
+            <h2 className="text-center my-5 font-weight-bold">
+              {this.getHeading(showSurvey)}
+            </h2>
 
-              <MDBNavLink
-                tag="button"
-                to="/survey/new"
-                color="mdb-color"
-                className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
-                onClick={this.scrollToTop}
-              >
-                Create new Survey
-              </MDBNavLink>
+            <MDBNavLink
+              tag="button"
+              to="/survey/new"
+              color="mdb-color"
+              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+              onClick={this.scrollToTop}
+            >
+              Create new Survey
+            </MDBNavLink>
 
-              <hr className="my-5" />
-              {showSurvey ? (
-                <SurveyDetails
-                  survey={this.state.surveyToShow}
-                  onClickReturn={this.returnToOverview}
-                />
-              ) : (
-                <MDBRow id="categories">
-                  {this.state.surveys.map((survey, key) => (
-                    <MySurveyCardComponent
-                      key={key}
-                      infos={{ survey: survey, type: 1 }}
-                      onClickSurvey={this.showSurvey}
-                    />
-                  ))}
-                </MDBRow>
-              )}
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
-      </>
+            <hr className="my-5" />
+            {showSurvey ? (
+              <SurveyDetails
+                survey={this.state.surveyToShow}
+                onClickReturn={this.returnToOverview}
+              />
+            ) : (
+              <MDBRow id="categories">
+                {this.state.surveys.map((survey, key) => (
+                  <MySurveyCardComponent
+                    key={key}
+                    infos={{ survey: survey, type: 1 }}
+                    onClickSurvey={this.showSurvey}
+                  />
+                ))}
+              </MDBRow>
+            )}
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     );
   }
 }

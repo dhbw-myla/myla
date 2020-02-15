@@ -63,7 +63,6 @@ export async function register(user) {
     const url = PATH_BASE_URL + PATH_REGISTER;
     return fetch(url, POST_METHOD(user))
       .then(data => {
-        debugger;
         return createResponseObject(data);
       })
       .catch(err => {

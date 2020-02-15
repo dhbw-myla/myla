@@ -19,7 +19,6 @@ class UserEntry extends Component {
     this.state = {};
   }
   render() {
-    debugger;
     const { entry } = this.props;
     const { username } = entry;
     return (

@@ -27,9 +27,7 @@ class EditUserComponent extends Component {
     const admin = getStoredUser();
     admin.newPassword = newPassword;
     admin.usernameForPasswordReset = userToEdit.username;
-    debugger;
     const response = await resetPasswordOfUser(admin);
-    console.log("status", response.status);
     if (response.status === 200) {
       swalHelper.success("Successfully changed password");
     } else {

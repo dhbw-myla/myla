@@ -11,8 +11,6 @@ export function verifyPassword(password, passwordRepeat) {
 
 export async function verifyUser(user) {
   const myLogin = await login(user);
-  console.log("myLogin", myLogin);
-  debugger;
   if (
     !util.checkIfUndefiniedOrNull(myLogin.jsonPayload) &&
     !util.checkIfUndefiniedOrNull(myLogin.jsonPayload.sessionId)
@@ -29,7 +27,6 @@ const getUserFromStorage = () => {
 };
 
 export function verifySession() {
-  debugger;
   const user = getUserFromStorage();
   return (
     !util.checkIfUndefiniedOrNull(user) &&

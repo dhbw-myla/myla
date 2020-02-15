@@ -81,7 +81,7 @@ class SurveyDetails extends Component {
   render() {
     const { survey } = this.props;
     const model = new Survey.Model(survey);
-    console.log('details', this.props)
+    console.log("details", this.props);
     return (
       <div className="surveyjs">
         <Survey.Survey
