@@ -2,7 +2,7 @@ import { login } from "../database/database";
 import * as util from "../util/util";
 
 export function verifySignup(password, passwordRepeat) {
-  verifyPassword(password, passwordRepeat);
+  return verifyPassword(password, passwordRepeat);
 }
 
 export function verifyPassword(password, passwordRepeat) {

@@ -6,7 +6,7 @@ const PATH_BASE_URL = PATH_SERVER + PATH_API;
 const PATH_REGISTER = "register/";
 const PATH_LOGIN = "login/";
 const PATH_ALL_USERS = "getUsers/";
-const PATH_ResetPasswordOfUser = "resetPasswordOfUser/";
+const PATH_RESET_PASSWORD_OF_USER = "resetPasswordOfUser/";
 const PATH_CHANGE_PASSWORD = "changePassword";
 
 const POST_METHOD = body => {
@@ -47,7 +47,7 @@ export async function login(user) {
     const url = PATH_BASE_URL + PATH_LOGIN;
     return fetch(url, POST_METHOD(user))
       .then(data => {
-        return createResponseObject(data)
+        return createResponseObject(data);
       })
       .catch(err => {
         console.log("verifyUser", err);
@@ -58,19 +58,24 @@ export async function login(user) {
 }
 
 export async function register(user) {
+  console.log("user-fetch", user);
   try {
     const url = PATH_BASE_URL + PATH_REGISTER;
-    const data = await fetch(url, POST_METHOD(user)).catch(err => {
-      console.log("verifyUser", err);
-    });
-    return await data.json();
+    return fetch(url, POST_METHOD(user))
+      .then(data => {
+        debugger;
+        return createResponseObject(data);
+      })
+      .catch(err => {
+        console.log("register new user", err);
+      });
   } catch (error) {
     console.log("error on register", error);
   }
 }
 
 export async function resetPasswordOfUser(admin) {
-  const url = PATH_BASE_URL + PATH_ResetPasswordOfUser;
+  const url = PATH_BASE_URL + PATH_RESET_PASSWORD_OF_USER;
   return await fetch(url, POST_METHOD(admin))
     .then(data => {
       return createResponseObject(data);

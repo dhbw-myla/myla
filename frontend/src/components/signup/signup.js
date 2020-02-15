@@ -1,12 +1,11 @@
+import { MDBBtn, MDBInput, MDBRow } from "mdbreact";
 import React, { Component } from "react";
-import { verifySignup } from "../../auth/verifyPw";
-import "./signup.css";
-import { register } from "../../database/database";
 import { Redirect } from "react-router";
-import { MDBRow, MDBBtn, MDBInput } from "mdbreact";
-
+import { verifySignup } from "../../auth/verifyPw";
+import { register } from "../../database/database";
 import * as swalHelper from "../../util/swalHelper";
 import * as util from "../../util/util";
+import "./signup.css";
 
 class Signup extends Component {
   constructor(props) {
@@ -50,16 +49,19 @@ class Signup extends Component {
     const pwMatch = verifySignup(password, passwordRepeat);
 
     if (pwMatch) {
-      const registeredUser = await register(user);
+      const responseObj = await register(user);
+      const { status, jsonPayload } = responseObj;
+      const { username, sessionId } = jsonPayload;
       if (
-        !util.checkIfUndefiniedOrNull(registeredUser) &&
-        !util.checkIfUndefiniedOrNull(registeredUser.sessionId)
+        !util.checkIfUndefiniedOrNull(username) &&
+        !util.checkIfUndefiniedOrNull(sessionId) &&
+        status === 201
       ) {
-        sessionStorage.setItem("user", JSON.stringify(registeredUser));
+        sessionStorage.setItem("user", JSON.stringify(jsonPayload));
         this.setState({
           isLoggedIn: true,
           user: {
-            registeredUser
+            username
           }
         });
         swalHelper.success("Successfully signed Up!");
