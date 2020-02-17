@@ -1,0 +1,24 @@
+\section{\acf{JSON}}
+\label{sec:json}
+
+Für den Datenaustausch zwischen Front- und Back-End wird mit der \acf{JSON} realisiert.
+Grund ist, dass hier rein die Nutzdaten transferiert werden.
+Ferner gestaltet sich das Auslesen und Generieren der \acs{JSON}-Dateien als recht \enquote{einfach}. \\
+Ein Array bzw. eine Liste wird in \acs{JSON} mit [ ] dargestellt.
+Objekte werden mit \{ \} dargestellt.
+Jedes Attribut und jede Zeichenkette wird in \acs{JSON} in Anführungszeichen gesetzt (siehe Quelltext \vref{lst:example_movie}).
+
+\begin{lstlisting}[language=json, caption={Beispiel eines Films im \acs{JSON}-Format}, label={lst:example_movie}]
+{"movie": {
+	"id": 1,
+	"title": "Kampf der Titanen",
+	"duration": 120,
+	"hall": {
+		"id": 1,
+		"name": "Kino 1",
+		"seats": [{"seat": {"id": 1, ...}}]
+	},
+	"shows": [{"show": {"id": 1, ...}}]
+ }
+}
+\end{lstlisting}

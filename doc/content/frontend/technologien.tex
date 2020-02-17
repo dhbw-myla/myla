@@ -1,0 +1,21 @@
+% !TEX root =  master.tex
+\section{Verwendete Technologien und Konzept}
+
+Bei der Implementierung des Front-Ends fiel die Wahl auf die Verwendung von \acs{HTML} und \acs{CSS} in Verbindung mit dem Framework Bootstrap\footnote{\url{https://getbootstrap.com/}}.
+So lässt sich mit einfachen Mitteln eine ansprechende und responsive Benutzeroberfläche gestalten.
+
+Da der Inhalt der Benutzeroberfläche dynamisch sein soll, müssen irgendwann die Daten aus dem Back-End mit dem statischen Inhalt verknüpft werden.
+Dafür gibt es im Grunde zwei Möglichkeiten.
+Entweder man generiert die anzuzeigende Webseite vollständige im Back-End oder man hat statische Seiten und lädt die Inhalte im Anschluss nach.
+
+Es wurde die zweite Lösung gewählt, da sie eine bessere Trennung der verschiedenen Schichten bietet und zudem auch schneller ist.
+So wird das Einfügen der dynamischen Inhalte clientseitig ausgeführt und belastet den Server entsprechend weniger.
+Ebenso bietet es den Vorteil, dass bei einer Änderung nicht jedes Mal die Seite neu geladen werden muss.
+Dies ist bereits jetzt beim Blockieren von Sitzplätzen zu finden, andererseits kann man das Front-End so auch noch später auf eine Single-Page-Webanwendung umstellen.
+
+Für die Anpassung der \acs{HTML}-Seite, genauer gesagt des \acs{DOM}s im Browser, wird Java\-Script mit der Bibliothek jQuery\footnote{\url{https://jquery.com/}} genutzt.
+Durch sogenannte \acs{AJAX}-Aufrufe werden Daten wie zum Beispiel eine Liste mit allen Filmen vom Back-End geladen.
+Das zurückgelieferte \acs{JSON} wird dann in JavaScript verarbeitet und die Daten daraus werden in kleine \acs{HTML}-Vorlagen eingefügt.
+Nachdem die \acs{HTML}-Vorlagen mit Daten befüllt wurden, können sie im \acs{DOM} platziert werden.
+
+Um Daten zwischen den verschiedenen Seiten auszutauschen, werden einerseits Cookies und der SessionStorage genutzt, andererseits werden einige Informationen auch als \acs{URL}-Parameter weitergegeben.

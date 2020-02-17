@@ -1,0 +1,72 @@
+% !TEX root =  master.tex
+\section{Filmdetails und Vorstellungsauswahl}
+
+Nachdem die Daten wie in Quelltext \ref{lst:load_movie_and_shows} geladen wurden, muss nun das \acs{DOM} entsprechend verändert werden.
+Die statische \acs{HTML}-Seite ist dabei auf das Wesentliche reduziert und enthält neben der Menüleiste und der Fußzeile folgenden Teil:
+
+\begin{lstlisting}[style=lstHTML, caption={\acs{HTML}-Seite für Filmdetails}, label={lst:html_movie_and_shows}]
+<div class="container" id="movie">
+	<!-- Informationen zum Film werden hier eingefügt -->
+	<table class="table" id="shows">
+		<tr>
+			<th>Tag</th>
+			<th>Vorführungen</th>
+		</tr>
+		<!-- die einzelnen Vorstellungen werden hier eingefügt -->
+	</table>
+	<!-- Bewertungen werden hier eingefügt -->
+</div>
+\end{lstlisting}
+
+An den gekennzeichneten Stellen wird später der Inhalt, der aus dem Back-End geladen wurde, eingefügt.
+Dafür gibt es kleinere Vorlagen mit Platzhaltern.
+
+\begin{lstlisting}[style=lstHTML, caption={\acs{HTML}-Vorlage mit Platzhaltern für Filmdetails}, label={lst:html_template_movie_detail}]
+<div class="row featurette">
+	<div class="col-12 col-sm-4">
+		<img class="featurette-image img-fluid mx-auto" src="./img/`\textcolor{red}{\{movieID\}}`.jpg" alt="`\textcolor{red}{\{movieTitle\}}`" width="100%">
+	</div>
+	<div class="col-12 col-sm-8">
+		<h2 class="featurette-heading">`\textcolor{red}{\{movieTitle\}}`</h2>
+		<p>FSK `\textcolor{red}{\{movieFSK\}}`, `\textcolor{red}{\{movieDuration\}}` Minuten, `\textcolor{red}{\{movieGenres\}}`</p>
+		<p class="rating-`\textcolor{red}{\{movieRatingRounded\}}`">`\textcolor{red}{\{movieRating\}}`</p>
+	</div>
+</div>
+
+<div class="row featurette">
+	<div class="col-12">
+		<p>`\textcolor{red}{\{movieDescription\}}`</p>
+	</div>
+</div>
+\end{lstlisting}
+
+%Dabei wir davon ausgegangen, dass die Bilder für die Filme als statische Inhalt unter einem festen Namen gespeichert sind, z.B. \textit{1.jpg}.
+
+In JavaScript wird diese Vorlage dann mit Inhalten befüllt.
+Nachdem die Daten in der Funktion \textit{displayMovieAndShows()} ein wenig verarbeitet wurden, können sie mit JavaScript bzw. jQuery in die Vorlage und danach ins \acs{DOM} eingefügt werden.
+
+\begin{lstlisting}[language=JavaScript, caption={Einfügen der Filmdetails ins \acs{DOM} mit jQuery}, label={lst:js_write_movie_detail_to_dom}]
+$("#movie").prepend(templateMovieDetail
+	.replace("{movieID}", movie.id)
+	.replace(/\{movieTitle\}/g, movie.name)
+	.replace("{movieFSK}", movie.fsk)
+	.replace("{movieDuration}", movie.duration)
+	.replace("{movieGenres}", genres)
+	.replace("{movieRatingRounded}", Math.max(0, Math.min(5, Math.round(rating))))
+	.replace("{movieRating}", (movie.ratings.length > 0 ? rating.toFixed(1).replace(".",",") : "") + " (" + movie.ratings.length + " Bewertung" + (movie.ratings.length == 1 ? "" : "en") + ")")
+	.replace("{movieDescription}", movie.description)
+);
+\end{lstlisting}
+
+Genauso wie die Filmdetails werden auch die Vorstellungen und die Bewertungen ins \acs{DOM} eingefügt.
+Ausschnitte von der vollständig mit Daten befüllten Seite mit allen Details zu einem Film finden sich in Anhang \vref{sec:screenshots_frontend}.
+
+Zusammenfassend heißt das, dass zuerst einmal die statische und weitestgehend leere \acs{HTML}-Seite geladen wird.
+Diese wiederum importiert eine JavaScript-Datei, welche beim Laden der Seite eine Anfrage an das Back-End stellt.
+Sobald der Server antwortet, wird die Antwort entsprechend verarbeitet und in JavaScript in kleinere Vorlagen eingesetzt.
+Die mit Inhalten befüllten Vorlagen werden dann mit jQuery ins \acs{DOM} eingefügt, sodass die \acs{HTML}-Seite die gewünschten Inhalte darstellt.
+Dies passiert im Idealfall so schnell, dass es für den Benutzer wirkt, als hätte er die Seite \enquote{ganz normal} geladen.
+
+Damit dies reibungslos funktioniert, ist es essentiell, dass sich die Kommunikation mit dem Server auf ein Minimum beschränkt und keine nicht benötigten oder redundanten Daten transferiert werden.
+So ist es zum Beispiel schlecht für die Performance, wenn man im Front-End lediglich eine Liste mit allen Filmen sehen will, aber vom Back-End zu jedem Film alle Vorstellungen mit allen Sitzplätzen erhält.
+Genauso muss natürlich auch die Verarbeitung im Front-End effizient erfolgen.

@@ -1,0 +1,41 @@
+\section{Datenbank}
+\label{sec:datenbank}
+
+Für die Datenverarbeitung sowie -haltung wird eine Postgres Datenbank\footnote{\url{https://www.postgresql.org/} -- Version 9.11} verwendet.
+Diese wird u.a. genutzt, um die Lerninhalte aus der Datenbankvorlesung aus diesem Semester zu vertiefen und das Arbeiten mittels einer Datenbank zu forcieren.
+
+Die verwendete Postgres Datenbank ist eine relationale Datenbank, welche ein \acf{RDBMS} besitzt.
+Alle Anfragen an die Datenbank werden über das jeweilige implementierte \acs{DAO} der aufgerufenen Ressource an das \acs{DBMS} geschickt, welches die Anfragen optimiert und das Ergebnis an den Nutzer bzw. Aufrufer weiterleitet.
+
+Ein Datenbankmodell des hier erstellten Kinoreservierungsprogramms befindet sich im Anhang \vref{fig:Anhang_ER-Modell}.
+
+\subsection{Kommunikation zwischen Server und Datenbank}
+\label{ssec:jpa}
+
+In diesem Projekt wird die \ac{JPA} verwendet.
+Sie garantiert dem Programmierer einen einfacheren Zugriff auf die Datenbank, da dieser nicht alle benötigten \sinline |SELECT|- oder \sinline |INSERT|-Befehle über die verschiedenen Tabellen selbst erstellen muss.
+Dies minimiert die potentiell auftretenden Fehler.
+
+Mittels eines \acp{POJO} wird die Datenstruktur der Datenbank widergespiegelt (Entität).
+Bei dem eingesetzten Kinoreservierungsprogramms werden für 1:N-Beziehungen \jinline|ArrayList|s verwendet.
+Alternativ besteht die Möglichkeit in \ac{JPA} auch eine \jinline|Map| einzusetzen.
+Darüber hinaus hat der Programmierer die Option verschiedene Annotationen an den jeweiligen Attributen zu definieren.
+So kann er z.B. deklarieren, dass der verwendete Sessiontoken im \ac{POJO} bzw. der Entität nicht \jinline|null|sein darf.
+Dies geschieht mit den aus Jersey JAX-RS 2.1 zur Verfügung gestellten Bibliotheken.
+
+Nutzt man \ac{JPA} hat der Programmierer zwei \acp{ORM} zur Auswahl; nämlich EclipseLink und Hibernate.
+In diesem Projekt wird EclipseLink\footnote{\url{https://www.eclipse.org/eclipselink/} -- Version 2.5.2} verwendet, da es einige Vorteile gegenüber Hibernate hat, auf die in dieser Seminararbeit nicht weiter eingegangen werden kann.
+Auch diese wird mittels einer Dependency in der pom.xml definiert.
+
+Die Abfrage-Sprache ähnelt sehr der \acs{SQL}-Syntax, heißt in \ac{JPA} aber \acf{JPQL}.
+Die Abfragen werden über die zuvor genannten \acsp{POJO} realisiert.
+Die \enquote{Standard}- oder erweiterten Abfragen z.B. einer \sinline|WHERE|-Bedingung werden mittels einer sog. Native-Query realisiert, die wie zuvor beschrieben sehr nahe an der \acs{SQL}-Syntax ist.
+
+Ein Beispiel wäre, wenn man alle Vorstellungen zu einem Film haben möchte.
+Um diese \sinline|WHERE|-Bedingung in \acs{JPQL} zu realisieren, muss man auf die ID eines anderen Attributes bzw. Objekts zugreifen.
+Dies wird in \acs{JPQL} über eine sog. Native-Query realisiert.
+Das Ergebnis würde wie folgt aussehen (siehe Quelltext \vref{lst:jpql_movie}):
+
+\begin{lstlisting}[language=JAVA, morekeywords={SELECT,FROM,WHERE}, caption={\acs{JPQL}-Abfrage aller Vorstellungen, bei denen die Film-ID 1 ist}, label={lst:jpql_movie}]
+SELECT s FROM Show s WHERE s.movie.id = 1;
+\end{lstlisting}

@@ -1,0 +1,101 @@
+% !TEX root =  master.tex
+\section{Zukünftige Sprints und Backlog}
+
+\subsection{Theoretischer Sprint 3}
+\label{ssec:theoretischer_sprint}
+\multipleauthorsection{\authorRF}{\authorEJ, \authorNL}
+Die größte Neuerung des angedachten dritten Sprints ist die komplette Anbindung des Mitarbeiters.
+Für einen Mitarbeiter sollen Vorname, Nachname, E-Mail-Adresse, Mitarbeiternummer und ein Passwort, in einer aktuellen Sicherheitsstandards genügenden Form (vgl. Kapitel \vref{sec:authentifizierung}), gespeichert werden.
+Grundlagen dazu wurden bereits im vorhergehenden Sprint gelegt.
+Eine Mitarbeiterrelation wurde in der Datenbank angelegt.
+Teile der Businesslogik sind ebenfalls vorhanden, namentlich das Employee-\acs{DTO} und die Entität mit der zugehörigen Konvertierung.
+Diese wurde bereits während der Testphase überprüft.
+
+Eine Neuerung wäre eine spezielle Ansicht des Front-Ends angepasst an die Bedürfnisse der Mitarbeiter.
+Hierzu zählen eine einfache Übersicht der aktuell laufenden Filme, eine simple und schnelle Suche nach Reservierungen und ein Kalendersteuerelement der nächsten 14 Spieltage im Kino. \\
+Die Anordnung der Filme auf der Startseite des Mitarbeiters sollte nach dessen Belieben z.B. nach aktueller Uhrzeit erfolgen, sodass Primetime-Filme eine bestimmte Zeit vor Start des Blockbusters, aber auch zur jeweiligen Tageszeit eine passende Filmauswahl angezeigt werden. \\
+Dies sollte den Buchungsvorgang vor Ort erheblich erleichtern und Teilzeitkräften sowie Ferienarbeitern den Einsteig in das System auch ohne eine lange Einarbeitungszeit ermöglichen. \\
+
+Sobald ein Mitarbeiter eine Vorstellung ausgewählt hat, bekommen er und der Kunde vor Ort einen aktuellen Saalplan angezeigt.
+Nachdem der Kunde nun seine gewünschten Sitze ausgewählt hat, beginnt der Bezahlvorgang.
+Dieser erfolgt über ein bereits vorhandenes Kassensystem.
+Beendet wird die Buchung schlussendlich durch das Ausdrucken der Kinotickets direkt an der Kasse.
+
+Aufgrund der Bezahlung vor Ort muss die Mitarbeiteransicht in zweifacher Sicht geschützt werden.
+Einerseits sollte das System nur innerhalb des lokalen Netzwerks verfügbar sein, andererseits ist eine Sicherheitsprüfung, in Form einer Authentifizierung, relevant, sodass kein Unbefugter Zugang zu den internen Bezahlsysteme erlangt.
+
+Zusätzlich zu den genannten Hauptaspekten des dritten Sprints sollen kleinere Verbesserungen sowie Fehlerbeseitigungen durchgeführt werden.
+Diese bestehen zum Beispiel aus der Verbesserung der Bestätigungsseite bei einer Online-Buchung.
+Um die User Experience aufzuwerten und dem Benutzer ein besseres Erlebnis zu bieten, ist die Veränderung der Buchungsbestätigung im dritten Sprint nämlich unabdingbar.
+Eine Einbindung der wie in Abbildung \ref{fig:ticket_phone} gezeigten Buchungsbestätigung gibt dem Benutzer weitere Informationen wie zum Beispiel Kinosaal, Reihe, Sitzplatz, Uhrzeit und Film, die in der aktuellen Version noch fehlen.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.2\textwidth]{img/ticket_phone}
+	\captionsetup{format=hang}
+	\caption{Digitales Ticket auf mobilem Endgerät}
+	\label{fig:ticket_phone}
+\end{figure}
+
+Neben der Integration dieser Daten in das Handy-Ticket umfasst die Verbesserung der Bestätigungsseite aber auch das Ergänzen einer ausdruckbaren PDF-Datei für Kinobesucher, die die Möglichkeit, das Ticket digital auf dem Smartphone mitzuführen, nicht nutzen möchten.
+Nach Möglichkeit wäre hier dann auch ein E-Mail-Versand der Bestätigung denkbar.
+
+\subsection{Theoretischer Sprint 4}
+\label{ssssec:sprint_benuterkonto}
+\authorsection{\authorSG}
+Durch den vierten Sprint soll dem Kinoreservierungssystem ein Benutzerkonto hinzugefügt werden.
+Somit hätte der Kunde die Perspektive, sich in sein zuvor erstelltes Benutzerkonto einzuloggen.
+Hier hätte er u.a. die Chance sein Passwort zu ändern und eine Übersicht über seine getätigtem Reservierungen zu haben.\
+Hierbei bestünde dann die Aussicht, dass er auch eine getätigte Reservierung wieder stornieren kann.
+Schlussendlich könnte man dem Kunden noch die Perspektive bieten, alle von ihm verfassten getätigten Rezensionen anzuzeigen.
+
+Hierfür müssten lediglich neue \acs{REST}-Schnittstellen wie z.B. \jinline|reservation/customer| definiert werden, die für die Auswertung der getätigten Reservierungen verantwortlich wären.
+Ebenfalls müssten im \jinline|CustomerService| die entsprechenden Methoden implementiert werden, sodass die aufgerufene Ressource das Ergebnis übermitteln kann.
+
+Wie auch im dritten Sprint sollen hier kleine Verbesserungen sowie Fehlerbeseitigungen durchgeführt werden.
+
+\subsection{Backlog}
+\label{ssec:backlog}
+\multipleauthorsection{\authorRF}{\authorEJ, \authorNL}
+Für die langfristige Planung des Projektes wurden bereits Backlog-Items angelegt, die in späteren Sprints aufgefasst werden soll.
+
+\subsubsection*{Gutschein}
+\label{ssssec:gutschein}
+Eine hohe Priorität hält dabei die Überprüfung und langfristige Speicherung der Gutscheincodes mithilfe der Datenbank inne.
+Dabei sollen verschiedene Arten von Gutscheinen, sowie deren Ablaufdatum und vergangene Transaktionen gespeichert werden.
+
+\subsubsection*{Bildformate und Dimensionen}
+\label{ssssec:bildformatedimensionen}
+Nachdem nicht jedes Filmplakat unbedingt im selben Format oder gar in den selben Dimensionen vorhanden sein wird, müssen diese Restriktionen im Endprodukt entfernt werden.
+Hierbei ist vor allem zu beachten, dass Unternehmen eine einfache Bedienung der Software bevorzugen und somit beim Hinzufügen von Filmen im System die Bilder in diversen Formaten bereits mitgeben wollen.
+Dabei sollten die Bilder für das Karussell sowie möglicherweise verschiedene Poster des Films einfach über eine Einrichtungsseite auf dem Front-End eingefügt werden können und durch das Back-End angepasst und in der Datenbank gespeichert werden.
+
+\subsubsection*{Sitzplatzauswahl}
+\label{ssssec:sitzplatzauswahl}
+Die Darstellung der Sitze soll ebenfalls in einem zukünftigen Sprint angepasst werden, sodass einerseits Breite und Höhe eines Sitzes für die Darstellung mit gespeichert werden, andererseits aber auch Sitzflächen für Rollstuhlfahrer o.ä. ausgewiesen werden.
+
+\subsubsection*{Kommunikation}
+\label{ssssec:kommunikation}
+Die Kommunikation zwischen Front- und Back-End muss erweitert werden.
+Dabei sollten regelmäßige Abfragen das temporäre Speichern verschiedener Übergabeparameter ersetzen.
+
+\subsubsection*{Zahlungsmöglichkeiten}
+\label{ssssec:zahlungsmöglichkeiten}
+Des Weiteren sollte ein breiteres Portfolio an Zahlungsmöglichkeiten das Benutzererlebnis verbessern und dem Kunden erlauben, ohne vorherigen Besuch des Kinos, online zu bezahlen.
+Somit kann sichergestellt werden, dass den Kunden eine unverbindlichere und bequemere Art der Vorbestellung zu ermöglichen.
+Als Alternative zu den weiteren Zahlungsmöglichkeiten, sollte die Option einer Reservierung (Bezahlung erst im Kino) gegeben sein.
+
+\subsubsection*{Reservierungs-/Buchungsnummer}
+\label{ssssec:reservierungsnummer}
+Die Sicherheit der Tickets sollte ausgebaut werden.
+Aktuell wird im \acs{QR-Code} lediglich die Reservierungs- bzw. Buchungsnummer gespeichert.
+Da diese Reservierungsnummer der ID in der Datenbank entspricht, wird sie lediglich linear hochgezählt.
+Ein böswilliger Angreifer könnte somit ziemlich einfach durch gezieltes Raten den Inhalt eines gültigen \acs{QR-Code}s erzeugen und unberechtigt Zutritt zu einer Kinovorstellung erhalten.
+Durch eine zufällige in der Datenbank gespeicherte Nummer (Nonce), die neben der Reservierungsnummer in den \acs{QR-Code} mit einfließt, kann dies verhindert bzw. erschwert werden.
+
+\subsubsection*{Stornieren und Verwalten}
+\label{ssssec:stornieren_und_verwalten}
+Einhergehend zur Reservierung, sollte eine Stornierung dieser, als auch eine Buchung möglich sein.
+
+Um Reservierungen und Buchungen für einen passionierten Kinogänger einsehbar und verwaltbar (u.a. Stornierung) zu gestalten, wird ein Login eingerichtet.
+Über diesen kann eine Personalisierung der Darstellung sowie Filmempfehlungen die User Experience verbessern.

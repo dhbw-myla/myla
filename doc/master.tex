@@ -1,0 +1,123 @@
+ %	Main Document
+
+\documentclass[
+	12pt,
+	BCOR=5mm,
+	DIV=12,
+	headinclude=on,
+	footinclude=off,
+	parskip=half,
+	bibliography=totoc,
+	listof=entryprefix,
+	toc=listof,
+	pointlessnumbers,
+	plainfootsepline]{scrreprt}
+
+% include configuration file
+\input{config}
+\input{configlistings}
+\input{authors}
+
+\begin{document}
+
+% set some information (title, author, ...)
+\TitelDerArbeit{Entwurf und Implementierung eines Kinoreservierungssystems}
+\AutorDerArbeit{\authorSG, \authorRF, \authorGP, \authorEJ, \authorNL}
+\Firma{DER Touristik GmbH, Technische Universität Kaiserslautern, SAP SE}
+\Kurs{WWI 17 SE B}
+
+\input{titlepage}
+
+\pagenumbering{roman}
+\normalfont
+
+% table of contents
+\tableofcontents
+
+% figures
+\listoffigures
+
+% tables
+%\listoftables
+
+% listings (source code)
+\lstlistoflistings
+
+% acronyms
+\input{acronyms}
+\ohead{Acronyms}
+
+%--------------------------------
+% Content
+%--------------------------------
+\clearpage
+\ihead{\chaptername~\thechapter}
+\ohead{\headmark}
+\pagenumbering{arabic}
+
+% one file for each chapter
+\input{content/einleitung}
+
+\input{content/analyse/_analyse}
+\input{content/analyse/personas}
+\input{content/analyse/userstories}
+\input{content/analyse/userjourney}
+\input{content/analyse/ablaufkino}
+
+\input{content/entwurf/_entwurf}
+\input{content/entwurf/klassendiagramm}
+\input{content/entwurf/sequenzdiagramm}
+\input{content/entwurf/authentifizierung}
+\input{content/entwurf/blocken}
+
+\input{content/backend/_backend}
+\input{content/backend/technologien}
+\input{content/backend/konzept}
+\input{content/backend/maven}
+\input{content/backend/datenbank}
+\input{content/backend/webservices}
+\input{content/backend/rest}
+\input{content/backend/json}
+\input{content/backend/json_generieren}
+\input{content/backend/dto}
+\input{content/backend/blocken}
+\input{content/backend/reservieren}
+
+\input{content/frontend/_frontend}
+\input{content/frontend/technologien}
+\input{content/frontend/startseite}
+\input{content/frontend/anbindungbackend}
+\input{content/frontend/vorstellungsauswahl}
+\input{content/frontend/saalplan}
+\input{content/frontend/bezahlung}
+
+\input{content/testen/_testen}
+\input{content/testen/softwarequalitaet}
+\input{content/testen/testverfahren}
+\input{content/testen/technischegrundlagen}
+\input{content/testen/umsetzungentests}
+
+\input{content/ausblick/_ausblick}
+\input{content/ausblick/backlog}
+\input{content/ausblick/zielerreichung}
+\input{content/ausblick/reflexionbewertung}
+\input{content/ausblick/fazit}
+
+% bibliography
+\clearpage
+\ihead{}
+\printbibliography[title=Literaturverzeichnis]
+\cleardoublepage
+
+% appendix
+\appendix
+\ihead{\appendixname~\thechapter}
+
+\input{appendix}
+
+% ewerkl.tex
+%\input{ewerkl.tex}
+\includepdf[pages={99}]{Seminararbeit_KinoEntenteich_unterschrieben.pdf}
+
+
+\end{document}

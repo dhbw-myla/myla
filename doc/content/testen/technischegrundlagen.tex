@@ -1,0 +1,41 @@
+% !TEX root =  master.tex
+\section{Technische Grundlagen der Tests}
+\authorsection{\authorRF}
+
+\subsection{JUnit}
+
+\subsubsection{Allgemeines}
+
+JUnit ist ein Java-Framework, welches vorwiegend zum Automatisieren von Tests verschiedener Klassen und Methoden verwendet wird.\footnote{\url{https://junit.org/junit5/docs/current/user-guide/}}
+
+Ein Test kann bei JUnit zwei Ergebnisse erzielen, entweder er schlägt fehl und wird mit rot markiert oder er läuft erfolgreich ab und wird grün markiert.
+Bei den fehlgeschlagenen Tests wird jedoch noch weiter unterschieden.
+Es gibt sogenannte \enquote{Failures}, welche dadurch charakterisiert sind, dass nicht das erwartete Ergebnis beim Test aufgetreten ist.
+Des Weiteren gibt es sogenannte \enquote{Errors}, welche unerwartete Fehler sind, die während eines Tests auftreten können und somit den Test möglicherweise nicht vollenden lassen oder ein falsches Ergebnis hervorrufen.
+
+Tests werden zudem als eigene Klassen realisiert, um sie vom Programmcode abzugrenzen und nicht vor dem Kompilieren des Projektes entfernen zu müssen.
+
+\subsubsection{Funktionsweise}
+
+JUnit-Tests werden in Java mit Annotationen angekündigt und können mit diesen spezialisiert werden.
+Standardmäßig wird ein Test mit \enquote{@Test} eingeleitet, danach folgt die eigentliche Test-Methode.
+In der Test-Methode werden die zu testenden Klassen bzw. Methoden aufgerufen und mit Hilfe der \textit{assertEquals}-Methode getestet.
+Hierbei wird ein erwarteter Wert bzw. ein erwartetes Objekt angegeben und diese mit den Ergebnissen der zu testenden Methoden auf Gleichheit geprüft.
+
+Falls mehrere Tests die selben Ausgangsdaten benötigen, kann mit Hilfe der \enquote{@BeforeAll}-Annotation einmalig zu Beginn bzw. mit \enquote{@BeforeEach} vor jeder Test-Methode eine Initialisierungsmethode eingeleitet werden, um die Ausgangsdaten zu erzeugen.
+Gleichzeitig gibt es diese Annotationen auch nach den Tests, um bspw. Datenbankverbindungen zu schließen.
+Diese Methoden werden mit \enquote{@AfterAll} und \enquote{@AfterEach} eingeleitet.
+
+Außerdem können Tests übersprungen werden, sofern sie mit \enquote{@Disabled} eingeleitet werden.
+Dies hat einerseits Vorteile bei der Entwicklung, da so Tests schneller geprüft werden können, andererseits können so Tests auskommentiert werden, sofern Bugs in den zu testenden Methoden vorhanden sind.
+
+
+\subsection{Hamcrest}
+
+Hamcrest ist wie JUnit ein Java-Framework, welches es leichter macht, richtige Matcher-Objekte zu deklarieren.
+Jedoch ist Hamcrest als Zusatz zu JUnit zu betrachten und nicht als eigenständiges Test-Framework.
+Dies ist ein großer Vorteil gegenüber dem Standard-Matcher von JUnit, da dieser allein mit der Gleichheit der Objekte arbeitet.
+Somit ist es einfacher, komplette Kollektionen von Objekten auf Gleichheit zu testen oder komplexere Tests aufzustellen.
+
+Hamcrest erlaubt es dem Nutzer zusätzlich auch eigene Matcher zu erstellen, welche das Testen erheblich erleichtern können.
+

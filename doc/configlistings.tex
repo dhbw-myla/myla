@@ -1,0 +1,128 @@
+% !TEX root =  master.tex
+
+% colors
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+
+\colorlet{jsonPunct}{red!60!black}
+\definecolor{jsonBackground}{HTML}{EEEEEE}
+\definecolor{jsonDelim}{RGB}{20,105,176}
+\colorlet{jsonNumb}{magenta!60!black}
+
+\definecolor{xmlGray}{rgb}{0.4,0.4,0.4}
+\definecolor{xmlDarkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{xmlCyan}{rgb}{0.0,0.6,0.6}
+
+\definecolor{jsBackground}{RGB}{250,250,255}
+\definecolor{jsString}    {RGB}{ 16,160, 60}
+
+\definecolor{cssKeyword}{RGB}{ 10,100,160}
+\definecolor{cssClass}  {RGB}{200,120, 10}
+
+% general style
+\lstset{
+	basicstyle=\ttfamily\footnotesize,
+	backgroundcolor=\color{jsBackground},
+	numbers=left,
+	numberstyle=\scriptsize\color{black},
+	stepnumber=1,
+	numbersep=10pt,
+	showspaces=false,
+	showstringspaces=false,
+	breaklines=true,
+	tabsize=2,
+	captionpos=b,
+	literate=
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}1
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
+% Java
+\lstdefinestyle{lstJava}
+{
+	language=Java,
+	keywordstyle=\color{javapurple}\bfseries,
+	stringstyle=\color{javared},
+	commentstyle=\color{javagreen},
+	morecomment=[s][\color{javadocblue}]{/**}{*/},
+	tabsize=1
+}
+
+% JSON
+\lstdefinelanguage{json}{
+	literate=
+	*{0}{{{\color{jsonNumb}0}}}{1}
+	{1}{{{\color{jsonNumb}1}}}{1}
+	{2}{{{\color{jsonNumb}2}}}{1}
+	{3}{{{\color{jsonNumb}3}}}{1}
+	{4}{{{\color{jsonNumb}4}}}{1}
+	{5}{{{\color{jsonNumb}5}}}{1}
+	{6}{{{\color{jsonNumb}6}}}{1}
+	{7}{{{\color{jsonNumb}7}}}{1}
+	{8}{{{\color{jsonNumb}8}}}{1}
+	{9}{{{\color{jsonNumb}9}}}{1}
+	{:}{{{\color{jsonPunct}{:}}}}{1}
+	{,}{{{\color{jsonPunct}{,}}}}{1}
+	{\{}{{{\color{jsonDelim}{\{}}}}{1}
+	{\}}{{{\color{jsonDelim}{\}}}}}{1}
+	{[}{{{\color{jsonDelim}{[}}}}{1}
+	{]}{{{\color{jsonDelim}{]}}}}{1}
+}
+
+% XML
+\lstdefinelanguage{XML}
+{
+	morestring=[b]",
+	morestring=[s]{>}{<},
+	morecomment=[s]{<?}{?>},
+	stringstyle=\color{xmlGray},
+	identifierstyle=\color{xmlDarkblue},
+	keywordstyle=\color{xmlCyan},
+	morekeywords={xmlns,version,type}
+}
+
+% JavaScript
+\lstdefinelanguage{JavaScript}
+{
+	backgroundcolor=\color{jsBackground},
+	keywordstyle=\color{blue}\bfseries,
+	stringstyle=\color{jsString},
+	commentstyle=\color{gray},
+	morestring=[b]",
+	morecomment=[l][\color{gray}]{//},
+	morecomment=[s][\color{gray}]{/*}{*/},
+	morekeywords={break,case,const,continue,else,false,for,function,if,in,new,null,switch,this,true,var,while}
+}
+
+% HTML
+\lstdefinestyle{lstHTML}
+{
+	language=HTML,
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{gray}\itshape,
+	morecomment=[s][\color{gray}]{<!--}{-->},
+%	stringstyle=\color{jsString}
+	escapeinside=``
+}
+
+% CSS
+\lstdefinestyle{lstCSS}
+{
+	keywordstyle=\color{cssKeyword}\bfseries,
+	commentstyle=\color{gray}\itshape,
+	morecomment=[s][\color{gray}]{/*}{*/},
+%	morecomment=[s][\color{cssClass}]{.}{ \{},
+	alsoletter=-,
+	morekeywords={border,background-color}
+}
+
+%lstinline
+\def\jinline{\lstinline[basicstyle=\ttfamily,keywordstyle={}, language=JAVA]}
+\def\sinline{\lstinline[basicstyle=\ttfamily,keywordstyle={}, language=SQL]}

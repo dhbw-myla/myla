@@ -1,0 +1,70 @@
+% !TEX root =  master.tex
+\section{Abgeschlossene und offene Ziele der Software}
+\multipleauthorsection{\authorRF}{\authorEJ}
+\label{sec:ziele}
+\subsection{Zieldefinition}
+\subsubsection*{Ziel}
+Das Ziel der Arbeit war es, ein Kinobuchungssystem zu entwickeln, welches dem Benutzer ermöglicht eine Buchung durchzuführen.
+Dieses Kinobuchungssystem sollte mit Hilfe der iterativen Vorgehensweise entwickelt werden.
+\subsubsection*{Vorgaben}
+Eine Einschränkung des Entwurfs- und Entwicklungsprozesses war die Vorgabe, die Programmiersprache Java im Back-End (vgl. Kapitel \vref{sec:backend}) zu verwenden sowie den Entwicklungsprozess innerhalb von zwei Sprints und einem Bearbeitungszeitraum von zwölf Wochen abzuschließen.
+Zudem sollten ca. 60\% des eigenen logischen Codes durch Tests abgedeckt werden. Dies bezieht sich lediglich auf das Back-End und den Businesscode des Projektes.
+
+\subsubsection*{Eigene Ziele}
+Unsere eigenen Ziele waren die Verwendung einer Datenbank, um die Voraussetzungen einer Drei-Schichten-Logik zu erfüllen.
+Dies sollte den Austausch von Daten im System erleichtern.
+
+Weiterhin sollte es möglich sein einen kompletten Buchungsvorgang durchzuführen, d.h. von der Filmauswahl über die Vorstellungsauswahl sowie die Sitzplatzauswahl bis hin zur Buchung und deren Bestätigung zu gelangen.
+Während des Buchungsvorganges soll dem Benutzer eine unverkennbare User Experience geboten werden, welche eine erneute Verwendung des Kinobuchungssystems begünstigt.
+
+\subsection{Abgeschlossene Ziele}
+\label{ssec:abgeschlossene_ziele}
+Das vorliegende Kinoreservierungssystem erfüllt alle an das Projekt gestellten Zielvorgaben und überschreitet diese an diversen Stellen. 
+
+\subsubsection*{Back-End}
+Das komplette Back-End wurde innerhalb der zwei Iterationen mit eine Datenbank sowie der geforderten Businesslogik implementiert. Ferner wurden neue Architekturmuster sowie die Implementierung von Webservices inklusiver deren \acs{REST}-Schnittstellen implementiert. Da diese Themen noch nie in einer Vorlesung thematisiert wurden, übertrifft dies die an das Projekt gestellten Anforderungen. Darin beinhaltet ist eine Restriktion der mehrmaligen Buchung eines Sitzplatzes sowie das temporäre Blockieren eines online ausgewählten Sitzplatzes.
+
+\subsubsection*{Front-End}
+Im Front-End wurden alle geplanten Schritte der Buchung implementiert. 
+Somit kann der Nutzer von der Filmauswahl bis zur Buchung ohne Unterbrechung die Funktionsweise eines Kinoreservierungssystems in Anspruch nehmen. Dies wird jedoch aktuell durch eine vorgegebene Zahlungsmethode, welche nur vorher festgelegte Werte erlaubt, limitiert.
+
+\subsubsection*{JUnit}
+Das Testen wurde, wie in Kapitel \vref{sec:testen} beschrieben, auch im Rahmen der Vorgaben erfüllt. Hierbei wurde das Ziel überschritten, da die zu testenden Klassen eine höhere Codeabdeckung als gefordert aufweisen.
+
+\subsubsection*{Datenbank und \acf{REST}}
+%Die eigenen Ziele wurden ebenfalls zum großen Teil erreicht. 
+Das Verwenden einer Datenbank wurde mit Hilfe einer Postgres-Datenbank umgesetzt.
+Hierzu wurden sämtliche von den Autoren festgelegten Attributen im Backend implementiert und für die weitere Verwendung bereitgestellt.\\
+Durch die Implementierung von einem breiten Schnittstellen-Portfolio, die sowohl Speichern, Abrufen und Löschen mit Hilfe von \acs{REST}-Services ermöglichen, wird eine umfangreiche Kommunikation zwischen Front- und Back-End gewährleistet. \\
+Somit wurde das Ziel, einer klaren Trennung in Form der Drei-Schichten-Logik, erreicht.
+
+\subsubsection*{Buchungsvorgang und Sitzplatzauswahl}
+Ein weiteres, selbst gestecktes Ziel war es einen erfolgreichen Buchungsvorgang, wie in der User-Journey (siehe Kapitel \vref{sec:user_journey}) beschrieben, zu durchlaufen.
+Hierbei wurde im Front-End zusätzlich zur geplanten Filmauswahl ein Karussell mit aktuellen Blockbustern als Eye-Catcher implementiert. \\
+Darüber hinaus wurde die Sitzplatzauswahl im Front- und Back-End gegenüber einer konventionellen Anordnung in Tabellenform durch ein Koordinatensystem ersetzt.
+Folglich ergeben sich diverse Möglichkeiten, die sich zu einer realitätsgetreuen Darstellung aller denkbaren zweidimensionalen Sitzplatzanordnungen abbilden lassen. 
+Ferner wird die Skalierbarkeit im Hinblick auf der Größe der Säle bzw. Anzahl der Plätze gewahrt. 
+
+\subsubsection*{Hauptziel}
+Der Hauptziel dieses Projekts war es, einen Sitzplatz einer Vorstellung nicht mehrmals zu verkaufen.
+Dies wurde mit Hilfe des temporären Blockierens eines Sitzes gelöst.  
+Eine genauer Beschreibung des genannten Ansatzes befindet sich in Kapitel \vref{ssssec:geblockt_durch_benutzer}. \\
+
+Schlussendlich wurde auch bereits der Grundstein des theoretischen dritten Sprints gelegt, indem ein Mitarbeiter im Back-End bereits implementiert wurde.
+
+\subsection{Offene Ziele}
+\label{ssec:offene_ziele}
+\subsubsection*{Sitzplatzdarstellung}
+Zu den offenen Zielen, welche nicht in voller Gänze erreicht wurden, zählt die Sitzplatzdarstellung.
+Diese sollte nach Plan auch eine Breite und Höhe in der Datenhaltung aufweisen, um jegliche Sitzarten (Sofas etc.) darstellen zu können.
+Des Weiteren fehlt die Spezifikation für Rollstuhlplätze, diese werden in der aktuellen Version nicht dargestellt.
+Jedoch ist das Potential für diese Änderungen im aktuellen System vorhanden, weshalb sie bei einem größeren Bearbeitungszeitraum auch erreicht worden wären.
+
+\subsubsection*{Single-Page-Application}
+Ein weiteres offenes Ziel ist die Umsetzung des Front-Ends als Single-Page-Application, hierbei wäre redundanter Datenaustausch verhindert worden.
+Es wurde sich jedoch aufgrund Zeitmangels gegen eine frühzeitige Konvertierung des Front-Ends entschieden, um Ressourcen für Anpassungen im Back-End sowie den Tests frei zu halten. 
+
+\subsubsection*{User Experience}
+Die unvergleichliche User Experience konnte zum jetzigen Zeitpunkt noch nicht, soll aber durch spätere Erweiterungen, erreicht werden. \\
+Eine Fokussierung auf eine Eigenschaft der User Experience wäre dabei ein Weg dieses Ziel zu erreichen.
+Dabei bietet sich das Vergnügen beim Benutzen des Systems hervorragend an, da dies eine der wichtigsten Eigenschaften bei einer Anwendung ist.

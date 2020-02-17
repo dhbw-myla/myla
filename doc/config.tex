@@ -1,0 +1,226 @@
+% !TEX root =  master.tex
+
+% language, font, colors
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[german=quotes]{csquotes} 	% correct quotes using \enquote{}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % latin modern font, TODO: Arial 12?
+\usepackage[onehalfspacing]{setspace}
+\usepackage{xcolor}
+
+% hyperlinks
+\PassOptionsToPackage{hyphens}{url}\usepackage[hidelinks=true]{hyperref}
+
+% commands for author and title
+\newcommand{\TitelDerArbeit}[1]{\def\DerTitelDerArbeit{#1}\hypersetup{pdftitle={#1}}}
+\newcommand{\AutorDerArbeit}[1]{\def\DerAutorDerArbeit{#1}\hypersetup{pdfauthor={#1}}}
+\newcommand{\Firma}[1]{\def\DerNameDerFirma{#1}}
+\newcommand{\Kurs}[1]{\def\DieKursbezeichnung{#1}}
+
+% create free field for chapter
+\makeatletter
+\newcommand{\freechapterauthor}[1]{%
+	{\parindent0pt\vspace*{-25pt}%
+		\linespread{1.1}\large\scshape#1%
+		\par\nobreak\vspace*{35pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create author for chapter
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+	{\parindent0pt\vspace*{-25pt}%
+		\linespread{1.1}\large\scshape Autor: #1%
+		\par\nobreak\vspace*{35pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create multiple author for chapter
+\makeatletter
+\newcommand{\chaptermulitpleauthor}[2]{%
+	{\parindent0pt\vspace*{-25pt}%
+		\linespread{1.1}\large\scshape Autoren: #1, #2%
+		\par\nobreak\vspace*{35pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create free for section
+\makeatletter
+\newcommand{\freeauthorsection}[1]{%
+	{\parindent0pt\vspace*{0 pt}%
+		\linespread{1.1}\scshape#1%
+		\par\nobreak\vspace*{15pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create author for section
+\makeatletter
+\newcommand{\authorsection}[1]{%
+	{\parindent0pt\vspace*{0 pt}%
+		\linespread{1.1}\scshape Autor: #1%
+		\par\nobreak\vspace*{15pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create multiple author for section
+\makeatletter
+\newcommand{\multipleauthorsection}[2]{%
+	{\parindent0pt\vspace*{0 pt}%
+		\linespread{1.1}\scshape Autoren: #1, #2%
+		\par\nobreak\vspace*{15pt}}
+	\@afterheading%
+}
+\makeatother
+
+%\usepackage{microtype}% verbesserter Randausgleich
+%\setlength\emergencystretch{1em}
+% correct superscripts
+\usepackage{fnpct}
+
+\usepackage{footnote}
+\usepackage{rotating}
+
+% calc 
+\usepackage{calc} % Used for extra space below footsepline
+
+% bibliography settings
+% author-year-style with footnotes (Chicago)
+\usepackage[backend=biber, autocite=footnote, style=authoryear, dashed=false]{biblatex}
+\AdaptNoteOpt\footcite\multfootcite
+\AdaptNoteOpt\autocite\multautocite
+
+\DefineBibliographyStrings{ngerman}{  % change u.a. to et al. (german only!)
+	andothers = {{et\,al\adddot}},
+}
+% Command to output section title headings
+\newcommand{\cvsect}[1]{% The only parameter is the section text
+	\vspace{\baselineskip} % Whitespace before the section title
+	\colorbox{black}{\textcolor{white}{\MakeUppercase{\textbf{#1}}}}\\% Section title
+}
+
+\usepackage{longtable} % Required for tables that span multiple pages
+\setlength{\LTpre}{0pt} % Remove default whitespace before longtable
+\setlength{\LTpost}{0pt} % Remove default whitespace after longtable
+
+\setlength{\tabcolsep}{0pt} % No spacing between table columns
+
+% Environment to hold a new list of entries
+\newenvironment{entrylist}{
+	\begin{longtable}[H]{l l}
+	}{
+	\end{longtable}
+}
+
+\newcommand{\entry}[2]{% First argument for the leftmost date(s) text, second is for the entry heading
+	\vspace{-0.15cm}
+	\parbox[t]{0.33\textwidth}{% 25.0% of the text width of the page
+		#1 % Leftmost entry date(s) text
+	}%
+	&\parbox[t]{0.68\textwidth}{% 75.0% of the text width of the page
+		{#2}% Entry heading text
+	}\\\\}
+
+\newcounter{barcount}
+
+% Environment to hold a new bar chart
+\newenvironment{barchart}[1]{ % The only parameter is the maximum bar width, in cm
+	\newcommand{\barwidth}{0.35}
+	\newcommand{\barsep}{0.55}
+	
+	% Command to add a bar to the bar chart
+	\newcommand{\baritem}[2]{ % The first argument is the bar label and the second is the percentage the current bar should take up of the total width
+		\pgfmathparse{##2}
+		\let\perc\pgfmathresult
+		
+		\pgfmathparse{#1}
+		\let\barsize\pgfmathresult
+		
+		\pgfmathparse{\barsize*##2/5}
+		\let\barone\pgfmathresult
+		
+		\pgfmathparse{(\barwidth*\thebarcount)+(\barsep*\thebarcount)}
+		\let\barx\pgfmathresult
+		
+		\filldraw[fill=none, draw=black!] (0,-\barx) rectangle (5,-\barx-\barwidth);
+		\filldraw[fill=black!90, draw=black!90] (0,-\barx) rectangle (\barone,-\barx-\barwidth);
+		
+		\node [label=180:{\textcolor{black}{##1: ##2/5}}] at (0,-\barx-0.175) {};
+		\addtocounter{barcount}{1}
+	}
+	\begin{tikzpicture}
+	\setcounter{barcount}{0}
+}{
+	\end{tikzpicture}
+	\vspace{0.3cm}
+}
+
+\usepackage{tikz} % Required for creating the plots
+\usetikzlibrary{shapes, backgrounds}
+\tikzset{x=1cm, y=1cm} % Default tikz units
+
+%%% Uncomment the following lines to support hard URL breaks in bibliography 
+%\apptocmd{\UrlBreaks}{\do\f\do\m}{}{}
+%\setcounter{biburllcpenalty}{9000}% Kleinbuchstaben
+%\setcounter{biburlucpenalty}{9000}% Großbuchstaben
+
+\setlength{\bibparsep}{\parskip}	% add some space between biblatex entries in the bibliography
+\addbibresource{bibliography.bib}	% add file bibliography.bib as biblatex resource
+
+% footnotes (count footnotes over chapters)
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+% acronyms
+\makeatletter
+\usepackage[printonlyused]{acronym}
+\@ifpackagelater{acronym}{2015/03/20}
+  {%
+    \renewcommand*{\aclabelfont}[1]{\textbf{\textsf{\acsfont{#1}}}}
+  }%
+  {%
+  }%
+\makeatother
+
+% listings
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Quelltext} 
+\renewcommand{\lstlistlistingname}{Quelltextverzeichnis}
+
+%% More configuration for listings is in configlistings.tex %%
+
+
+% extra packages
+\usepackage{graphicx}			% use various graphics formats
+\usepackage{subfig}				% sub-figures, e.g. side-by-side pictures
+\usepackage[german]{varioref}	% nicer references \vref
+\usepackage{caption}			% better captions
+\usepackage{booktabs}			% nicer tabs
+\usepackage{array}
+\usepackage{pdfpages}			% for signed ewerkl
+
+% algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\renewcommand{\listalgorithmname}{Algorithmenverzeichnis}
+\floatname{algorithm}{Algorithmus}
+
+% page header/footer
+\RequirePackage[automark,headsepline,footsepline]{scrpage2}
+\pagestyle{scrheadings}
+\renewcommand*{\pnumfont}{\upshape\sffamily}
+\renewcommand*{\headfont}{\upshape\sffamily}
+\renewcommand*{\footfont}{\upshape\sffamily}
+\renewcommand{\chaptermarkformat}{}
+\RedeclareSectionCommand[beforeskip=0pt]{chapter}
+\clearscrheadfoot
+
+\ifoot[\rule{0pt}{\ht\strutbox+\dp\strutbox}DHBW Mannheim]{\rule{0pt}{\ht\strutbox+\dp\strutbox}DHBW Mannheim}
+\ofoot[\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark]{\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark}
+
+\ohead{\headmark}

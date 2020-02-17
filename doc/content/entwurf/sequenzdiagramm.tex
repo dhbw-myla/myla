@@ -1,0 +1,40 @@
+% !TEX root =  master.tex
+\section{Sequenzdiagramm}
+\label{sec:sequenzdiagram}
+\authorsection{\authorSG}
+
+Im Anhang \vref{fig:Anhang_seq_reservieren} befindet sich ein Sequenzdiagramm des Reservierungsvorganges.
+
+Im Folgenden werden die einzelnen Schritte kurz erläutert.
+
+Nachdem der Benutzer die gewünschten Sitzplätze ausgewählt hat, drückt er im Front-End auf den Button \enquote{Reservieren}.
+Im Front-End wird daraufhin ein \acs{JSON} mit den Informationen der gewünschten Sitzplätze erstellt (siehe \vref{lst:json_book}).
+Vor dem \acs{JSON} wird noch ein Formparameter book angeschlossen, um eine genauere Identifizierung in der \acs{REST}-Schnittstelle \jinline|reservation/book| zu realisieren.
+
+Das Front-End ruft über einen \acs{AJAX}-Call den Webserver mit der \acs{URI}  \url{http://localhost:8080/cinemasystem-system/reservation/book} auf und übergibt dabei das \acs{JSON}.
+Diese Ressource ruft ihren eigenen Service auf.
+Dieser ruf den Webserver für die Datenschicht über die \acs{URI} \url{http://localhost:8080/cinemasystem-data/reservation/book} auf und übergibt das \acs{JSON}.
+Hier wird das \acs{JSON} mittels eines \acs{JSON}-Converters in ein \acs{DTO} konvertiert.
+Da aus dem Front-End lediglich die Vorstellungs-ID übermittelt wird, müssen die Informationen der Vorstellung aus der Datenbank nachgeladen werden. \\
+Hier wird die Methode \jinline|find(String id)| im \jinline|ShowService|, der ebenfalls in der Ressource implementiert ist, aufgerufen.
+Diese greift auf die Datenbank zu und holt die Informationen der Vorstellung ab und wandelt es anschließend in ein Show-\acs{DTO} um.
+
+%Anschließend kann eine Verifizierung erfolgen, ob überhaupt eine Reservierung derzeit möglich ist.
+%Ein möglicher Ausschlussgrund könnte sein, dass zwischen Beginn der ausgewählten Vorstellung und aktueller Zeit weniger als 30 Minuten liegen. \\
+%Ist diese erfolgreich gewesen, wird überprüft, ob es bereits den Kunden in der Datenbank gibt.
+%Dies wird durch die vom Front-End übermittelte E-Mail-Adresse des aktuellen Benutzers durchgeführt.
+%Somit kann später der Reservierung und somit den Tickets eindeutig der Kunde zugewiesen werden. \\
+
+Anschließend erfolgen verschiedene Verifizierungen, ob das Anlegen der Reservierung möglich ist.
+Ausschlussgründe könnten etwa folgende sein:
+\begin{enumerate}
+	\item Zwischen Vorstellung und aktueller Uhrzeit liegen weniger als 30 Minuten.
+	\item Der ausgewählte Sitzplatz ist schon von einem anderen Benutzer blockiert.
+	\item Der ausgewählte Sitzplatz ist bereits vergeben.
+\end{enumerate}
+War die Reservierung erfolgreich, wird das Ergebnis an den \jinline|ReservationService| des Webserver System im \acs{JSON} zurück übermittelt. % TODO: Webserver? Webservice?
+Ggf. kann es hier noch zu weiteren Berechnungen kommen, weshalb das \acs{JSON} in ein Reservation\acs{DTO} umgewandelt wird.
+
+Ist die Methode \jinline|postTickets| abgeschlossen, wird das Ergebnis in ein \acs{JSON} umgewandelt und an das Front-End gesendet, welches dem Benutzer die Reservierung als \acs{QR-Code} darstellt (siehe Kapitel \vref{fig:vorstellung04}).
+
+Eine nähere Beschreibung der Herausforderungen für das Reservieren und den Lösungsansätzen befindet sich in Kapitel \vref{ssec:herausforderung_reservieren} und Kapitel \vref{ssec:loesung_reservieren}.

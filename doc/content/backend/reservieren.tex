@@ -1,0 +1,61 @@
+\section{Reservieren}
+\label{sec:reservieren}
+
+\subsection{Herausforderung}
+\label{ssec:herausforderung_reservieren}
+
+Eine weitere Herausforderung bestand darin, das Reservieren eines Sitzes im Back-End zu realisieren.
+Hierfür mussten ebenso verschiedene Aspekte betrachtet werden.
+
+\begin{enumerate}
+	\label{enum:reservieren}
+	\item \label{itm:zeitpunkt_reservieren}Das Reservieren darf nur, wie das Blocken, bis zu einem bestimmten Zeitpunkt möglich sein.
+	\item \label{itm:geblockt_durch_benutzer} Falls der Sitzplatz durch den selben Benutzer geblockt wurde, darf dieser diesen buchen.
+	Andernfalls darf es keine erfolgreiche Reservierung geben.
+	\item \label{itm:mehr_eine_vorstellung_reservieren}Eine Mehrfachvergabe des selben Sitzplatzes für eine Vorstellung muss wie beim Blocken ausgeschlossen sein (vgl. Herausforderung \ref{enum:blocken} Punkt \ref{itm:mehr_eine_vorstellung}).
+	\item \label{itm:mehr_mehrere_vorstellungen_reservieren}Die Belegung eines Sitzes für verschiedene Vorstellungen muss gewährleistet sein.
+	\item \label{itm:ticket_reservieren} Der Sitzplatz darf nur reserviert werden, wenn es für ihn noch kein Ticket gibt und er derzeit auch nicht blockiert ist.
+	\item \label{itm:front_end_reservieren} Eine Information mit den erfolgreich reservierten Sitzen muss an das Front-End gesendet werden.
+	\item \label{itm:zeit_reservieren} Der Zeitpunkt der Reservierung darf durch das Front-End nicht manipulierbar sein.
+\end{enumerate}
+
+\subsection{Lösungsansatz}
+\label{ssec:loesung_reservieren}
+
+Um die geforderten o.g. Punkte umzusetzen, werden in der \acs{REST}-Schnittstelle \\\jinline |reservation/book| mehrere Überprüfungen durchgeführt.
+
+\subsubsection*{Punkt \ref{itm:zeitpunkt_reservieren} -- Zeitpunkt}
+\label{ssssec:Zeitpunkt_reservieren}
+Siehe \nameref{ssec:loesung_blocken} \nameref{ssssec:Zeitpunkt} auf Seite \pageref{ssssec:Zeitpunkt}.
+
+\subsubsection*{Punkt \ref{itm:geblockt_durch_benutzer} -- Geblockt durch Benutzer, Punkt \ref{itm:mehr_eine_vorstellung_reservieren}, \ref{itm:mehr_mehrere_vorstellungen_reservieren} -- Mehrfachvergabe, Punkt \ref{itm:ticket_reservieren} -- Reservieren}
+\label{ssssec:geblockt_durch_benutzer}
+Um einem Benutzer das Reservieren des möglicherweise geblockten Sitzplatzes für eine Vorstellung zu gewährleisten, wurde, wie bereits erwähnt, sich dazu entschlossen einen Sessiontoken als Identifikator mitzugeben.
+Da dieser vom Front-End erzeugt wird, reicht dieses den Sessiontoken beim Reservierungsvorgang im \acs{JSON} mit.
+Da der Sessiontoken auch hier nach erfolgreicher Buchung nicht übermittelt werden soll, gibt es auch für diesen Anwendungsfall zwei \acp{DTO}, die wie im \nameref{ssec:loesung_blocken} Blocken in \nameref{ssssec:Bezeichner} auf Seite \pageref{ssssec:Bezeichner} auch die \acs{JSON}-Annotation, für das Schreiben bzw. Nichtschreiben des Sessiontokens, besitzen (\textit{BookingToWithSessiontoken} und \textit{BookingTo}). 
+
+Auch hier erfolgt durch eine ausgelagerte Methode \jinline |checkIfSeatsAreBookable| die Überprüfung, ob
+\begin{enumerate}
+	\item es bereits ein Ticket für den zu buchenden Sitzplatz gibt.
+	\item der Sitzplatz bereits geblockt ist.
+	\begin{enumerate}
+		\item Wenn ja, passt der Sessiontoken der aktuellen Anfrage zu diesem? Dann darf die Buchung erfolgen.
+		\item Falls nicht, darf die Reservierung nicht erfolgen.
+	\end{enumerate}
+\end{enumerate}
+
+War dieser Methoden-Aufruf erfolgreich, wird eine weitere Methode aufgerufen, die ein Reservierungs-\acs{DTO} als Rückgabewert hat (\jinline |createReservationForSeats|). \\
+Dieses ist mit dem aktuellen Datum und der aktuellen Uhrzeit sowie einer Liste mit Ticket-\acp{DTO} versehen.
+Dem Ticket-\acs{DTO} wird der aktuelle Sitzplatz zugeteilt.
+Ferner wird in jedem Ticket-\acs{DTO} individuell das Attribut \jinline |isReducedPrice| gesetzt, welches zuvor durch das Front-End zu dem jeweiligen Sitzplatz über das \acs{JSON} mitgeteilt wurde.
+Durch dieses Setzen des Attributs hat man im Nachhinein die Möglichkeit, die korrekte Preisberechnung zu verifizieren.
+
+Die Implementierung, ob die ausgewählten Sitzplätze verfügbar sind, befindet sich im Anhang \vref{lst:Angang_Prüfung_ob_Reservierung_möglich}.
+Die Implementierung für das Erstellen des Reservierungs-\acp{DTO} befindet sich im Anhang \vref{lst:Anhang_Erstellen_Reservierung}.
+
+\subsubsection*{Punkt \ref{itm:front_end_reservieren} -- Erfolgreich}
+\label{ssssec:front_end_reservieren}
+Wurde der Reservierungsvorgang erfolgreich durchgeführt, erhält das Front-End das Reservierungs-\acs{DTO} als \acs{JSON} wie in \nameref{ssec:loesung_blocken} im \nameref{ssssec:erfolgreich_blocken} auf Seite \pageref{ssssec:erfolgreich_blocken} beschrieben, zur Auswertung zurück (vgl. Herausforderungen Punkt \vref{itm:front_end_reservieren}).
+Diese wertet das \acs{JSON} aus und generiert daraus einen \acs{QR-Code}, der im Browser angezeigt wird.
+Ein Beispiel für die Umsetzung seitens des Front-Ends befindet sich in Kapitel \vref{fig:vorstellung04}.
+%Dieses hat wie zuvor beschrieben das Attribut \jinline |sessiontoken| nicht gesetzt.

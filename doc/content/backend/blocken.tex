@@ -1,0 +1,63 @@
+% !TEX root =  master.tex
+\section{Blocken}
+\label{sec:blocken}
+
+\subsection{Herausforderung}
+\label{ssec:herausforderung_blocken}
+
+Eine Herausforderung bestand darin, das Blocken eines Sitzes im Back-End zu implementieren.
+Hierfür mussten verschiedene Aspekte betrachtet werden.
+
+\begin{enumerate}
+\label{enum:blocken}
+\item \label{itm:zeitpunkt}Das Blocken darf nur bis zu einem bestimmten Zeitpunkt möglich sein.
+\item \label{itm:bezeichner}Für das Blocken muss ein eindeutiger Bezeichner gefunden werden, der es ermöglicht, den Sitzplatz für die Veranstaltung zu buchen.
+\item \label{itm:mehr_eine_vorstellung}Eine Mehrfachbelegung für eine Vorstellung muss ausgeschlossen sein.
+\item \label{itm:mehr_mehrere_vorstellungen}Die Belegung eines Sitzes für verschiedene Vorstellungen muss möglich sein.
+\item \label{itm:front_end} Der eindeutige Bezeichner darf nicht an das Front-End gesendet werden.
+\item \label{itm:ticket} Der Sitzplatz darf nur geblockt werden, wenn es für ihn noch kein Ticket gibt.
+\end{enumerate}
+
+\subsection{Lösungsansatz}
+\label{ssec:loesung_blocken}
+
+Um die geforderten o.g. Punkte umzusetzen, werden in der \acs{REST}-Schnittstelle \\\jinline |reservation/block| mehrere Überprüfungen durchgeführt.
+
+\subsubsection*{Punkt \ref{itm:zeitpunkt} -- Zeitpunkt}
+\label{ssssec:Zeitpunkt}
+Um das Blocken eines Sitzplatzes nur für eine bestimmte Zeit zu ermöglichen, wurde sich in diesem Projekt dafür entschieden, dass das Blocken und Reservieren nur bis maximal 30 Minuten vor Beginn einer Vorstellung möglich ist.
+
+\subsubsection*{Punkt \ref{itm:bezeichner} -- Bezeichner}
+\label{ssssec:Bezeichner}
+Um das \enquote{anonyme} Blocken eines Sitzplatzes für eine Vorstellung zu ermöglichen, wurde sich dazu entschlossen aus dem Front-End einen Sessiontoken als Identifikator mitzugeben. \\
+Da dieser gemäß Punkt \ref{itm:front_end} nicht an das Front-End übermittelt werden darf, wurde hier ein zweites \acs{DTO} implementiert, welches über dem Attribut \jinline|sessiontoken| mit einer Jackson-Annotation versehen ist (\jinline|@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)|), die das Schreiben des Attributs verhindert (siehe Quelltext \vref{lst:jsonproperty}).
+Somit ist gewährleistet, dass beim Erzeugen eines Block-\acs{DTO}s das Attribut \jinline|sessiontoken| nicht in das \acs{JSON} geschrieben wird.
+
+\begin{lstlisting}[style=lstJava, caption={Block-\acs{DTO} mit ausgeblendetem Sessiontoken}, label={lst:jsonproperty}]
+public class BlockToWithSessiontoken
+{
+	private long   id;
+	private SeatTo seat;
+	private ShowTo show;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String sessiontoken;
+	private Date timestamp;
+		
+	// getter and setter
+}
+\end{lstlisting}
+
+\subsubsection*{Punkt \ref{itm:mehr_eine_vorstellung}, \ref{itm:mehr_mehrere_vorstellungen} -- Vorstellung, Punkt \ref{itm:ticket} -- Ticket}
+\label{ssssec:Vorstellung}
+Um das Blocken eines Sitzplatzes für eine Vorstellung und gleichzeitig für eine andere zu ermöglichen, werden im Back-End nach erfolgreicher Überprüfung des Punkts \ref{itm:zeitpunkt} alle Ticket-\acp{DTO} zur gewünschten Vorstellung aus der Datenbank geladen. \\
+Anschließend wird in einer For-Each-Schleife überprüft, ob der gewünschte Sitzplatz bereits vergeben ist.
+Da an dem Ticket-\acs{DTO} auch der Sitzplatz angebunden ist, kann man dies so exakt verifizieren.
+Tritt der Fall ein, dass er vergeben ist, wird eine \jinline |TicketForSeatExistsExeption| geworfen.
+Das Front-End bekommt kein \acs{JSON} zurück.
+Somit wird signalisiert, dass das Blocken nicht erfolgreich war.
+Die Fehlermeldung wird aber auf der Konsole in Eclipse sowie in einer Log-Datei mitgeführt.
+
+\subsubsection*{Erfolgreich}
+\label{ssssec:erfolgreich_blocken}
+Ist das Blocken erfolgreich gewesen, wird ein Block-\acs{DTO} erzeugt, welches alle Informationen wie z.B. Zeitpunkt des Blockens und den geblockten Sitzplatz beinhaltet, ausgenommen den in Punkt \ref{itm:bezeichner} genutzten Sessiontoken.
+Anschließend erhält das Front-End ein, durch den in Kapitel \vref{sec:json_generieren} vorgestellten JSONConverter, \acs{JSON} des Block-\acp{DTO} zurück.
