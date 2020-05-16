@@ -21,8 +21,8 @@
 \begin{document}
 
 % set some information (title, author, ...)
-\TitelDerArbeit{Entwurf und Implementierung eines Kinoreservierungssystems}
-\AutorDerArbeit{\authorSG, \authorRF, \authorGP, \authorEJ, \authorNL}
+\TitelDerArbeit{Integrationsseminar}
+\AutorDerArbeit{\authorSG, \authorRF, \authorMS, \authorEJ, \authorNL}
 \Firma{DER Touristik GmbH, Technische Universität Kaiserslautern, SAP SE}
 \Kurs{WWI 17 SE B}
 
@@ -32,6 +32,8 @@
 \normalfont
 
 % table of contents
+\clearpage
+\pdfbookmark{Inhaltsverzeichnis}{toc-bookmark}
 \tableofcontents
 
 % figures
@@ -45,7 +47,7 @@
 
 % acronyms
 \input{acronyms}
-\ohead{Acronyms}
+\ohead{Abkürzungsverzeichnis}
 
 %--------------------------------
 % Content
@@ -58,19 +60,23 @@
 % one file for each chapter
 \input{content/einleitung}
 
-\input{content/analyse/_analyse}
+\chapter{Analyse}
+\chaptermulitpleauthor{\authorSG}{\authorGP, \authorRF, \authorEJ}
 \input{content/analyse/personas}
 \input{content/analyse/userstories}
 \input{content/analyse/userjourney}
 \input{content/analyse/ablaufkino}
 
-\input{content/entwurf/_entwurf}
+\chapter{Entwurf}
+\label{c:entwurf}
 \input{content/entwurf/klassendiagramm}
 \input{content/entwurf/sequenzdiagramm}
 \input{content/entwurf/authentifizierung}
 \input{content/entwurf/blocken}
 
-\input{content/backend/_backend}
+\chapter{Back-End}
+\chapterauthor{Sascha Görnert}
+\label{sec:backend}
 \input{content/backend/technologien}
 \input{content/backend/konzept}
 \input{content/backend/maven}
@@ -83,7 +89,8 @@
 \input{content/backend/blocken}
 \input{content/backend/reservieren}
 
-\input{content/frontend/_frontend}
+\chapter{Front-End}
+\chapterauthor{\authorNL}
 \input{content/frontend/technologien}
 \input{content/frontend/startseite}
 \input{content/frontend/anbindungbackend}
@@ -91,13 +98,17 @@
 \input{content/frontend/saalplan}
 \input{content/frontend/bezahlung}
 
-\input{content/testen/_testen}
+\chapter{Testen}
+\label{sec:testen}
+\chaptermulitpleauthor{\authorRF}{\authorEJ}
 \input{content/testen/softwarequalitaet}
 \input{content/testen/testverfahren}
 \input{content/testen/technischegrundlagen}
 \input{content/testen/umsetzungentests}
 
-\input{content/ausblick/_ausblick}
+\chapter{Ausblick}
+\label{c:ausblick}
+\chaptermulitpleauthor{\authorRF}{\authorEJ, \authorSG, \authorNL}
 \input{content/ausblick/backlog}
 \input{content/ausblick/zielerreichung}
 \input{content/ausblick/reflexionbewertung}
@@ -116,8 +127,8 @@
 \input{appendix}
 
 % ewerkl.tex
-%\input{ewerkl.tex}
-\includepdf[pages={99}]{Seminararbeit_KinoEntenteich_unterschrieben.pdf}
+\input{ewerkl.tex}
+%\includepdf[pages={99}]{Seminararbeit_KinoEntenteich_unterschrieben.pdf}
 
 
 \end{document}

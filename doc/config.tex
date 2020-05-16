@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[german=quotes]{csquotes} 	% correct quotes using \enquote{}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern} % latin modern font, TODO: Arial 12?
+\usepackage{lmodern} % latin modern font
 \usepackage[onehalfspacing]{setspace}
 \usepackage{xcolor}
 
@@ -224,3 +224,6 @@
 \ofoot[\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark]{\rule{0pt}{\ht\strutbox+\dp\strutbox}\pagemark}
 
 \ohead{\headmark}
+
+% highlight notes as not yet finished
+\newenvironment{note}{\color{gray}}{}
