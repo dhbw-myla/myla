@@ -90,7 +90,7 @@ module.exports = {
 };
 ```
 
-_registerKey.js_:
+_registerKey.txt_:
 ```
 thisIsTheReg1sterK3y,butUcanALSOkeepTHISfileBLANK-onlyNeccessaryToCreateThisF1le
 ```
