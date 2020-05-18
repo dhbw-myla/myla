@@ -23,7 +23,7 @@ class App extends Component {
 			<Router>
 				<div className="flyout">
 					{showNavbarComponent()}
-					<main style={{ marginTop: "4rem" }}>
+					<main style={{ height: "94vh" }}>
 						<Routes />
 					</main>
 					<Footer />

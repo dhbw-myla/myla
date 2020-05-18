@@ -1,0 +1,83 @@
+.card {
+    margin-left: auto;
+    margin-right: auto;
+    width: 30rem;
+    opacity: 0.95;
+    align-self: center;
+
+}
+
+.container {
+    padding-top: 7rem; /*vertical Alignment needed*/
+    margin: auto;
+    width: 100%;
+    height: 94vh;
+}
+
+.background {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto;
+    min-height: 94vh;    
+}
+
+.logo {
+    width: 10rem;
+    height: 10rem;
+    text-align: center;
+}
+
+.form-control:focus {
+    border-color: #e30613;
+    box-shadow: 0 0 0 0.2rem rgba(227, 6, 19, 0.25);
+} 
+
+.form-group{
+    display: flex;
+    align-items: right;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btn_dhbw {
+    background-color: #e30613 !important;
+    color: white !important;
+    position: relative;
+}
+
+.btn_dhbw:hover {
+    background-color: white;
+    border-color: #e30613; 
+}
+
+.btn_split{
+    width: 100%;
+}
+
+.div_button_split{
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.loginLink {
+    text-decoration: none;
+}
+
+.loginLink:hover {
+    color: #4a5358;
+    text-decoration: none;
+}
+
+.bg-card-background{
+    background-color: lightgrey;
+}
+
+.card-header{
+    color:#4a5358
+}
+.card-label{
+    color:#4a5358;
+    width: 100%;
+}

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { MDBEdgeHeader, MDBContainer, MDBRow, MDBCol, MDBJumbotron, MDBAnimation } from "mdbreact";
 
 import Startpage from "../Home/startpage";
-
-import DHBWTeaser from "../../assets/teaser.jpg";
 
 class MainScreen extends Component {
 	constructor(props) {
@@ -12,23 +9,7 @@ class MainScreen extends Component {
 	}
 	render() {
 		return (
-			<>
-				<MDBEdgeHeader color="grey darken-2" className="sectionPage">
-					<img src={DHBWTeaser} alt="DHBW-Teaser" className="text-center" />
-				</MDBEdgeHeader>
-				<MDBAnimation type="zoomIn" duration="500ms">
-					<MDBContainer>
-						<MDBRow>
-							<MDBCol md="8" className="mx-auto">
-								<MDBJumbotron className="mt-3">
-									<h1 className="text-center">Welcome</h1>
-									<Startpage />
-								</MDBJumbotron>
-							</MDBCol>
-						</MDBRow>
-					</MDBContainer>
-				</MDBAnimation>
-			</>
+				<Startpage />
 		);
 	}
 }
