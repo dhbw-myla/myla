@@ -19,10 +19,10 @@
     "react-scripts": "3.3.0",
     "recharts": "^2.0.0-beta.1",
     "sweetalert2": "^9.7.1",
-    "survey-react": "latest",
-    "survey-creator": "latest",
-    "surveyjs-widgets": "latest",
-    "survey-pdf": "latest"
+    "survey-react": "1.5.8",
+    "survey-creator": "1.5.8",
+    "surveyjs-widgets": "1.5.8",
+    "survey-pdf": "1.5.8"
   },
   "scripts": {
     "start": "react-scripts start",
