@@ -48,7 +48,6 @@ exports.login = function (request, response) {
     // checks whether password is correct
     // returns session id from db or creates one if there is none
     const { username, password } = request.body;
-    const preparedPassword = authHelper.preparePassword(password);
     db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
         if (err || dbResult.rows.length !== 1) {
             // user not found
@@ -57,6 +56,7 @@ exports.login = function (request, response) {
         const dbPassword = dbResult.rows[0].password;
         const dbSessionId = dbResult.rows[0].session_id;
         const isPasswordChangeRequired = dbResult.rows[0].password_change_required;
+        const preparedPassword = authHelper.preparePassword(password);
         bcrypt.compare(preparedPassword, dbPassword, function(err, bcryptResult) {
             if (err) {
                 // hashing failed
@@ -67,7 +67,7 @@ exports.login = function (request, response) {
                 return responseHelper.sendClientError(response, "Login Failed");
             } else {
                 let respond = function (response, username, sessionId) {
-                    response.status(200).json({ username: username, sessionId: sessionId, isPasswordChangeRequired: isPasswordChangeRequired });
+                    response.status(200).json({ username: sessionId, isPasswordChangeRequired });
                 };
                 let sessionId;
                 if (!dbSessionId ) {
@@ -92,7 +92,6 @@ exports.changePassword = function (request, response) {
     // check whether old password is correct
     // updates password and generates new session id which is returned
     const { username, password, newPassword } = request.body;
-    const preparedPassword = authHelper.preparePassword(password);
     db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
         if (err) {
             // db failed
@@ -102,6 +101,7 @@ exports.changePassword = function (request, response) {
             return responseHelper.sendClientError(response, "Password Change Failed");
         }
         const dbPassword = dbResult.rows[0].password;
+        const preparedPassword = authHelper.preparePassword(password);
         bcrypt.compare(preparedPassword, dbPassword, function(err, bcryptResult) {
             if (err) {
                 // hashing failed
@@ -119,8 +119,8 @@ exports.changePassword = function (request, response) {
                     }
                     let sessionId = authHelper.createSessionId();
                     db.query(`UPDATE users
-                                SET password = $1
-                                    password_change_required = false
+                                SET password = $1,
+                                    password_change_required = false,
                                     session_id = $2
                                 WHERE username = $3`,
                     [hash, sessionId, username], (err, result) => {
@@ -128,7 +128,7 @@ exports.changePassword = function (request, response) {
                             // db failed
                             return responseHelper.sendInternalServerError(response, err);
                         }
-                        response.status(200).json({ sessionId: sessionId });
+                        response.status(200).json({ sessionId });
                     });
                 });
             }
@@ -557,8 +557,8 @@ exports.resetPasswordOfUser = async function (request, response) {
             return responseHelper.sendInternalServerError(response, err);
         }
         db.query(`UPDATE users
-                    SET password = $1
-                        password_change_required = true
+                    SET password = $1,
+                        password_change_required = true,
                         session_id = NULL
                     WHERE username = $2`,
         [hash, usernameForPasswordReset], (err, result) => {

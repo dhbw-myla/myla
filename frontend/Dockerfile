@@ -8,8 +8,11 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install
-RUN npm install react-scripts@3.0.1 -g --silent
+RUN npm install -g yarn
+RUN npm install yarn
+
+RUN yarn install
+RUN yarn upgrade
 # If you are building your code for production
 # RUN npm ci --only=production
 
