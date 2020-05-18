@@ -13,7 +13,7 @@ const POST_METHOD = body => {
   return {
     method: "POST",
     body: JSON.stringify(body),
-    // mode: 'no-cors',
+    mode: 'no-cors',
     headers: new Headers({
       "Content-Type": "application/json",
       Accept: "application/json"

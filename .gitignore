@@ -51,3 +51,5 @@ testem.log
 /backend/db/dbconfig.js
 /backend/secret.js
 .DS_Store
+.vscode/launch.json
+backend/package-lock.json
