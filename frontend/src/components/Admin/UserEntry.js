@@ -1,17 +1,6 @@
+import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from "mdbreact";
 import React, { Component } from "react";
 
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBAnimation,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBIcon,
-  MDBCardText,
-  MDBNavLink
-} from "mdbreact";
 
 class UserEntry extends Component {
   constructor(props) {

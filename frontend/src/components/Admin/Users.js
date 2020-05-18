@@ -1,16 +1,16 @@
+import { MDBCol, MDBContainer, MDBRow } from "mdbreact";
 import React, { Component } from "react";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import UserEntry from "./UserEntry";
-import { getAllUsers } from "../../database/database";
 import { getStoredUser } from "../../auth/verifyPw";
+import { getAllUsers } from "../../database/database";
 import EditUserComponent from "../Users/EditUser";
+import UserEntry from "./UserEntry";
 
 class UsersComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       users: [],
-      editUser: false
+      editUser: false,
     };
   }
 
@@ -24,11 +24,11 @@ class UsersComponent extends Component {
   componentDidMount = async () => {
     const users = await this.getUsersFromDB();
     console.log("users", users);
-    this.setState({ users: users });
+    this.setState({ users });
   };
 
-  handleEditUser = userToEdit => {
-    this.setState({ editUser: true, userToEdit: userToEdit });
+  handleEditUser = (userToEdit) => {
+    this.setState({ editUser: true, userToEdit });
   };
 
   handleBack = () => {

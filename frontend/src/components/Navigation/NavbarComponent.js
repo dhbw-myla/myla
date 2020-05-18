@@ -1,21 +1,19 @@
-import React, { Component } from "react";
 import {
+  MDBCollapse,
+  MDBIcon,
   MDBNavbar,
   MDBNavbarBrand,
   MDBNavbarNav,
   MDBNavbarToggler,
-  MDBCollapse,
   MDBNavItem,
   MDBNavLink,
   MDBTooltip,
-  MDBIcon
 } from "mdbreact";
+import React, { Component } from "react";
 import DHBWLogo from "../../assets/DHBW-Logo.png";
-
-import "./Navigation.css";
 import { clearSessionStorage } from "../../auth/verifyPw";
-
 import * as swalHelper from "../../util/swalHelper";
+import "./Navigation.css";
 
 class NavbarComponent extends Component {
   constructor(props) {
@@ -23,12 +21,12 @@ class NavbarComponent extends Component {
     this.state = { collapseID: "" };
   }
 
-  toggleCollapse = collapseID => () =>
-    this.setState(prevState => ({
-      collapseID: prevState.collapseID !== collapseID ? collapseID : ""
+  toggleCollapse = (collapseID) => () =>
+    this.setState((prevState) => ({
+      collapseID: prevState.collapseID !== collapseID ? collapseID : "",
     }));
 
-  closeCollapse = collID => () => {
+  closeCollapse = (collID) => () => {
     const { collapseID } = this.state;
     window.scrollTo(0, 0);
     collapseID === collID && this.setState({ collapseID: "" });
@@ -36,9 +34,9 @@ class NavbarComponent extends Component {
 
   logOutUser = () => {
     clearSessionStorage();
-	this.closeCollapse("mainNavbarCollapse");
-	swalHelper.success("Logged out successfully!");
-	this.forceUpdate();
+    this.closeCollapse("mainNavbarCollapse");
+    swalHelper.success("Logged out successfully!");
+    this.forceUpdate();
   };
 
   render() {
