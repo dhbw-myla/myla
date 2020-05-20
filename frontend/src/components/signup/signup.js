@@ -1,11 +1,12 @@
 import { MDBBtn, MDBInput } from "mdbreact";
 import React, { Component } from "react";
-import { Redirect } from "react-router";
+import { withRouter } from "react-router-dom";
+import val from "validator";
 import { register } from "../../api/auth";
 import { verifySignup } from "../../auth/verifyPw";
 import * as swalHelper from "../../util/swalHelper";
-import * as util from "../../util/util";
 import "./signup.css";
+import { checkIfUndefiniedOrNull } from "../../util/util";
 
 class Signup extends Component {
   constructor(props) {
@@ -43,33 +44,41 @@ class Signup extends Component {
     });
   };
 
+  verifyUser = (user) => {
+    let bool = true;
+    const { password, passwordRepeat, username } = user;
+    bool &= val.isEmail(username);
+    bool &= verifySignup(password, passwordRepeat);
+    return bool;
+  };
+
   createUser = async (e) => {
     e.preventDefault();
     const { user } = this.state;
-    const { password, passwordRepeat } = user;
-    console.log("password", password);
-    console.log("passwordRepeat", passwordRepeat);
-    const pwMatch = verifySignup(password, passwordRepeat);
-
-    if (pwMatch) {
+    const userVerified = this.verifyUser(user);
+    if (userVerified) {
       const responseObj = await register(user);
-      const { status, jsonPayload } = responseObj;
-      const { username, sessionId } = jsonPayload;
-      if (
-        !util.checkIfUndefiniedOrNull(username) &&
-        !util.checkIfUndefiniedOrNull(sessionId) &&
-        status === 201
-      ) {
-        sessionStorage.setItem("user", JSON.stringify(jsonPayload));
-        this.setState({
-          isLoggedIn: true,
-          user: {
-            username,
-          },
-        });
-        swalHelper.success("Successfully signed Up!");
+      if (!checkIfUndefiniedOrNull(responseObj)) {
+        const { status, jsonPayload } = responseObj;
+        const { username, sessionId } = jsonPayload;
+        if (
+          !val.isEmpty(username) &&
+          !val.isEmpty(sessionId) &&
+          status === 201
+        ) {
+          sessionStorage.setItem("user", JSON.stringify(jsonPayload));
+          swalHelper.success("Successfully signed Up!");
+          this.props.history.push("/dashboard");
+          /* this.setState({
+            isLoggedIn: true,
+            user: {
+              username,
+            },
+          }); */
+        }
       } else {
-        swalHelper.error("Error on registering");
+        console.log(responseObj);
+        swalHelper.error("Error on registering\n");
       }
     } else {
       swalHelper.error("Passwords didn't match");
@@ -86,9 +95,11 @@ class Signup extends Component {
     const { username, passwordRepeat, password, registerKey } = user;
 
     if (isLoggedIn && !redirectToHome) {
-      return <Redirect from={currentComponent} to="/dashboard" />;
+      this.props.history.push("/dashboard");
+      //return <Redirect from={currentComponent} to="/dashboard" />;
     } else if (redirectToHome) {
-      return <Redirect to="/" />;
+      this.props.history.push("/");
+      //return <Redirect to="/" />;
     }
     return (
       <div className="container">
@@ -99,7 +110,7 @@ class Signup extends Component {
               <div className="form-group">
                 <MDBInput
                   label="username"
-                  type="text"
+                  type="email"
                   name="username"
                   id="username"
                   maxLength="30"
@@ -156,4 +167,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);

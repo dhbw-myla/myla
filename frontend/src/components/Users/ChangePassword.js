@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
 import { verifyPassword, getStoredUser } from "../../auth/verifyPw";
-
+import validator from "validator";
 import * as swalHelper from "../../util/swalHelper";
 import { changePassword } from "../../api/auth";
 
@@ -19,7 +19,7 @@ class ChangePassword extends Component {
   handleOnSave = async () => {
     const { newPassword, repeatPassword, oldPassword } = this.state;
 
-    if (newPassword.length === 0) {
+    if (validator.isEmpty(newPassword)) {
       return swalHelper.error("Can't be empty");
     }
 

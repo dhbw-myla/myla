@@ -3,6 +3,7 @@ import DHBWTeaser from "../../assets/teaser.jpg";
 import "../Home/startpage.css";
 import Signup from "../signup/signup";
 import Login from "./MyLogin";
+import { withRouter } from "react-router-dom";
 
 class Startpage extends Component {
   constructor(props) {
@@ -33,4 +34,4 @@ class Startpage extends Component {
   }
 }
 
-export default Startpage;
+export default withRouter(Startpage);

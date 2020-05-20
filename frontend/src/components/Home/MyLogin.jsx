@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { login } from "../../api/auth";
 import * as swalHelper from "../../util/swalHelper";
 import "../Home/startpage.css";
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class Login extends Component {
 
   handleLogin = async (e) => {
     e.preventDefault();
-    alert("login");
     const { user } = this.state;
 
     // const valid = validator.isEmail(user.username) && !validator.isEmpty(user.password);
@@ -88,4 +88,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
