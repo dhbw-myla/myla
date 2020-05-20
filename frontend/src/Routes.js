@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import MainScreen from "./components/Main/MainScreen";
-import SignupComponent from "./components/signup/SignupComponent";
 import { verifySession } from "./auth/verifyPw";
-import ChartPageComponent from "./components/Charts/ChartPageComponent";
-import SurveyComponent from "./components/Survey/SurveyComponent";
-import SurveyCreateComponent from "./components/Survey/SurveyCreateComponent";
 import AdminComponent from "./components/Admin/AdminComponent";
 import UsersComponent from "./components/Admin/Users";
-import ChangePassword from "./components/Users/ChangePassword";
+import ChartPageComponent from "./components/Charts/ChartPageComponent";
+import Startpage from "./components/Home/startpage";
+import SignupComponent from "./components/signup/SignupComponent";
+import SurveyComponent from "./components/Survey/SurveyComponent";
+import SurveyCreateComponent from "./components/Survey/SurveyCreateComponent";
 import Account from "./components/Users/Account";
+import ChangePassword from "./components/Users/ChangePassword";
 
 class Routes extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Routes extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route exact path="/" component={MainScreen} />
+        <Route exact path="/" component={Startpage} />
         <Route exact path="/signup" component={SignupComponent} />
         {/* <Route exact path="/survey/participate" component={Survey} /> */}
       </Switch>
@@ -36,8 +36,12 @@ class Routes extends Component {
           <Route exact path="/dashboard" component={ChartPageComponent} />
           <Route exact path="/admin/users" component={UsersComponent} />
           <Route exact path="/myaccount" component={Account} />
-          <Route exact path="/myaccount/passwordchange" component={ChangePassword} />
-          <Route exact path="/" component={MainScreen} />
+          <Route
+            exact
+            path="/myaccount/passwordchange"
+            component={ChangePassword}
+          />
+          <Route exact path="/" component={Startpage} />
         </Switch>
       );
     }
