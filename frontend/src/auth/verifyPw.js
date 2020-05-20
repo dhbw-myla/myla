@@ -1,4 +1,4 @@
-import { login } from "../database/database";
+import { login } from "../api/auth";
 import * as util from "../util/util";
 
 export function verifySignup(password, passwordRepeat) {
@@ -12,6 +12,7 @@ export function verifyPassword(password, passwordRepeat) {
 export async function verifyUser(user) {
   const myLogin = await login(user);
   if (
+    myLogin &&
     !util.checkIfUndefiniedOrNull(myLogin.jsonPayload) &&
     !util.checkIfUndefiniedOrNull(myLogin.jsonPayload.sessionId)
   ) {

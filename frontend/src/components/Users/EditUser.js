@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
-import { resetPasswordOfUser } from "../../database/database";
+import { resetPasswordOfUser } from "../../api/auth";
 import { getStoredUser } from "../../auth/verifyPw";
 
 import * as swalHelper from "../../util/swalHelper";
@@ -11,7 +11,7 @@ class EditUserComponent extends Component {
     this.state = { newPassword: "" };
   }
 
-  handleOnChange = event => {
+  handleOnChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -63,7 +63,7 @@ class EditUserComponent extends Component {
             icon="key"
             value={newPassword}
             name="newPassword"
-            onChange={e => this.handleOnChange(e)}
+            onChange={(e) => this.handleOnChange(e)}
             required
           />
         </MDBRow>
