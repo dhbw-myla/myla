@@ -3,7 +3,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
 import { verifyPassword, getStoredUser } from "../../auth/verifyPw";
 
 import * as swalHelper from "../../util/swalHelper";
-import { changePassword } from "../../database/database";
+import { changePassword } from "../../api/auth";
 
 class ChangePassword extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class ChangePassword extends Component {
     this.state = { newPassword: "", repeatPassword: "" };
   }
 
-  handleOnChange = event => {
+  handleOnChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -53,7 +53,7 @@ class ChangePassword extends Component {
             icon="key"
             value={oldPassword || ""}
             name="oldPassword"
-            onChange={e => this.handleOnChange(e)}
+            onChange={(e) => this.handleOnChange(e)}
             required
           />
         </MDBRow>
@@ -63,7 +63,7 @@ class ChangePassword extends Component {
             icon="key"
             value={newPassword}
             name="newPassword"
-            onChange={e => this.handleOnChange(e)}
+            onChange={(e) => this.handleOnChange(e)}
             required
           />
         </MDBRow>
@@ -73,7 +73,7 @@ class ChangePassword extends Component {
             icon="key"
             value={repeatPassword}
             name="repeatPassword"
-            onChange={e => this.handleOnChange(e)}
+            onChange={(e) => this.handleOnChange(e)}
             required
           />
         </MDBRow>

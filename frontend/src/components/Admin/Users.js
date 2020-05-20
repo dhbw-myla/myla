@@ -1,7 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow } from "mdbreact";
 import React, { Component } from "react";
+import { getAllUsers } from "../../api/admin";
 import { getStoredUser } from "../../auth/verifyPw";
-import { getAllUsers } from "../../database/database";
 import EditUserComponent from "../Users/EditUser";
 import UserEntry from "./UserEntry";
 

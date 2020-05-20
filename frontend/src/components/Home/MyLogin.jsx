@@ -1,6 +1,6 @@
 import { MDBBtn, MDBInput } from "mdbreact";
 import React, { Component } from "react";
-import { login } from "../../api/database";
+import { login } from "../../api/auth";
 import * as swalHelper from "../../util/swalHelper";
 import "../Home/startpage.css";
 

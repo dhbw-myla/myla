@@ -1,10 +1,10 @@
-export const checkIfUndefiniedOrNull = value => {
+export const checkIfUndefiniedOrNull = (value) => {
   return undefined === value || null === value;
 };
 
 export const create_UUID = () => {
   var dt = new Date().getTime();
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (
     c
   ) {
     var r = (dt + Math.random() * 16) % 16 | 0;
@@ -14,7 +14,7 @@ export const create_UUID = () => {
   return uuid;
 };
 
-export const parseToJsonObject = obj => {
+export const parseToJsonObject = (obj) => {
   try {
     return JSON.parse(obj);
   } catch (error) {
@@ -23,11 +23,14 @@ export const parseToJsonObject = obj => {
   }
 };
 
-export const createResponseObject = async response => {
-  console.log('asd', response);
-  const payload = await response.json();
-  return {
-    status: response.status,
-    jsonPayload: payload
-  };
+export const createResponseObject = async (response) => {
+  try {
+    const payload = await response.json();
+    return {
+      status: response.status,
+      jsonPayload: payload,
+    };
+  } catch (error) {
+    console.log("createResponseObject", error);
+  }
 };

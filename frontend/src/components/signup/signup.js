@@ -1,8 +1,8 @@
-import { MDBBtn, MDBInput, MDBRow } from "mdbreact";
+import { MDBBtn, MDBInput } from "mdbreact";
 import React, { Component } from "react";
 import { Redirect } from "react-router";
+import { register } from "../../api/auth";
 import { verifySignup } from "../../auth/verifyPw";
-import { register } from "../../database/database";
 import * as swalHelper from "../../util/swalHelper";
 import * as util from "../../util/util";
 import "./signup.css";
@@ -43,9 +43,12 @@ class Signup extends Component {
     });
   };
 
-  createUser = async () => {
+  createUser = async (e) => {
+    e.preventDefault();
     const { user } = this.state;
     const { password, passwordRepeat } = user;
+    console.log("password", password);
+    console.log("passwordRepeat", passwordRepeat);
     const pwMatch = verifySignup(password, passwordRepeat);
 
     if (pwMatch) {
@@ -92,7 +95,7 @@ class Signup extends Component {
         <div className="card bg-card-background text-light">
           <div className="card-body">
             <h1 className="text-center text-dark">MyLA Register</h1>
-            <form onSubmit={this.handleLogin}>
+            <form onSubmit={this.createUser}>
               <div className="form-group">
                 <MDBInput
                   label="username"
@@ -118,6 +121,7 @@ class Signup extends Component {
                 <MDBInput
                   label="Passwort"
                   type="password"
+                  name="password"
                   className="form-control"
                   onChange={this.handleOnChange}
                 />
