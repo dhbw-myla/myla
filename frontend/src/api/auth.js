@@ -25,7 +25,6 @@ export async function login(user) {
 }
 
 export async function register(user) {
-  console.log("user-fetch", user);
   try {
     const url = PATH_BASE_URL + PATH_REGISTER;
     return fetch(url, POST_METHOD(user))
