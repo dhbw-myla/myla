@@ -15,20 +15,20 @@ class Signup extends Component {
         username: "",
         password: "",
         passwordRepeat: "",
-        registerKey: ""
-      }
+        registerKey: "",
+      },
     };
   }
 
-  handleOnChange = event => {
+  handleOnChange = (event) => {
     const { value, name } = event.target;
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       user: {
         // object that we want to update
         ...prevState.user, // keep all other key-value pairs
-        [name]: value // update the value of specific key
-      }
+        [name]: value, // update the value of specific key
+      },
     }));
   };
 
@@ -38,8 +38,8 @@ class Signup extends Component {
         username: "",
         registerKey: "",
         password: "",
-        passwordRepeat: ""
-      }
+        passwordRepeat: "",
+      },
     });
   };
 
@@ -61,8 +61,8 @@ class Signup extends Component {
         this.setState({
           isLoggedIn: true,
           user: {
-            username
-          }
+            username,
+          },
         });
         swalHelper.success("Successfully signed Up!");
       } else {
@@ -88,73 +88,66 @@ class Signup extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <>
-        <MDBRow>
-          <MDBInput
-            label="username"
-            type="text"
-            name="username"
-            id="username"
-            maxLength="30"
-            value={username}
-            onChange={e => this.handleOnChange(e)}
-          />
-        </MDBRow>
-        <MDBRow>
-          <MDBInput
-            label="Regiser Key"
-            type="text"
-            name="registerKey"
-            maxLength="200"
-            value={registerKey}
-            onChange={e => this.handleOnChange(e)}
-          />
-        </MDBRow>
-        <MDBRow>
-          <MDBInput
-            label="Password"
-            type="password"
-            name="password"
-            maxLength="50"
-            value={password}
-            onChange={e => this.handleOnChange(e)}
-          />
-        </MDBRow>
-        <MDBRow>
-          <MDBInput
-            label="Password Repeat"
-            type="password"
-            name="passwordRepeat"
-            maxLength="50"
-            value={passwordRepeat}
-            onChange={e => this.handleOnChange(e)}
-          />
-        </MDBRow>
-        <MDBRow>
-          <MDBBtn
-            id="resetBtn"
-            className="btn pressButton threeButtons"
-            type="reset"
-            onClick={this.resetForm}
-          >
-            Reset
-          </MDBBtn>
-          <MDBBtn
-            className="btn pressButton threeButtons"
-            type="button"
-            onClick={this.createUser}
-          >
-            Submit
-          </MDBBtn>
-          <MDBBtn
-            className="btn pressButton threeButtons"
-            type="button"
-            onClick={this.props.handleShowLogin}
-          >
-            Login
-          </MDBBtn>
-        </MDBRow>
-      </>
+      <div className="container">
+        <div className="card bg-card-background text-light">
+          <div className="card-body">
+            <h1 className="text-center text-dark">MyLA Register</h1>
+            <form onSubmit={this.handleLogin}>
+              <div className="form-group">
+                <MDBInput
+                  label="username"
+                  type="text"
+                  name="username"
+                  id="username"
+                  maxLength="30"
+                  value={username}
+                  onChange={this.handleOnChange}
+                />
+              </div>
+              <div className="form-group">
+                <MDBInput
+                  label="Register Key"
+                  type="text"
+                  name="registerKey"
+                  maxLength="200"
+                  value={registerKey}
+                  onChange={this.handleOnChange}
+                />
+              </div>
+              <div className="form-group">
+                <MDBInput
+                  label="Passwort"
+                  type="password"
+                  className="form-control"
+                  onChange={this.handleOnChange}
+                />
+                <div className="form-group">
+                  <MDBInput
+                    label="Password Repeat"
+                    type="password"
+                    name="passwordRepeat"
+                    maxLength="50"
+                    value={passwordRepeat}
+                    onChange={this.handleOnChange}
+                  />
+                </div>
+                <div className="div_button_split">
+                  <MDBBtn
+                    type="button"
+                    className="btn btn_split btn_dhbw"
+                    onClick={this.props.handleShowLogin}
+                  >
+                    Login
+                  </MDBBtn>
+                  <MDBBtn type="submit" className="btn btn_split btn_dhbw">
+                    Sign Up
+                  </MDBBtn>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     );
   }
 }
