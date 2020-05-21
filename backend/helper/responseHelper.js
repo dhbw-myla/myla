@@ -13,10 +13,26 @@ exports.sendClientError = function (response, status, errorMessage) {
         errorMessage = status;
         status = 400;
     }
-    response.status(status).json({ error: errorMessage || statusCodes[status] || "Error" });
+    response.status(status).json({
+        status,
+        message: errorMessage || statusCodes[status] || "Error",
+        payload: null
+    });
 };
 
 exports.sendInternalServerError = function (response, err) {
     console.log(err);
-    response.status(500).json({ error: "Internal Server Error" });
+    response.status(500).json({
+        status: 500,
+        message: "Internal Server Error",
+        payload: null
+    });
+};
+
+exports.send = function (response, status, message, payload) {
+    response.status(status).json({
+        status,
+        message: message || "Successful",
+        payload: payload || null
+    });
 };
