@@ -39,9 +39,10 @@ services:
       driver: none
   
   nginx: 
-    image: nginx:latest
+    image: my-nginx
     hostname: nginx
-    container_name: nginx
+    build: 
+      context: ./nginx
     volumes:
       - ./nginx/nginx-frontend.conf:/etc/nginx/nginx.conf
     ports:
