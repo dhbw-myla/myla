@@ -38,7 +38,7 @@ exports.register = function (request, response) {
                     }
                     return responseHelper.sendInternalServerError(response, err);
                 }
-                response.status(201).json({ username: username, sessionId: sessionId });
+                responseHelper.send(response, 201, "", { username, sessionId });
             });
         });
     });
@@ -66,8 +66,8 @@ exports.login = function (request, response) {
                 // wrong password
                 return responseHelper.sendClientError(response, "Login Failed");
             } else {
-                let respond = function (response, username, sessionId) {
-                    response.status(200).json({ username: sessionId, isPasswordChangeRequired });
+                let respond = function (username, sessionId) {
+                    responseHelper.send(response, 200, "", { username, sessionId, isPasswordChangeRequired });
                 };
                 let sessionId;
                 if (!dbSessionId ) {
@@ -77,11 +77,11 @@ exports.login = function (request, response) {
                             // db failed
                             return responseHelper.sendInternalServerError(response, err);
                         }
-                        respond(response, username, sessionId);
+                        respond(username, sessionId);
                     });
                 } else {
                     sessionId = dbSessionId;
-                    respond(response, username, sessionId);
+                    respond(username, sessionId);
                 }
             }
         });
@@ -128,7 +128,7 @@ exports.changePassword = function (request, response) {
                             // db failed
                             return responseHelper.sendInternalServerError(response, err);
                         }
-                        response.status(200).json({ sessionId });
+                        responseHelper.send(response, 200, "", { sessionId });
                     });
                 });
             }
@@ -145,7 +145,7 @@ exports.logout = function (request, response) {
             // db failed?
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json({ message: "Logged Out Successfully" });
+        responseHelper.send(response, 200, "Logged Out Successfully");
     });
 };
 
@@ -162,7 +162,7 @@ exports.getAllOwnSurveys = function (request, response) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json(result.rows);
+        responseHelper.send(response, 200, "", result.rows);
     });
 };
 
@@ -178,7 +178,7 @@ exports.getAllSurveyMasterTemplates = function (request, response) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json(result.rows);
+        responseHelper.send(response, 200, "", result.rows);
     });
 };
 
@@ -195,7 +195,7 @@ exports.getAllQuestionTemplates = function (request, response) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json(result.rows);
+        responseHelper.send(response, 200, "", result.rows);
     });
 };
 
@@ -236,7 +236,7 @@ const createSurveyHelper = function (response, surveyMasterId, timestampStart, t
             return responseHelper.sendInternalServerError(response, err);
         }
         let survey_id = result.rows[0].survey_id;
-        response.status(201).json({ surveyId: survey_id });
+        responseHelper.send(response, 201, "", { surveyId: survey_id });
     });
 };
 
@@ -332,11 +332,19 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
 };
 
 exports.getSurveyMasterDetails = function (request, response) {
-    response.status(501).json({ error: "Not Yet Implemented" }); // TODO
+    response.status(501).json({
+        status: 501,
+        message: "Not Yet Implemented",
+        payload: null
+    }); // TODO
 };
 
 exports.getSurveyDetails = function (request, response) {
-    response.status(501).json({ error: "Not Yet Implemented" }); // TODO
+    response.status(501).json({
+        status: 501,
+        message: "Not Yet Implemented",
+        payload: null
+    }); // TODO
 };
 
 exports.getAllOwnGroups = function (request, response) {
@@ -348,7 +356,7 @@ exports.getAllOwnGroups = function (request, response) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json(result.rows);
+        responseHelper.send(response, 200, "", result.rows);
     });
 };
 
@@ -363,7 +371,7 @@ exports.createGroup = function (request, response) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(201).json({ groupId: result.rows[0].group_id });
+        responseHelper.send(response, 201, "", { groupId: result.rows[0].group_id });
     });
 };
 
@@ -389,7 +397,7 @@ exports.getSurveyBySurveyCode = function (request, response) {
                 return responseHelper.sendInternalServerError(response, err);
             }
             result.questions = resultQuestions.rows;
-            response.status(200).json(result);
+            responseHelper.send(response, 200, "", result);
         });
     });
 };
@@ -439,7 +447,7 @@ exports.submitSurvey = function (request, response) {
             // db failed?
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json({ message: "Submitted Survey Successfully" });
+        responseHelper.send(response, 200, "Submitted Survey Successfully");
     });
 };
 
@@ -456,7 +464,7 @@ exports.submitComment = function (request, response) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json({ message: "Submitted Comment Successfully" });
+        responseHelper.send(response, 200, "Submitted Comment Successfully");
     });
 };
 
@@ -485,7 +493,7 @@ exports.getUsers = async function (request, response) {
         if (err) {
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json(result.rows);
+        responseHelper.send(response, 200, "", result.rows);
     });
 };
 
@@ -505,7 +513,7 @@ exports.createUser = async function (request, response) {
                 // db failed
                 return responseHelper.sendInternalServerError(response, err);
             }
-            response.status(201).json({ userId: result.rows[0].user_id });
+            responseHelper.send(response, 201, "", { userId: result.rows[0].user_id });
         });
     });
 };
@@ -523,7 +531,7 @@ exports.setRegisterKey = async function (request, response) {
             // writing file failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json({ message: "Set Register Key Successfully" });
+        responseHelper.send(response, 200, "Set Register Key Successfully");
     });
 };
 
@@ -538,7 +546,7 @@ exports.getRegisterKey = async function (request, response) {
             // reading file failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        response.status(200).json({ registerKey: registerKeyFile });
+        responseHelper.send(response, 200, "", { registerKey: registerKeyFile });
     });
 };
 
@@ -566,7 +574,7 @@ exports.resetPasswordOfUser = async function (request, response) {
                 // db failed
                 return responseHelper.sendInternalServerError(response, err);
             }
-            response.status(200).json({ message: "Resetted Password Successfully" });
+            responseHelper.send(response, 200, "Resetted Password Successfully");
         });
     });
 };
@@ -577,7 +585,11 @@ exports.deleteUser = async function (request, response) {
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
 
-    response.status(501).json({ error: "Not Yet Implemented" }); // TODO
+    response.status(501).json({
+        status: 501,
+        message: "Not Yet Implemented",
+        payload: null
+    }); // TODO
 };
 
 
@@ -629,5 +641,5 @@ exports.createExampleDatabase = function (request, response) {
             });
         });
     });
-    response.status(200).json({ message: "Created Example Database Successfully" });
+    responseHelper.send(response, 200, "Created Example Database Successfully");
 };
