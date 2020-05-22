@@ -1,9 +1,9 @@
 import { MDBBtn, MDBInput } from 'mdbreact';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { login } from '../../api/auth';
 import * as swalHelper from '../../util/swalHelper';
 import '../Home/startpage.css';
-import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
    constructor(props) {
@@ -43,12 +43,7 @@ class Login extends Component {
                   <h1 className="text-center text-dark">MyLA Login</h1>
                   <form onSubmit={this.handleLogin}>
                      <div className="form-group">
-                        <MDBInput
-                           label="Survey Code"
-                           type="text"
-                           name="surveyCode"
-                           onChange={this.handleOnChange}
-                        />
+                        <MDBInput label="Survey Code" type="text" name="surveyCode" onChange={this.handleOnChange} />
                         <MDBBtn className="btn btn_dhbw">Enter</MDBBtn>
                      </div>
                      <div className="form-group">
@@ -61,24 +56,12 @@ class Login extends Component {
                         />
                      </div>
                      <div className="form-group">
-                        <MDBInput
-                           label="Passwort"
-                           type="password"
-                           className="form-control"
-                           onChange={this.handleOnChange}
-                        />
+                        <MDBInput label="Passwort" type="password" className="form-control" onChange={this.handleOnChange} />
                         <div className="div_button_split">
-                           <MDBBtn
-                              type="submit"
-                              className="btn btn_split btn_dhbw"
-                           >
+                           <MDBBtn type="submit" className="btn btn_split btn_dhbw">
                               Login
                            </MDBBtn>
-                           <MDBBtn
-                              type="button"
-                              className="btn btn_split btn_dhbw"
-                              onClick={this.props.handleShowLogin}
-                           >
+                           <MDBBtn type="button" className="btn btn_split btn_dhbw" onClick={this.props.handleShowLogin}>
                               Sign Up
                            </MDBBtn>
                         </div>

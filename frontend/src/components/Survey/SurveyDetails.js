@@ -1,33 +1,29 @@
-import React, { Component } from "react";
-import * as Survey from "survey-react";
-import "survey-react/survey.css";
-import "bootstrap/dist/css/bootstrap.css";
+import 'bootstrap-slider/dist/css/bootstrap-slider.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import $ from 'jquery';
+import 'jquery-bar-rating';
+import 'jquery-bar-rating/dist/themes/css-stars.css';
+import 'jquery-ui/themes/base/all.css';
+import 'jquery-ui/ui/widgets/datepicker.js';
+import { MDBBtn } from 'mdbreact';
+import 'nouislider/distribute/nouislider.css';
+import 'pretty-checkbox/dist/pretty-checkbox.css';
+import React, { Component } from 'react';
+import 'select2/dist/css/select2.css';
+import 'select2/dist/js/select2.js';
+import * as SurveyCore from 'survey-core';
+import * as SurveyPDF from 'survey-pdf';
+import * as Survey from 'survey-react';
+import 'survey-react/survey.css';
+import * as widgets from 'surveyjs-widgets';
 
-import "jquery-ui/themes/base/all.css";
-import "nouislider/distribute/nouislider.css";
-import "select2/dist/css/select2.css";
-import "bootstrap-slider/dist/css/bootstrap-slider.css";
-
-import "jquery-bar-rating/dist/themes/css-stars.css";
-
-import $ from "jquery";
-import "jquery-ui/ui/widgets/datepicker.js";
-import "select2/dist/js/select2.js";
-import "jquery-bar-rating";
-
-import * as SurveyCore from "survey-core";
-import * as SurveyPDF from "survey-pdf";
-import * as widgets from "surveyjs-widgets";
-
-import "pretty-checkbox/dist/pretty-checkbox.css";
-import { MDBBtn } from "mdbreact";
 //import "icheck/skins/square/blue.css";
-window["$"] = window["jQuery"] = $;
+window['$'] = window['jQuery'] = $;
 //require("icheck");
 
-export { MyQuestion } from "../Question/MyQuestion";
+export { MyQuestion } from '../Question/MyQuestion';
 
-Survey.StylesManager.applyTheme("default");
+Survey.StylesManager.applyTheme('default');
 
 //widgets.icheck(Survey, $);
 widgets.prettycheckbox(Survey);
@@ -58,46 +54,42 @@ widgets.autocomplete(SurveyCore, $);
 widgets.bootstrapslider(SurveyCore);
 
 class SurveyDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+   constructor(props) {
+      super(props);
+      this.state = {};
+   }
 
-  onValueChanged(result) {
-    console.log("value changed!");
-  }
+   onValueChanged(result) {
+      console.log('value changed!');
+   }
 
-  onComplete(result) {
-    console.log("Complete! " + result);
-  }
+   onComplete(result) {
+      console.log('Complete! ' + result);
+   }
 
-  savePDF = model => {
-    const { survey } = this.props;
-    const surveyPDF = new SurveyPDF.SurveyPDF(survey);
-    surveyPDF.data = model.data;
-    surveyPDF.save();
-  };
+   savePDF = (model) => {
+      const { survey } = this.props;
+      const surveyPDF = new SurveyPDF.SurveyPDF(survey);
+      surveyPDF.data = model.data;
+      surveyPDF.save();
+   };
 
-  render() {
-    const { survey } = this.props;
-    const model = new Survey.Model(survey);
-    console.log("details", this.props);
-    return (
-      <div className="surveyjs">
-        <Survey.Survey
-          model={model}
-          onComplete={this.onComplete}
-          onValueChanged={this.onValueChanged}
-        />
-        <h3>SurveyPDF export:</h3>
-        <MDBBtn onClick={() => this.savePDF(model)}>Save PDF</MDBBtn>
+   render() {
+      const { survey } = this.props;
+      const model = new Survey.Model(survey);
+      console.log('details', this.props);
+      return (
+         <div className="surveyjs">
+            <Survey.Survey model={model} onComplete={this.onComplete} onValueChanged={this.onValueChanged} />
+            <h3>SurveyPDF export:</h3>
+            <MDBBtn onClick={() => this.savePDF(model)}>Save PDF</MDBBtn>
 
-        <hr className="my-5" />
+            <hr className="my-5" />
 
-        <MDBBtn onClick={this.props.onClickReturn}>Return</MDBBtn>
-      </div>
-    );
-  }
+            <MDBBtn onClick={this.props.onClickReturn}>Return</MDBBtn>
+         </div>
+      );
+   }
 }
 
 export default SurveyDetails;

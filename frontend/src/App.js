@@ -1,36 +1,36 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // Components
-import Routes from "./Routes";
-import NavbarComponent from "./components/Navigation/NavbarComponent";
-import Footer from "./components/Footer/Footer";
+import Routes from './Routes';
+import NavbarComponent from './components/Navigation/NavbarComponent';
+import Footer from './components/Footer/Footer';
 
 // methodes
-import { verifySession } from "./auth/verifyPw";
+import { verifySession } from './auth/verifyPw';
 
 const showNavbarComponent = () => {
-	if (verifySession()) {
-		return <NavbarComponent />;
-	}
+   if (verifySession()) {
+      return <NavbarComponent />;
+   }
 };
 
 class App extends Component {
-	state = {};
+   state = {};
 
-	render() {
-		return (
-			<Router>
-				<div className="flyout">
-					{showNavbarComponent()}
-					<main style={{ height: "94vh" }}>
-						<Routes />
-					</main>
-					<Footer />
-				</div>
-			</Router>
-		);
-	}
+   render() {
+      return (
+         <Router>
+            <div className="flyout">
+               {showNavbarComponent()}
+               <main style={{ height: '94vh' }}>
+                  <Routes />
+               </main>
+               <Footer />
+            </div>
+         </Router>
+      );
+   }
 }
 
 export default App;

@@ -60,10 +60,7 @@ class Signup extends Component {
          if (responseObj && responseObj.status === 201) {
             const { username, sessionId } = responseObj.payload;
             if (!val.isEmpty(username) && !val.isEmpty(sessionId)) {
-               sessionStorage.setItem(
-                  'user',
-                  JSON.stringify(responseObj.payload)
-               );
+               sessionStorage.setItem('user', JSON.stringify(responseObj.payload));
                swalHelper.success('Successfully signed Up!');
                this.props.history.push('/dashboard');
                /* this.setState({
@@ -144,17 +141,10 @@ class Signup extends Component {
                            />
                         </div>
                         <div className="div_button_split">
-                           <MDBBtn
-                              type="button"
-                              className="btn btn_split btn_dhbw"
-                              onClick={this.props.handleShowLogin}
-                           >
+                           <MDBBtn type="button" className="btn btn_split btn_dhbw" onClick={this.props.handleShowLogin}>
                               Login
                            </MDBBtn>
-                           <MDBBtn
-                              type="submit"
-                              className="btn btn_split btn_dhbw"
-                           >
+                           <MDBBtn type="submit" className="btn btn_split btn_dhbw">
                               Sign Up
                            </MDBBtn>
                         </div>

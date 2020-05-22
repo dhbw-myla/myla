@@ -1,9 +1,9 @@
+import { MDBBtn, MDBCol, MDBContainer, MDBInput, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
-import { verifyPassword, getStoredUser } from '../../auth/verifyPw';
 import validator from 'validator';
-import * as swalHelper from '../../util/swalHelper';
 import { changePassword } from '../../api/auth';
+import { getStoredUser, verifyPassword } from '../../auth/verifyPw';
+import * as swalHelper from '../../util/swalHelper';
 
 class ChangePassword extends Component {
    constructor(props) {
@@ -29,9 +29,7 @@ class ChangePassword extends Component {
          user.password = oldPassword;
          const response = await changePassword(user);
          const { status } = response;
-         status === 200
-            ? swalHelper.success('Password has been changed!')
-            : swalHelper.error('Password has not been changed!');
+         status === 200 ? swalHelper.success('Password has been changed!') : swalHelper.error('Password has not been changed!');
       } else {
          swalHelper.error("Password didn't match");
       }
@@ -79,9 +77,7 @@ class ChangePassword extends Component {
             </MDBRow>
             <MDBRow>
                <MDBBtn onClick={this.handleOnSave}>Save</MDBBtn>
-               <MDBBtn onClick={this.props.handleOnClickUserProfil}>
-                  Back
-               </MDBBtn>
+               <MDBBtn onClick={this.props.handleOnClickUserProfil}>Back</MDBBtn>
             </MDBRow>
          </MDBContainer>
       );

@@ -1,12 +1,11 @@
+import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-
 export const trash = () => {
-  return <FontAwesomeIcon icon={faTrash} />
-}
+   return <FontAwesomeIcon icon={faTrash} />;
+};
 
 export const plus = () => {
-    return <FontAwesomeIcon icon={faPlusCircle} />
-  }
+   return <FontAwesomeIcon icon={faPlusCircle} />;
+};

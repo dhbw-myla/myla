@@ -1,47 +1,40 @@
-import { login } from "../api/auth";
-import * as util from "../util/util";
+import { login } from '../api/auth';
+import * as util from '../util/util';
 
-export function verifySignup(password, passwordRepeat) {
-  return verifyPassword(password, passwordRepeat);
-}
-
-export function verifyPassword(password, passwordRepeat) {
-  return password === passwordRepeat;
-}
-
-export async function verifyUser(user) {
-  const myLogin = await login(user);
-  if (
-    myLogin &&
-    !util.checkIfUndefiniedOrNull(myLogin.jsonPayload) &&
-    !util.checkIfUndefiniedOrNull(myLogin.jsonPayload.sessionId)
-  ) {
-    return myLogin;
-  }
-  return undefined;
-}
-
-const getUserFromStorage = () => {
-  const user = sessionStorage.getItem("user");
-  const jsonUser = JSON.parse(user);
-  return jsonUser;
+export const verifySignup = (password, passwordRepeat) => {
+   return verifyPassword(password, passwordRepeat);
 };
 
-export function verifySession() {
-  const user = getUserFromStorage();
-  return (
-    !util.checkIfUndefiniedOrNull(user) &&
-    !util.checkIfUndefiniedOrNull(user.sessionId)
-  );
-}
+export const verifyPassword = (password, passwordRepeat) => {
+   return password === passwordRepeat;
+};
 
-export function getStoredUser() {
-  if (verifySession()) {
-    return getUserFromStorage();
-  }
-  return undefined;
-}
+export const verifyUser = async (user) => {
+   const myLogin = await login(user);
+   if (myLogin && !util.checkIfUndefiniedOrNull(myLogin.payload) && !util.checkIfUndefiniedOrNull(myLogin.payload.sessionId)) {
+      return myLogin;
+   }
+   return undefined;
+};
 
-export function clearSessionStorage() {
-  sessionStorage.clear();
-}
+const getUserFromStorage = () => {
+   const user = sessionStorage.getItem('user');
+   const jsonUser = JSON.parse(user);
+   return jsonUser;
+};
+
+export const verifySession = () => {
+   const user = getUserFromStorage();
+   return !util.checkIfUndefiniedOrNull(user) && !util.checkIfUndefiniedOrNull(user.sessionId);
+};
+
+export const getStoredUser = () => {
+   if (verifySession()) {
+      return getUserFromStorage();
+   }
+   return undefined;
+};
+
+export const clearSessionStorage = () => {
+   sessionStorage.clear();
+};
