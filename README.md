@@ -122,6 +122,18 @@ The most routes are restricted to logged-in users.
 The credentials need to be specified in body parameters `username` and `sessionId` as they are returned by `/register`, `/login` or `/changePassword`.
 If the specified credentials are incorrect you will receive a 401 error.
 
+**IMPORTANT**:
+The response has been updated.
+The below examples do **not** reflect these changes yet.
+You will always receive an object in the following format:
+```
+{
+  status: 200,
+  message: "Hello, World!",
+  payload: {}
+}
+```
+
 ### `POST /register`
 body:
 ```
@@ -467,4 +479,32 @@ responses:
 200 { message: "Resetted Password Successfully" }
 403 { error: "Forbidden" }
 500 { error: "Internal Server Error" }
+```
+
+### `POST /upgradeUserToAdmin` (only for admins)
+body:
+```
+{ username: "admin",
+  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c",
+  usernameToBeUpgraded: "user"
+}
+```
+responses:
+```
+200 { message: "Upgraded user successfully" }
+403 { error: "Forbidden" }
+500 { error: "Internal Server Error" }
+```
+
+### `POST /testIfAdmin` (only for admins)
+body:
+```
+{ username: "admin",
+  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
+}
+```
+responses:
+```
+200 { message: "Yeah, you're an admin. But for how long...?" }
+403 { error: "Forbidden" }
 ```
