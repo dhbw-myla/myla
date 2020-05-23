@@ -9,9 +9,9 @@ import {
    MDBNavLink,
    MDBTooltip,
 } from 'mdbreact';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import DHBWLogo from '../../assets/DHBW-Logo.png';
-import { clearSessionStorage } from '../../auth/verifyPw';
+import { clearSessionStorage, isUserAdmin, verifySession } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { ADMIN, DASHBOARD, MY_ACCOUNT, NOT_YET_IMPLEMENTED, SURVEY } from '../constants';
 import './Navigation.css';
@@ -46,8 +46,23 @@ class NavbarComponent extends Component {
       );
 
       const { collapseID } = this.state;
+
+      const sessionAvaliable = verifySession();
+
+      if (!sessionAvaliable) {
+         return null;
+      }
+
+      const navIsAdmin = isUserAdmin() ? (
+         <MDBNavItem>
+            <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + ADMIN}>
+               <strong>Admin</strong>
+            </MDBNavLink>
+         </MDBNavItem>
+      ) : null;
+
       return (
-         <>
+         <Fragment>
             <MDBNavbar color="grey darken-2" dark expand="md" fixed="top" scrolling>
                <MDBNavbarBrand href="/" className="py-0 font-weight-bold">
                   <img src={DHBWLogo} style={{ width: 120, marginRight: 20 }} alt="DHBWLogo" />
@@ -71,11 +86,7 @@ class NavbarComponent extends Component {
                            <strong>Survey</strong>
                         </MDBNavLink>
                      </MDBNavItem>
-                     <MDBNavItem>
-                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + ADMIN}>
-                           <strong>Admin</strong>
-                        </MDBNavLink>
-                     </MDBNavItem>
+                     {navIsAdmin}
                      <MDBNavItem>
                         <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + MY_ACCOUNT}>
                            <strong>
@@ -86,7 +97,7 @@ class NavbarComponent extends Component {
                      <MDBNavItem>
                         <MDBNavLink onClick={this.logOutUser} to="/">
                            <strong>
-                              <MDBIcon far icon="sign-out-alt" />
+                              <MDBIcon icon="sign-out-alt" />
                            </strong>
                         </MDBNavLink>
                      </MDBNavItem>
@@ -104,7 +115,7 @@ class NavbarComponent extends Component {
                </MDBCollapse>
             </MDBNavbar>
             {collapseID && overlay}
-         </>
+         </Fragment>
       );
    }
 }

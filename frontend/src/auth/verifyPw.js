@@ -1,4 +1,5 @@
 import { login } from '../api/auth';
+import { testIfAdmin } from '../api/admin';
 import * as util from '../util/util';
 
 export const verifySignup = (password, passwordRepeat) => {
@@ -41,4 +42,10 @@ export const clearSessionStorage = () => {
 
 export const setUserToStorage = (user) => {
    sessionStorage.setItem('user', JSON.stringify(user));
+};
+
+export const isUserAdmin = async () => {
+   const user = getStoredUser();
+   const resObj = await testIfAdmin(user);
+   return resObj && resObj.status === 200;
 };

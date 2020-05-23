@@ -6,7 +6,7 @@ import { login } from '../../api/auth';
 import { setUserToStorage } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { MY_ACCOUNT } from '../constants';
-import '../Home/startpage.css';
+import './startpage.css';
 
 class Login extends Component {
    constructor(props) {
