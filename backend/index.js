@@ -45,11 +45,10 @@ app.post('/getAllOwnSurveys', routes.getAllOwnSurveys);
 app.post('/getAllSurveyMasterTemplates', routes.getAllSurveyMasterTemplates);
 app.post('/getAllQuestionTemplates', routes.getAllQuestionTemplates);
 
-app.post('/createSurvey', routes.createSurvey);
-app.post('/createSurveyBasedOnMaster/:masterId', routes.createSurveyBasedOnMaster);
+app.post('/getAllOwnSurveyMasters', routes.getAllOwnSurveyMasters);
 
-app.post('/getSurveyMasterDetails', routes.getSurveyMasterDetails);
-app.post('/getSurveyDetails', routes.getSurveyDetails);
+app.post('/createSurveyMaster', routes.createSurveyMaster);
+app.post('/createSurveyBasedOnMaster/:masterId', routes.createSurveyBasedOnMaster);
 
 app.get('/getAllOwnGroups', routes.getAllOwnGroups);
 app.post('/createGroup', routes.createGroup);
@@ -58,7 +57,7 @@ app.post('/createGroup', routes.createGroup);
 
 // Participating in survey
 app.get('/getSurveyBySurveyCode/:surveyCode', routes.getSurveyBySurveyCode);
-app.post('/submitSurvey/:surveyCode', routes.submitSurvey);
+app.post('/submitSurvey/:surveyCode', routes.submitSurvey); // TODO
 app.post('/submitComment/:surveyCode', routes.submitComment);
 
 // Admin sites

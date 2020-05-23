@@ -251,31 +251,74 @@ responses:
 500 { error: "Internal Server Error" }
 ```
 
-### `POST /createSurvey`
+### `POST /getAllOwnSurveyMasters`
+body:
+```
+{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
+responses:
+```
+200 [{survey_master_id: 42,
+      title: "Survey Master",
+      description: "First Survey Master",
+      is_template: false,
+      is_public_template: false,
+      results_visible: true,
+      group_id: null,
+      name: null},
+    ...
+    ]
+500 { error: "Internal Server Error" }
+```
+
+### `POST /createSurveyMaster`
 body:
 ```
 { username: "user",
   sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
-  title: "My first survey",
-  description: "It's a survey obviously.",
-  timestampStart: "2019-12-01 00:00:00",
-  timestampEnd: "2019-12-31 23:59:59",
   resultsVisible: true,
   isTemplate: true,
   isPublicTemplate: false,
-  questions: [
-    { questionJSON: {"question": "Is this a good first question?", "type": "single-choice", "answers": ["yes", "no"]}",
-      isTemplate: false,
-      isPublicTemplate: false
-    },
-    ...
-  ],
+  survey: {
+    title: 'Product Feedback Survey Example',
+    showProgressBar: 'top',
+    pages: [
+      {
+        elements: [
+          {
+            type: 'myquestion',
+            name: 'cq1',
+            text: 'Some Text',
+          },
+          ...
+        ]
+      }, {
+        elements: [
+          {
+            type: 'dropdown',
+            name: 'position',
+            title: 'Choose job position ...',
+            renderAs: 'select2',
+            choices: [
+              '1|Designer',
+              '2|Front-end Developer',
+              '3|Back-end Developer',
+              '4|Database Administrator',
+              '5|System Engineer',
+            ],
+          },
+          ...
+        ],
+      },
+      ...
+    ]
+  },
   groupId: null
 }
 ```
 responses:
 ```
-201 { surveyId: 24 }
+201 { surveyMasterId: 24 }
 400 { error: "Parsing of Questions Failed" }
 403 { error: "Forbidden" }
 500 { error: "Internal Server Error" }
@@ -293,7 +336,7 @@ body:
 ```
 responses:
 ```
-201 { surveyId: 25 }
+201 { surveyId: 25, surveyCode: "II41KMQAUM" }
 403 { error: "Forbidden" }
 500 { error: "Internal Server Error" }
 ```
@@ -326,13 +369,9 @@ responses:
 500 { error: "Internal Server Error" }
 ```
 
-### `POST /getSurveyBySurveyCode/:surveyCode`
+### `GET /getSurveyBySurveyCode/:surveyCode`
 Replace `:surveyCode` with the survey code of the survey you want to get, e.g. `II41KMQAUM`.
 
-body:
-```
-{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
-```
 responses:
 ```
 200 {survey: {
@@ -349,13 +388,38 @@ responses:
       user_id: 25,
       group_id: 7
      },
-     questions: [
-      {question_id: 314,
-        question_json: "{\"question\":\"How much do you like the possible answers of this this question?\",\"type\":\"single-choice\",\"answers\":[\"yes\",\"no\"]}",
-        is_template: false,
-        is_public_template: false,
-        survey_master_id: 42}
-     ]
+     surveyjs: {
+      title: "Product Feedback Survey Example",
+      showProgressBar: "top",
+      pages: [
+        {
+          elements: [
+            {
+              type: "myquestion",
+              name: "cq1",
+              text: "Some Text"
+            }
+          ]
+        },
+        {
+          elements: [
+            {
+              type: "dropdown",
+              name: "position",
+              title: "Choose job position ...",
+              renderAs: "select2",
+              choices: [
+                "1|Designer",
+                "2|Front-end Developer",
+                "3|Back-end Developer",
+                "4|Database Administrator",
+                "5|System Engineer"
+              ]
+            }
+          ]
+        }
+      ]
+     }
     }
 404 { error: "No Survey Found" }
 500 { error: "Internal Server Error" }
