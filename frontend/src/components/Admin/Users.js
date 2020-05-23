@@ -4,6 +4,7 @@ import { getAllUsers } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import EditUserComponent from '../Users/EditUser';
 import UserEntry from './UserEntry';
+import * as swalHelper from '../../util/swalHelper';
 
 class UsersComponent extends Component {
    constructor(props) {
@@ -17,12 +18,16 @@ class UsersComponent extends Component {
    getUsersFromDB = async () => {
       const user = getStoredUser();
       const resObj = await getAllUsers(user);
-      return resObj.payload;
+      return resObj;
    };
 
    componentDidMount = async () => {
-      const users = await this.getUsersFromDB();
-      this.setState({ users });
+      const resObj = await this.getUsersFromDB();
+      if (resObj.status === 200) {
+         this.setState({ users: resObj.payload });
+      } else {
+         swalHelper.error(resObj.message);
+      }
    };
 
    handleEditUser = (userToEdit) => {
