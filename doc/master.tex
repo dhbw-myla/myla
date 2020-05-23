@@ -17,12 +17,11 @@
 \input{config}
 \input{configlistings}
 \input{authors}
-
 \begin{document}
 
 % set some information (title, author, ...)
 \TitelDerArbeit{Integrationsseminar}
-\AutorDerArbeit{\authorSG, \authorRF, \authorMS, \authorEJ, \authorNL}
+\AutorDerArbeit{\authorSG, \authorRF, \authorMS, \authorEJ, \authorNL, \authorJR}
 \Firma{DER Touristik GmbH, Technische Universität Kaiserslautern, SAP SE}
 \Kurs{WWI 17 SE B}
 
@@ -57,62 +56,41 @@
 \ohead{\headmark}
 \pagenumbering{arabic}
 
-% one file for each chapter
-\input{content/einleitung}
+\chapter{Einleitung}
+\label{c:einleitung}
+\input{content/einleitung/motivation}
+\input{content/einleitung/zielsetzung}
+\input{content/einleitung/aufbau}
 
-\chapter{Analyse}
-\chaptermulitpleauthor{\authorSG}{\authorGP, \authorRF, \authorEJ}
-\input{content/analyse/personas}
-\input{content/analyse/userstories}
-\input{content/analyse/userjourney}
-\input{content/analyse/ablaufkino}
+\chapter{Grundlagen}
+\label{c:grundlagen}
+\input{content/grundlagen/theoretisch.tex}
+\input{content/grundlagen/technisch.tex}
 
-\chapter{Entwurf}
-\label{c:entwurf}
-\input{content/entwurf/klassendiagramm}
-\input{content/entwurf/sequenzdiagramm}
-\input{content/entwurf/authentifizierung}
-\input{content/entwurf/blocken}
+\chapter{Anforderungsanalyse}
+\label{c:analyse}
+\input{content/analyse/ist-analyse}
+\input{content/analyse/anforderungen}
+\input{content/analyse/abgrenzung}
 
-\chapter{Back-End}
-\chapterauthor{Sascha Görnert}
-\label{sec:backend}
-\input{content/backend/technologien}
-\input{content/backend/konzept}
-\input{content/backend/maven}
-\input{content/backend/datenbank}
-\input{content/backend/webservices}
-\input{content/backend/rest}
-\input{content/backend/json}
-\input{content/backend/json_generieren}
-\input{content/backend/dto}
-\input{content/backend/blocken}
-\input{content/backend/reservieren}
+\chapter{Konzeption}
+\label{c:konzeption}
+\input{content/konzeption/gesamtkonzept.tex}
+\input{content/konzeption/personas}
+\input{content/konzeption/userjourney}
+\input{content/konzeption/server}
+\input{content/konzeption/client}
+\input{content/konzeption/sicherheit.tex}
 
-\chapter{Front-End}
-\chapterauthor{\authorNL}
-\input{content/frontend/technologien}
-\input{content/frontend/startseite}
-\input{content/frontend/anbindungbackend}
-\input{content/frontend/vorstellungsauswahl}
-\input{content/frontend/saalplan}
-\input{content/frontend/bezahlung}
-
-\chapter{Testen}
-\label{sec:testen}
-\chaptermulitpleauthor{\authorRF}{\authorEJ}
-\input{content/testen/softwarequalitaet}
-\input{content/testen/testverfahren}
-\input{content/testen/technischegrundlagen}
-\input{content/testen/umsetzungentests}
+\chapter{Implementierung}
+\label{sec:implementierung}
+\input{content/implementierung/server.tex}
+\input{content/implementierung/client.tex}
+\input{content/implementierung/sicherheit.tex}
 
 \chapter{Ausblick}
-\label{c:ausblick}
-\chaptermulitpleauthor{\authorRF}{\authorEJ, \authorSG, \authorNL}
-\input{content/ausblick/backlog}
-\input{content/ausblick/zielerreichung}
-\input{content/ausblick/reflexionbewertung}
 \input{content/ausblick/fazit}
+\input{content/ausblick/ausblick}
 
 % bibliography
 \clearpage
