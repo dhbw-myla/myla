@@ -319,7 +319,6 @@ body:
 responses:
 ```
 201 { surveyMasterId: 24 }
-400 { error: "Parsing of Questions Failed" }
 403 { error: "Forbidden" }
 500 { error: "Internal Server Error" }
 ```
@@ -432,16 +431,20 @@ body:
 ```
 { username: "user",
   sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
-  answers: [
-    { questionId: 314, answer: "yes"},
+  answers: {
+    question_name_1: "answer1",
+    question_name_2: "answer2",
+    question_name_3: [
+      "answer3_1",
+      "answer3_2"
+    ]
     ...
-  ]
+  }
 }
 ```
 responses:
 ```
 200 { message: "Submitted Survey Successfully" }
-400 { error: "Parsing of Answers Failed" }
 404 { error: "No Survey Found" }
 500 { error: "Internal Server Error" }
 ```
@@ -458,6 +461,63 @@ body:
 responses:
 ```
 200 { message: "Submitted Comment Successfully" }
+500 { error: "Internal Server Error" }
+```
+
+### `POST /getSurveyResults/:surveyId`
+Replace `:surveyId` with the survey id whose results you want to see, e.g. `69`.
+
+body:
+```
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+}
+```
+responses:
+```
+200 { title: "Product Feedback Survey Example",
+      survey_id: 25,
+      timestamp_start: "2019-12-31T23:00:00.000Z",
+      timestamp_end: "2020-12-31T22:59:59.000Z",
+      survey_master_id: 52,
+      survey_code: "052JOJ6FIV",
+      description: "",
+      questions: {
+        "117": {
+          question: {
+            type: "myquestion",
+            name: "cq1",
+            text: "Some Text"
+          },
+          answers: {
+            "test": 3,
+            "test2": 1
+          }
+        },
+        "118": {
+          question: {
+            type: "dropdown",
+            name: "position",
+            title: "Choose job position ...",
+            renderAs: "select2",
+            choices: [
+              "1|Designer",
+              "2|Front-end Developer",
+              "3|Back-end Developer",
+              "4|Database Administrator",
+              "5|System Engineer"
+            ]
+          },
+          answers: {
+            "Database Administrator": 2,
+            "Back-end Developer": 1,
+            "System Engineer": 1,
+            "Designer": 1
+          }
+        }
+      }
+    }
+404 { error: "No Data Found" }
 500 { error: "Internal Server Error" }
 ```
 

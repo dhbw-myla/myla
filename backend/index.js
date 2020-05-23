@@ -53,12 +53,13 @@ app.post('/createSurveyBasedOnMaster/:masterId', routes.createSurveyBasedOnMaste
 app.get('/getAllOwnGroups', routes.getAllOwnGroups);
 app.post('/createGroup', routes.createGroup);
 
-// TODO: edit
-
 // Participating in survey
 app.get('/getSurveyBySurveyCode/:surveyCode', routes.getSurveyBySurveyCode);
-app.post('/submitSurvey/:surveyCode', routes.submitSurvey); // TODO
+app.post('/submitSurvey/:surveyCode', routes.submitSurvey);
 app.post('/submitComment/:surveyCode', routes.submitComment);
+
+// Results
+app.post('/getSurveyResults/:surveyId', routes.getSurveyResults);
 
 // Admin sites
 app.post('/getUsers', routes.getUsers);

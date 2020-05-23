@@ -414,17 +414,9 @@ exports.submitSurvey = function (request, response) {
     const surveyCode = request.params.surveyCode;
     let { answers } = request.body;
 
-    if (Object.prototype.toString.call(answers) === "[object String]") {
-        // answers are a string -> parse to JSON/array
-        try {
-            answers = JSON.parse(answers);
-        } catch (err) {
-            return responseHelper.sendClientError(response, "Parsing of Answers Failed");
-        }
-    }
-    db.query(`SELECT survey.survey_id, survey.survey_master_id, question.question_id
+    db.query(`SELECT survey.survey_id, survey.survey_master_id, q.question_id, q.question_json
                 FROM survey INNER JOIN
-                    question on survey.survey_master_id = question.survey_master_id
+                    question q on survey.survey_master_id = q.survey_master_id
                 WHERE survey_code = $1
                 AND timestamp_start < $2
                 AND (timestamp_end IS NULL OR timestamp_end > $2);`,
@@ -438,24 +430,38 @@ exports.submitSurvey = function (request, response) {
         }
         let surveyId = result.rows[0].survey_id;
 
-        let questionIds = [];
+        let questionNameIdMap = {};
         for (let row of result.rows) {
-            questionIds.push(row.question_id);
+            questionNameIdMap[JSON.parse(row.question_json).name] = row.question_id;
         }
 
-        try {
-            for (let a of answers) {
-                if (questionIds.includes(a.questionId)) {
-                    db.query(`INSERT INTO answer (answer, survey_id, question_id, timestamp)
-                                VALUES ($1, $2, $3, $4);`,
-                            [a.answer, surveyId, a.questionId, new Date().toISOString()]);
-                }
+        for (let questionName in answers) {
+            let qId = questionNameIdMap[questionName];
+            if (qId === undefined) {
+                // no question found that corresponds to this answer
+                continue;
             }
-        } catch (err) {
-            // db failed?
-            return responseHelper.sendInternalServerError(response, err);
+
+            let answ = answers[questionName];
+            if (typeof answ === "string") {
+                answ = [answ];
+            } else if (Array.isArray(answ)) {
+                // everything fine
+            } else {
+                console.log("This answer type is unsupported...");
+                console.log(answ);
+                continue;
+            }
+
+            for(let a of answ) {
+                try {
+                    db.query(`INSERT INTO answer (answer, survey_id, question_id, timestamp)
+                                    VALUES ($1, $2, $3, $4);`,
+                                [a, surveyId, qId, new Date().toISOString()]);
+                } catch {}
+            }
         }
-        responseHelper.send(response, 200, "Submitted Survey Successfully");
+        responseHelper.send(response, 200, "Submitted Answers Successfully");
     });
 };
 
@@ -473,6 +479,55 @@ exports.submitComment = function (request, response) {
             return responseHelper.sendInternalServerError(response, err);
         }
         responseHelper.send(response, 200, "Submitted Comment Successfully");
+    });
+};
+
+// Results of Survey
+exports.getSurveyResults = async function (request, response) {
+    const username = request.body.username;
+    let surveyId = request.params.surveyId;
+
+    db.query(`SELECT *
+                FROM survey s
+                    INNER JOIN survey_master sm ON s.survey_master_id = sm.survey_master_id
+                    INNER JOIN question q ON sm.survey_master_id = q.survey_master_id
+                    INNER JOIN users u ON sm.user_id = u.user_id
+                WHERE u.username = $1 AND s.survey_id = $2;`,
+            [username, surveyId], (err, questions) => {
+        if (err) {
+            // db failed
+            return responseHelper.sendInternalServerError(response, err);
+        } else if (questions.rows.length < 1) {
+            // no survey
+            return responseHelper.sendClientError(response, 404, "No Data Found");
+        }
+        let result = {};
+        for (let prop of ["title", "survey_id", "timestamp_start", "timestamp_end",
+                "survey_master_id", "survey_code", "description"]) {
+            result[prop] = questions.rows[0][prop];
+        }
+        result.questions = {};
+        for (let question of questions.rows) {
+            result.questions[question.question_id] = {
+                question: JSON.parse(question.question_json),
+                answers: {}
+            };
+        }
+
+        db.query(`SELECT a.question_id, a.answer, count(a.answer)
+                    FROM answer a
+                    WHERE a.survey_id = $1
+                    GROUP BY a.question_id, a.answer;`,
+                [surveyId], (err, answers) => {
+            if (err) {
+                // db failed
+                return responseHelper.sendInternalServerError(response, err);
+            }
+            for (let answer of answers.rows) {
+                result.questions[answer.question_id].answers[answer.answer] = answer.count;
+            }
+            responseHelper.send(response, 200, "", result);
+        });
     });
 };
 
