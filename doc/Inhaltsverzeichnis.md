@@ -15,7 +15,7 @@
       2. PostgreSQL
       3. React
 3. Anforderungsanalyse
-   1. Ist-Analyse
+   1. Ist-Analyse # Analyse des "alten Systems"
    2. Anforderungen # erst Text und dann in Tabellenform
    3. Abgrenzung zu Alternativen # Moodle + ?
 4. Konzeption # Verlinkungen zu den Anforderungen einfügen
