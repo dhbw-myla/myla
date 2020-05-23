@@ -19,10 +19,11 @@ class MySurveyCardComponent extends Component {
    };
 
    render() {
-      const { survey, type } = this.props.infos;
-      console.log('props', this.props);
+      const { counter, infos } = this.props;
+      const { survey, type } = infos;
+      console.log('counter', counter);
       return (
-         <MDBCol md="4">
+         <MDBCol md="4" key={counter}>
             <MDBAnimation reveal type={this.getFading(type)}>
                <MDBCard cascade className="my-3 grey lighten-4">
                   <MDBCardBody cascade className="text-center">

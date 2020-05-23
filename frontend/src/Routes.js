@@ -4,9 +4,9 @@ import { verifySession } from './auth/verifyPw';
 import AdminComponent from './components/Admin/AdminComponent';
 import UsersComponent from './components/Admin/Users';
 import ChartPageComponent from './components/Charts/ChartPageComponent';
-import Startpage from './components/Home/startpage';
+import Startpage from './components/Home/Startpage';
 import SurveyComponent from './components/Survey/SurveyComponent';
-import SurveyCreateComponent from './components/Survey/SurveyCreateComponent';
+import SurveyCreateComponent from './components/Survey/SurveyCreateComponent2';
 import Account from './components/Users/Account';
 import ChangePassword from './components/Users/ChangePassword';
 
@@ -20,7 +20,6 @@ class Routes extends Component {
       let routes = (
          <Switch>
             <Route exact path="/" component={Startpage} />
-            <Route exact path="/signup" component={Startpage} />
             {/* <Route exact path="/survey/participate" component={Survey} /> */}
          </Switch>
       );

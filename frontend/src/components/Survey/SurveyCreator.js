@@ -14,6 +14,7 @@ import * as SurveyJSCreator from 'survey-creator';
 import 'survey-creator/survey-creator.css';
 import * as SurveyKo from 'survey-knockout';
 import * as widgets from 'surveyjs-widgets';
+import './Survey.css';
 
 SurveyJSCreator.StylesManager.applyTheme('default');
 
