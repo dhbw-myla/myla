@@ -1,6 +1,7 @@
+import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBContainer, MDBIcon, MDBNavLink, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBAnimation, MDBCard, MDBCardBody, MDBCardTitle, MDBIcon, MDBCardText, MDBNavLink } from 'mdbreact';
 import { Redirect } from 'react-router-dom';
+import { ADMIN, USERS } from '../constants';
 
 class AdminComponent extends Component {
    constructor(props) {
@@ -15,7 +16,7 @@ class AdminComponent extends Component {
    render() {
       const { showUsers } = this.state;
       if (showUsers) {
-         return <Redirect to="admin/users" />;
+         return <Redirect to={'/' + ADMIN + '/' + USERS} />;
       }
       return (
          <MDBContainer>

@@ -1,10 +1,12 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { getAllUsers } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
+import * as swalHelper from '../../util/swalHelper';
+import { MY_ACCOUNT } from '../constants';
 import EditUserComponent from '../Users/EditUser';
 import UserEntry from './UserEntry';
-import * as swalHelper from '../../util/swalHelper';
 
 class UsersComponent extends Component {
    constructor(props) {
@@ -27,6 +29,7 @@ class UsersComponent extends Component {
          this.setState({ users: resObj.payload });
       } else {
          swalHelper.error(resObj.message);
+         this.props.history.push('/' + MY_ACCOUNT);
       }
    };
 
@@ -63,4 +66,4 @@ class UsersComponent extends Component {
    }
 }
 
-export default UsersComponent;
+export default withRouter(UsersComponent);
