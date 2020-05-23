@@ -579,6 +579,34 @@ exports.resetPasswordOfUser = async function (request, response) {
     });
 };
 
+exports.upgradeUserToAdmin = async function (request, response) {
+    // reads register key from local file
+    const username = request.body.username;
+    const isAdmin = await checkIfUserIsAdmin(username);
+    if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
+
+    const usernameToBeUpgraded = request.body.usernameToBeUpgraded;
+
+    db.query(`UPDATE users
+                SET is_admin = true
+                WHERE username = $2`,
+    [usernameToBeUpgraded], (err, result) => {
+        if (err) {
+            // db failed
+            return responseHelper.sendInternalServerError(response, err);
+        }
+        responseHelper.send(response, 200, "Upgraded user successfully");
+    });
+};
+
+exports.testIfAdmin = async function (request, response) {
+    const username = request.body.username;
+    const isAdmin = await checkIfUserIsAdmin(username);
+    if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
+
+    responseHelper.send(response, 200, "Yeah, you're an admin. But for how long...?")
+};
+
 exports.deleteUser = async function (request, response) {
     // deletes user and all corresponding surveys etc.
     const username = request.body.username;

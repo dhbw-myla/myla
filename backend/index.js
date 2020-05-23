@@ -67,6 +67,8 @@ app.post('/createUser', routes.createUser);
 app.post('/setRegisterKey', routes.setRegisterKey);
 app.post('/getRegisterKey', routes.getRegisterKey);
 app.post('/resetPasswordOfUser', routes.resetPasswordOfUser);
+app.post('/upgradeUserToAdmin', routes.upgradeUserToAdmin);
+app.post('/testIfAdmin', routes.testIfAdmin);
 app.post('/deleteUser', routes.deleteUser);
 
 // Testing
