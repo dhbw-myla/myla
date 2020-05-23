@@ -18,20 +18,15 @@ class EditUserComponent extends Component {
    handleOnSave = async () => {
       const { newPassword } = this.state;
 
-      if (newPassword.length === 0) {
-         return swalHelper.error("Password can't be empty");
-      }
+      if (newPassword.length === 0) return swalHelper.error("Password can't be empty");
 
       const { userToEdit } = this.props;
       const admin = getStoredUser();
       admin.newPassword = newPassword;
       admin.usernameForPasswordReset = userToEdit.username;
-      const response = await resetPasswordOfUser(admin);
-      if (response.status === 200) {
-         swalHelper.success('Successfully changed password');
-      } else {
-         swalHelper.error('Password change went wrong');
-      }
+      const resObj = await resetPasswordOfUser(admin);
+      if (resObj.status === 200) return swalHelper.success('Successfully changed password');
+      return swalHelper.error('Password change went wrong');
    };
 
    render() {
@@ -57,7 +52,8 @@ class EditUserComponent extends Component {
                   icon="key"
                   value={newPassword}
                   name="newPassword"
-                  onChange={(e) => this.handleOnChange(e)}
+                  onChange={this.handleOnChange}
+                  type="password"
                   required
                />
             </MDBRow>
