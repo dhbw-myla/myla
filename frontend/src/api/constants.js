@@ -10,6 +10,7 @@ export const PATH_GET_ALL_OWN_SURVEYS = 'getAllOwnSurveys';
 export const PATH_GET_ALL_SURVEY_MASTER_TEMPLATES = 'getAllSurveyMasterTemplates/';
 export const PATH_CREATE_SURVEY = 'createSurvey/';
 export const PATH_CREATE_SURVEY_BASED_ON_MASTER = 'createSurveyBasedOnMaster/';
+export const PATH_CREATE_SURVEY_MASTER = 'createSurveyMaster/';
 export const PATH_GET_SURVEY_BY_SURVEY_CODE = 'getSurveyBySurveyCode/';
 export const PATH_SUBMIT_SURVEY = 'submitSurvey/';
 export const PATH_UPGRADE_USER_TO_ADMIN = 'upgradeUserToAdmin/';

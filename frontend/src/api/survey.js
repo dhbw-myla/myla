@@ -7,8 +7,14 @@ import {
    PATH_GET_ALL_SURVEY_MASTER_TEMPLATES,
    PATH_GET_SURVEY_BY_SURVEY_CODE,
    PATH_SUBMIT_SURVEY,
+   PATH_CREATE_SURVEY_MASTER,
 } from './constants';
 
+/*
+ * Returns
+ * 200 [ ... ]
+ * 500 { error: "Internal Server Error" }
+ */
 export async function getAllOwnSurveys(user) {
    try {
       const url = PATH_BASE_URL + PATH_GET_ALL_OWN_SURVEYS;
@@ -19,6 +25,11 @@ export async function getAllOwnSurveys(user) {
    }
 }
 
+/*
+ * Returns
+ * 200 [ ... ]
+ * 500 { error: "Internal Server Error" }
+ */
 export async function getAllSurveyMasterTemplates(user) {
    try {
       const url = PATH_BASE_URL + PATH_GET_ALL_SURVEY_MASTER_TEMPLATES;
@@ -29,6 +40,13 @@ export async function getAllSurveyMasterTemplates(user) {
    }
 }
 
+/*
+ * Returns
+ * 201 { surveyId: 24 }
+ * 400 { error: "Parsing of Questions Failed" }
+ * 403 { error: "Forbidden" }
+ * 500 { error: "Internal Server Error" }
+ */
 export async function createSurvey(user) {
    try {
       const url = PATH_BASE_URL + PATH_CREATE_SURVEY;
@@ -39,6 +57,12 @@ export async function createSurvey(user) {
    }
 }
 
+/*
+ * Returns
+ * 201 { surveyId: 25 }
+ * 403 { error: "Forbidden" }
+ * 500 { error: "Internal Server Error" }
+ */
 export async function createSurveyBasedOnMaster(user, surveyMasterId) {
    try {
       const url = PATH_BASE_URL + PATH_CREATE_SURVEY_BASED_ON_MASTER + surveyMasterId;
@@ -49,6 +73,12 @@ export async function createSurveyBasedOnMaster(user, surveyMasterId) {
    }
 }
 
+/*
+ * Returns
+ * 200 {survey: { ... }, questions: [ { ... } ] }
+ * 404 { error: "No Survey Found" }
+ * 500 { error: "Internal Server Error" }
+ */
 export async function getSurveyBySurveyCode(user, surveyCode) {
    try {
       const url = PATH_BASE_URL + PATH_GET_SURVEY_BY_SURVEY_CODE + surveyCode;
@@ -59,6 +89,13 @@ export async function getSurveyBySurveyCode(user, surveyCode) {
    }
 }
 
+/*
+ * Returns
+ * 200 { message: "Submitted Survey Successfully" }
+ * 400 { error: "Parsing of Answers Failed" }
+ * 404 { error: "No Survey Found" }
+ * 500 { error: "Internal Server Error" }
+ */
 export async function submitSurvey({ user, answers }, surveyCode) {
    try {
       const url = PATH_BASE_URL + PATH_SUBMIT_SURVEY + surveyCode;
@@ -66,5 +103,15 @@ export async function submitSurvey({ user, answers }, surveyCode) {
       return response.data;
    } catch (error) {
       console.log('error on submitSurvey', error);
+   }
+}
+
+export async function createSurveyMaster(user, surveyMaster) {
+   try {
+      const url = PATH_BASE_URL + PATH_CREATE_SURVEY_MASTER;
+      const response = await axiosHelper.post(url, 'createSurveyMaster', { user, surveyMaster });
+      return response.data;
+   } catch (error) {
+      console.log('error on createSurveyMaster', error);
    }
 }

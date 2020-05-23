@@ -14,6 +14,9 @@ import * as SurveyJSCreator from 'survey-creator';
 import 'survey-creator/survey-creator.css';
 import * as SurveyKo from 'survey-knockout';
 import * as widgets from 'surveyjs-widgets';
+import { createSurveyMaster } from '../../api/survey';
+import { getStoredUser } from '../../auth/verifyPw';
+import * as swalHelper from '../../util/swalHelper';
 import './Survey.css';
 
 SurveyJSCreator.StylesManager.applyTheme('default');
@@ -37,13 +40,17 @@ class SurveyCreator extends Component {
    componentDidMount() {
       let options = { showEmbededSurveyTab: true };
       this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
-      this.surveyCreator.saveSurveyFunc = this.saveMySurvey;
+      this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
    }
    render() {
       return <div id="surveyCreatorContainer" />;
    }
-   saveMySurvey = () => {
-      console.log(JSON.stringify(this.surveyCreator.text));
+   saveCreatedSurvey = async () => {
+      const user = getStoredUser();
+      const createdSurvey = this.surveyCreator.text;
+      const resObj = await createSurveyMaster(user, createdSurvey);
+      if (resObj && resObj.status === 201) return swalHelper.success('Survey successful created!');
+      return swalHelper.error("Survey couldn't be created!");
    };
 }
 

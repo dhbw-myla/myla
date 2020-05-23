@@ -46,6 +46,9 @@ export const setUserToStorage = (user) => {
 
 export const isUserAdmin = async () => {
    const user = getStoredUser();
-   const resObj = await testIfAdmin(user);
-   return resObj && resObj.status === 200;
+   if (!util.checkIfUndefiniedOrNull(user)) {
+      const resObj = await testIfAdmin(user);
+      return resObj && resObj.status === 200;
+   }
+   return false;
 };
