@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
 import { login } from '../../api/auth';
+import { setUserToStorage } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
+import { MY_ACCOUNT } from '../constants';
 import '../Home/startpage.css';
 
 class Login extends Component {
@@ -42,12 +44,12 @@ class Login extends Component {
       const { username, password } = this.state;
 
       const valid = validator.isEmail(username) && !validator.isEmpty(password);
-      console.log('username', username);
-      console.log('password', password);
       if (valid) {
          const resObj = await login({ username, password });
          if (resObj && resObj.status === 200) {
             swalHelper.success('Welcome');
+            setUserToStorage(resObj.payload);
+            this.props.history.push('/' + MY_ACCOUNT);
          } else {
             swalHelper.error('Error on log in!');
          }

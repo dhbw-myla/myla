@@ -38,3 +38,7 @@ export const getStoredUser = () => {
 export const clearSessionStorage = () => {
    sessionStorage.clear();
 };
+
+export const setUserToStorage = (user) => {
+   sessionStorage.setItem('user', JSON.stringify(user));
+};

@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import val from 'validator';
 import { register } from '../../api/auth';
-import { verifySignup } from '../../auth/verifyPw';
+import { setUserToStorage, verifySignup } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
+import { DASHBOARD } from '../constants';
 import './signup.css';
 
 class Signup extends Component {
@@ -56,22 +57,13 @@ class Signup extends Component {
       const { user } = this.state;
       const userVerified = this.verifyUser(user);
       if (userVerified) {
-         const responseObj = await register(user);
-         if (responseObj && responseObj.status === 201) {
-            const { username, sessionId } = responseObj.payload;
-            if (!val.isEmpty(username) && !val.isEmpty(sessionId)) {
-               sessionStorage.setItem('user', JSON.stringify(responseObj.payload));
-               swalHelper.success('Successfully signed Up!');
-               this.props.history.push('/dashboard');
-               /* this.setState({
-            isLoggedIn: true,
-            user: {
-              username,
-            },
-          }); */
-            }
+         const resObj = await register(user);
+         if (resObj && resObj.status === 201) {
+            setUserToStorage(resObj.payload);
+            swalHelper.success('Successfully signed Up!');
+            this.props.history.push('/' + DASHBOARD);
          } else {
-            const { message } = responseObj;
+            const { message } = resObj;
             swalHelper.error('Error on registering\n\n' + message);
          }
       } else {
@@ -89,7 +81,7 @@ class Signup extends Component {
       const { username, passwordRepeat, password, registerKey } = user;
 
       if (isLoggedIn && !redirectToHome) {
-         this.props.history.push('/dashboard');
+         this.props.history.push('/' + DASHBOARD);
          //return <Redirect from={currentComponent} to="/dashboard" />;
       } else if (redirectToHome) {
          this.props.history.push('/');

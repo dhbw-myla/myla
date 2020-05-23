@@ -19,16 +19,14 @@ class ChangePassword extends Component {
    handleOnSave = async () => {
       const { newPassword, repeatPassword, oldPassword } = this.state;
 
-      if (validator.isEmpty(newPassword)) {
-         return swalHelper.error("Can't be empty");
-      }
+      if (validator.isEmpty(newPassword)) return swalHelper.error("Can't be empty");
 
       if (verifyPassword(newPassword, repeatPassword)) {
          const user = getStoredUser();
          user.newPassword = newPassword;
          user.password = oldPassword;
-         const response = await changePassword(user);
-         const { status } = response;
+         const resObj = await changePassword(user);
+         const { status } = resObj;
          status === 200 ? swalHelper.success('Password has been changed!') : swalHelper.error('Password has not been changed!');
       } else {
          swalHelper.error("Password didn't match");
@@ -51,7 +49,8 @@ class ChangePassword extends Component {
                   icon="key"
                   value={oldPassword || ''}
                   name="oldPassword"
-                  onChange={(e) => this.handleOnChange(e)}
+                  onChange={this.handleOnChange}
+                  type="password"
                   required
                />
             </MDBRow>
@@ -61,7 +60,8 @@ class ChangePassword extends Component {
                   icon="key"
                   value={newPassword}
                   name="newPassword"
-                  onChange={(e) => this.handleOnChange(e)}
+                  onChange={this.handleOnChange}
+                  type="password"
                   required
                />
             </MDBRow>
@@ -71,7 +71,8 @@ class ChangePassword extends Component {
                   icon="key"
                   value={repeatPassword}
                   name="repeatPassword"
-                  onChange={(e) => this.handleOnChange(e)}
+                  onChange={this.handleOnChange}
+                  type="password"
                   required
                />
             </MDBRow>

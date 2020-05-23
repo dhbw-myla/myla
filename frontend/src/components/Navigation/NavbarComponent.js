@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import DHBWLogo from '../../assets/DHBW-Logo.png';
 import { clearSessionStorage } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
+import { ADMIN, DASHBOARD, MY_ACCOUNT, NOT_YET_IMPLEMENTED, SURVEY } from '../constants';
 import './Navigation.css';
 
 class NavbarComponent extends Component {
@@ -61,22 +62,22 @@ class NavbarComponent extends Component {
                         </MDBNavLink>
                      </MDBNavItem>
                      <MDBNavItem>
-                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to="/dashboard">
+                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + DASHBOARD}>
                            <strong>Dashboard</strong>
                         </MDBNavLink>
                      </MDBNavItem>
                      <MDBNavItem>
-                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to="/survey">
+                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + SURVEY}>
                            <strong>Survey</strong>
                         </MDBNavLink>
                      </MDBNavItem>
                      <MDBNavItem>
-                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to="/admin">
+                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + ADMIN}>
                            <strong>Admin</strong>
                         </MDBNavLink>
                      </MDBNavItem>
                      <MDBNavItem>
-                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to="/myaccount">
+                        <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + MY_ACCOUNT}>
                            <strong>
                               <MDBIcon far icon="user" />
                            </strong>
@@ -91,7 +92,7 @@ class NavbarComponent extends Component {
                      </MDBNavItem>
                      <MDBNavItem className="mr-2">
                         <MDBTooltip placement="bottom" domElement style={{ display: 'block' }}>
-                           <a className="nav-link Ripple-parent" href="#" target="_blank" rel="noopener noreferrer">
+                           <a className="nav-link Ripple-parent" href={'/' + NOT_YET_IMPLEMENTED} target="_blank" rel="noopener noreferrer">
                               <strong>
                                  <MDBIcon icon="question-circle" />
                               </strong>
