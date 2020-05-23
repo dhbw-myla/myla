@@ -5,7 +5,6 @@ import AdminComponent from './components/Admin/AdminComponent';
 import UsersComponent from './components/Admin/Users';
 import ChartPageComponent from './components/Charts/ChartPageComponent';
 import Startpage from './components/Home/startpage';
-import SignupComponent from './components/signup/SignupComponent';
 import SurveyComponent from './components/Survey/SurveyComponent';
 import SurveyCreateComponent from './components/Survey/SurveyCreateComponent';
 import Account from './components/Users/Account';
@@ -21,7 +20,7 @@ class Routes extends Component {
       let routes = (
          <Switch>
             <Route exact path="/" component={Startpage} />
-            <Route exact path="/signup" component={SignupComponent} />
+            <Route exact path="/signup" component={Startpage} />
             {/* <Route exact path="/survey/participate" component={Survey} /> */}
          </Switch>
       );

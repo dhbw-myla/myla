@@ -103,7 +103,7 @@ class Signup extends Component {
                   <form onSubmit={this.createUser}>
                      <div className="form-group">
                         <MDBInput
-                           label="username"
+                           label="Username"
                            type="email"
                            name="username"
                            id="username"

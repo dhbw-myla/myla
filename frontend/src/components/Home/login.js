@@ -81,7 +81,7 @@ class Login extends Component {
                from={currentComponent}
                to={{
                   pathname: '/dashboard',
-                  state: { user: user },
+                  state: { user },
                }}
             />
          );

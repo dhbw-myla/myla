@@ -11,7 +11,8 @@ export const register = async (user) => {
    }
 };
 
-export const login = async (user) => {
+export const login = async ({ username, password }) => {
+   const user = { username, password };
    try {
       const url = PATH_BASE_URL + PATH_LOGIN;
       const response = await axiosHelper.post(url, 'register', user);
