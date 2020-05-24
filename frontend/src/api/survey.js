@@ -226,8 +226,8 @@ export async function submitSurvey({ user, answers }, surveyCode) {
  */
 export async function submitComment({ user, comment }, surveyCode) {
    try {
-      const url = PATH_BASE_URL + PATH_SUBMIT_COMMENT + surveyCode;
-      const response = await axiosHelper.post(url, 'submitComment', { user, comment });
+      const url = PATH_BASE_URL + PATH_CREATE_SURVEY_MASTER;
+      const response = await axiosHelper.post(url, 'createSurveyMaster', { ...user, survey, ...config });
       return response.data;
    } catch (error) {
       console.log('error on submitComment', error);

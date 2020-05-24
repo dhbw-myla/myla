@@ -47,7 +47,7 @@ class SurveyCreator extends Component {
 
    saveCreatedSurvey = async () => {
       const user = getStoredUser();
-      const createdSurvey = this.surveyCreator.text;
+      const createdSurvey = JSON.parse(this.surveyCreator.text);
       const resObj = await createSurveyMaster(user, createdSurvey);
       if (resObj && resObj.status === 201) return swalHelper.success('Survey successful created!');
       return swalHelper.error("Survey couldn't be created!");
@@ -59,8 +59,8 @@ class SurveyCreator extends Component {
       if (!a) {
          this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
       } else {
+         this.surveyCreator = new SurveyJSCreator.SurveyEditor(surveys[0]);
          this.surveyCreator = new SurveyJSCreator.SurveyEditor();
-         new SurveyJSCreator.SurveyEditor(surveys[0], options);
          const { location } = this.props.history;
          const { surveyToEdit } = location.state;
          const { surveyMaster, surveyjs } = surveyToEdit;
@@ -68,7 +68,6 @@ class SurveyCreator extends Component {
          console.log('edit surveyjs', surveyjs);
       }
       this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
-
       // https://surveyjs.io/Examples/Survey-Creator?id=loadfromservice&theme=bootstrap#content-js
       //this.surveyCreator.loadSurvey(surveyToEdit.id);
    }
