@@ -133,6 +133,8 @@ You will always receive an object in the following format:
   payload: {}
 }
 ```
+If you find an object below, it is most probably in the `payload` field.
+If you find an error message, it is in the `message` field and not in `error`.
 
 ### `POST /register`
 body:
@@ -284,6 +286,8 @@ body:
     showProgressBar: 'top',
     pages: [
       {
+        title: "title for this page",
+        description: "description for this page",
         elements: [
           {
             type: 'myquestion',
@@ -293,6 +297,7 @@ body:
           ...
         ]
       }, {
+        name: "name for this page",
         elements: [
           {
             type: 'dropdown',
@@ -336,6 +341,55 @@ body:
 responses:
 ```
 201 { surveyId: 25, surveyCode: "II41KMQAUM" }
+403 { error: "Forbidden" }
+500 { error: "Internal Server Error" }
+```
+
+### `POST /getSurveyMaster/:surveyMasterId`
+In the URL you need to replace `:surveyMasterId` with the id of the survey master you want to get the details of.
+
+body:
+```
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
+responses:
+```
+200 similar to GET /getSurveyBySurveyCode, except that it's payload.surveyMaster instead of payload.survey and there are no timestamps
+403 { error: "Forbidden" }
+404 { message: "No Survey Master Found" }
+500 { error: "Internal Server Error" }
+```
+
+### `PUT /updateSurveyMaster/:surveyMasterId`
+You can only update a survey master when there are no associated surveys.
+The body is the same like when creating a survey.
+You need to replace `:surveyMasterId` with the id of the survey master you want to update.
+
+body:
+
+see above at [POST /createSurveyMaster](#post-createsurveymaster)
+
+responses:
+```
+200 { surveyMasterId: 24 }
+400 { message: "You Can't Update This Survey Master Because There Are Already Surveys Based On That Master" }
+403 { error: "Forbidden" }
+500 { error: "Internal Server Error" }
+```
+
+### `DELETE /deleteSurveyMaster/:surveyMasterId`
+In the URL you need to replace `:surveyMasterId` with the id of the survey master you want to delete.
+
+body:
+```
+{ username: "user",
+  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+```
+responses:
+```
+200 { message: "Successfully Deleted Survey Master" }
+400 { message: "You Can't Delete This Survey Master Because There Are Already Surveys Based On That Master" }
 403 { error: "Forbidden" }
 500 { error: "Internal Server Error" }
 ```

@@ -259,7 +259,7 @@ exports.createSurveyMaster = async function (request, response) {
     const username = request.body.username;
     let { resultsVisible, isTemplate, isPublicTemplate, survey, groupId } = request.body;
     let title = survey.title;
-    let description = "";
+    let description = survey.description;
 
     // make sure that no one tries to create a survey in the group of someone else
     if (groupId) {
@@ -303,6 +303,11 @@ exports.createSurveyMaster = async function (request, response) {
         for (let pageId=0; pageId<survey.pages.length; pageId++) {
             for (let q of survey.pages[pageId].elements) {
                 q.backend_ugly_fix_page_id = pageId;
+                q.backend_further_ugly_fixes_page = {
+                    name: survey.pages[pageId].name,
+                    title: survey.pages[pageId].title,
+                    description: survey.pages[pageId].description
+                };
                 db.query(`INSERT INTO question (question_json, is_template, is_public_template, survey_master_id)
                         VALUES ($1, $2, $3, $4);`,
                     [JSON.stringify(q), false, false, surveyMasterId]);
@@ -338,6 +343,169 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
         return responseHelper.sendClientError(response, 403);
     }
     createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd);
+};
+
+exports.getSurveyMaster = async function (request, response) {
+    const username = request.body.username;
+    let surveyMasterId = request.params.masterId;
+
+    let result = {};
+    db.query(`SELECT *
+                FROM survey_master
+                WHERE survey_master_id = $1
+                    AND user_id = (SELECT user_id FROM users WHERE username = $2);`,
+    [surveyMasterId, username], (err, resultSurveyMaster) => {
+        if (err) {
+            // db failed
+            return responseHelper.sendInternalServerError(response, err);
+        } else if (resultSurveyMaster.rows.length === 0) {
+            return responseHelper.sendClientError(response, 404, "No Survey Master Found");
+        }
+        result.surveyMaster = resultSurveyMaster.rows[0];
+        db.query(`SELECT * FROM question q
+                    WHERE q.survey_master_id = $1`,
+                [result.surveyMaster.survey_master_id], (err, resultQuestions) => {
+            if (err) {
+                // db failed
+                return responseHelper.sendInternalServerError(response, err);
+            }
+            result.surveyjs = {
+                title: result.surveyMaster.title,
+                description: result.surveyMaster.description,
+                showProgressBar: 'top',
+                pages: [],
+            };
+            for (let question of resultQuestions.rows) {
+                let el = JSON.parse(question.question_json);
+                let pageId = el.backend_ugly_fix_page_id;
+                while (result.surveyjs.pages.length <= pageId) {
+                    result.surveyjs.pages.push({
+                        elements: []
+                    });
+                }
+                for (let attr of ["name", "title", "description"]) {
+                    if (el.backend_further_ugly_fixes_page && el.backend_further_ugly_fixes_page[attr]) {
+                        result.surveyjs.pages[pageId][attr] = el.backend_further_ugly_fixes_page[attr];
+                    }
+                }
+                delete el.backend_ugly_fix_page_id;
+                delete el.backend_further_ugly_fixes_page;
+                result.surveyjs.pages[pageId].elements.push(el);
+            }
+            responseHelper.send(response, 200, "", result);
+        });
+    });
+};
+
+function changeSurveyMasterIfNoSurvey (username, surveyMasterId, response, callback) {
+    // check if survey master belongs to user
+    db.query(`SELECT *
+                FROM survey_master sm INNER JOIN users u ON sm.user_id = u.user_id
+                WHERE u.username = $1 AND sm.survey_master_id = $2;`,
+    [username, surveyMasterId], (err, result1) => {
+        if (err) {
+            // db failed
+            return responseHelper.sendInternalServerError(response, err);
+        } else if (result1.rows.length !== 1) {
+            return responseHelper.sendClientError(response, 403);
+        }
+
+        // check if there are surveys already
+        db.query(`SELECT *
+                    FROM survey
+                    WHERE survey_master_id = $1;`,
+        [surveyMasterId], (err, result2) => {
+            if (err) {
+                // db failed
+                return responseHelper.sendInternalServerError(response, err);
+            } else if (result2.rows.length > 0) {
+                return responseHelper.sendClientError(response, 400, "You Can't Delete This Survey Master Because There Are Already Surveys Based On That Master");
+            }
+
+            callback();
+        });
+    });
+}
+
+exports.updateSurveyMaster = async function (request, response) {
+    const username = request.body.username;
+    let surveyMasterId = request.params.masterId;
+
+    changeSurveyMasterIfNoSurvey(username, surveyMasterId, response, async () => {
+        // update attributes in survey_master
+        // ugly, mostly copied from createSurveyMaster
+        let { resultsVisible, isTemplate, isPublicTemplate, survey, groupId } = request.body;
+        let title = survey.title;
+        let description = survey.description;
+
+        // make sure that no one tries to create a survey in the group of someone else
+        if (groupId) {
+            let isAllowed = await checkIfGroupIdIsAllowedForUser(groupId, username);
+            if (!isAllowed) {
+                return responseHelper.sendClientError(response, 403);
+            }
+        }
+
+        // make sure it's a boolean and nothing like null or undefined
+        if (resultsVisible !== true) { resultsVisible = false; }
+        if (isTemplate !== true) { isTemplate = false; }
+        if (isPublicTemplate !== true) { isPublicTemplate = false; }
+        if (isPublicTemplate === true) { isTemplate = true; } // if it's a public template, it is of course a template
+        
+        // update SurveyMaster
+        let args = [title, description, resultsVisible, isTemplate, isPublicTemplate, surveyMasterId];
+        let sqlStatement = `UPDATE survey_master SET
+                                title = $1, description = $2, results_visible = $3,
+                                is_template = $4, is_public_template = $5`;
+        if (groupId) {
+            sqlStatement += ', group_id = $7';
+            args.push(+groupId);
+        }
+        sqlStatement += ` WHERE survey_master_id = $6;`;
+
+        db.query(sqlStatement, args, (err, resultUpdateSurveyMaster) => {
+            if (err) {
+                // db failed
+                return responseHelper.sendInternalServerError(response, err);
+            }
+
+            // delete questions and create them again
+            db.query(`DELETE FROM question
+                        WHERE survey_master_id = $1;`,
+            [surveyMasterId], (err, resultDeleteQuestions) => {
+                // create questions, also copied from createSurveyMaster
+                for (let pageId=0; pageId<survey.pages.length; pageId++) {
+                    for (let q of survey.pages[pageId].elements) {
+                        q.backend_ugly_fix_page_id = pageId;
+                        q.backend_further_ugly_fixes_page = {
+                            name: survey.pages[pageId].name,
+                            title: survey.pages[pageId].title,
+                            description: survey.pages[pageId].description
+                        };
+                        db.query(`INSERT INTO question (question_json, is_template, is_public_template, survey_master_id)
+                                VALUES ($1, $2, $3, $4);`,
+                            [JSON.stringify(q), false, false, surveyMasterId]);
+                    }
+                }
+                // TODO: wait for successfully saving all questions? Promise.all?
+                responseHelper.send(response, 200, "Successfully Updated Survey Master", { surveyMasterId });
+            });
+        });
+    });
+};
+
+exports.deleteSurveyMaster = async function (request, response) {
+    const username = request.body.username;
+    let surveyMasterId = request.params.masterId;
+
+    changeSurveyMasterIfNoSurvey(username, surveyMasterId, response, () => {
+        // delete survey_master and questions
+        db.query(`DELETE FROM question
+                    WHERE survey_master_id = $1;`, [surveyMasterId]);
+        db.query(`DELETE FROM survey_master
+                    WHERE survey_master_id = $1;`, [surveyMasterId]);
+        responseHelper.send(response, 200, "Successfully Deleted Survey Master");
+    });
 };
 
 exports.getAllOwnGroups = function (request, response) {
@@ -391,6 +559,7 @@ exports.getSurveyBySurveyCode = function (request, response) {
             }
             result.surveyjs = {
                 title: result.survey.title,
+                description: result.survey.description,
                 showProgressBar: 'top',
                 pages: [],
             };
@@ -402,7 +571,13 @@ exports.getSurveyBySurveyCode = function (request, response) {
                         elements: []
                     });
                 }
+                for (let attr of ["name", "title", "description"]) {
+                    if (el.backend_further_ugly_fixes_page && el.backend_further_ugly_fixes_page[attr]) {
+                        result.surveyjs.pages[pageId][attr] = el.backend_further_ugly_fixes_page[attr];
+                    }
+                }
                 delete el.backend_ugly_fix_page_id;
+                delete el.backend_further_ugly_fixes_page;
                 result.surveyjs.pages[pageId].elements.push(el);
             }
             responseHelper.send(response, 200, "", result);
