@@ -118,7 +118,7 @@ export async function createSurveyMaster(user, survey) {
    };
    try {
       const url = PATH_BASE_URL + PATH_CREATE_SURVEY_MASTER;
-      const response = await axiosHelper.post(url, 'createSurveyMaster', { user, survey, config });
+      const response = await axiosHelper.post(url, 'createSurveyMaster', { ...user, survey, ...config });
       return response.data;
    } catch (error) {
       console.log('error on createSurveyMaster', error);
