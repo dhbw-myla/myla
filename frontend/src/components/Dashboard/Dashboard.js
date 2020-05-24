@@ -4,7 +4,7 @@ import { MDBContainer } from 'mdbreact';
 import DocsLink from '../../components/docsLink';
 import SectionContainer from '../../components/sectionContainer';
 
-class ChartPageComponent extends Component {
+class Dashboard extends Component {
    constructor(props) {
       super(props);
       this.state = {};
@@ -181,4 +181,4 @@ class ChartPageComponent extends Component {
    }
 }
 
-export default ChartPageComponent;
+export default Dashboard;
