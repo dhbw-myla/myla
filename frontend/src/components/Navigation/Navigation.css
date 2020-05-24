@@ -2,3 +2,39 @@ nav.navbar-dark {
     color: red;
     background: #000;
 }
+
+@media (max-width: 480px) {
+    .dhbw_title {
+        font-size: 1rem !important;
+    }
+    .dhbw_logo {
+        width: 80px !important;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .dhbw_title {
+        font-size: 1.2rem !important;
+    }
+    .dhbw_logo {
+        width: 80px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .dhbw_title {
+        font-size: 1.5rem !important;
+    }
+    .dhbw_logo {
+        width: 100px !important;
+    }
+}
+
+@media (min-width: 980px) {
+    .dhbw_title {
+        font-size: 1.5rem !important;
+    }
+    .dhbw_logo {
+        width: 120px !important;
+    }
+}

@@ -10,7 +10,7 @@ import {
    MDBTooltip,
 } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
-import DHBWLogo from '../../assets/DHBW-Logo.png';
+import DHBWLogo from '../../assets/DHBW-Logo_neu.png';
 import { clearSessionStorage, isUserAdmin, verifySession } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { ADMIN, DASHBOARD, MY_ACCOUNT, NOT_YET_IMPLEMENTED, SURVEY } from '../constants';
@@ -65,8 +65,8 @@ class NavbarComponent extends Component {
          <Fragment>
             <MDBNavbar color="grey darken-2" dark expand="md" fixed="top" scrolling>
                <MDBNavbarBrand href="/dashboard" className="py-0 font-weight-bold">
-                  <img src={DHBWLogo} style={{ width: 120, marginRight: 20 }} alt="DHBWLogo" />
-                  <strong className="align-middle">My Learning Analytics - A DHBW-Student project</strong>
+                  <img src={DHBWLogo} className="img-fluid dhbw_logo" style={{ marginRight: 20 }} alt="DHBWLogo" />
+                  <strong className="align-middle dhbw_title">My Learning Analytics</strong>
                </MDBNavbarBrand>
                <MDBNavbarToggler onClick={this.toggleCollapse('mainNavbarCollapse')}/>
                <MDBCollapse id="mainNavbarCollapse" isOpen={collapseID} navbar>
