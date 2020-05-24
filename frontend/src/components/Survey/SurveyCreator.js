@@ -19,6 +19,7 @@ import { createSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import './Survey.css';
+import { surveys } from './surveys';
 
 SurveyJSCreator.StylesManager.applyTheme('default');
 
@@ -54,7 +55,13 @@ class SurveyCreator extends Component {
 
    componentDidMount() {
       let options = { showEmbededSurveyTab: true };
-      this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
+      const a = true;
+      if (!a) {
+         this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
+      } else {
+         this.surveyCreator = new SurveyJSCreator.SurveyEditor();
+         new SurveyJSCreator.SurveyEditor(surveys[0], options);
+      }
       this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
       const { location } = this.props.history;
       const { surveyToEdit } = location.state;

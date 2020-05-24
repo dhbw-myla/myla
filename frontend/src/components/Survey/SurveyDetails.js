@@ -1,8 +1,10 @@
-import { MDBBtn } from 'mdbreact';
+import { MDBBtn, MDBContainer } from 'mdbreact';
 import React, { Component } from 'react';
 import * as SurveyPDF from 'survey-pdf';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
+import { surveys } from './surveys';
+import { withRouter } from 'react-router-dom';
 
 Survey.StylesManager.applyTheme('default');
 
@@ -31,26 +33,39 @@ class SurveyDetails extends Component {
       surveyPDF.save();
    };
 
+   terminateSurvey = () => {
+      this.props.history.replace('/');
+   };
+
    componentDidMount() {
-      const { survey } = this.props;
+      //const { survey } = this.props;
+      console.log('surveys', surveys);
+      const survey = surveys[0];
+      console.log('survey', survey);
       this.setState({ survey });
    }
 
    render() {
       const { survey } = this.state;
       const model = new Survey.Model(survey);
+
+      if (survey) {
+         console.log('lö', survey.pages.length);
+      }
       return (
-         <div className="surveyjs">
-            <Survey.Survey model={model} onComplete={this.onComplete.bind(this)} onValueChanged={this.onValueChanged.bind(this)} />
-            <h3>SurveyPDF export:</h3>
-            <MDBBtn onClick={() => this.savePDF(model)}>Save PDF</MDBBtn>
-
+         <MDBContainer id="survey-participate">
+            <h1>{survey ? survey.title : ''}</h1>
             <hr className="my-5" />
+            <div className="surveyjs">
+               <Survey.Survey model={model} onComplete={this.onComplete.bind(this)} onValueChanged={this.onValueChanged.bind(this)} />
+               <h3>SurveyPDF export:</h3>
+               <MDBBtn onClick={() => this.savePDF(model)}>Save PDF</MDBBtn>
 
-            <MDBBtn onClick={this.props.onClickReturn}>Return</MDBBtn>
-         </div>
+               <MDBBtn onClick={this.terminateSurvey}>Beenden</MDBBtn>
+            </div>
+         </MDBContainer>
       );
    }
 }
 
-export default SurveyDetails;
+export default withRouter(SurveyDetails);

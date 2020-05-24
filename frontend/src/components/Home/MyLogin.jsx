@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
 import { login } from '../../api/auth';
-import { setUserToStorage } from '../../auth/verifyPw';
+import { getSurveyMaster } from '../../api/survey';
+import { getStoredUser, setUserToStorage } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { DASHBOARD } from '../constants';
+import { DASHBOARD, SURVEY_PARTICIPATE } from '../constants';
 import './startpage.css';
 
 class Login extends Component {
@@ -15,7 +16,7 @@ class Login extends Component {
          username: '',
          password: '',
          surveycode: '',
-         success: false
+         success: false,
       };
    }
 
@@ -29,11 +30,19 @@ class Login extends Component {
       }));
    };
 
-   joinSurvey = (e) => {
+   joinSurvey = async (e) => {
       e.preventDefault();
       const { surveycode } = this.state;
       const valid = !validator.isEmpty(surveycode);
       if (valid) {
+         const user = getStoredUser();
+         const resObj = await getSurveyMaster(user, this.state.surveycode);
+         if (resObj) {
+            this.props.history.push({
+               pathname: '/' + SURVEY_PARTICIPATE,
+               state: { surveyToParticipate: resObj },
+            });
+         }
          swalHelper.success('Load Survey: ' + surveycode);
       } else {
          swalHelper.error('No Surveycode was given');
@@ -51,7 +60,7 @@ class Login extends Component {
             swalHelper.success('Welcome');
             setUserToStorage(resObj.payload);
             //this.setState({ success: true });
-            this.props.history.push('/'+ DASHBOARD)
+            this.props.history.push('/' + DASHBOARD);
             this.props.updateRoot();
          } else {
             swalHelper.error('Error on log in!');
@@ -69,7 +78,13 @@ class Login extends Component {
                   <h1 className="text-center text-dark">MyLA Login</h1>
                   <form onSubmit={this.handleLogin}>
                      <div className="form-group">
-                        <MDBInput className="form-control" label="Survey Code" type="text" name="surveycode" onChange={this.handleOnChange} />
+                        <MDBInput
+                           className="form-control"
+                           label="Survey Code"
+                           type="text"
+                           name="surveycode"
+                           onChange={this.handleOnChange}
+                        />
                         <MDBBtn className="btn btn_dhbw" onClick={this.joinSurvey}>
                            Enter
                         </MDBBtn>
