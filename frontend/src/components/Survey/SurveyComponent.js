@@ -2,10 +2,10 @@ import { MDBCol, MDBContainer, MDBNavLink, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 import { getAllSurveyMasterTemplates } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
-import MySurveyCardComponent from './MySurveyCard';
+import { NEW_SURVEY } from '../constants';
+import MySurveyCard from './MySurveyCard';
 import SurveyDetails from './SurveyDetails';
 import { surveys } from './surveys';
-import { NEW_SURVEY } from '../constants';
 
 class SurveyComponent extends Component {
    constructor(props) {
@@ -52,7 +52,7 @@ class SurveyComponent extends Component {
       ) : (
          <MDBRow id="categories">
             {this.state.surveys.map((survey, key) => (
-               <MySurveyCardComponent counter={key} infos={{ survey, type: 1 }} onClickSurvey={this.showSurvey} />
+               <MySurveyCard counter={key} infos={{ survey, type: 1 }} onClickSurvey={this.showSurvey} />
             ))}
          </MDBRow>
       );

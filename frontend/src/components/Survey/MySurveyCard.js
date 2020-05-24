@@ -2,7 +2,7 @@ import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, 
 import React, { Component } from 'react';
 import './Survey.css';
 
-class MySurveyCardComponent extends Component {
+class MySurveyCard extends Component {
    constructor(props) {
       super(props);
       this.state = {};
@@ -50,4 +50,4 @@ class MySurveyCardComponent extends Component {
    }
 }
 
-export default MySurveyCardComponent;
+export default MySurveyCard;
