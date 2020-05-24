@@ -50,6 +50,10 @@ app.post('/getAllOwnSurveyMasters', routes.getAllOwnSurveyMasters);
 app.post('/createSurveyMaster', routes.createSurveyMaster);
 app.post('/createSurveyBasedOnMaster/:masterId', routes.createSurveyBasedOnMaster);
 
+app.post('/getSurveyMaster/:masterId', routes.getSurveyMaster);
+app.put('/updateSurveyMaster/:masterId', routes.updateSurveyMaster);
+app.delete('/deleteSurveyMaster/:masterId', routes.deleteSurveyMaster);
+
 app.get('/getAllOwnGroups', routes.getAllOwnGroups);
 app.post('/createGroup', routes.createGroup);
 
