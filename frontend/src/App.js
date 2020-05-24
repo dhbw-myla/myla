@@ -18,13 +18,18 @@ const showNavbarComponent = () => {
 class App extends Component {
    state = {};
 
+   updateRoot = () => {
+      this.setState({ updateRoot: !this.state.updateRoot });
+   };
+
+
    render() {
       return (
          <Router>
             <div className="flyout">
                {showNavbarComponent()}
                <main style={{ height: '94vh' }}>
-                  <Routes />
+                  <Routes updateRoot={this.updateRoot} />
                </main>
                <Footer />
             </div>

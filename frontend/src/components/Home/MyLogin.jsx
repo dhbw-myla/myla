@@ -5,7 +5,7 @@ import validator from 'validator';
 import { login } from '../../api/auth';
 import { setUserToStorage } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { MY_ACCOUNT } from '../constants';
+import { DASHBOARD } from '../constants';
 import './startpage.css';
 
 class Login extends Component {
@@ -14,7 +14,8 @@ class Login extends Component {
       this.state = {
          username: '',
          password: '',
-         sourveycode: '',
+         surveycode: '',
+         success: false
       };
    }
 
@@ -30,10 +31,10 @@ class Login extends Component {
 
    joinSurvey = (e) => {
       e.preventDefault();
-      const { sourveycode } = this.state;
-      const valid = !validator.isEmpty(sourveycode);
+      const { surveycode } = this.state;
+      const valid = !validator.isEmpty(surveycode);
       if (valid) {
-         swalHelper.success('Load Survey: ' + sourveycode);
+         swalHelper.success('Load Survey: ' + surveycode);
       } else {
          swalHelper.error('No Surveycode was given');
       }
@@ -49,7 +50,9 @@ class Login extends Component {
          if (resObj && resObj.status === 200) {
             swalHelper.success('Welcome');
             setUserToStorage(resObj.payload);
-            this.props.history.push('/' + MY_ACCOUNT);
+            //this.setState({ success: true });
+            this.props.history.push('/'+ DASHBOARD)
+            this.props.updateRoot();
          } else {
             swalHelper.error('Error on log in!');
          }
@@ -66,7 +69,7 @@ class Login extends Component {
                   <h1 className="text-center text-dark">MyLA Login</h1>
                   <form onSubmit={this.handleLogin}>
                      <div className="form-group">
-                        <MDBInput label="Survey Code" type="text" name="sourveycode" onChange={this.handleOnChange} />
+                        <MDBInput label="Survey Code" type="text" name="surveycode" onChange={this.handleOnChange} />
                         <MDBBtn className="btn btn_dhbw" onClick={this.joinSurvey}>
                            Enter
                         </MDBBtn>

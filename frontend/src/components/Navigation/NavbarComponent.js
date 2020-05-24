@@ -64,18 +64,18 @@ class NavbarComponent extends Component {
       return (
          <Fragment>
             <MDBNavbar color="grey darken-2" dark expand="md" fixed="top" scrolling>
-               <MDBNavbarBrand href="/" className="py-0 font-weight-bold">
+               <MDBNavbarBrand href="/dashboard" className="py-0 font-weight-bold">
                   <img src={DHBWLogo} style={{ width: 120, marginRight: 20 }} alt="DHBWLogo" />
                   <strong className="align-middle">My Learning Analytics - A DHBW-Student project</strong>
                </MDBNavbarBrand>
-               <MDBNavbarToggler onClick={this.toggleCollapse('mainNavbarCollapse')} />
+               <MDBNavbarToggler onClick={this.toggleCollapse('mainNavbarCollapse')}/>
                <MDBCollapse id="mainNavbarCollapse" isOpen={collapseID} navbar>
                   <MDBNavbarNav right>
-                     <MDBNavItem>
+                     {/* <MDBNavItem>
                         <MDBNavLink exact to="/" onClick={this.closeCollapse('mainNavbarCollapse')}>
                            <strong>Home</strong>
                         </MDBNavLink>
-                     </MDBNavItem>
+                     </MDBNavItem> */}
                      <MDBNavItem>
                         <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + DASHBOARD}>
                            <strong>Dashboard</strong>

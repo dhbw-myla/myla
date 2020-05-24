@@ -19,9 +19,9 @@ class Startpage extends Component {
 
    render() {
       const whatToDisplay = this.state.showLogin ? (
-         <Login handleShowLogin={this.handleShowLogin} />
+         <Login handleShowLogin={this.handleShowLogin} updateRoot={this.props.updateRoot}/>
       ) : (
-         <Signup handleShowLogin={this.handleShowLogin} />
+         <Signup handleShowLogin={this.handleShowLogin} updateRoot={this.props.updateRoot} />
       );
       return (
          <div className="background" style={{ backgroundImage: `url(${DHBWTeaser})` }}>
