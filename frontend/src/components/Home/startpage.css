@@ -81,3 +81,8 @@
     color:#4a5358;
     width: 100%;
 }
+
+.md-form input {
+    box-shadow: 0 1px 0 0 grey !important;
+    border-bottom: 1px solid grey !important;
+}

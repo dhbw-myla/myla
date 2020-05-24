@@ -69,7 +69,7 @@ class Login extends Component {
                   <h1 className="text-center text-dark">MyLA Login</h1>
                   <form onSubmit={this.handleLogin}>
                      <div className="form-group">
-                        <MDBInput label="Survey Code" type="text" name="surveycode" onChange={this.handleOnChange} />
+                        <MDBInput className="form-control" label="Survey Code" type="text" name="surveycode" onChange={this.handleOnChange} />
                         <MDBBtn className="btn btn_dhbw" onClick={this.joinSurvey}>
                            Enter
                         </MDBBtn>
@@ -83,8 +83,6 @@ class Login extends Component {
                            aria-describedby="emailHelp"
                            onChange={this.handleOnChange}
                         />
-                     </div>
-                     <div className="form-group">
                         <MDBInput
                            label="Passwort"
                            type="password"

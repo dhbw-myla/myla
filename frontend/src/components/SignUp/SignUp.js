@@ -103,8 +103,6 @@ class Signup extends Component {
                            value={username}
                            onChange={this.handleOnChange}
                         />
-                     </div>
-                     <div className="form-group">
                         <MDBInput
                            label="Register Key"
                            type="text"
@@ -113,8 +111,6 @@ class Signup extends Component {
                            value={registerKey}
                            onChange={this.handleOnChange}
                         />
-                     </div>
-                     <div className="form-group">
                         <MDBInput
                            label="Passwort"
                            type="password"
@@ -122,16 +118,14 @@ class Signup extends Component {
                            className="form-control"
                            onChange={this.handleOnChange}
                         />
-                        <div className="form-group">
-                           <MDBInput
-                              label="Password Repeat"
-                              type="password"
-                              name="passwordRepeat"
-                              maxLength="50"
-                              value={passwordRepeat}
-                              onChange={this.handleOnChange}
-                           />
-                        </div>
+                        <MDBInput
+                           label="Password Repeat"
+                           type="password"
+                           name="passwordRepeat"
+                           maxLength="50"
+                           value={passwordRepeat}
+                           onChange={this.handleOnChange}
+                        />
                         <div className="div_button_split">
                            <MDBBtn type="button" className="btn btn_split btn_dhbw" onClick={this.props.handleShowLogin}>
                               Login
