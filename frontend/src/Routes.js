@@ -4,25 +4,27 @@ import { verifySession } from './auth/verifyPw';
 import AdminComponent from './components/Admin/AdminComponent';
 import UsersComponent from './components/Admin/Users';
 import ChartPageComponent from './components/Charts/ChartPageComponent';
-import Startpage from './components/Home/Startpage';
+
 import SurveyComponent from './components/Survey/SurveyComponent';
 import SurveyCreateComponent from './components/Survey/SurveyCreateComponent2';
 import Account from './components/Users/Account';
 import ChangePassword from './components/Users/ChangePassword';
+import Startpage from './components/Home/startpage';
 
-const PrivateRoute = ({ component: Component, ...rest}) => (
-   <Route {...rest} render={
-      (props) => {
+const PrivateRoute = ({ component: Component, ...rest }) => (
+   <Route
+      {...rest}
+      render={(props) => {
          if (verifySession()) {
-            if(rest.path === "/") {
-               return <Redirect to="/dashboard"/>;
+            if (rest.path === '/') {
+               return <Redirect to="/dashboard" />;
             }
-            return <Component {...props} />
-         } 
-         return <Redirect to="/"/>;
-      }
-   }/>
-)
+            return <Component {...props} />;
+         }
+         return <Redirect to="/" />;
+      }}
+   />
+);
 
 class Routes extends Component {
    constructor(props) {
@@ -39,18 +41,18 @@ class Routes extends Component {
       //    </Switch>
       // );
       let routes = (
-            <Switch>
-               <PrivateRoute exact path="/survey" component={SurveyComponent} />
-               <PrivateRoute exact path="/survey/new" component={SurveyCreateComponent} />
-               <PrivateRoute exact path="/admin" component={AdminComponent} />
-               <PrivateRoute exact path="/dashboard" component={ChartPageComponent} />
-               <PrivateRoute exact path="/admin/users" component={UsersComponent} />
-               <PrivateRoute exact path="/myaccount" component={Account} />
-               <PrivateRoute exact path="/myaccount/passwordchange" component={ChangePassword} />
-               <Route exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />
-            </Switch>
-         );
-    
+         <Switch>
+            <PrivateRoute exact path="/survey" component={SurveyComponent} />
+            <PrivateRoute exact path="/survey/new" component={SurveyCreateComponent} />
+            <PrivateRoute exact path="/admin" component={AdminComponent} />
+            <PrivateRoute exact path="/dashboard" component={ChartPageComponent} />
+            <PrivateRoute exact path="/admin/users" component={UsersComponent} />
+            <PrivateRoute exact path="/myaccount" component={Account} />
+            <PrivateRoute exact path="/myaccount/passwordchange" component={ChangePassword} />
+            <Route exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />
+         </Switch>
+      );
+
       return routes;
    }
 }

@@ -106,10 +106,16 @@ export async function submitSurvey({ user, answers }, surveyCode) {
    }
 }
 
-export async function createSurveyMaster(user, surveyMaster) {
+export async function createSurveyMaster(user, survey) {
+   const config = {
+      resultsVisible: true,
+      isTemplate: true,
+      isPublicTemplate: false,
+      groupId: null,
+   };
    try {
       const url = PATH_BASE_URL + PATH_CREATE_SURVEY_MASTER;
-      const response = await axiosHelper.post(url, 'createSurveyMaster', { user, surveyMaster });
+      const response = await axiosHelper.post(url, 'createSurveyMaster', { user, survey, config });
       return response.data;
    } catch (error) {
       console.log('error on createSurveyMaster', error);

@@ -16,8 +16,11 @@ class SurveyDetails extends Component {
       console.log('value changed!');
    }
 
+   // TODO implement API
    onComplete(result) {
+      const { survey } = this.props;
       console.log('Complete! ', result);
+      console.log('SurveyID', survey.id);
       console.log('Complete! data', result.data);
    }
 
@@ -28,13 +31,18 @@ class SurveyDetails extends Component {
       surveyPDF.save();
    };
 
+   componentDidMount() {
+      const { survey } = this.props;
+      this.setState({ survey });
+   }
+
    render() {
       const { survey } = this.props;
       const model = new Survey.Model(survey);
       console.log('details', this.props);
       return (
          <div className="surveyjs">
-            <Survey.Survey model={model} onComplete={this.onComplete} onValueChanged={this.onValueChanged} />
+            <Survey.Survey model={model} onComplete={this.onComplete.bind(this)} onValueChanged={this.onValueChanged.bind(this)} />
             <h3>SurveyPDF export:</h3>
             <MDBBtn onClick={() => this.savePDF(model)}>Save PDF</MDBBtn>
 

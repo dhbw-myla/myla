@@ -1,5 +1,6 @@
+import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
-import { MDBCol, MDBAnimation, MDBCard, MDBCardBody, MDBCardTitle, MDBIcon, MDBCardText, MDBNavLink } from 'mdbreact';
+import './Survey.css';
 
 class MySurveyCardComponent extends Component {
    constructor(props) {
@@ -31,10 +32,7 @@ class MySurveyCardComponent extends Component {
                         <MDBIcon icon="cubes" className="blue-text pr-2" />
                         <strong>{survey.title}</strong>
                      </MDBCardTitle>
-                     <MDBCardText>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                        magna aliquyam
-                     </MDBCardText>
+                     <MDBCardText>{survey.description}</MDBCardText>
                      <MDBNavLink
                         tag="button"
                         to="#"
@@ -42,7 +40,7 @@ class MySurveyCardComponent extends Component {
                         className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                         onClick={() => this.props.onClickSurvey(survey)}
                      >
-                        More
+                        Show survey
                      </MDBNavLink>
                   </MDBCardBody>
                </MDBCard>

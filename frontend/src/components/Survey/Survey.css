@@ -1,3 +1,11 @@
 .panel.card.svd_content.svd-dark-bg-color {
    width: fit-content;
 }
+
+.card {
+   width: auto !important;
+}
+
+#surveyCreatorContainer {
+   margin-top: 1.9rem;
+}

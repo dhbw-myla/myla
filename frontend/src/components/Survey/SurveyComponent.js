@@ -1,8 +1,11 @@
 import { MDBCol, MDBContainer, MDBNavLink, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
+import { getAllSurveyMasterTemplates } from '../../api/survey';
+import { getStoredUser } from '../../auth/verifyPw';
 import MySurveyCardComponent from './MySurveyCard';
 import SurveyDetails from './SurveyDetails';
 import { surveys } from './surveys';
+import { NEW_SURVEY } from '../constants';
 
 class SurveyComponent extends Component {
    constructor(props) {
@@ -28,7 +31,16 @@ class SurveyComponent extends Component {
       if (shouldShowSurvey) {
          return 'Edit Survey';
       } else {
-         return 'Survey Paradise';
+         return 'Survey Master Paradise';
+      }
+   };
+
+   componentDidMount = async () => {
+      //getAllSurveyMasterTemplates
+      const user = getStoredUser();
+      const resObj = await getAllSurveyMasterTemplates(user);
+      if (resObj && resObj.status === 200) {
+         this.setState({ surveys: resObj.payload });
       }
    };
 
@@ -50,18 +62,18 @@ class SurveyComponent extends Component {
             <MDBRow>
                <MDBCol md="12" className="mt-4">
                   <h2 className="text-center my-5 font-weight-bold">{this.getHeading(showSurvey)}</h2>
-
-                  <MDBNavLink
-                     tag="button"
-                     to="/survey/new"
-                     color="mdb-color"
-                     className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
-                     onClick={this.scrollToTop}
-                  >
-                     Create new Survey
-                  </MDBNavLink>
-
                   <hr className="my-5" />
+                  <MDBRow>
+                     <MDBNavLink
+                        tag="button"
+                        to={'/' + NEW_SURVEY}
+                        color="mdb-color"
+                        className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                        onClick={this.scrollToTop}
+                     >
+                        Create new Survey
+                     </MDBNavLink>
+                  </MDBRow>
                   {whatToRender}
                </MDBCol>
             </MDBRow>
