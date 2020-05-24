@@ -236,29 +236,36 @@ const createSurveyHelper = function (response, surveyMasterId, timestampStart, t
             return responseHelper.sendInternalServerError(response, err);
         }
         let survey_id = result.rows[0].survey_id;
-        responseHelper.send(response, 201, "", { surveyId: survey_id });
+        responseHelper.send(response, 201, "", { surveyId: survey_id, surveyCode });
     });
 };
 
-exports.createSurvey = async function (request, response) {
+exports.getAllOwnSurveyMasters = function (request, response) {
+    // returns a list of survey masters of the logged-in user
     const username = request.body.username;
-    let { title, description, timestampStart, timestampEnd, resultsVisible, isTemplate, isPublicTemplate, questions, groupId } = request.body;
+    db.query(`SELECT * FROM survey_master sm
+                LEFT JOIN survey_master_group g ON g.group_id = sm.group_id
+                WHERE sm.user_id = (SELECT user_id FROM users WHERE username = $1);`,
+            [username], (err, result) => {
+        if (err) {
+            // db failed
+            return responseHelper.sendInternalServerError(response, err);
+        }
+        responseHelper.send(response, 200, "", result.rows);
+    });
+};
+
+exports.createSurveyMaster = async function (request, response) {
+    const username = request.body.username;
+    let { resultsVisible, isTemplate, isPublicTemplate, survey, groupId } = request.body;
+    let title = survey.title;
+    let description = "";
 
     // make sure that no one tries to create a survey in the group of someone else
     if (groupId) {
         let isAllowed = await checkIfGroupIdIsAllowedForUser(groupId, username);
         if (!isAllowed) {
             return responseHelper.sendClientError(response, 403);
-        }
-    }
-
-    // checking and preparing inputs
-    if (Object.prototype.toString.call(questions) === "[object String]") {
-        // questions are a string -> parse to JSON/array
-        try {
-            questions = JSON.parse(questions);
-        } catch (err) {
-            return responseHelper.sendClientError(response, "Parsing of Questions Failed");
         }
     }
 
@@ -290,24 +297,26 @@ exports.createSurvey = async function (request, response) {
         let surveyMasterId = result.rows[0].survey_master_id;
         
         // create survey
-        createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd);
+        //createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd);
 
         // create questions
-        for (let q of questions) {
-            if (q.isTemplate !== true) { q.isTemplate = false; }
-            if (q.isPublicTemplate !== true) { q.isPublicTemplate = false; }
-            if (q.isPublicTemplate == true) { q.isTemplate = true; }
-            db.query(`INSERT INTO question (question_json, is_template, is_public_template, survey_master_id)
+        for (let pageId=0; pageId<survey.pages.length; pageId++) {
+            for (let q of survey.pages[pageId].elements) {
+                q.backend_ugly_fix_page_id = pageId;
+                db.query(`INSERT INTO question (question_json, is_template, is_public_template, survey_master_id)
                         VALUES ($1, $2, $3, $4);`,
-                    [q.questionJSON, q.isTemplate, q.isPublicTemplate, surveyMasterId]);
+                    [JSON.stringify(q), false, false, surveyMasterId]);
+            }
         }
+        // TODO: wait for successfully saving all questions? Promise.all?
+        responseHelper.send(response, 201, "", { surveyMasterId });
     });
 };
 
 const checkIfSurveyMasterIdIsAllowedForUser = function (surveyMasterId, username) {
     return new Promise(resolve => {
-        db.query(`SELECT * FROM users u JOIN survey_master m ON m.user_id = g.user_id
-                    WHERE m.survey_master_id = $1 AND u.username = $2;`, [surveyMasterId, username], (err, result) => {
+        db.query(`SELECT * FROM users u JOIN survey_master sm ON u.user_id = sm.user_id
+                    WHERE sm.survey_master_id = $1 AND u.username = $2;`, [surveyMasterId, username], (err, result) => {
             if (err || result.rows.length !== 1) {
                 resolve(false);
             } else {
@@ -329,22 +338,6 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
         return responseHelper.sendClientError(response, 403);
     }
     createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd);
-};
-
-exports.getSurveyMasterDetails = function (request, response) {
-    response.status(501).json({
-        status: 501,
-        message: "Not Yet Implemented",
-        payload: null
-    }); // TODO
-};
-
-exports.getSurveyDetails = function (request, response) {
-    response.status(501).json({
-        status: 501,
-        message: "Not Yet Implemented",
-        payload: null
-    }); // TODO
 };
 
 exports.getAllOwnGroups = function (request, response) {
@@ -396,7 +389,22 @@ exports.getSurveyBySurveyCode = function (request, response) {
                 // db failed
                 return responseHelper.sendInternalServerError(response, err);
             }
-            result.questions = resultQuestions.rows;
+            result.surveyjs = {
+                title: result.survey.title,
+                showProgressBar: 'top',
+                pages: [],
+            };
+            for (let question of resultQuestions.rows) {
+                let el = JSON.parse(question.question_json);
+                let pageId = el.backend_ugly_fix_page_id;
+                while (result.surveyjs.pages.length <= pageId) {
+                    result.surveyjs.pages.push({
+                        elements: []
+                    });
+                }
+                delete el.backend_ugly_fix_page_id;
+                result.surveyjs.pages[pageId].elements.push(el);
+            }
             responseHelper.send(response, 200, "", result);
         });
     });
@@ -406,17 +414,9 @@ exports.submitSurvey = function (request, response) {
     const surveyCode = request.params.surveyCode;
     let { answers } = request.body;
 
-    if (Object.prototype.toString.call(answers) === "[object String]") {
-        // answers are a string -> parse to JSON/array
-        try {
-            answers = JSON.parse(answers);
-        } catch (err) {
-            return responseHelper.sendClientError(response, "Parsing of Answers Failed");
-        }
-    }
-    db.query(`SELECT survey.survey_id, survey.survey_master_id, question.question_id
+    db.query(`SELECT survey.survey_id, survey.survey_master_id, q.question_id, q.question_json
                 FROM survey INNER JOIN
-                    question on survey.survey_master_id = question.survey_master_id
+                    question q on survey.survey_master_id = q.survey_master_id
                 WHERE survey_code = $1
                 AND timestamp_start < $2
                 AND (timestamp_end IS NULL OR timestamp_end > $2);`,
@@ -430,24 +430,38 @@ exports.submitSurvey = function (request, response) {
         }
         let surveyId = result.rows[0].survey_id;
 
-        let questionIds = [];
+        let questionNameIdMap = {};
         for (let row of result.rows) {
-            questionIds.push(row.question_id);
+            questionNameIdMap[JSON.parse(row.question_json).name] = row.question_id;
         }
 
-        try {
-            for (let a of answers) {
-                if (questionIds.includes(a.questionId)) {
-                    db.query(`INSERT INTO answer (answer, survey_id, question_id, timestamp)
-                                VALUES ($1, $2, $3, $4);`,
-                            [a.answer, surveyId, a.questionId, new Date().toISOString()]);
-                }
+        for (let questionName in answers) {
+            let qId = questionNameIdMap[questionName];
+            if (qId === undefined) {
+                // no question found that corresponds to this answer
+                continue;
             }
-        } catch (err) {
-            // db failed?
-            return responseHelper.sendInternalServerError(response, err);
+
+            let answ = answers[questionName];
+            if (typeof answ === "string") {
+                answ = [answ];
+            } else if (Array.isArray(answ)) {
+                // everything fine
+            } else {
+                console.log("This answer type is unsupported...");
+                console.log(answ);
+                continue;
+            }
+
+            for(let a of answ) {
+                try {
+                    db.query(`INSERT INTO answer (answer, survey_id, question_id, timestamp)
+                                    VALUES ($1, $2, $3, $4);`,
+                                [a, surveyId, qId, new Date().toISOString()]);
+                } catch {}
+            }
         }
-        responseHelper.send(response, 200, "Submitted Survey Successfully");
+        responseHelper.send(response, 200, "Submitted Answers Successfully");
     });
 };
 
@@ -465,6 +479,55 @@ exports.submitComment = function (request, response) {
             return responseHelper.sendInternalServerError(response, err);
         }
         responseHelper.send(response, 200, "Submitted Comment Successfully");
+    });
+};
+
+// Results of Survey
+exports.getSurveyResults = async function (request, response) {
+    const username = request.body.username;
+    let surveyId = request.params.surveyId;
+
+    db.query(`SELECT *
+                FROM survey s
+                    INNER JOIN survey_master sm ON s.survey_master_id = sm.survey_master_id
+                    INNER JOIN question q ON sm.survey_master_id = q.survey_master_id
+                    INNER JOIN users u ON sm.user_id = u.user_id
+                WHERE u.username = $1 AND s.survey_id = $2;`,
+            [username, surveyId], (err, questions) => {
+        if (err) {
+            // db failed
+            return responseHelper.sendInternalServerError(response, err);
+        } else if (questions.rows.length < 1) {
+            // no survey
+            return responseHelper.sendClientError(response, 404, "No Data Found");
+        }
+        let result = {};
+        for (let prop of ["title", "survey_id", "timestamp_start", "timestamp_end",
+                "survey_master_id", "survey_code", "description"]) {
+            result[prop] = questions.rows[0][prop];
+        }
+        result.questions = {};
+        for (let question of questions.rows) {
+            result.questions[question.question_id] = {
+                question: JSON.parse(question.question_json),
+                answers: {}
+            };
+        }
+
+        db.query(`SELECT a.question_id, a.answer, count(a.answer)
+                    FROM answer a
+                    WHERE a.survey_id = $1
+                    GROUP BY a.question_id, a.answer;`,
+                [surveyId], (err, answers) => {
+            if (err) {
+                // db failed
+                return responseHelper.sendInternalServerError(response, err);
+            }
+            for (let answer of answers.rows) {
+                result.questions[answer.question_id].answers[answer.answer] = answer.count;
+            }
+            responseHelper.send(response, 200, "", result);
+        });
     });
 };
 
