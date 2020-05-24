@@ -139,16 +139,15 @@ If you find an error message, it is in the `message` field and not in `error`.
 ### `POST /register`
 body:
 ```
-{ username: "user",
-  password: "password"
-  registerKey: "https://knowyourmeme.com/memes/let-me-in"
+{
+  "username": "user",
+  "password": "password"
+  "registerKey": "https://knowyourmeme.com/memes/let-me-in"
 }
 ```
 responses:
 ```
-201 { username: "user",
-      sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
-    }
+201 { username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
 400 { error: "Register Failed" }
 400 { error: "Username Already Exists" }
 500 { error: "Internal Server Error" }
@@ -157,7 +156,10 @@ responses:
 ### `POST /login`
 body:
 ```
-{ username: "user", password: "password" }
+{
+  "username": "user",
+  "password": "password"
+}
 ```
 responses:
 ```
@@ -172,23 +174,27 @@ responses:
 ### `POST /changePassword`
 body:
 ```
-200 { username: "user",
-      sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
-      password: "password",
-      newPassword: "pa55w0rd"
-    }
-400 { error: "Password Change Failed" }
-500 { error: "Internal Server Error" }
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  "password": "password",
+  "newPassword": "pa55w0rd"
+}
 ```
 responses:
 ```
-{ username: "user", sessionId: "6a2e2d2d1814bb98fb1fc875e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6728e130f86" }
+200 { username: "user", sessionId: "6a2e2d2d1814bb98fb1fc875e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6728e130f86" }
+400 { error: "Password Change Failed" }
+500 { error: "Internal Server Error" }
 ```
 
 ### `POST /logout`
 body:
 ```
-{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
+}
 ```
 responses:
 ```
@@ -199,7 +205,10 @@ responses:
 ### `POST /getAllOwnSurveys`
 body:
 ```
-{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
+}
 ```
 responses:
 ```
@@ -224,7 +233,10 @@ responses:
 ### `POST /getAllSurveyMasterTemplates`
 body:
 ```
-{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+{ 
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
+}
 ```
 responses:
 ```
@@ -241,7 +253,10 @@ responses:
 ### `POST /getAllQuestionTemplates`
 body:
 ```
-{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+{ 
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
+}
 ```
 responses:
 ```
@@ -256,7 +271,10 @@ responses:
 ### `POST /getAllOwnSurveyMasters`
 body:
 ```
-{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+{ 
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
+}
 ```
 responses:
 ```
@@ -276,49 +294,51 @@ responses:
 ### `POST /createSurveyMaster`
 body:
 ```
-{ username: "user",
-  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
-  resultsVisible: true,
-  isTemplate: true,
-  isPublicTemplate: false,
-  survey: {
-    title: 'Product Feedback Survey Example',
-    showProgressBar: 'top',
-    pages: [
+{ 
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  "resultsVisible": true,
+  "isTemplate": true,
+  "isPublicTemplate": false,
+  "survey": {
+    "title": "Product Feedback Survey Example",
+    "showProgressBar": "top",
+    "pages": [
       {
-        title: "title for this page",
-        description: "description for this page",
-        elements: [
+        "title": "title for this page",
+        "description": "description for this page",
+        "elements": [
           {
-            type: 'myquestion',
-            name: 'cq1',
-            text: 'Some Text',
+            "type": "myquestion",
+            "name": "cq1",
+            "text": "Some Text"
           },
           ...
         ]
-      }, {
-        name: "name for this page",
-        elements: [
+      },
+      {
+        "name": "name for this page",
+        "elements": [
           {
-            type: 'dropdown',
-            name: 'position',
-            title: 'Choose job position ...',
-            renderAs: 'select2',
-            choices: [
-              '1|Designer',
-              '2|Front-end Developer',
-              '3|Back-end Developer',
-              '4|Database Administrator',
-              '5|System Engineer',
-            ],
+            "type": "dropdown",
+            "name": "position",
+            "title": "Choose job position ...",
+            "renderAs": "select2",
+            "choices": [
+              "1|Designer",
+              "2|Front-end Developer",
+              "3|Back-end Developer",
+              "4|Database Administrator",
+              "5|System Engineer"
+            ]
           },
           ...
-        ],
+        ]
       },
       ...
     ]
   },
-  groupId: null
+  "groupId": null
 }
 ```
 responses:
@@ -333,10 +353,12 @@ In the URL you need to replace `:surveyMasterId` with the real Id to specify on 
 
 body:
 ```
-{ username: "user",
-  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
-  timestampStart: "2019-12-01 00:00:00",
-  timestampEnd: "2019-12-31 23:59:59" }
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  "timestampStart": "2019-12-01 00:00:00",
+  "timestampEnd": "2019-12-31 23:59:59"
+}
 ```
 responses:
 ```
@@ -350,8 +372,10 @@ In the URL you need to replace `:surveyMasterId` with the id of the survey maste
 
 body:
 ```
-{ username: "user",
-  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
+}
 ```
 responses:
 ```
@@ -383,8 +407,10 @@ In the URL you need to replace `:surveyMasterId` with the id of the survey maste
 
 body:
 ```
-{ username: "user",
-  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
+}
 ```
 responses:
 ```
@@ -397,7 +423,10 @@ responses:
 ### `POST /getAllOwnGroups`
 body:
 ```
-{ username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }
+{ 
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
+}
 ```
 responses:
 ```
@@ -412,9 +441,11 @@ responses:
 ### `POST /createGroup`
 body:
 ```
-{ username: "user",
-  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
-  name: "New Group" }
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  "name": "New Group"
+}
 ```
 responses:
 ```
@@ -483,15 +514,16 @@ Replace `:surveyCode` with the survey code of the survey you want to submit, e.g
 
 body:
 ```
-{ username: "user",
-  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
-  answers: {
-    question_name_1: "answer1",
-    question_name_2: "answer2",
-    question_name_3: [
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  "answers": {
+    "question_name_1": "answer1",
+    "question_name_2": "answer2",
+    "question_name_3": [
       "answer3_1",
       "answer3_2"
-    ]
+    ],
     ...
   }
 }
@@ -508,9 +540,11 @@ Replace `:surveyCode` with the survey code of the survey you want to comment, e.
 
 body:
 ```
-{ username: "user",
-  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
-  comment: "What do you think of One-Time-Pad and using the message as key too?" }
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+  "comment": "What do you think of One-Time-Pad and using the message as key too?"
+}
 ```
 responses:
 ```
@@ -523,8 +557,9 @@ Replace `:surveyId` with the survey id whose results you want to see, e.g. `69`.
 
 body:
 ```
-{ username: "user",
-  sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
+{
+  "username": "user",
+  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77"
 }
 ```
 responses:
@@ -578,7 +613,10 @@ responses:
 ### `POST /getUsers` (only for admins)
 body:
 ```
-{ username: "admin", sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c" }
+{
+  "username: "admin",
+  "sessionId": "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
+}
 ```
 responses:
 ```
@@ -600,10 +638,11 @@ responses:
 ### `POST /createUser` (only for admins)
 body:
 ```
-{ username: "admin",
-  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
-  newUsername: "user2",
-  newPassword: "pw"
+{
+  "username": "admin",
+  "sessionId": "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c",
+  "newUsername": "user2",
+  "newPassword": "pw"
 }
 ```
 responses:
@@ -617,9 +656,10 @@ responses:
 Use an empty string to reset register key (so that no registration is possible for new users).
 body:
 ```
-{ username: "admin",
-  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
-  registerKey: "newRegisterKey"
+{
+  "username": "admin",
+  "sessionId": "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c",
+  "registerKey": "newRegisterKey"
 }
 ```
 responses:
@@ -632,8 +672,9 @@ responses:
 ### `POST /getRegisterKey` (only for admins)
 body:
 ```
-{ username: "admin",
-  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
+{
+  "username": "admin",
+  "sessionId": "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
 }
 ```
 responses:
@@ -646,10 +687,11 @@ responses:
 ### `POST /resetPasswordOfUser` (only for admins)
 body:
 ```
-{ username: "admin",
-  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
-  usernameForPasswordReset: "user",
-  newPassword: "youbetternotforgetyourpasswordagain"
+{
+  "username": "admin",
+  "sessionId": "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c",
+  "usernameForPasswordReset": "user",
+  "newPassword": "youbetternotforgetyourpasswordagain"
 }
 ```
 responses:
@@ -662,9 +704,10 @@ responses:
 ### `POST /upgradeUserToAdmin` (only for admins)
 body:
 ```
-{ username: "admin",
-  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c",
-  usernameToBeUpgraded: "user"
+{
+  "username": "admin",
+  "sessionId": "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c",
+  "usernameToBeUpgraded": "user"
 }
 ```
 responses:
@@ -677,8 +720,9 @@ responses:
 ### `POST /testIfAdmin` (only for admins)
 body:
 ```
-{ username: "admin",
-  sessionId: "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
+{
+  "username": "admin",
+  "sessionId": "a6876c524c4864b8e7e097a8798867b7a4636033b0c997aba97614ed2fc12c2c12434fd2d22c7cfdcf80fbc7914c3c0c"
 }
 ```
 responses:
