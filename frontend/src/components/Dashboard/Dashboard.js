@@ -1,47 +1,64 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Line, Bar, Radar, Pie, Doughnut, Polar } from 'react-chartjs-2';
-import { MDBContainer, MDBTabContent, MDBTabPane, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
-import DocsLink from '../docsLink';
-import SectionContainer from '../sectionContainer';
+import { MDBContainer, MDBTabContent, MDBTabPane, MDBNav, MDBNavItem, MDBNavLink, MDBDropdown, MDBRow, MDBCol } from 'mdbreact';
+import surveyAPI from '../../api/survey';
+import SurveyResultCard from './SurveyResultCard'
+import SurveyResultDetails from './SurveyResultDetails'
+
+import surveys from './surveys.json';
+import survey69 from './69surveydata.json';
+import survey70 from './70surveydata.json';
 
 class Dashboard extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         activeItem: "1"
+         showSurveyResult: false,
+         surveyResults: [],
+         surveyResultToShow: 0
       };
    }
 
-   toggle = tab => e => {
-      if (this.state.activeItem !== tab) {
-        this.setState({
-          activeItem: tab
-        });
-      }
-    };
+   showSurveyResults = async (surveyResult) => {
+      this.setState({ showSurveyResult: true, surveyResultToShow: surveyResult });
+   };
 
+   returnToOverview = () => {
+      this.setState({ showSurveyResult: false, surveyToShow: null });
+   };
+
+
+   loadSurveys(params) {}
+
+   loadSurveyData(surveyId) {
+      // for each survey: /getSurveyResults/:surveyId--
+   }
+   
    render() {
+      const { showSurveyResult } = this.state;
+
+      const whatToRender = showSurveyResult ? (
+         <SurveyResultDetails survey={this.state.surveyResultToShow} onClickReturn={this.returnToOverview} />
+      ) : (
+         <Fragment>
+            <MDBRow id="categories">
+               {this.state.surveyResults.map((surveyResult, key) => (
+                  <SurveyResultCard counter={key} infos={{ surveyResult, type: 1 }} onClickSurvey={() => this.showSurvey(surveyResult.id)} />
+               ))}
+            </MDBRow>
+         </Fragment>
+      );
+
       return (
          <MDBContainer>
-         <MDBNav className="nav-tabs mt-5">
-           <MDBNavItem>
-             <MDBNavLink link to="#" active={this.state.activeItem === "1"} onClick={this.toggle("1")} role="tab" >
-               Home
-             </MDBNavLink>
-           </MDBNavItem>
-         </MDBNav>
-         <MDBTabContent activeItem={this.state.activeItem} >
-           <MDBTabPane tabId="1" role="tabpanel">
-             <p className="mt-2">
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-               Nihil odit magnam minima, soluta doloribus reiciendis
-               molestiae placeat unde eos molestias. Quisquam aperiam,
-               pariatur. Tempora, placeat ratione porro voluptate odit
-               minima.
-             </p>
-           </MDBTabPane>
-         </MDBTabContent>
-       </MDBContainer>
+            <MDBRow>
+               <MDBCol md="12" className="mt-4">
+                  <h2 className="text-center my-5 font-weight-bold">Survey Results Dashboard</h2>
+                  <hr className="my-5" />
+                  {whatToRender}
+               </MDBCol>
+            </MDBRow>
+         </MDBContainer>
       );
    }
 }
