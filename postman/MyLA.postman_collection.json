@@ -1,0 +1,749 @@
+{
+	"info": {
+		"_postman_id": "57583781-b94b-4bf4-9ac3-d020ee8d2799",
+		"name": "MyLA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"NewTestUser\",\n\t\"password\": \"123\",\n\t\"registerKey\": {{registerKey}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/register",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"NewTestUser\",\n\t\"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/login",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}},\r\n  \"password\": \"123\",\r\n  \"newPassword\": \"new_S3cure.PW420\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/changePassword",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/logout",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bfec4991-1760-48f4-872d-3ac141a38024",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "dbd0fa10-5d15-47f0-966e-717284043773",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Survey Management",
+			"item": [
+				{
+					"name": "get All Own Surveys",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getAllOwnSurveys",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getAllOwnSurveys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Survey Master Templates",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getAllSurveyMasterTemplates",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getAllSurveyMasterTemplates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Question Templates",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getAllQuestionTemplates",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getAllQuestionTemplates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Own Survey Masters",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getAllOwnSurveyMasters",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getAllOwnSurveyMasters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Survey Master",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}},\r\n  \"resultsVisible\": true,\r\n  \"isTemplate\": true,\r\n  \"isPublicTemplate\": false,\r\n  \"survey\": {\r\n    \"title\": \"Product Feedback Survey Example\",\r\n    \"showProgressBar\": \"top\",\r\n    \"pages\": [\r\n      {\r\n        \"title\": \"title for this page\",\r\n        \"description\": \"description for this page\",\r\n        \"elements\": [\r\n          {\r\n            \"type\": \"myquestion\",\r\n            \"name\": \"cq1\",\r\n            \"text\": \"Some Text\"\r\n          }\r\n        ]\r\n      },\r\n      {\r\n        \"name\": \"name for this page\",\r\n        \"elements\": [\r\n          {\r\n            \"type\": \"dropdown\",\r\n            \"name\": \"position\",\r\n            \"title\": \"Choose job position ...\",\r\n            \"renderAs\": \"select2\",\r\n            \"choices\": [\r\n              \"1|Designer\",\r\n              \"2|Front-end Developer\",\r\n              \"3|Back-end Developer\",\r\n              \"4|Database Administrator\",\r\n              \"5|System Engineer\"\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    ]\r\n  },\r\n  \"groupId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createSurveyMaster",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createSurveyMaster"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Survey based on Master with ID: {ID}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}},\r\n  \"timestampStart\": \"2019-12-01 00:00:00\",\r\n  \"timestampEnd\": \"2019-12-31 23:59:59\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createSurveyBasedOnMaster/{ID}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createSurveyBasedOnMaster",
+								"{ID}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Survey Master with ID: {ID}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getSurveyMaster/{ID}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getSurveyMaster",
+								"{ID}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Survey Master with ID: {ID}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}},\r\n  \"resultsVisible\": true,\r\n  \"isTemplate\": true,\r\n  \"isPublicTemplate\": false,\r\n  \"survey\": {\r\n    \"title\": \"Product Feedback Survey Example\",\r\n    \"showProgressBar\": \"top\",\r\n    \"pages\": [\r\n      {\r\n        \"title\": \"title for this page\",\r\n        \"description\": \"description for this page\",\r\n        \"elements\": [\r\n          {\r\n            \"type\": \"myquestion\",\r\n            \"name\": \"cq1\",\r\n            \"text\": \"Some Text\"\r\n          }\r\n        ]\r\n      },\r\n      {\r\n        \"name\": \"name for this page\",\r\n        \"elements\": [\r\n          {\r\n            \"type\": \"dropdown\",\r\n            \"name\": \"position\",\r\n            \"title\": \"Choose job position ...\",\r\n            \"renderAs\": \"select2\",\r\n            \"choices\": [\r\n              \"1|Designer\",\r\n              \"2|Front-end Developer\",\r\n              \"3|Back-end Developer\",\r\n              \"4|Database Administrator\",\r\n              \"5|System Engineer\"\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    ]\r\n  },\r\n  \"groupId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/updateSurveyMaster/{ID}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"updateSurveyMaster",
+								"{ID}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Survey Master with ID: {ID}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/deleteSurveyMaster/{ID}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"deleteSurveyMaster",
+								"{ID}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "get All Own Groups",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getAllOwnGroups",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getAllOwnGroups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}},\r\n  \"name\": \"NewGroupName\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createGroup",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createGroup"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Survey Usage",
+			"item": [
+				{
+					"name": "get Survey by Survey Code: {CODE}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getSurveyBySurveyCode/{CODE}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getSurveyBySurveyCode",
+								"{CODE}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit Anwsers to Survey with Survey Code: {CODE}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}},\r\n  \"answers\": {\r\n    \"question_name_1\": \"answer1\",\r\n    \"question_name_2\": \"answer2\",\r\n    \"question_name_3\": [\r\n      \"answer3_1\",\r\n      \"answer3_2\"\r\n    ]\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{CODE}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{CODE}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit Comment to Survey with Survey Code: {CODE}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}},\r\n  \"comment\": \"Here you can add you comment.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitComment/{CODE}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitComment",
+								"{CODE}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Results from Survey with Survey Code: {CODE}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getSurveyResults/{CODE}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getSurveyResults",
+								"{CODE}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Admin Routes",
+			"item": [
+				{
+					"name": "get All Users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exmapleAdmin}},\r\n  \"sessionId\": {{adminSessionID}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getUsers",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create a New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exmapleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"newUsername\": \"NewUser\",\r\n  \"newPassword\": \"SecurePW\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createUser",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set the Register Key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exmapleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"registerKey\": {{registerKey}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/setRegisterKey",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"setRegisterKey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get the Register Key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exmapleAdmin}},\r\n  \"sessionId\": {{adminSessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/getRegisterKey",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"getRegisterKey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset Password of Given User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exmapleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"usernameForPasswordReset\": \"NewTestUser\",\r\n  \"newPassword\": \"youbetternotforgetyourpasswordagain\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/resetPasswordOfUser",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"resetPasswordOfUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upgrade User to Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exmapleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"usernameToBeUpgraded\": \"NewTestUser\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/upgradeUserToAdmin",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"upgradeUserToAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test if You are an Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exmapleAdmin}},\r\n  \"sessionId\": {{adminSessionID}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/testIfAdmin",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"testIfAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

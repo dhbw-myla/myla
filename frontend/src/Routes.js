@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { verifySession } from './auth/verifyPw';
 import AdminComponent from './components/Admin/AdminComponent';
 import UsersComponent from './components/Admin/Users';
-import ChartPageComponent from './components/Charts/ChartPageComponent';
+import Dashboard from './components/Dashboard/Dashboard';
 import {
    ACCOUNT_PASSWORD_CHANGE,
    ADMIN,
@@ -60,7 +60,7 @@ class Routes extends Component {
             <PrivateRoute exact path={'/' + NEW_SURVEY} component={SurveyCreateComponent} />
             <PrivateRoute exact path={'/' + MODIFY_SURVEY} component={SurveyCreateComponent} />
             <PrivateRoute exact path={'/' + ADMIN} component={AdminComponent} />
-            <PrivateRoute exact path={'/' + DASHBOARD} component={ChartPageComponent} />
+            <PrivateRoute exact path={'/' + DASHBOARD} component={Dashboard} />
             <PrivateRoute exact path={'/' + ADMIN_USERS} component={UsersComponent} />
             <PrivateRoute exact path={'/' + MY_ACCOUNT} component={Account} />
             <PrivateRoute exact path={'/' + ACCOUNT_PASSWORD_CHANGE} component={ChangePassword} />

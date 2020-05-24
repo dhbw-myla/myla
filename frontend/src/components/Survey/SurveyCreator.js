@@ -60,6 +60,7 @@ class SurveyCreator extends Component {
          this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
       } else {
          this.surveyCreator = new SurveyJSCreator.SurveyEditor(surveys[0]);
+         this.surveyCreator = new SurveyJSCreator.SurveyEditor();
          const { location } = this.props.history;
          const { surveyToEdit } = location.state;
          const { surveyMaster, surveyjs } = surveyToEdit;

@@ -1,15 +1,33 @@
-import React, { Component } from 'react';
-import { Line, Bar, Radar, Pie, Doughnut, Polar } from 'react-chartjs-2';
-import { MDBContainer } from 'mdbreact';
-import DocsLink from '../../components/docsLink';
-import SectionContainer from '../../components/sectionContainer';
+         <MDBContainer>
+            <DocsLink title="Charts" href="https://mdbootstrap.com/docs/react/advanced/charts/" />
 
-class ChartPageComponent extends Component {
-   constructor(props) {
-      super(props);
-      this.state = {};
-   }
+            <SectionContainer header="Line chart">
+               <Line data={this.dataLine} options={{ responsive: true }} />
+            </SectionContainer>
 
+            <SectionContainer header="Radar chart">
+               <Radar data={this.dataRadar} options={{ responsive: true }} />
+            </SectionContainer>
+
+            <SectionContainer header="Bar chart">
+               <Bar data={this.dataBar} options={this.barChartOptions} />
+            </SectionContainer>
+
+            <SectionContainer header="Polar chart">
+               <Polar data={this.dataPolar} options={{ responsive: true }} />
+            </SectionContainer>
+
+            <SectionContainer header="Pie chart">
+               <Pie data={this.dataPie} options={{ responsive: true }} />
+            </SectionContainer>
+
+            <SectionContainer header="Doughnut chart">
+               <Doughnut data={this.dataDoughnut} options={{ responsive: true }} />
+            </SectionContainer>
+         </MDBContainer>
+
+
+         
    // LineChart
    dataLine = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -147,38 +165,3 @@ class ChartPageComponent extends Component {
          },
       ],
    };
-
-   render() {
-      return (
-         <MDBContainer>
-            <DocsLink title="Charts" href="https://mdbootstrap.com/docs/react/advanced/charts/" />
-
-            <SectionContainer header="Line chart">
-               <Line data={this.dataLine} options={{ responsive: true }} />
-            </SectionContainer>
-
-            <SectionContainer header="Radar chart">
-               <Radar data={this.dataRadar} options={{ responsive: true }} />
-            </SectionContainer>
-
-            <SectionContainer header="Bar chart">
-               <Bar data={this.dataBar} options={this.barChartOptions} />
-            </SectionContainer>
-
-            <SectionContainer header="Polar chart">
-               <Polar data={this.dataPolar} options={{ responsive: true }} />
-            </SectionContainer>
-
-            <SectionContainer header="Pie chart">
-               <Pie data={this.dataPie} options={{ responsive: true }} />
-            </SectionContainer>
-
-            <SectionContainer header="Doughnut chart">
-               <Doughnut data={this.dataDoughnut} options={{ responsive: true }} />
-            </SectionContainer>
-         </MDBContainer>
-      );
-   }
-}
-
-export default ChartPageComponent;
