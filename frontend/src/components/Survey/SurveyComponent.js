@@ -1,6 +1,6 @@
 import { MDBCol, MDBContainer, MDBNavLink, MDBRow } from 'mdbreact';
-import React, { Component } from 'react';
-import { getAllSurveyMasterTemplates } from '../../api/survey';
+import React, { Component, Fragment } from 'react';
+import { getAllSurveyMasterTemplates, updateSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import { NEW_SURVEY } from '../constants';
 import MySurveyCard from './MySurveyCard';
@@ -16,7 +16,7 @@ class SurveyComponent extends Component {
       };
    }
 
-   showSurvey = (survey) => {
+   showSurvey = async (survey) => {
       this.setState({ showSurvey: true, surveyToShow: survey });
    };
 
@@ -50,11 +50,24 @@ class SurveyComponent extends Component {
       const whatToRender = showSurvey ? (
          <SurveyDetails survey={this.state.surveyToShow} onClickReturn={this.returnToOverview} />
       ) : (
-         <MDBRow id="categories">
-            {this.state.surveys.map((survey, key) => (
-               <MySurveyCard counter={key} infos={{ survey, type: 1 }} onClickSurvey={this.showSurvey} />
-            ))}
-         </MDBRow>
+         <Fragment>
+            <MDBRow>
+               <MDBNavLink
+                  tag="button"
+                  to={'/' + NEW_SURVEY}
+                  color="mdb-color"
+                  className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                  onClick={this.scrollToTop}
+               >
+                  Create new Survey
+               </MDBNavLink>
+            </MDBRow>
+            <MDBRow id="categories">
+               {this.state.surveys.map((survey, key) => (
+                  <MySurveyCard counter={key} infos={{ survey, type: 1 }} onClickSurvey={() => this.showSurvey(survey.id)} />
+               ))}
+            </MDBRow>
+         </Fragment>
       );
 
       return (
@@ -63,17 +76,6 @@ class SurveyComponent extends Component {
                <MDBCol md="12" className="mt-4">
                   <h2 className="text-center my-5 font-weight-bold">{this.getHeading(showSurvey)}</h2>
                   <hr className="my-5" />
-                  <MDBRow>
-                     <MDBNavLink
-                        tag="button"
-                        to={'/' + NEW_SURVEY}
-                        color="mdb-color"
-                        className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
-                        onClick={this.scrollToTop}
-                     >
-                        Create new Survey
-                     </MDBNavLink>
-                  </MDBRow>
                   {whatToRender}
                </MDBCol>
             </MDBRow>

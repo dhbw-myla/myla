@@ -37,9 +37,8 @@ class SurveyDetails extends Component {
    }
 
    render() {
-      const { survey } = this.props;
+      const { survey } = this.state;
       const model = new Survey.Model(survey);
-      console.log('details', this.props);
       return (
          <div className="surveyjs">
             <Survey.Survey model={model} onComplete={this.onComplete.bind(this)} onValueChanged={this.onValueChanged.bind(this)} />

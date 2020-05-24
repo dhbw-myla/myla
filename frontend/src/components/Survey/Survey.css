@@ -2,10 +2,19 @@
    width: fit-content;
 }
 
-.card {
-   width: auto !important;
+.survey-card {
+   width: auto;
 }
 
 #surveyCreatorContainer {
    margin-top: 1.9rem;
+}
+
+#editIcon,
+#trashIcon {
+   margin-left: 1rem;
+}
+
+#trashIcon:hover {
+   color: #e30613;
 }

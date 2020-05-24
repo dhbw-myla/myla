@@ -1,5 +1,7 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
+import { deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
+import { getStoredUser } from '../../auth/verifyPw';
 import './Survey.css';
 
 class MySurveyCard extends Component {
@@ -19,14 +21,27 @@ class MySurveyCard extends Component {
       }
    };
 
+   // Not yet implemented from BE
+   delteSurvey = async (surveyMasterId) => {
+      const user = getStoredUser();
+      const resObj = await deleteSurveyMaster(user, surveyMasterId);
+      console.log('resObj', resObj);
+   };
+
+   // Not yet implemented from BE
+   modifySurvey = async (surveyMasterId) => {
+      const user = getStoredUser();
+      const resObj = await getSurveyMaster(user, surveyMasterId);
+      console.log('resObj', resObj);
+   };
+
    render() {
       const { counter, infos } = this.props;
       const { survey, type } = infos;
-      console.log('counter', counter);
       return (
          <MDBCol md="4" key={counter}>
             <MDBAnimation reveal type={this.getFading(type)}>
-               <MDBCard cascade className="my-3 grey lighten-4">
+               <MDBCard cascade className="my-3 grey lighten-4 survey-card">
                   <MDBCardBody cascade className="text-center">
                      <MDBCardTitle>
                         <MDBIcon icon="cubes" className="blue-text pr-2" />
@@ -42,6 +57,8 @@ class MySurveyCard extends Component {
                      >
                         Show survey
                      </MDBNavLink>
+                     <MDBIcon id="editIcon" icon="edit" onClick={() => this.modifySurvey(survey.survey_master_id)} />
+                     <MDBIcon id="trashIcon" icon="trash" onClick={() => this.delteSurvey(survey.survey_master_id)} />
                   </MDBCardBody>
                </MDBCard>
             </MDBAnimation>

@@ -3,11 +3,14 @@ import {
    PATH_BASE_URL,
    PATH_CREATE_SURVEY,
    PATH_CREATE_SURVEY_BASED_ON_MASTER,
+   PATH_CREATE_SURVEY_MASTER,
+   PATH_DELTE_SURVEY_MASTER,
    PATH_GET_ALL_OWN_SURVEYS,
    PATH_GET_ALL_SURVEY_MASTER_TEMPLATES,
    PATH_GET_SURVEY_BY_SURVEY_CODE,
+   PATH_GET_SURVEY_MASTER,
    PATH_SUBMIT_SURVEY,
-   PATH_CREATE_SURVEY_MASTER,
+   PATH_UPDATE_SURVEY_MASTER,
 } from './constants';
 
 /*
@@ -119,5 +122,50 @@ export async function createSurveyMaster(user, survey) {
       return response.data;
    } catch (error) {
       console.log('error on createSurveyMaster', error);
+   }
+}
+
+/*
+ * NOT YET IMPLEMENTED !!!
+ */
+export async function getSurveyMaster(user, surveyMasterId) {
+   try {
+      const url = PATH_BASE_URL + PATH_GET_SURVEY_MASTER;
+      const response = await axiosHelper.post(url, 'getSurveyMaster', { user, surveyMasterId });
+      return response.data;
+   } catch (error) {
+      console.log('error on getSurveyMaster', error);
+   }
+}
+
+/*
+ * NOT YET IMPLEMENTED !!!
+ */
+export async function updateSurveyMaster(user, survey) {
+   const config = {
+      resultsVisible: true,
+      isTemplate: true,
+      isPublicTemplate: false,
+      groupId: null,
+   };
+   try {
+      const url = PATH_BASE_URL + PATH_UPDATE_SURVEY_MASTER;
+      const response = await axiosHelper.post(url, 'updateSurveyMaster', { user, survey, config });
+      return response.data;
+   } catch (error) {
+      console.log('error on updateSurveyMaster', error);
+   }
+}
+
+/*
+ * NOT YET IMPLEMENTED !!!
+ */
+export async function deleteSurveyMaster(user, surveyMasterId) {
+   try {
+      const url = PATH_BASE_URL + PATH_DELTE_SURVEY_MASTER;
+      const response = await axiosHelper.post(url, 'deleteSurveyMaster', { user, surveyMasterId });
+      return response.data;
+   } catch (error) {
+      console.log('error on deleteSurveyMaster', error);
    }
 }
