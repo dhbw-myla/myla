@@ -1,9 +1,31 @@
 import * as axiosHelper from './axiosHelper';
-import { PATH_BASE_URL, PATH_CREATE_GROUP, PATH_CREATE_SURVEY, PATH_CREATE_SURVEY_BASED_ON_MASTER, PATH_CREATE_SURVEY_MASTER, PATH_CREATE_USER, PATH_DELTE_SURVEY_MASTER, PATH_GET_ALL_OWN_GROUPS, PATH_GET_ALL_OWN_SURVEYS, PATH_GET_ALL_OWN_SURVEY_MASTERS, PATH_GET_ALL_QUESTION_TEMPLATES, PATH_GET_ALL_SURVEY_MASTER_TEMPLATES, PATH_GET_REGISTER_KEY, PATH_GET_SURVEY_BY_SURVEY_CODE, PATH_GET_SURVEY_MASTER, PATH_GET_SURVEY_RESULTS, PATH_GET_USERS, PATH_RESET_PASSWORD_OF_USER, PATH_SET_REGISTER_KEY, PATH_SUBMIT_COMMENT, PATH_SUBMIT_SURVEY, PATH_TEST_IF_ADMIN, PATH_UPDATE_SURVEY_MASTER, PATH_UPGRADE_USER_TO_ADMIN } from './constants';
-
+import {
+   PATH_BASE_URL,
+   PATH_CREATE_GROUP,
+   PATH_CREATE_SURVEY_BASED_ON_MASTER,
+   PATH_CREATE_SURVEY_MASTER,
+   PATH_CREATE_USER,
+   PATH_DELTE_SURVEY_MASTER,
+   PATH_GET_ALL_OWN_GROUPS,
+   PATH_GET_ALL_OWN_SURVEYS,
+   PATH_GET_ALL_OWN_SURVEY_MASTERS,
+   PATH_GET_ALL_QUESTION_TEMPLATES,
+   PATH_GET_ALL_SURVEY_MASTER_TEMPLATES,
+   PATH_GET_REGISTER_KEY,
+   PATH_GET_SURVEY_BY_SURVEY_CODE,
+   PATH_GET_SURVEY_MASTER,
+   PATH_GET_SURVEY_RESULTS,
+   PATH_GET_USERS,
+   PATH_RESET_PASSWORD_OF_USER,
+   PATH_SET_REGISTER_KEY,
+   PATH_SUBMIT_COMMENT,
+   PATH_SUBMIT_SURVEY,
+   PATH_TEST_IF_ADMIN,
+   PATH_UPDATE_SURVEY_MASTER,
+   PATH_UPGRADE_USER_TO_ADMIN,
+} from './constants';
 
 // order according to readme.md
-
 
 /*
  * Returns
@@ -71,10 +93,16 @@ export async function getAllOwnSurveyMasters(user) {
  * 403 { error: "Forbidden" }
  * 500 { error: "Internal Server Error" }
  */
-export async function createSurveyMaster(user) {
+export async function createSurveyMaster(user, survey) {
+   const config = {
+      resultsVisible: true,
+      isTemplate: true,
+      isPublicTemplate: false,
+      groupId: null,
+   };
    try {
       const url = PATH_BASE_URL + PATH_CREATE_SURVEY_MASTER;
-      const response = await axiosHelper.post(url, 'createSurveyMaster', user);
+      const response = await axiosHelper.post(url, 'createSurveyMaster', { ...user, survey, ...config });
       return response.data;
    } catch (error) {
       console.log('error on createSurveyMaster', error);
@@ -87,10 +115,10 @@ export async function createSurveyMaster(user) {
  * 403 { error: "Forbidden" }
  * 500 { error: "Internal Server Error" }
  */
-export async function createSurveyBasedOnMaster(user, surveyMasterId) {
+export async function createSurveyBasedOnMaster(user, timestampStart, timestampEnd, surveyMasterId) {
    try {
       const url = PATH_BASE_URL + PATH_CREATE_SURVEY_BASED_ON_MASTER + surveyMasterId;
-      const response = await axiosHelper.post(url, 'createSurveyBasedOnMaster', user);
+      const response = await axiosHelper.post(url, 'createSurveyBasedOnMaster', { ...user, timestampStart, timestampEnd });
       return response.data;
    } catch (error) {
       console.log('error on createSurveyBasedOnMaster', error);
@@ -129,7 +157,7 @@ export async function updateSurveyMaster(user, survey, surveyMasterId) {
    };
    try {
       const url = PATH_BASE_URL + PATH_UPDATE_SURVEY_MASTER + surveyMasterId;
-      const response = await axiosHelper.post(url, 'updateSurveyMaster', { user, survey, config });
+      const response = await axiosHelper.put(url, 'updateSurveyMaster', { ...user, survey, ...config });
       return response.data;
    } catch (error) {
       console.log('error on updateSurveyMaster', error);
@@ -145,8 +173,8 @@ export async function updateSurveyMaster(user, survey, surveyMasterId) {
  */
 export async function deleteSurveyMaster(user, surveyMasterId) {
    try {
-      const url = PATH_BASE_URL + PATH_DELTE_SURVEY_MASTER;
-      const response = await axiosHelper.post(url, 'deleteSurveyMaster', { user, surveyMasterId });
+      const url = PATH_BASE_URL + PATH_DELTE_SURVEY_MASTER + surveyMasterId;
+      const response = await axiosHelper.remove(url, 'deleteSurveyMaster', user);
       return response.data;
    } catch (error) {
       console.log('error on deleteSurveyMaster', error);
@@ -173,14 +201,14 @@ export async function getAllOwnGroups(user) {
 }
 
 /*
-  * Returns
-  * 201 { groupId: ... }
-  * 500 { error: "Internal Server Error" }
-  */
-export async function createGroup(user) {
+ * Returns
+ * 201 { groupId: ... }
+ * 500 { error: "Internal Server Error" }
+ */
+export async function createGroup(user, name) {
    try {
       const url = PATH_BASE_URL + PATH_CREATE_GROUP;
-      const response = await axiosHelper.post(url, 'createGroup', user);
+      const response = await axiosHelper.post(url, 'createGroup', { ...user, name });
       return response.data;
    } catch (error) {
       console.log('error on createGroup', error);
@@ -193,10 +221,10 @@ export async function createGroup(user) {
  * 404 { error: "No Survey Found" }
  * 500 { error: "Internal Server Error" }
  */
-export async function getSurveyBySurveyCode(user, surveyCode) {
+export async function getSurveyBySurveyCode(surveyCode) {
    try {
       const url = PATH_BASE_URL + PATH_GET_SURVEY_BY_SURVEY_CODE + surveyCode;
-      const response = await axiosHelper.post(url, 'getSurveyBySurveyCode', user);
+      const response = await axiosHelper.get(url, 'getSurveyBySurveyCode');
       return response.data;
    } catch (error) {
       console.log('error on getSurveyBySurveyCode', error);
@@ -209,10 +237,10 @@ export async function getSurveyBySurveyCode(user, surveyCode) {
  * 404 { error: "No Survey Found" }
  * 500 { error: "Internal Server Error" }
  */
-export async function submitSurvey({ user, answers }, surveyCode) {
+export async function submitSurvey(user, answers, surveyCode) {
    try {
       const url = PATH_BASE_URL + PATH_SUBMIT_SURVEY + surveyCode;
-      const response = await axiosHelper.post(url, 'submitSurvey', { user, answers }); //user spreaden
+      const response = await axiosHelper.post(url, 'submitSurvey', { ...user, answers }); // TODO: remove user if API is changed
       return response.data;
    } catch (error) {
       console.log('error on submitSurvey', error);
@@ -224,10 +252,10 @@ export async function submitSurvey({ user, answers }, surveyCode) {
  * 200 { message: "Submitted Comment Successfully" }
  * 500 { error: "Internal Server Error" }
  */
-export async function submitComment({ user, comment }, surveyCode) {
+export async function submitComment(user, comment, surveyCode) {
    try {
-      const url = PATH_BASE_URL + PATH_CREATE_SURVEY_MASTER;
-      const response = await axiosHelper.post(url, 'createSurveyMaster', { ...user, survey, ...config });
+      const url = PATH_BASE_URL + PATH_SUBMIT_COMMENT + surveyCode;
+      const response = await axiosHelper.post(url, 'createSurveyMaster', { ...user, comment });
       return response.data;
    } catch (error) {
       console.log('error on submitComment', error);
@@ -249,7 +277,6 @@ export async function getSurveyResults(user, surveyCode) {
       console.log('error on getSurveyResults', error);
    }
 }
-
 
 // ALL UPCOMING ROUTES ARE FOR ADMINS ONLY!
 
@@ -275,10 +302,10 @@ export async function getUsers(user) {
  * 403 { error: "Forbidden" }
  * 500 { error: "Internal Server Error" }
  */
-export async function createUser(user, newUser, newUserPassword) {
+export async function createUser(user, newUsername, newPassword) {
    try {
       const url = PATH_BASE_URL + PATH_CREATE_USER;
-      const response = await axiosHelper.post(url, 'createUser', { user, newUser, newUserPassword });
+      const response = await axiosHelper.post(url, 'createUser', { ...user, newUsername, newPassword });
       return response.data;
    } catch (error) {
       console.log('error on createUser', error);
@@ -294,7 +321,7 @@ export async function createUser(user, newUser, newUserPassword) {
 export async function setRegisterKey(user, registerKey) {
    try {
       const url = PATH_BASE_URL + PATH_SET_REGISTER_KEY;
-      const response = await axiosHelper.post(url, 'setRegisterKey', { user, registerKey });
+      const response = await axiosHelper.post(url, 'setRegisterKey', { ...user, registerKey });
       return response.data;
    } catch (error) {
       console.log('error on setRegisterKey', error);
@@ -323,10 +350,10 @@ export async function getRegisterKey(user) {
  * 403 { error: "Forbidden" }
  * 500 { error: "Internal Server Error" }
  */
-export async function resetPasswordOfUser(user, usernameForPasswortReset, newPassword) {
+export async function resetPasswordOfUser(user, usernameForPasswordReset, newPassword) {
    try {
       const url = PATH_BASE_URL + PATH_RESET_PASSWORD_OF_USER;
-      const response = await axiosHelper.post(url, 'resetPasswordOfUser', { user, usernameForPasswortReset, newPassword });
+      const response = await axiosHelper.post(url, 'resetPasswordOfUser', { ...user, usernameForPasswordReset, newPassword });
       return response.data;
    } catch (error) {
       console.log('error on resetPasswordOfUser', error);
@@ -342,13 +369,12 @@ export async function resetPasswordOfUser(user, usernameForPasswortReset, newPas
 export async function upgradeUserToAdmin(user, usernameToBeUpgraded) {
    try {
       const url = PATH_BASE_URL + PATH_UPGRADE_USER_TO_ADMIN;
-      const response = await axiosHelper.post(url, 'upgradeUserToAdmin', { user, usernameToBeUpgraded });
+      const response = await axiosHelper.post(url, 'upgradeUserToAdmin', { ...user, usernameToBeUpgraded });
       return response.data;
    } catch (error) {
       console.log('error on upgradeUserToAdmin', error);
    }
 }
-
 
 /*
  * Returns

@@ -1,5 +1,5 @@
 import * as axiosHelper from './axiosHelper';
-import { PATH_ALL_USERS, PATH_BASE_URL, PATH_UPGRADE_USER_TO_ADMIN, PATH_TEST_IF_ADMIN } from './constants';
+import { PATH_BASE_URL, PATH_GET_USERS, PATH_TEST_IF_ADMIN, PATH_UPGRADE_USER_TO_ADMIN } from './constants';
 
 /*
  * Returns
@@ -9,7 +9,7 @@ import { PATH_ALL_USERS, PATH_BASE_URL, PATH_UPGRADE_USER_TO_ADMIN, PATH_TEST_IF
  */
 export async function getAllUsers(user) {
    try {
-      const url = PATH_BASE_URL + PATH_ALL_USERS;
+      const url = PATH_BASE_URL + PATH_GET_USERS;
       const response = await axiosHelper.post(url, 'getAllUsers', user);
       return response.data;
    } catch (error) {
