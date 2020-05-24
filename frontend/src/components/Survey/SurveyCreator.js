@@ -8,6 +8,7 @@ import 'jquery-ui/ui/widgets/datepicker.js';
 import 'nouislider/distribute/nouislider.css';
 import 'pretty-checkbox/dist/pretty-checkbox.css';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import 'select2/dist/css/select2.css';
 import 'select2/dist/js/select2.js';
 import * as SurveyJSCreator from 'survey-creator';
@@ -36,15 +37,13 @@ widgets.autocomplete(SurveyKo, $);
 widgets.bootstrapslider(SurveyKo);
 
 class SurveyCreator extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {};
+   }
+
    surveyCreator;
-   componentDidMount() {
-      let options = { showEmbededSurveyTab: true };
-      this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
-      this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
-   }
-   render() {
-      return <div id="surveyCreatorContainer" />;
-   }
+
    saveCreatedSurvey = async () => {
       const user = getStoredUser();
       const createdSurvey = this.surveyCreator.text;
@@ -52,6 +51,21 @@ class SurveyCreator extends Component {
       if (resObj && resObj.status === 201) return swalHelper.success('Survey successful created!');
       return swalHelper.error("Survey couldn't be created!");
    };
+
+   componentDidMount() {
+      let options = { showEmbededSurveyTab: true };
+      this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
+      this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
+      const { location } = this.props.history;
+      const { surveyToEdit } = location.state;
+      alert('Survey To Edit: ' + surveyToEdit.id);
+      // https://surveyjs.io/Examples/Survey-Creator?id=loadfromservice&theme=bootstrap#content-js
+      this.surveyCreator.loadSurvey(surveyToEdit.id);
+   }
+
+   render() {
+      return <div id="surveyCreatorContainer" />;
+   }
 }
 
-export default SurveyCreator;
+export default withRouter(SurveyCreator);

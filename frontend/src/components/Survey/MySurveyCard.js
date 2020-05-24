@@ -1,8 +1,10 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import './Survey.css';
+import { NEW_SURVEY } from '../constants';
 
 class MySurveyCard extends Component {
    constructor(props) {
@@ -33,6 +35,10 @@ class MySurveyCard extends Component {
       const user = getStoredUser();
       const resObj = await getSurveyMaster(user, surveyMasterId);
       console.log('resObj', resObj);
+      this.props.history.push({
+         pathname: '/' + NEW_SURVEY,
+         state: { surveyToEdit: { id: 1 } },
+      });
    };
 
    render() {
@@ -67,4 +73,4 @@ class MySurveyCard extends Component {
    }
 }
 
-export default MySurveyCard;
+export default withRouter(MySurveyCard);
