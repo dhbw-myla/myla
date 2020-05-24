@@ -5,7 +5,7 @@ import {
    PATH_CREATE_SURVEY_BASED_ON_MASTER,
    PATH_CREATE_SURVEY_MASTER,
    PATH_DELTE_SURVEY_MASTER,
-   PATH_GET_ALL_OWN_SURVEYS,
+   PATH_GET_ALL_OWN_SURVEY_MASTERS,
    PATH_GET_ALL_SURVEY_MASTER_TEMPLATES,
    PATH_GET_SURVEY_BY_SURVEY_CODE,
    PATH_GET_SURVEY_MASTER,
@@ -18,13 +18,13 @@ import {
  * 200 [ ... ]
  * 500 { error: "Internal Server Error" }
  */
-export async function getAllOwnSurveys(user) {
+export async function getAllOwnSurveyMasters(user) {
    try {
-      const url = PATH_BASE_URL + PATH_GET_ALL_OWN_SURVEYS;
-      const response = await axiosHelper.post(url, 'getAllOwnSurveys', user);
+      const url = PATH_BASE_URL + PATH_GET_ALL_OWN_SURVEY_MASTERS;
+      const response = await axiosHelper.post(url, 'getAllOwnSurveyMasters', user);
       return response.data;
    } catch (error) {
-      console.log('error on getAllOwnSurveys', error);
+      console.log('error on getAllOwnSurveyMasters', error);
    }
 }
 
@@ -125,23 +125,17 @@ export async function createSurveyMaster(user, survey) {
    }
 }
 
-/*
- * NOT YET IMPLEMENTED !!!
- */
 export async function getSurveyMaster(user, surveyMasterId) {
    try {
-      const url = PATH_BASE_URL + PATH_GET_SURVEY_MASTER;
-      const response = await axiosHelper.post(url, 'getSurveyMaster', { user, surveyMasterId });
+      const url = PATH_BASE_URL + PATH_GET_SURVEY_MASTER + surveyMasterId;
+      const response = await axiosHelper.post(url, 'getSurveyMaster', user);
       return response.data;
    } catch (error) {
       console.log('error on getSurveyMaster', error);
    }
 }
 
-/*
- * NOT YET IMPLEMENTED !!!
- */
-export async function updateSurveyMaster(user, survey) {
+export async function updateSurveyMaster(user, survey, surveyMasterId) {
    const config = {
       resultsVisible: true,
       isTemplate: true,
@@ -149,7 +143,7 @@ export async function updateSurveyMaster(user, survey) {
       groupId: null,
    };
    try {
-      const url = PATH_BASE_URL + PATH_UPDATE_SURVEY_MASTER;
+      const url = PATH_BASE_URL + PATH_UPDATE_SURVEY_MASTER + surveyMasterId;
       const response = await axiosHelper.post(url, 'updateSurveyMaster', { user, survey, config });
       return response.data;
    } catch (error) {

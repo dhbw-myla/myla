@@ -1,6 +1,6 @@
 import { MDBCol, MDBContainer, MDBNavLink, MDBRow } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
-import { getAllSurveyMasterTemplates, updateSurveyMaster } from '../../api/survey';
+import { getAllOwnSurveyMasters } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import { NEW_SURVEY } from '../constants';
 import MySurveyCard from './MySurveyCard';
@@ -36,9 +36,9 @@ class SurveyComponent extends Component {
    };
 
    componentDidMount = async () => {
-      //getAllSurveyMasterTemplates
+      //getAllOwnSurveyMasters
       const user = getStoredUser();
-      const resObj = await getAllSurveyMasterTemplates(user);
+      const resObj = await getAllOwnSurveyMasters(user);
       if (resObj && resObj.status === 200) {
          this.setState({ surveys: resObj.payload });
       }

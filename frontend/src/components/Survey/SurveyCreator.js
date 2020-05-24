@@ -58,9 +58,10 @@ class SurveyCreator extends Component {
       this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
       const { location } = this.props.history;
       const { surveyToEdit } = location.state;
-      alert('Survey To Edit: ' + surveyToEdit.id);
+      const { surveyMaster, surveyjs } = surveyToEdit;
+      console.log('edit surveyjs', surveyjs);
       // https://surveyjs.io/Examples/Survey-Creator?id=loadfromservice&theme=bootstrap#content-js
-      this.surveyCreator.loadSurvey(surveyToEdit.id);
+      //this.surveyCreator.loadSurvey(surveyToEdit.id);
    }
 
    render() {
