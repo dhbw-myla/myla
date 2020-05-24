@@ -55,19 +55,20 @@ class SurveyCreator extends Component {
 
    componentDidMount() {
       let options = { showEmbededSurveyTab: true };
-      const a = true;
+      const a = false;
       if (!a) {
          this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
       } else {
          this.surveyCreator = new SurveyJSCreator.SurveyEditor();
          new SurveyJSCreator.SurveyEditor(surveys[0], options);
+         const { location } = this.props.history;
+         const { surveyToEdit } = location.state;
+         const { surveyMaster, surveyjs } = surveyToEdit;
+         console.log('edit surveyMaster', surveyMaster);
+         console.log('edit surveyjs', surveyjs);
       }
       this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
-      const { location } = this.props.history;
-      const { surveyToEdit } = location.state;
-      const { surveyMaster, surveyjs } = surveyToEdit;
-      console.log('edit surveyMaster', surveyMaster);
-      console.log('edit surveyjs', surveyjs);
+
       // https://surveyjs.io/Examples/Survey-Creator?id=loadfromservice&theme=bootstrap#content-js
       //this.surveyCreator.loadSurvey(surveyToEdit.id);
    }
