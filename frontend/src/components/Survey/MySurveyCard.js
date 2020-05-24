@@ -33,9 +33,7 @@ class MySurveyCard extends Component {
    // Not yet implemented from BE
    modifySurvey = async (surveyMasterId) => {
       const user = getStoredUser();
-      console.log('user', user);
       const resObj = await getSurveyMaster(user, surveyMasterId);
-      console.log('resObj', resObj);
       if (resObj && resObj.status === 200) {
          this.props.history.push({
             pathname: '/' + NEW_SURVEY,
