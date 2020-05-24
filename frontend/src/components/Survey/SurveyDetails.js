@@ -2,7 +2,7 @@ import { MDBBtn } from 'mdbreact';
 import React, { Component } from 'react';
 import * as SurveyPDF from 'survey-pdf';
 import * as Survey from 'survey-react';
-//import 'survey-react/survey.css';
+import 'survey-react/survey.css';
 
 Survey.StylesManager.applyTheme('default');
 
