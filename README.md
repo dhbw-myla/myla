@@ -552,8 +552,8 @@ responses:
 500 { error: "Internal Server Error" }
 ```
 
-### `POST /getSurveyResults/:surveyId`
-Replace `:surveyId` with the survey id whose results you want to see, e.g. `69`.
+### `POST /getSurveyResults/:surveyCode`
+Replace `:surveyCode` with the survey id whose results you want to see, e.g. `69`.
 
 body:
 ```
