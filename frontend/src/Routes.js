@@ -14,7 +14,7 @@ import {
    NEW_SURVEY,
    SURVEY,
 } from './components/constants';
-import Startpage from './components/Home/Startpage';
+import Startpage from './components/Home/startpage';
 import SurveyComponent from './components/Survey/SurveyComponent';
 import SurveyCreateComponent from './components/Survey/SurveyCreateComponent2';
 import Account from './components/Users/Account';

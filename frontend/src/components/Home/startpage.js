@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DHBWTeaser from '../../assets/teaser.jpg';
 import './startpage.css';
-import Signup from '../SignUp/SignUp';
+import Signup from '../Signup/SignUp';
 import Login from './MyLogin';
 import { withRouter } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ class Startpage extends Component {
 
    render() {
       const whatToDisplay = this.state.showLogin ? (
-         <Login handleShowLogin={this.handleShowLogin} updateRoot={this.props.updateRoot}/>
+         <Login handleShowLogin={this.handleShowLogin} updateRoot={this.props.updateRoot} />
       ) : (
          <Signup handleShowLogin={this.handleShowLogin} updateRoot={this.props.updateRoot} />
       );
