@@ -237,10 +237,10 @@ export async function getSurveyBySurveyCode(surveyCode) {
  * 404 { error: "No Survey Found" }
  * 500 { error: "Internal Server Error" }
  */
-export async function submitSurvey(user, answers, surveyCode) {
+export async function submitSurvey(answers, surveyCode) {
    try {
       const url = PATH_BASE_URL + PATH_SUBMIT_SURVEY + surveyCode;
-      const response = await axiosHelper.post(url, 'submitSurvey', { ...user, answers }); // TODO: remove user if API is changed
+      const response = await axiosHelper.post(url, 'submitSurvey', { answers });
       return response.data;
    } catch (error) {
       console.log('error on submitSurvey', error);
@@ -268,9 +268,9 @@ export async function submitComment(user, comment, surveyCode) {
  * 404 { error: "No Data Found" }
  * 500 { error: "Internal Server Error" }
  */
-export async function getSurveyResults(user, surveyCode) {
+export async function getSurveyResults(user, surveyId) {
    try {
-      const url = PATH_BASE_URL + PATH_GET_SURVEY_RESULTS + surveyCode;
+      const url = PATH_BASE_URL + PATH_GET_SURVEY_RESULTS + surveyId;
       const response = await axiosHelper.post(url, 'getSurveyResults', user);
       return response.data;
    } catch (error) {

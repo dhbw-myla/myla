@@ -43,7 +43,7 @@ class Dashboard extends Component {
    };
 
    componentDidMount(params) {
-      //getAllOwnSurveys(getStoredUser()).then(response => this.setState({surveyResults:response}));
+      //getAllOwnSurveys(getStoredUser()).then(response => this.setState({surveyResults:response.payload}));
       this.buildSelectOptions();
    }
 

@@ -15,6 +15,14 @@ const showNavbarComponent = () => {
    }
 };
 
+const addMarginToPageBottom = () => {
+   if (verifySession()) {
+      return { height: '94vh', marginBottom: '12%'};
+   } 
+      
+   return { height: '94vh'};
+}
+
 class App extends Component {
    state = {};
 
@@ -28,7 +36,7 @@ class App extends Component {
          <Router>
             <div className="flyout">
                {showNavbarComponent()}
-               <main style={{ height: '94vh' }}>
+               <main style={addMarginToPageBottom()}>
                   <Routes updateRoot={this.updateRoot} />
                </main>
                <Footer />
