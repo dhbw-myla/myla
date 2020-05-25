@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DHBWTeaser from '../../assets/teaser.jpg';
+import DHBWTeaser from '../../assets/DHBWIntro.jpg';
 import './startpage.css';
 import Signup from '../SignUp/SignUp';
 import Login from './MyLogin';
