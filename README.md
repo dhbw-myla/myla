@@ -511,12 +511,11 @@ responses:
 
 ### `POST /submitSurvey/:surveyCode`
 Replace `:surveyCode` with the survey code of the survey you want to submit, e.g. `II41KMQAUM`.
+You don't need to specify username and sessionId because this route is unrestricted and can be accessed without being a user.
 
 body:
 ```
 {
-  "username": "user",
-  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
   "answers": {
     "question_name_1": "answer1",
     "question_name_2": "answer2",
@@ -537,12 +536,11 @@ responses:
 
 ### `POST /submitComment/:surveyCode`
 Replace `:surveyCode` with the survey code of the survey you want to comment, e.g. `II41KMQAUM`.
+You don't need to specify username and sessionId because this route is unrestricted and can be accessed without being a user.
 
 body:
 ```
 {
-  "username": "user",
-  "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
   "comment": "What do you think of One-Time-Pad and using the message as key too?"
 }
 ```
