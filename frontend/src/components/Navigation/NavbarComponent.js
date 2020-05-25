@@ -37,6 +37,7 @@ class NavbarComponent extends Component {
       clearSessionStorage();
       this.closeCollapse('mainNavbarCollapse');
       swalHelper.success('Logged out successfully!');
+      this.props.updateRoot();
       this.forceUpdate();
    };
 

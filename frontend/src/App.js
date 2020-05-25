@@ -9,9 +9,9 @@ import Footer from './components/Footer/Footer';
 // methodes
 import { verifySession } from './auth/verifyPw';
 
-const showNavbarComponent = () => {
+const showNavbarComponent = (updateRoot) => {
    if (verifySession()) {
-      return <NavbarComponent />;
+      return <NavbarComponent  updateRoot={updateRoot} />;
    }
 };
 
@@ -35,7 +35,7 @@ class App extends Component {
       return (
          <Router>
             <div className="flyout">
-               {showNavbarComponent()}
+               {showNavbarComponent(this.updateRoot)}
                <main style={addMarginToPageBottom()}>
                   <Routes updateRoot={this.updateRoot} />
                </main>
