@@ -42,6 +42,7 @@ app.post('/logout', routes.logout);
 
 // Sites for registered users
 app.post('/getAllOwnSurveys', routes.getAllOwnSurveys);
+app.post('/getAllOwnSurveysForSurveyMaster/:masterId', routes.getAllOwnSurveysForSurveyMaster);
 app.post('/getAllSurveyMasterTemplates', routes.getAllSurveyMasterTemplates);
 app.post('/getAllQuestionTemplates', routes.getAllQuestionTemplates);
 
