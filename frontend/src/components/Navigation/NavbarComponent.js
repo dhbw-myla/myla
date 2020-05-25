@@ -34,6 +34,7 @@ class NavbarComponent extends Component {
    };
 
    logOutUser = () => {
+      // TODO: use logout from auth.js
       clearSessionStorage();
       this.closeCollapse('mainNavbarCollapse');
       swalHelper.success('Logged out successfully!');

@@ -1,5 +1,5 @@
 import * as axiosHelper from './axiosHelper';
-import { PATH_BASE_URL, PATH_CHANGE_PASSWORD, PATH_LOGIN, PATH_REGISTER, PATH_RESET_PASSWORD_OF_USER } from './constants';
+import { PATH_BASE_URL, PATH_REGISTER, PATH_LOGIN, PATH_CHANGE_PASSWORD, PATH_LOGOUT } from './constants';
 
 /*
 * Returns 
@@ -10,13 +10,13 @@ import { PATH_BASE_URL, PATH_CHANGE_PASSWORD, PATH_LOGIN, PATH_REGISTER, PATH_RE
 * 400 { error: "Username Already Exists" }
 * 500 { error: "Internal Server Error" }
 */
-export const register = async (user) => {
+export const register = async ({ username, password, registerKey }) => {
    try {
       const url = PATH_BASE_URL + PATH_REGISTER;
-      const response = await axiosHelper.post(url, 'register', user);
+      const response = await axiosHelper.post(url, 'register', { username, password, registerKey });
       return response.data;
    } catch (error) {
-      console.log('error on login', error);
+      console.log('error on register', error);
       return error.response.data;
    }
 };
@@ -28,10 +28,9 @@ export const register = async (user) => {
  *500 { error: "Internal Server Error" }
  */
 export const login = async ({ username, password }) => {
-   const user = { username, password };
    try {
       const url = PATH_BASE_URL + PATH_LOGIN;
-      const response = await axiosHelper.post(url, 'register', user);
+      const response = await axiosHelper.post(url, 'login', { username, password });
       return response.data;
    } catch (error) {
       console.log('error on login', error);
@@ -39,14 +38,35 @@ export const login = async ({ username, password }) => {
    }
 };
 
-export const resetPasswordOfUser = async (admin) => {
-   const url = PATH_BASE_URL + PATH_RESET_PASSWORD_OF_USER;
-   const response = await axiosHelper.post(url, 'resetPasswordOfUser', admin);
-   return response.data;
+/*
+ * Returns
+ * 200 { username: "...", sessionId: "..." }
+ * 400 { error: "Password Change Failed" }
+ * 500 { error: "Internal Server Error" }
+ */
+export const changePassword = async ({ username, sessionId, password, newPassword }) => {
+   try {
+      const url = PATH_BASE_URL + PATH_CHANGE_PASSWORD;
+      const response = await axiosHelper.post(url, 'changePassword', { username, sessionId, password, newPassword });
+      return response.data;
+   } catch (error) {
+      console.log('error on changePassword', error);
+      return error.response.data;
+   }
 };
 
-export const changePassword = async (user) => {
-   const url = PATH_BASE_URL + PATH_CHANGE_PASSWORD;
-   const response = await axiosHelper.post(url, 'changePassword', user);
-   return response.data;
+/*
+ * Returns
+ * 200 { message: "Logged Out Successfully" }
+ * 500 { error: "Internal Server Error" }
+ */
+export const logout = async (user) => {
+   try {
+      const url = PATH_BASE_URL + PATH_LOGOUT;
+      const response = await axiosHelper.post(url, 'logout', user);
+      return response.data;
+   } catch (error) {
+      console.log('error on logout', error);
+      return error.response.data;
+   }
 };

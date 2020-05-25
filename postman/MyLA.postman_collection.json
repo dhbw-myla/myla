@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "57583781-b94b-4bf4-9ac3-d020ee8d2799",
+		"_postman_id": "606a2451-f9f2-41d8-80ff-44e328b9fa3a",
 		"name": "MyLA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -117,7 +117,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "bfec4991-1760-48f4-872d-3ac141a38024",
+						"id": "7e7d011a-9cb6-403a-adc3-ed7d750ab803",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -127,7 +127,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "dbd0fa10-5d15-47f0-966e-717284043773",
+						"id": "1de55307-8f95-4f04-a86d-c976ca12a49b",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -440,7 +440,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Survey Usage",
+			"name": "Survey Interaction",
 			"item": [
 				{
 					"name": "get Survey by Survey Code: {CODE}",
@@ -479,7 +479,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"NewTestUser\",\r\n  \"sessionId\": {{sessionID}},\r\n  \"answers\": {\r\n    \"question_name_1\": \"answer1\",\r\n    \"question_name_2\": \"answer2\",\r\n    \"question_name_3\": [\r\n      \"answer3_1\",\r\n      \"answer3_2\"\r\n    ]\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"answers\": {\r\n    \"question_name_1\": \"answer1\",\r\n    \"question_name_2\": \"answer2\",\r\n    \"question_name_3\": [\r\n      \"answer3_1\",\r\n      \"answer3_2\"\r\n    ]\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"

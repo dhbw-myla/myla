@@ -1,7 +1,7 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink, MDBContainer } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { getSurveyResults } from '../../api/survey';
+import { getSurveyResults } from '../../api/interaction';
 import { getAllOwnSurveys } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 
@@ -17,7 +17,9 @@ class SurveyResultDetails extends Component {
    }
 
    componentDidMount() {
-      //getSurveyResults(getStoredUser(this.props.survey.id)).then(response => this.setState({ resultsOfSurvey: response, showCharts: true }));
+      // getSurveyResults(getStoredUser(), this.props.survey.id).then((response) =>
+      // this.setState({ resultsOfSurvey: response.payload, showCharts: true })
+      // );
       this.setState({ resultsOfSurvey: survey, showCharts: true });
    }
 
@@ -35,9 +37,7 @@ class SurveyResultDetails extends Component {
             </Fragment>
          );
       } else {
-         return <Fragment>
-
-         </Fragment>;
+         return <Fragment></Fragment>;
       }
    }
 }
