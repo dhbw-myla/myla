@@ -18,6 +18,7 @@
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "react-select": "^3.1.0",
     "recharts": "^2.0.0-beta.1",
     "survey-creator": "1.7.7",
     "survey-pdf": "1.7.7",

@@ -1,10 +1,11 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink, MDBContainer } from 'mdbreact';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { getSurveyResults } from '../../api/survey';
 import { getAllOwnSurveys } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
-import { NEW_SURVEY } from '../constants';
+
+import survey from './69surveydata.json';
 
 class SurveyResultDetails extends Component {
    constructor(props) {
@@ -16,7 +17,8 @@ class SurveyResultDetails extends Component {
    }
 
    componentDidMount() {
-      this.setState({ resultsOfSurvey: getSurveyResults(getStoredUser(), this.props.survey.id), showCharts: true });
+      //getSurveyResults(getStoredUser(this.props.survey.id)).then(response => this.setState({ resultsOfSurvey: response, showCharts: true }));
+      this.setState({ resultsOfSurvey: survey, showCharts: true });
    }
 
    componentWillUnmount() {
@@ -28,13 +30,15 @@ class SurveyResultDetails extends Component {
 
       if (!showCharts) {
          return (
-            <MDBContainer id="survey-participate">
+            <Fragment>
                <strong>Information loading... Please fuck you</strong>
-            </MDBContainer>
+            </Fragment>
          );
-      }
+      } else {
+         return <Fragment>
 
-      return <MDBContainer id="survey-participate"></MDBContainer>;
+         </Fragment>;
+      }
    }
 }
 
