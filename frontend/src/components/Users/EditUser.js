@@ -21,11 +21,9 @@ class EditUserComponent extends Component {
       if (newPassword.length === 0) return swalHelper.error("Password can't be empty");
 
       const { userToEdit } = this.props;
-      const admin = getStoredUser();
-      admin.newPassword = newPassword;
-      admin.usernameForPasswordReset = userToEdit.username;
-      const resObj = await resetPasswordOfUser(admin);
-      if (resObj.status === 200) return swalHelper.success('Successfully changed password');
+      const usernameForPasswordReset = userToEdit.username;
+      const resObj = await resetPasswordOfUser({ ...getStoredUser(), usernameForPasswordReset, newPassword });
+      if (resObj && resObj.status === 200) return swalHelper.success('Successfully changed password');
       return swalHelper.error('Password change went wrong');
    };
 
@@ -34,7 +32,6 @@ class EditUserComponent extends Component {
       const { username } = userToEdit;
       const { newPassword } = this.state;
 
-      console.log('state', this.state);
       return (
          <MDBContainer>
             <MDBRow>

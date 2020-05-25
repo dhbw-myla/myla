@@ -1,7 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { getAllUsers } from '../../api/admin';
+import { getUsers } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { MY_ACCOUNT } from '../constants';
@@ -19,7 +19,7 @@ class UsersComponent extends Component {
 
    getUsersFromDB = async () => {
       const user = getStoredUser();
-      const resObj = await getAllUsers(user);
+      const resObj = await getUsers(user);
       return resObj;
    };
 

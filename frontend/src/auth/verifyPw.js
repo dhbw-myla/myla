@@ -1,4 +1,3 @@
-import { login } from '../api/auth';
 import { testIfAdmin } from '../api/admin';
 import * as util from '../util/util';
 
@@ -8,14 +7,6 @@ export const verifySignup = (password, passwordRepeat) => {
 
 export const verifyPassword = (password, passwordRepeat) => {
    return password === passwordRepeat;
-};
-
-export const verifyUser = async (user) => {
-   const myLogin = await login(user);
-   if (myLogin && !util.checkIfUndefiniedOrNull(myLogin.payload) && !util.checkIfUndefiniedOrNull(myLogin.payload.sessionId)) {
-      return myLogin;
-   }
-   return undefined;
 };
 
 const getUserFromStorage = () => {
