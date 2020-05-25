@@ -62,6 +62,7 @@ class Signup extends Component {
             setUserToStorage(resObj.payload);
             swalHelper.success('Successfully signed Up!');
             this.props.history.push('/' + DASHBOARD);
+            this.props.updateRoot();
          } else {
             const { message } = resObj;
             swalHelper.error('Error on registering\n\n' + message);

@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Line, Bar, Radar, Pie, Doughnut, Polar } from 'react-chartjs-2';
 import { MDBContainer, MDBTabContent, MDBTabPane, MDBNav, MDBNavItem, MDBNavLink, MDBDropdown, MDBRow, MDBCol } from 'mdbreact';
-import surveyAPI from '../../api/survey';
+import {getAllOwnSurveys} from '../../api/survey';
+import {getStoredUser} from '../../auth/verifyPw';
 import SurveyResultCard from './SurveyResultCard'
 import SurveyResultDetails from './SurveyResultDetails'
 
@@ -14,7 +15,7 @@ class Dashboard extends Component {
       super(props);
       this.state = {
          showSurveyResult: false,
-         surveyResults: [],
+         surveyResults: surveys,
          surveyResultToShow: 0
       };
    }
@@ -28,11 +29,11 @@ class Dashboard extends Component {
    };
 
 
-   loadSurveys(params) {}
+   componentDidMount(params) {
+      getAllOwnSurveys(getStoredUser());
 
-   loadSurveyData(surveyId) {
-      // for each survey: /getSurveyResults/:surveyId--
    }
+
    
    render() {
       const { showSurveyResult } = this.state;
@@ -43,7 +44,7 @@ class Dashboard extends Component {
          <Fragment>
             <MDBRow id="categories">
                {this.state.surveyResults.map((surveyResult, key) => (
-                  <SurveyResultCard counter={key} infos={{ surveyResult, type: 1 }} onClickSurvey={() => this.showSurvey(surveyResult.id)} />
+                  <SurveyResultCard counter={key} surveyResult={surveyResult} type={1} onClickSurveyResult={() => this.showSurveyResults(surveyResult)} />
                ))}
             </MDBRow>
          </Fragment>
