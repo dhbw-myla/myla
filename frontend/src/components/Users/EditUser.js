@@ -1,6 +1,6 @@
 import { MDBBtn, MDBCol, MDBContainer, MDBInput, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
-import { resetPasswordOfUser } from '../../api/auth';
+import { resetPasswordOfUser } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 
