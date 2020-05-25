@@ -550,8 +550,8 @@ responses:
 500 { error: "Internal Server Error" }
 ```
 
-### `POST /getSurveyResults/:surveyCode`
-Replace `:surveyCode` with the survey id whose results you want to see, e.g. `69`.
+### `POST /getSurveyResults/:surveyId`
+Replace `:surveyId` with the survey id whose results you want to see, e.g. `69`.
 
 body:
 ```
@@ -563,7 +563,7 @@ body:
 responses:
 ```
 200 { title: "Product Feedback Survey Example",
-      survey_id: 25,
+      survey_id: 69,
       timestamp_start: "2019-12-31T23:00:00.000Z",
       timestamp_end: "2020-12-31T22:59:59.000Z",
       survey_master_id: 52,
