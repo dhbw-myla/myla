@@ -1,14 +1,10 @@
+import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
-import { Line, Bar, Radar, Pie, Doughnut, Polar } from 'react-chartjs-2';
-import { MDBContainer, MDBTabContent, MDBTabPane, MDBNav, MDBNavItem, MDBNavLink, MDBDropdown, MDBRow, MDBCol } from 'mdbreact';
-import { getAllOwnSurveys } from '../../api/survey';
-import { getStoredUser } from '../../auth/verifyPw';
+import Select from 'react-select';
+import { BtnDefault } from '../Button/BtnDefault';
 import SurveyResultCard from './SurveyResultCard';
 import SurveyResultDetails from './SurveyResultDetails';
-import Select from 'react-select';
-
 import surveys from './surveys.json';
-import survey70 from './70surveydata.json';
 
 class Dashboard extends Component {
    constructor(props) {
@@ -18,7 +14,7 @@ class Dashboard extends Component {
          surveyResults: surveys,
          surveyResultToShow: 0,
          selectOptions: {},
-         selectedID: undefined
+         filteredSurveyResults: surveys,
       };
    }
 
@@ -29,12 +25,12 @@ class Dashboard extends Component {
          return;
       }
 
-      let selectOptions = [];
-      surveyResults.forEach((s) => selectOptions.push({ label: s.title, value: s.survey_id }));
-      this.setState({ selectOptions: selectOptions });
+      const selectOptions = [];
+      surveyResults.forEach((surveyResult) => selectOptions.push({ label: surveyResult.title, value: surveyResult.survey_id }));
+      this.setState({ selectOptions });
    }
 
-   showSurveyResults = async (surveyResult) => {
+   showSurveyResults = (surveyResult) => {
       this.setState({ showSurveyResult: true, surveyResultToShow: surveyResult });
    };
 
@@ -42,65 +38,54 @@ class Dashboard extends Component {
       this.setState({ showSurveyResult: false, surveyToShow: null });
    };
 
-   componentDidMount(params) {
-      //getAllOwnSurveys(getStoredUser()).then(response => this.setState({surveyResults:response.payload}));
+   componentDidMount() {
+      //getAllOwnSurveys(getStoredUser()).then(response => this.setState({surveyResults:response.payload, filteredSurveyResults:response.payload}));
       this.buildSelectOptions();
    }
 
    onSelectChange = (value) => {
-      if(value !== null) {
-         this.setState({selectedID: value.value});
+      const { surveyResults } = this.state;
+      if (value !== null) {
+         const filteredSurveyResults = surveyResults.filter((surveyResult) => surveyResult.survey_id === value.value);
+         this.setState({ filteredSurveyResults });
       } else {
-         this.setState({selectedID: undefined});
-      }      
-   }
+         this.setState({ filteredSurveyResults: surveyResults });
+      }
+   };
 
    render() {
-      const { showSurveyResult, selectOptions, selectedID } = this.state;
+      const { showSurveyResult, selectOptions, surveyResultToShow, filteredSurveyResults } = this.state;
 
-      let whatToRender = undefined;
-      if(showSurveyResult) {
-         whatToRender = (
-            <SurveyResultDetails survey={this.state.surveyResultToShow} onClickReturn={this.returnToOverview} />
-         )
-      } else {
-         let shownCards = undefined
-         if(selectedID) {
-            let surveyResult = this.state.surveyResults.filter(x=> x.survey_id === selectedID)[0]
-            shownCards = (
-               <SurveyResultCard key={selectedID} counter={selectedID} surveyResult={surveyResult} type={1} onClickSurveyResult={() => this.showSurveyResults(surveyResult)}/>
-            );
-         } else {
-            shownCards = (
-               this.state.surveyResults.map((surveyResult, key) => (
-                  <SurveyResultCard key={key}
+      const whatToRender = showSurveyResult ? (
+         <Fragment>
+            <SurveyResultDetails survey={surveyResultToShow} />
+            <MDBRow>{BtnDefault(this.returnToOverview, 'Back to overview')}</MDBRow>
+         </Fragment>
+      ) : (
+         <Fragment>
+            <Select
+               className="basic-single"
+               classNamePrefix="select"
+               defaultValue={selectOptions[0]}
+               name="survey-filter"
+               options={selectOptions}
+               onChange={this.onSelectChange}
+               isClearable={true}
+            />
+            <MDBRow id="categories">
+               {filteredSurveyResults.map((surveyResult, key) => (
+                  <SurveyResultCard
+                     key={key}
                      counter={key}
                      surveyResult={surveyResult}
                      type={1}
                      onClickSurveyResult={() => this.showSurveyResults(surveyResult)}
                   />
-               ))
-            )
-         }
+               ))}
+            </MDBRow>
+         </Fragment>
+      );
 
-         whatToRender =  (
-            <Fragment>
-               <Select
-                  className="basic-single"
-                  classNamePrefix="select"
-                  defaultValue={selectOptions[0]}
-                  name="survey-filter"
-                  options={selectOptions}
-                  onChange={this.onSelectChange}
-                  isClearable={true}
-               />
-               <MDBRow id="categories">
-                  {shownCards}
-               </MDBRow>
-            </Fragment>
-         );
-      }
-      
       return (
          <MDBContainer>
             <MDBRow>

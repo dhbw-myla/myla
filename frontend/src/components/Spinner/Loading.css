@@ -1,0 +1,9 @@
+.loader {
+   padding-left: 35rem;
+}
+
+#loading-text {
+   position: relative;
+   padding-top: 2rem;
+   padding-left: 30rem;
+}

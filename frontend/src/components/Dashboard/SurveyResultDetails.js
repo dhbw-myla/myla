@@ -1,10 +1,6 @@
-import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink, MDBContainer } from 'mdbreact';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { getSurveyResults } from '../../api/interaction';
-import { getAllOwnSurveys } from '../../api/survey';
-import { getStoredUser } from '../../auth/verifyPw';
-
+import { loadingSpinner } from '../Spinner/Loading';
 import survey from './69surveydata.json';
 
 class SurveyResultDetails extends Component {
@@ -31,13 +27,9 @@ class SurveyResultDetails extends Component {
       const { resultsOfSurvey, showCharts } = this.state;
 
       if (!showCharts) {
-         return (
-            <Fragment>
-               <strong>Information loading... Please fuck you</strong>
-            </Fragment>
-         );
+         return loadingSpinner('Results are loading ...');
       } else {
-         return <Fragment></Fragment>;
+         return <h1>THIS IS TO BE IMPLEMENTED ASAP</h1>;
       }
    }
 }

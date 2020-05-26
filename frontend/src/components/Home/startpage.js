@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DHBWTeaser from '../../assets/DHBWIntro.jpg';
 import './startpage.css';
-import Signup from '../SignUp/SignUp';
+import Signup from '../SignUp/signup';
 import Login from './MyLogin';
 import { withRouter } from 'react-router-dom';
 
