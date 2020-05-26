@@ -156,8 +156,28 @@ exports.getAllOwnSurveys = function (request, response) {
                 FROM survey s JOIN (SELECT * FROM survey_master
                                     WHERE user_id = (SELECT user_id FROM users WHERE username = $1)) sm
                     ON s.survey_master_id = sm.survey_master_id
-                    LEFT JOIN survey_master_group g ON g.group_id = sm.group_id;`,
+                    LEFT JOIN survey_master_group g ON g.group_id = sm.group_id
+                ORDER BY sm.survey_master_id DESC, s.survey_id DESC;`,
             [username], (err, result) => {
+        if (err) {
+            // db failed
+            return responseHelper.sendInternalServerError(response, err);
+        }
+        responseHelper.send(response, 200, "", result.rows);
+    });
+};
+
+exports.getAllOwnSurveysForSurveyMaster = function (request, response) {
+    const username = request.body.username;
+    const surveyMasterId = request.params.masterId;
+    db.query(`SELECT *
+                FROM survey s JOIN (SELECT * FROM survey_master
+                                    WHERE user_id = (SELECT user_id FROM users WHERE username = $1)
+                                        AND survey_master_id = $2) sm
+                    ON s.survey_master_id = sm.survey_master_id
+                    LEFT JOIN survey_master_group g ON g.group_id = sm.group_id
+                ORDER BY s.survey_id DESC;`,
+            [username, surveyMasterId], (err, result) => {
         if (err) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
@@ -245,7 +265,8 @@ exports.getAllOwnSurveyMasters = function (request, response) {
     const username = request.body.username;
     db.query(`SELECT * FROM survey_master sm
                 LEFT JOIN survey_master_group g ON g.group_id = sm.group_id
-                WHERE sm.user_id = (SELECT user_id FROM users WHERE username = $1);`,
+                WHERE sm.user_id = (SELECT user_id FROM users WHERE username = $1)
+                ORDER BY sm.survey_master_id DESC;`,
             [username], (err, result) => {
         if (err) {
             // db failed

@@ -230,6 +230,9 @@ responses:
 500 { error: "Internal Server Error" }
 ```
 
+### `POST /getAllOwnSurveysForSurveyMaster/:surveyMasterId`
+Same as above except that you need to replace `:surveyMasterId` with the corresponding id and will only receive surveys belonging to this survey master.
+
 ### `POST /getAllSurveyMasterTemplates`
 body:
 ```
