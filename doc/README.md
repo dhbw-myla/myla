@@ -63,50 +63,50 @@ Zielsetzung                                   | | | | | | |
 Aufbau                                        | | | | | | |
 **<u>Grundlagen</u>**                         | | | | | | |
 Theoretische Grundlagen                       | | | | | | |
-- - REST                                      | | | :red_circle: | :red_circle: | | |
-- - Microservices                             | | | | :red_circle: | | |
-- - Fragebogen                                | | | | | :red_circle: | |
-- - Relationale Datenbanken                   | | | | | | |
-- - Learning Analytics                        | | | :red_circle: | | | |
+____REST                                      | | | :red_circle: | :red_circle: | | |
+____Microservices                             | | | | :red_circle: | | |
+____Fragebogen                                | | | | | :red_circle: | |
+____Relationale Datenbanken                   | | | | | | |
+____Learning Analytics                        | | | :red_circle: | | | |
 Technische Grundlagen                         | | | | | | |
-- - Docker                                    | | | | :red_circle: | | |
-- - PostgreSQL                                | | | | | | |
-- - React                                     | | | | | | |
+____Docker                                    | | | | :red_circle: | | |
+____PostgreSQL                                | | | | | | |
+____React                                     | | | | | | |
 **<u>Anforderungsanalyse</u>**                | | | | | | |
 Ist-Analyse                                   | | | | | | |
 Anforderungen                                 | | | | | | |
 Abgrenzung zu Alternativen                    | | | | | | |
 **<u>Konzeption</u>**                         | | | | | | |
 Gesamtkonzept                                 | | | | | | |
-- - Architektur                               | | | | | | |
-- - Server                                    | :red_circle: | | | | | |
-- - Client                                    | | | | | | |
+____Architektur                               | | | | | | |
+____Server                                    | :red_circle: | | | | | |
+____Client                                    | | | | | | |
 Personas                                      | | | | | | |
-- - Dozent                                    | | | | | | |
-- - Student                                   | | | | | | |
+____Dozent                                    | | | | | | |
+____Student                                   | | | | | | |
 User-Journey                                  | | | | | | |
 Bestandteile des Servers                      | | | | | | |
-- - Datenhaltung/Datenmodell                  | :red_circle: | | | | | |
-- - Schnittstelle                             | :red_circle: | | | | | |
+____Datenhaltung/Datenmodell                  | :red_circle: | | | | | |
+____Schnittstelle                             | :red_circle: | | | | | |
 Client                                        | | | | | | |
-- - Unterteilung der Gliederungsansichten     | | | | | | |
-- - Bestimmung von Darstellungsformen         | | | | | | |
+____Unterteilung der Gliederungsansichten     | | | | | | |
+____Bestimmung von Darstellungsformen         | | | | | | |
 Sicherheit                                    | | | | | | |
-- - Authentifizierung                         | :red_circle: | | | | | |
-- - Datenschutz                               | | | | | | |
-- - Verschlüsselung?                          | | | | | | |
+____Authentifizierung                         | :red_circle: | | | | | |
+____Datenschutz                               | | | | | | |
+____Verschlüsselung?                          | | | | | | |
 **<u>Implementierung</u>**                    | | | | | | |
 Server                                        | | | | | | |
-- - Geschäftslogik                            | :red_circle: | | | | | |
-- - Datenhaltung                              | :red_circle: | | | | | |
-- - Schnittstelle                             | :red_circle: | | | | | |
+____Geschäftslogik                            | :red_circle: | | | | | |
+____Datenhaltung                              | :red_circle: | | | | | |
+____Schnittstelle                             | :red_circle: | | | | | |
 Client                                        | | | | | | |
-- - Auswahl der Visualisierungs-Bibliothek    | | | | | | |
-- - Startansicht                              | | | | | | |
+____Auswahl der Visualisierungs-Bibliothek    | | | | | | |
+____Startansicht                              | | | | | | |
 Sicherheit                                    | | | | | | |
-- - Zugriffskontrolle                         | :red_circle: | | | | | |
-- - Kommunikation zwischen Client und Server? | | | | | | |
-- - Validierung der Übergabeparameter?        | | | | | | |
+____Zugriffskontrolle                         | :red_circle: | | | | | |
+____Kommunikation zwischen Client und Server? | | | | | | |
+____Validierung der Übergabeparameter?        | | | | | | |
 **<u>Fazit und Ausblick</u>**                 | | | | | | |
 Fazit                                         | | | | | | |
 Ausblick                                      | | | | | | |
