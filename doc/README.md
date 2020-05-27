@@ -1,4 +1,6 @@
-# Inhaltsverzeichnis
+# Integrationsseminar 
+
+## Inhaltsverzeichnis
 
 1. Einleitung
    1. Motivation und Hintergrund
@@ -55,61 +57,64 @@
    1. Fazit # Vergleich zum Altsystem (Repo, Doku -> nicht nur "fancy Demo", die unnutzbar ist)
    1. Ausblick
 
-Kapitel/Abschnitt | Niko | Sascha | Rene | Martin | Erik | Julian | Kommentar
---- | --- | --- | --- | --- | --- | --- | ---
-**<u>Einleitung</u>**                         | | | | | | |
-Motivation und Hintergrund                    | | | | | | |
-Zielsetzung                                   | | | | | | |
-Aufbau                                        | | | | | | |
-**<u>Grundlagen</u>**                         | | | | | | |
-Theoretische Grundlagen                       | | | | | | |
-____REST                                      | | | :red_circle: | :red_circle: | | |
-____Microservices                             | | | | :red_circle: | | |
-____Fragebogen                                | | | | | :red_circle: | |
-____Relationale Datenbanken                   | | | | | | |
-____Learning Analytics                        | | | :red_circle: | | | |
-Technische Grundlagen                         | | | | | | |
-____Docker                                    | | | | :red_circle: | | |
-____PostgreSQL                                | | | | | | |
-____React                                     | | | | | | |
-**<u>Anforderungsanalyse</u>**                | | | | | | |
-Ist-Analyse                                   | | | | | | |
-Anforderungen                                 | | | | | | |
-Abgrenzung zu Alternativen                    | | | | | | |
-**<u>Konzeption</u>**                         | | | | | | |
-Gesamtkonzept                                 | | | | | | |
-____Architektur                               | | | | | | |
-____Server                                    | :red_circle: | | | | | |
-____Client                                    | | | | | | |
-Personas                                      | | | | | | |
-____Dozent                                    | | | | | | |
-____Student                                   | | | | | | |
-User-Journey                                  | | | | | | |
-Bestandteile des Servers                      | | | | | | |
-____Datenhaltung/Datenmodell                  | :red_circle: | | | | | |
-____Schnittstelle                             | :red_circle: | | | | | |
-Client                                        | | | | | | |
-____Unterteilung der Gliederungsansichten     | | | | | | |
-____Bestimmung von Darstellungsformen         | | | | | | |
-Sicherheit                                    | | | | | | |
-____Authentifizierung                         | :red_circle: | | | | | |
-____Datenschutz                               | | | | | | |
-____Verschlüsselung?                          | | | | | | |
-**<u>Implementierung</u>**                    | | | | | | |
-Server                                        | | | | | | |
-____Geschäftslogik                            | :red_circle: | | | | | |
-____Datenhaltung                              | :red_circle: | | | | | |
-____Schnittstelle                             | :red_circle: | | | | | |
-Client                                        | | | | | | |
-____Auswahl der Visualisierungs-Bibliothek    | | | | | | |
-____Startansicht                              | | | | | | |
-Sicherheit                                    | | | | | | |
-____Zugriffskontrolle                         | :red_circle: | | | | | |
-____Kommunikation zwischen Client und Server? | | | | | | |
-____Validierung der Übergabeparameter?        | | | | | | |
-**<u>Fazit und Ausblick</u>**                 | | | | | | |
-Fazit                                         | | | | | | |
-Ausblick                                      | | | | | | |
+## Aufteilung der Kapitel
+
+| Kapitel/Abschnitt                             | Niko         | Sascha       | Rene         | Martin       | Erik         | Julian     | Kommentar                                               |
+| --------------------------------------------- | ------------ | ------------ | ------------ | ------------ | ------------ | ---------- | ------------------------------------------------------- |
+| **<u>Einleitung</u>**                         |              |              |              |              |              |            |                                                         |
+| Motivation und Hintergrund                    |              |              |              |              |              |            |                                                         |
+| Zielsetzung                                   |              |              |              |              |              |            |                                                         |
+| Aufbau                                        |              |              |              |              |              |            |                                                         |
+| **<u>Grundlagen</u>**                         |              |              |              |              |              |            |                                                         |
+| Theoretische Grundlagen                       |              |              |              |              |              |            |                                                         |
+| ____REST                                      |              |              | :red_circle: | :red_circle: |              |            |                                                         |
+| ____Microservices                             |              |              |              | :red_circle: |              |            |                                                         |
+| ____Fragebogen                                |              |              |              |              | :red_circle: |            |                                                         |
+| ____Relationale Datenbanken                   |              | :red_circle: | :red_circle: |              |              |            |                                                         |
+| ____Learning Analytics                        |              |              | :red_circle: |              |              |            |                                                         |
+| Technische Grundlagen                         |              |              |              |              |              |            |                                                         |
+| ____Docker                                    |              |              |              | :red_circle: |              |            |                                                         |
+| ____PostgreSQL                                |              | :red_circle: | :red_circle: |              |              |            |                                                         |
+| ____React                                     |              | :red_circle: |              |              |              |            |                                                         |
+| **<u>Anforderungsanalyse</u>**                |              |              |              |              |              |            |                                                         |
+| Ist-Analyse                                   |              |              | :red_circle: |              |              | :question: |                                                         |
+| Anforderungen                                 |              |              |              |              | :question:   | :question: |                                                         |
+| Abgrenzung zu Alternativen                    |              |              |              |              | :question:   | :question: |                                                         |
+| **<u>Konzeption</u>**                         |              |              |              |              |              |            |                                                         |
+| Gesamtkonzept                                 |              |              |              |              |              |            |                                                         |
+| ____Architektur                               |              |              | :red_circle: |              |              |            |                                                         |
+| ____Server                                    | :red_circle: |              |              |              |              |            |                                                         |
+| ____Client                                    |              | :red_circle: |              |              |              |            |                                                         |
+| Personas                                      |              |              |              |              |              |            |                                                         |
+| ____Dozent                                    |              |              |              |              | :question:   | :question: |                                                         |
+| ____Student                                   |              |              |              |              | :question:   | :question: |                                                         |
+| User-Journey                                  |              |              |              |              |              |            | BPMN                                                    |
+| Bestandteile des Servers                      |              |              |              |              |              |            |                                                         |
+| ____Datenhaltung/Datenmodell                  | :red_circle: |              |              |              |              |            |                                                         |
+| ____Schnittstelle                             | :red_circle: |              |              |              |              |            |                                                         |
+| Client                                        |              |              |              |              |              |            |                                                         |
+| ____Unterteilung der Gliederungsansichten     |              | :red_circle: |              |              |              |            |                                                         |
+| ____Bestimmung von Darstellungsformen         |              | :red_circle: |              |              |              |            |                                                         |
+| Sicherheit                                    |              |              |              |              |              |            |                                                         |
+| ____Authentifizierung                         | :red_circle: |              |              |              |              |            |                                                         |
+| ____Datenschutz                               |              |              |              |              |              |            | Beschreibung inwiefern das für das Projekt wichtig ist. |
+| ____Verschlüsselung?                          |              |              |              |              |              |            |                                                         |
+| **<u>Implementierung</u>**                    |              |              |              |              |              |            |                                                         |
+| Server                                        |              |              |              |              |              |            |                                                         |
+| ____Geschäftslogik                            | :red_circle: |              |              |              |              |            |                                                         |
+| ____Datenhaltung                              | :red_circle: |              |              |              |              |            |                                                         |
+| ____Schnittstelle                             | :red_circle: |              |              |              |              |            |                                                         |
+| Client                                        |              |              |              |              |              |            |                                                         |
+| ____Auswahl der Visualisierungs-Bibliothek    |              | :red_circle: | :question:   | :question:   |              |            |                                                         |
+| ____Startansicht                              |              | :red_circle: | :question:   | :question:   |              |            |                                                         |
+| ____Weitere Seiten...                         |              | :red_circle: | :question:   | :question:   |              |            | kommt noch viel dazu.                                   |
+| Sicherheit                                    |              |              |              |              |              |            |                                                         |
+| ____Zugriffskontrolle                         | :red_circle: | :red_circle: |              |              |              |            |                                                         |
+| ____Kommunikation zwischen Client und Server? |              |              |              |              |              |            | haben doch kein HTTPs -> kommt evtl. weg.               |
+| ____Validierung der Übergabeparameter?        |              |              |              |              |              |            |                                                         |
+| **<u>Fazit und Ausblick</u>**                 |              |              |              |              |              |            |                                                         |
+| Fazit                                         |              |              |              |              |              |            |                                                         |
+| Ausblick                                      |              |              |              |              |              |            |                                                         |
 
 - :red_circle: `:red_circle:`
 - :question: `:question:`
