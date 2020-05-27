@@ -61,10 +61,10 @@
 
 | Kapitel/Abschnitt                             | Niko         | Sascha       | Rene         | Martin       | Erik         | Julian     | Kommentar                                               |
 | --------------------------------------------- | ------------ | ------------ | ------------ | ------------ | ------------ | ---------- | ------------------------------------------------------- |
-| **<u>Einleitung</u>**                         |              |              |              |              |              |            |                                                         |
-| Motivation und Hintergrund                    |              |              |              |              |              |            |                                                         |
-| Zielsetzung                                   |              |              |              |              |              |            |                                                         |
-| Aufbau                                        |              |              |              |              |              |            |                                                         |
+| **<u>Einleitung</u>**                         |              |              |              |              |              |:red_circle:|                                                         |
+| Motivation und Hintergrund                    |              |              |              |              |              |:red_circle:|                                                         |
+| Zielsetzung                                   |              |              |              |              |              |:red_circle:|                                                         |
+| Aufbau                                        |              |              |              |              |              |:red_circle:|                                                         |
 | **<u>Grundlagen</u>**                         |              |              |              |              |              |            |                                                         |
 | Theoretische Grundlagen                       |              |              |              |              |              |            |                                                         |
 | ____REST                                      |              |              | :red_circle: | :red_circle: |              |            |                                                         |
@@ -77,17 +77,17 @@
 | ____PostgreSQL                                |              | :red_circle: | :red_circle: |              |              |            |                                                         |
 | ____React                                     |              | :red_circle: |              |              |              |            |                                                         |
 | **<u>Anforderungsanalyse</u>**                |              |              |              |              |              |            |                                                         |
-| Ist-Analyse                                   |              |              | :red_circle: |              |              | :question: |                                                         |
-| Anforderungen                                 |              |              |              |              | :question:   | :question: |                                                         |
-| Abgrenzung zu Alternativen                    |              |              |              |              | :question:   | :question: |                                                         |
+| Ist-Analyse                                   |              |              | :red_circle: |              |              |:red_circle:|                                                         |
+| Anforderungen                                 |              |              |              |              | :question:   |:red_circle:|                                                         |
+| Abgrenzung zu Alternativen                    |              |              |              |              | :question:   |:red_circle:|                                                         |
 | **<u>Konzeption</u>**                         |              |              |              |              |              |            |                                                         |
 | Gesamtkonzept                                 |              |              |              |              |              |            |                                                         |
 | ____Architektur                               |              |              | :red_circle: |              |              |            |                                                         |
 | ____Server                                    | :red_circle: |              |              |              |              |            |                                                         |
 | ____Client                                    |              | :red_circle: |              |              |              |            |                                                         |
 | Personas                                      |              |              |              |              |              |            |                                                         |
-| ____Dozent                                    |              |              |              |              | :question:   | :question: |                                                         |
-| ____Student                                   |              |              |              |              | :question:   | :question: |                                                         |
+| ____Dozent                                    |              |              |              |              | :question:   |:red_circle:|                                                         |
+| ____Student                                   |              |              |              |              | :question:   |:red_circle:|                                                         |
 | User-Journey                                  |              |              |              |              |              |            | BPMN                                                    |
 | Bestandteile des Servers                      |              |              |              |              |              |            |                                                         |
 | ____Datenhaltung/Datenmodell                  | :red_circle: |              |              |              |              |            |                                                         |
