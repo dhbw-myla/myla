@@ -702,12 +702,13 @@ exports.getSurveyResults = async function (request, response) {
                 "survey_master_id", "survey_code", "description"]) {
             result[prop] = questions.rows[0][prop];
         }
-        result.questions = {};
+        result.questions = [];
         for (let question of questions.rows) {
-            result.questions[question.question_id] = {
+            result.questions.push({
+                id: question.question_id,
                 question: JSON.parse(question.question_json),
                 answers: {}
-            };
+            });
         }
 
         db.query(`SELECT a.question_id, a.answer, count(a.answer)
@@ -720,7 +721,8 @@ exports.getSurveyResults = async function (request, response) {
                 return responseHelper.sendInternalServerError(response, err);
             }
             for (let answer of answers.rows) {
-                result.questions[answer.question_id].answers[answer.answer] = answer.count;
+                let q = result.questions.find((q) => { return q.id === answer.question_id});
+                q.answers[answer.answer] = answer.count;
             }
             responseHelper.send(response, 200, "", result);
         });

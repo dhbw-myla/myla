@@ -572,8 +572,9 @@ responses:
       survey_master_id: 52,
       survey_code: "052JOJ6FIV",
       description: "",
-      questions: {
-        "117": {
+      questions: [
+        {
+          id: 117,
           question: {
             type: "myquestion",
             name: "cq1",
@@ -584,7 +585,8 @@ responses:
             "test2": 1
           }
         },
-        "118": {
+        {
+          id: 118,
           question: {
             type: "dropdown",
             name: "position",
@@ -605,7 +607,7 @@ responses:
             "Designer": 1
           }
         }
-      }
+      ]
     }
 404 { error: "No Data Found" }
 500 { error: "Internal Server Error" }
