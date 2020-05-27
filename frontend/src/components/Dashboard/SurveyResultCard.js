@@ -16,7 +16,7 @@ class SurveyResultCard extends Component {
          case 1:
             return 'fadeInLeft';
          case 2:
-            return 'fadeInDown';
+            return 'fadeInUp';
          case 3:
             return 'fadeInRight';
       }

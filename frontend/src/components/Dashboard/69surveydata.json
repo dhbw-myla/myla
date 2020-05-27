@@ -6,19 +6,22 @@
     "survey_master_id": 42,
     "survey_code": "II41KMQAUM",
     "description": "Description Survey Master 69",
-    "questions": {
-        "1": {
+    "questions": [
+        {
+            "id": 1,
             "question": {
                 "type": "myquestion",
                 "name": "cq1",
-                "text": "Some Text"
+                "text": "Some Text",
+                "title": "Choose job position ..."
             },
             "answers": {
                 "test": 3,
                 "test2": 1
             }
         },
-        "2": {
+        {
+            "id": 2,
             "question": {
                 "type": "dropdown",
                 "name": "position",
@@ -38,6 +41,24 @@
                 "System Engineer": 1,
                 "Designer": 1
             }
+        },
+
+        {
+            "id": 3,
+            "question": {
+                "type": "text",
+                "name": "cq1",
+                "text": "Some Text",
+                "title": "fucked?"
+            },
+            "answers": [
+                "blaihjkwuikfguwzik fgzuwgzfu zwe",
+                "kifghiuwgz wgf uizwguikkiljufohwifg hiuzwhbfui zwghuzf hf gwugfz ",
+                "kifghiuwgz wgf uizwguikf gwugfz ",
+                "kifghiuwgz wgf uqdqiuohdoiuqhgwzuqgdtz qgdikuqizwguikf gwugfz ",
+                "kifghiuwgz wgf ufewiuhiwo hfiwho fliuhwluio hfgolwizwguikf gwugfz ",
+                "kifghiuwgz wgf uizwguikf gwugfz "
+            ]
         }
-    }
+    ]
 }

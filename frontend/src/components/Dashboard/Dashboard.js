@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { BtnDefault } from '../Button/BtnDefault';
 import SurveyResultCard from './SurveyResultCard';
 import SurveyResultDetails from './SurveyResultDetails';
+import './dashboard.css'
 import surveys from './surveys.json';
 
 class Dashboard extends Component {
@@ -63,8 +64,8 @@ class Dashboard extends Component {
          title = 'Survey: ' + surveyResultToShow.title;
          whatToRender = (
             <Fragment>
-               <SurveyResultDetails survey={surveyResultToShow} />
                <MDBRow>{BtnDefault(this.returnToOverview, 'Back to overview')}</MDBRow>
+               <SurveyResultDetails className='dhbw_bottom' survey={surveyResultToShow} />
             </Fragment>
          );
       } else {
@@ -85,7 +86,7 @@ class Dashboard extends Component {
                         key={key}
                         counter={key}
                         surveyResult={surveyResult}
-                        type={1}
+                        type={key%3+1}
                         onClickSurveyResult={() => this.showSurveyResults(surveyResult)}
                      />
                   ))}

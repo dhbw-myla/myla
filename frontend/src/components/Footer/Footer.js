@@ -10,7 +10,7 @@ class Footer extends Component {
    render() {
       return (
          <MDBFooter color="grey darken-2">
-            <p className="footer-copyright mb-0 py-3 mh-5 text-center fixed-bottom">
+            <p className="footer-copyright mb-0 py-3 mh-5 text-center fixed-bottom grey darken-2">
                &copy; {new Date().getFullYear()} Copyright:&nbsp;
                <a href="https://www.mannheim.dhbw.de/startseite">DHBW Mannheim</a>
             </p>
