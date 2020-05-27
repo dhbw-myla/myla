@@ -14,3 +14,13 @@ export const USERS = 'users';
 export const ADMIN_USERS = ADMIN + '/' + USERS;
 export const PASSWORD_CHANGE = 'passwordchange';
 export const ACCOUNT_PASSWORD_CHANGE = MY_ACCOUNT + '/' + PASSWORD_CHANGE;
+
+//Survey question types
+export const QUESTION_TYPE_DROPDOWN = "dropdown";
+export const QUESTION_TYPE_TEXT = "text";
+export const QUESTION_TYPE_MULTIPLE_TEXT = "multipletext";
+export const QUESTION_TYPE_BOOLEAN = "boolean";
+export const QUESTION_TYPE_RATING = "rating";
+export const QUESTION_TYPE_RADIO = "radio";
+export const QUESTION_TYPE_CHECKBOX = "checkbox";
+export const QUESTION_TYPE_COMMENT = "comment";

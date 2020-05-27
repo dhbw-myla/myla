@@ -56,41 +56,49 @@ class Dashboard extends Component {
    render() {
       const { showSurveyResult, selectOptions, surveyResultToShow, filteredSurveyResults } = this.state;
 
-      const whatToRender = showSurveyResult ? (
-         <Fragment>
-            <SurveyResultDetails survey={surveyResultToShow} />
-            <MDBRow>{BtnDefault(this.returnToOverview, 'Back to overview')}</MDBRow>
-         </Fragment>
-      ) : (
-         <Fragment>
-            <Select
-               className="basic-single"
-               classNamePrefix="select"
-               defaultValue={selectOptions[0]}
-               name="survey-filter"
-               options={selectOptions}
-               onChange={this.onSelectChange}
-               isClearable={true}
-            />
-            <MDBRow id="categories">
-               {filteredSurveyResults.map((surveyResult, key) => (
-                  <SurveyResultCard
-                     key={key}
-                     counter={key}
-                     surveyResult={surveyResult}
-                     type={1}
-                     onClickSurveyResult={() => this.showSurveyResults(surveyResult)}
-                  />
-               ))}
-            </MDBRow>
-         </Fragment>
-      );
+      let whatToRender;
+      let title = 'Survey Results Dashboard';
+
+      if (showSurveyResult) {
+         title = 'Survey: ' + surveyResultToShow.title;
+         whatToRender = (
+            <Fragment>
+               <SurveyResultDetails survey={surveyResultToShow} />
+               <MDBRow>{BtnDefault(this.returnToOverview, 'Back to overview')}</MDBRow>
+            </Fragment>
+         );
+      } else {
+         whatToRender = (
+            <Fragment>
+               <Select
+                  className="basic-single"
+                  classNamePrefix="select"
+                  defaultValue={selectOptions[0]}
+                  name="survey-filter"
+                  options={selectOptions}
+                  onChange={this.onSelectChange}
+                  isClearable={true}
+               />
+               <MDBRow id="categories">
+                  {filteredSurveyResults.map((surveyResult, key) => (
+                     <SurveyResultCard
+                        key={key}
+                        counter={key}
+                        surveyResult={surveyResult}
+                        type={1}
+                        onClickSurveyResult={() => this.showSurveyResults(surveyResult)}
+                     />
+                  ))}
+               </MDBRow>
+            </Fragment>
+         );
+      }
 
       return (
          <MDBContainer>
             <MDBRow>
                <MDBCol md="12" className="mt-4">
-                  <h2 className="text-center my-5 font-weight-bold">Survey Results Dashboard</h2>
+                  <h2 className="text-center my-5 font-weight-bold">{title}</h2>
                   <hr className="my-5" />
                   {whatToRender}
                </MDBCol>
