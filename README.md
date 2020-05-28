@@ -407,7 +407,7 @@ responses:
 500 { error: "Internal Server Error" }
 ```
 
-### `POST /deleteSurveyMaster/:surveyMasterId`
+### `DELETE /deleteSurveyMaster/:surveyMasterId`
 In the URL you need to replace `:surveyMasterId` with the id of the survey master you want to delete.
 
 body:
