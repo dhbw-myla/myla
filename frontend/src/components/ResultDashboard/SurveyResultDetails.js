@@ -14,6 +14,7 @@ import {
 } from '../constants';
 import SectionContainer from '../sectionContainer';
 import { loadingSpinner } from '../Spinner/Loading';
+import './resultDashboard.css';
 import surveyResult from './69surveydata.json';
 
 class SurveyResultDetails extends Component {
@@ -100,7 +101,78 @@ class SurveyResultDetails extends Component {
       },
    };
 
-   buildBarChart(question, answers) {}
+   buildBarChart(question, answers) {
+
+      let labels = Object.keys(answers);
+      let data = [];
+
+      let dataBar = {
+         labels: labels,
+         datasets: [
+            {
+               label: 'Penis',
+               data: [12, 19, 30, 5, 2, 150],
+               backgroundColor: [
+                  'rgba(255, 134, 159, 0.4)',
+                  'rgba(98,  182, 239, 0.4)',
+                  'rgba(255, 218, 128, 0.4)',
+                  'rgba(113, 205, 205, 0.4)',
+                  'rgba(170, 128, 252, 0.4)',
+                  'rgba(255, 177, 101, 0.4)',
+                  'rgba(255, 134, 159, 0.4)',
+                  'rgba(98,  182, 239, 0.4)',
+                  'rgba(255, 218, 128, 0.4)',
+                  'rgba(113, 205, 205, 0.4)',
+                  'rgba(170, 128, 252, 0.4)',
+                  'rgba(255, 177, 101, 0.4)',
+               ],
+               borderWidth: 2,
+               borderColor: [
+                  'rgba(255, 134, 159, 1)',
+                  'rgba(98,  182, 239, 1)',
+                  'rgba(255, 218, 128, 1)',
+                  'rgba(113, 205, 205, 1)',
+                  'rgba(170, 128, 252, 1)',
+                  'rgba(255, 177, 101, 1)',
+                  'rgba(255, 134, 159, 1)',
+                  'rgba(98,  182, 239, 1)',
+                  'rgba(255, 218, 128, 1)',
+                  'rgba(113, 205, 205, 1)',
+                  'rgba(170, 128, 252, 1)',
+                  'rgba(255, 177, 101, 1)',
+               ],
+            },
+         ],
+      };
+      let barChartOptions = {
+         responsive: true,
+         maintainAspectRatio: false,
+         scales: {
+            xAxes: [
+               {
+                  barPercentage: 0.5,
+                  gridLines: {
+                     display: true,
+                     color: 'rgba(0, 0, 0, 0.1)',
+                  },
+               },
+            ],
+            yAxes: [
+               {
+                  gridLines: {
+                     display: true,
+                     color: 'rgba(0, 0, 0, 0.1)',
+                  },
+                  ticks: {
+                     beginAtZero: true,
+                  },
+               },
+            ],
+         },
+      };
+
+      return <Bar data={dataBar} options={barChartOptions} />;
+   }
 
    buildAnswerList(answers) {
       return (
@@ -119,11 +191,25 @@ class SurveyResultDetails extends Component {
    }
 
    buildPieChart(question, answers) {
-      let labels = Object.keys(answers);
+      let labels = [];
       let data = [];
 
-      for (let a in answers) {
-         data.push(answers[a]);
+      if (question.choices) {
+         if (question.choices.length !== labels.length) {
+            for (let l in question.choices) {
+               labels.push(question.choices[l]);
+               if (answers[question.choices[l]]) {
+                  data.push(answers[question.choices[l]]);
+               } else {
+                  data.push(0)
+               }
+            }
+         }
+      } else {
+         labels = Object.keys(answers);
+         for (let a in answers) {
+            data.push(answers[a]);
+         }
       }
 
       let dataPie = {
@@ -131,8 +217,34 @@ class SurveyResultDetails extends Component {
          datasets: [
             {
                data: data,
-               backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360', '#ac64ad'],
-               hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5', '#616774', '#da92db'],
+               backgroundColor: [
+                  '#F7464A',
+                  '#46BFBD',
+                  '#FDB45C',
+                  '#C106C8',
+                  '#18A618',
+                  '#ac64ad',
+                  '#F7464A',
+                  '#46BFBD',
+                  '#FDB45C',
+                  '#C106C8',
+                  '#18A618',
+                  '#ac64ad',
+               ],
+               hoverBackgroundColor: [
+                  '#FF5A5E',
+                  '#5AD3D1',
+                  '#FFC870',
+                  '#C106C8',
+                  '#18A618',
+                  '#da92db',
+                  '#FF5A5E',
+                  '#5AD3D1',
+                  '#FFC870',
+                  '#C106C8',
+                  '#18A618',
+                  '#da92db',
+               ],
             },
          ],
       };
@@ -165,10 +277,12 @@ class SurveyResultDetails extends Component {
       }
 
       return (
-         <SectionContainer title={'Question ' + number} header={question.title} noBorder={true}>
-            {chart}
-            <hr className="my-5" />
-         </SectionContainer>
+         <div className="dhbw_result_background">
+            <SectionContainer number={number} title={'Question ' + number} header={question.title} noBorder={true}>
+               {chart}
+               <hr className="my-5" />
+            </SectionContainer>
+         </div>
       );
    }
 

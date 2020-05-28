@@ -28,11 +28,11 @@
           "title": "Choose job position ...",
           "renderAs": "select2",
           "choices": [
-            "1|Designer",
-            "2|Front-end Developer",
-            "3|Back-end Developer",
-            "4|Database Administrator",
-            "5|System Engineer"
+            "Designer",
+            "Front-end Developer",
+            "Back-end Developer",
+            "Database Administrator",
+            "System Engineer"
           ]
         },
         "answers": {

@@ -3,6 +3,7 @@ import { MDBContainer } from 'mdbreact';
 import React, { Fragment } from 'react';
 
 const SectionContainer = ({
+   number,
    children,
    className,
    dark,
@@ -35,7 +36,7 @@ const SectionContainer = ({
       <Fragment>
          {title}
          {header}
-         <MDBContainer fluid className={classes} style={style}>
+         <MDBContainer fluid key={number} className={classes} style={style}>
             {description}
             {children}
          </MDBContainer>
