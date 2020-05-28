@@ -242,15 +242,16 @@ const createSurveyCode = function () {
     return result;
 };
 
-const createSurveyHelper = function (response, surveyMasterId, timestampStart, timestampEnd) {
+const createSurveyHelper = function (response, surveyMasterId, timestampStart, timestampEnd, surveyTitle) {
     if (!timestampStart) { timestampStart = null; }
     if (!timestampEnd) { timestampEnd = null; }
+    if (!surveyTitle) { surveyTitle = ""; }
     
     // create survey
     let surveyCode = createSurveyCode();
-    db.query(`INSERT INTO survey (survey_code, timestamp_start, timestamp_end, survey_master_id)
-                    VALUES ($1, $2, $3, $4) RETURNING survey_id;`,
-            [surveyCode, timestampStart, timestampEnd, surveyMasterId], (err, result) => {
+    db.query(`INSERT INTO survey (survey_code, timestamp_start, timestamp_end, survey_master_id, survey_title)
+                    VALUES ($1, $2, $3, $4, $5) RETURNING survey_id;`,
+            [surveyCode, timestampStart, timestampEnd, surveyMasterId, surveyTitle], (err, result) => {
         if (err) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
@@ -355,7 +356,7 @@ const checkIfSurveyMasterIdIsAllowedForUser = function (surveyMasterId, username
 exports.createSurveyBasedOnMaster = async function (request, response) {
     const username = request.body.username;
     let surveyMasterId = request.params.masterId;
-    let { timestampStart, timestampEnd } = request.body;
+    let { timestampStart, timestampEnd, surveyTitle } = request.body;
     
     // make sure that no one tries to create a survey based on a survey master which is by someone else
     // not to be confused with: creating survey master based on template
@@ -363,7 +364,7 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
     if (!isAllowed) {
         return responseHelper.sendClientError(response, 403);
     }
-    createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd);
+    createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd, surveyTitle);
 };
 
 exports.getSurveyMaster = async function (request, response) {
@@ -614,7 +615,7 @@ exports.submitSurvey = function (request, response) {
                 FROM survey INNER JOIN
                     question q on survey.survey_master_id = q.survey_master_id
                 WHERE survey_code = $1
-                AND timestamp_start < $2
+                AND (timestamp_start IS NULL OR timestamp_start < $2)
                 AND (timestamp_end IS NULL OR timestamp_end > $2);`,
             [surveyCode, new Date().toISOString()], (err, result) => {
         if (err) {
