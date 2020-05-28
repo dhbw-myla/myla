@@ -6,7 +6,7 @@ import { getStoredUser } from '../../auth/verifyPw';
 import { NEW_SURVEY } from '../constants';
 import './Survey.css';
 
-class MySurveyCard extends Component {
+class SurveyMasterCard extends Component {
    constructor(props) {
       super(props);
       this.state = {};
@@ -53,7 +53,7 @@ class MySurveyCard extends Component {
                <MDBCard cascade className="my-3 grey lighten-4 survey-card">
                   <MDBCardBody cascade className="text-center">
                      <MDBCardTitle>
-                        <MDBIcon icon="cubes" className="blue-text pr-2" />
+                        <MDBIcon icon="cubes" className="icon-dhbw-red pr-2" />
                         <strong>{survey.title}</strong>
                      </MDBCardTitle>
                      <MDBCardText>{survey.description}</MDBCardText>
@@ -76,4 +76,4 @@ class MySurveyCard extends Component {
    }
 }
 
-export default withRouter(MySurveyCard);
+export default withRouter(SurveyMasterCard);

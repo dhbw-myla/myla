@@ -20,3 +20,16 @@ export const parseToJsonObject = (obj) => {
       return undefined;
    }
 };
+
+export const getFading = (type) => {
+   switch (type) {
+      case 1:
+         return 'fadeInLeft';
+      case 2:
+         return 'fadeInDown';
+      case 3:
+         return 'fadeInRight';
+      default:
+         return 'fadeInDown';
+   }
+};

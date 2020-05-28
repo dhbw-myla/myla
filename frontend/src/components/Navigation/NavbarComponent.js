@@ -70,7 +70,7 @@ class NavbarComponent extends Component {
                   <img src={DHBWLogo} className="img-fluid dhbw_logo" style={{ marginRight: 20 }} alt="DHBWLogo" />
                   <strong className="align-middle dhbw_title">My Learning Analytics</strong>
                </MDBNavbarBrand>
-               <MDBNavbarToggler onClick={this.toggleCollapse('mainNavbarCollapse')}/>
+               <MDBNavbarToggler onClick={this.toggleCollapse('mainNavbarCollapse')} />
                <MDBCollapse id="mainNavbarCollapse" isOpen={collapseID} navbar>
                   <MDBNavbarNav right>
                      {/* <MDBNavItem>
@@ -80,12 +80,12 @@ class NavbarComponent extends Component {
                      </MDBNavItem> */}
                      <MDBNavItem>
                         <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + DASHBOARD}>
-                           <strong>Dashboard</strong>
+                           <strong>Active Surveys</strong>
                         </MDBNavLink>
                      </MDBNavItem>
                      <MDBNavItem>
                         <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + SURVEY}>
-                           <strong>Survey</strong>
+                           <strong>Survey Masters</strong>
                         </MDBNavLink>
                      </MDBNavItem>
                      {navIsAdmin}
