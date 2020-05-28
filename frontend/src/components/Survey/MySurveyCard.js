@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
-import './Survey.css';
 import { NEW_SURVEY } from '../constants';
+import './Survey.css';
 
 class MySurveyCard extends Component {
    constructor(props) {
@@ -20,6 +20,8 @@ class MySurveyCard extends Component {
             return 'fadeInDown';
          case 3:
             return 'fadeInRight';
+         default:
+            return 'fadeInDown';
       }
    };
 

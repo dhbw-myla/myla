@@ -1,4 +1,4 @@
-import { MDBBtn, MDBInput } from 'mdbreact';
+import { MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
@@ -53,7 +53,7 @@ class Login extends Component {
       e.preventDefault();
       const { username, password } = this.state;
 
-      const valid = validator.isEmail(username) && !validator.isEmpty(password);
+      const valid = !validator.isEmpty(username) && !validator.isEmpty(password);
       if (valid) {
          const resObj = await login({ username, password });
          if (resObj && resObj.status === 200) {
@@ -72,49 +72,41 @@ class Login extends Component {
 
    render() {
       return (
-         <div className="container">
-            <div className="card bg-card-background text-light">
-               <div className="card-body">
-                  <h1 className="text-center text-dark">MyLA Login</h1>
-                  <form onSubmit={this.handleLogin}>
-                     <div className="form-group">
-                        <MDBInput
-                           className="form-control"
-                           label="Survey Code"
-                           type="text"
-                           name="surveycode"
-                           onChange={this.handleOnChange}
-                        />
-                        <MDBBtn className="btn btn_dhbw" onClick={this.joinSurvey}>
-                           Enter
-                        </MDBBtn>
-                     </div>
-                     <div className="form-group">
-                        <MDBInput
-                           label="E-Mail"
-                           type="email"
-                           name="username"
-                           className="form-control"
-                           aria-describedby="emailHelp"
-                           onChange={this.handleOnChange}
-                        />
-                        <MDBInput
-                           label="Passwort"
-                           type="password"
-                           className="form-control"
-                           name="password"
-                           onChange={this.handleOnChange}
-                        />
-                        <div className="div_button_split">
-                           <MDBBtn type="submit" className="btn btn_split btn_dhbw">
-                              Login
-                           </MDBBtn>
-                           <MDBBtn type="button" className="btn btn_split btn_dhbw" onClick={this.props.handleShowLogin}>
-                              Sign Up
-                           </MDBBtn>
+         <div className="background">
+            <div className="container">
+               <div className="card bg-card-background text-light">
+                  <div className="card-body">
+                     <h1 className="text-center text-dark">MyLA</h1>
+                     <form onSubmit={this.handleLogin}>
+                        <div className="form-group">
+                           <MDBInput
+                              label="Username"
+                              type="text"
+                              name="username"
+                              className="form-control"
+                              aria-describedby="emailHelp"
+                              onChange={this.handleOnChange}
+                           />
+                           <MDBInput
+                              label="Passwort"
+                              type="password"
+                              className="form-control"
+                              name="password"
+                              onChange={this.handleOnChange}
+                           />
                         </div>
-                     </div>
-                  </form>
+                        <div className="fg-dhbw-links">
+                           <MDBNav>
+                              <MDBNavItem>
+                                 <MDBNavLink activate to={'/'} className="fg-dhbw-red">
+                                    <MDBIcon icon="backward" className="fg-dhbw-icon" />
+                                    Back
+                                 </MDBNavLink>
+                              </MDBNavItem>
+                           </MDBNav>
+                        </div>
+                     </form>
+                  </div>
                </div>
             </div>
          </div>

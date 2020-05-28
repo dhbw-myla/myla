@@ -1,9 +1,6 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
-import { getStoredUser } from '../../auth/verifyPw';
-import { NEW_SURVEY } from '../constants';
 
 class SurveyResultCard extends Component {
    constructor(props) {
@@ -19,6 +16,8 @@ class SurveyResultCard extends Component {
             return 'fadeInUp';
          case 3:
             return 'fadeInRight';
+         default:
+            return 'fadeInDown';
       }
    };
 

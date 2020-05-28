@@ -3,19 +3,23 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { verifySession } from './auth/verifyPw';
 import AdminComponent from './components/Admin/AdminComponent';
 import UsersComponent from './components/Admin/Users';
-import Dashboard from './components/Dashboard/Dashboard';
 import {
    ACCOUNT_PASSWORD_CHANGE,
    ADMIN,
    ADMIN_USERS,
    DASHBOARD,
+   LOGIN,
    MODIFY_SURVEY,
    MY_ACCOUNT,
    NEW_SURVEY,
+   SIGNUP,
    SURVEY,
    SURVEY_PARTICIPATE,
 } from './components/constants';
+import Dashboard from './components/Dashboard/Dashboard';
+import MyLogin from './components/Home/MyLogin';
 import Startpage from './components/Home/startpage';
+import SignUp from './components/SignUp/SignUp';
 import SurveyComponent from './components/Survey/SurveyComponent';
 import SurveyCreateComponent from './components/Survey/SurveyCreateComponent2';
 import SurveyDetails from './components/Survey/SurveyDetails';
@@ -31,8 +35,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
             return <Component {...props} />;
          }
-         if (rest.path === '/' + SURVEY_PARTICIPATE) {
-            console.log('load SURVEY_PARTICIPATE');
+         if (rest.path === '/' + SURVEY_PARTICIPATE || rest.path === '/' + LOGIN || rest.path === '/' + SIGNUP) {
             return <Component {...props} />;
          }
          return <Redirect to="/" />;
@@ -65,6 +68,8 @@ class Routes extends Component {
             <PrivateRoute exact path={'/' + MY_ACCOUNT} component={Account} />
             <PrivateRoute exact path={'/' + ACCOUNT_PASSWORD_CHANGE} component={ChangePassword} />
             <PrivateRoute exact path={'/' + SURVEY_PARTICIPATE} component={SurveyDetails} />
+            <PrivateRoute exact path={'/' + LOGIN} component={MyLogin} />
+            <PrivateRoute exact path={'/' + SIGNUP} component={SignUp} />
             <Route exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />
          </Switch>
       );

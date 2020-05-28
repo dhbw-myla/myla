@@ -1,10 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import { MDBCard, MDBCardBody, MDBCardText, MDBCol, MDBContainer, MDBRow } from 'mdbreact';
+import React, { Component } from 'react';
+import { Bar, Pie } from 'react-chartjs-2';
 import { withRouter } from 'react-router-dom';
-import { loadingSpinner } from '../Spinner/Loading';
-import surveyResult from './69surveydata.json';
-import { Bar, Pie, HorizontalBar, Doughnut } from 'react-chartjs-2';
-import { MDBContainer, MDBBox, MDBCard, MDBCardText, MDBRow, MDBCol, MDBCardBody } from 'mdbreact';
-import SectionContainer from '../sectionContainer';
 import {
    QUESTION_TYPE_BOOLEAN,
    QUESTION_TYPE_CHECKBOX,
@@ -15,6 +12,9 @@ import {
    QUESTION_TYPE_RATING,
    QUESTION_TYPE_TEXT,
 } from '../constants';
+import SectionContainer from '../sectionContainer';
+import { loadingSpinner } from '../Spinner/Loading';
+import surveyResult from './69surveydata.json';
 
 class SurveyResultDetails extends Component {
    constructor(props) {
@@ -100,11 +100,7 @@ class SurveyResultDetails extends Component {
       },
    };
 
-   buildBarChart(question, answers) {
-
-   }
-
-    
+   buildBarChart(question, answers) {}
 
    buildAnswerList(answers) {
       return (
@@ -141,7 +137,7 @@ class SurveyResultDetails extends Component {
          ],
       };
 
-      return <Pie data={dataPie} options={{ responsive: true }}/>;
+      return <Pie data={dataPie} options={{ responsive: true }} />;
    }
 
    buildSection(surveyResult, key) {

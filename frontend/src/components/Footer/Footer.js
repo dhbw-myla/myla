@@ -11,8 +11,8 @@ class Footer extends Component {
       return (
          <MDBFooter color="grey darken-2">
             <p className="footer-copyright mb-0 py-3 mh-5 text-center fixed-bottom grey darken-2">
-               &copy; {new Date().getFullYear()} Copyright:&nbsp;
-               <a href="https://www.mannheim.dhbw.de/startseite">DHBW Mannheim</a>
+               &copy; {new Date().getFullYear()} Sascha Görnert, Niko Lockenvitz, Rene Fischer, Martin Sandig, Erik Jansky
+               {/*, Julian Rolle */}
             </p>
          </MDBFooter>
       );

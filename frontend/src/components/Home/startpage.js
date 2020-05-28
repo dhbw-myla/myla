@@ -1,31 +1,21 @@
 import React, { Component } from 'react';
-import DHBWTeaser from '../../assets/DHBWIntro.jpg';
-import './startpage.css';
-import Signup from '../SignUp/SignUp';
-import Login from './MyLogin';
 import { withRouter } from 'react-router-dom';
+import Participate from './Participate';
+import './startpage.css';
 
 class Startpage extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         showLogin: true,
+         showLogin: false,
+         showSignup: false,
       };
    }
 
-   handleShowLogin = () => {
-      this.setState({ showLogin: !this.state.showLogin });
-   };
-
    render() {
-      const whatToDisplay = this.state.showLogin ? (
-         <Login handleShowLogin={this.handleShowLogin} updateRoot={this.props.updateRoot} />
-      ) : (
-         <Signup handleShowLogin={this.handleShowLogin} updateRoot={this.props.updateRoot} />
-      );
       return (
-         <div className="background" style={{ backgroundImage: `url(${DHBWTeaser})` }}>
-            {whatToDisplay}
+         <div className="background">
+            <Participate />
          </div>
       );
    }

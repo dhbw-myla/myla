@@ -11,17 +11,17 @@ import { verifySession } from './auth/verifyPw';
 
 const showNavbarComponent = (updateRoot) => {
    if (verifySession()) {
-      return <NavbarComponent  updateRoot={updateRoot} />;
+      return <NavbarComponent updateRoot={updateRoot} />;
    }
 };
 
 const addMarginToPageBottom = () => {
    if (verifySession()) {
-      return { height: '94vh', marginBottom: '12%'};
-   } 
-      
-   return { height: '94vh'};
-}
+      return { height: '94vh', marginBottom: '12%' };
+   }
+
+   return { height: '94vh' };
+};
 
 class App extends Component {
    state = {};
@@ -29,7 +29,6 @@ class App extends Component {
    updateRoot = () => {
       this.setState({ updateRoot: !this.state.updateRoot });
    };
-
 
    render() {
       return (

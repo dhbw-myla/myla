@@ -1,4 +1,4 @@
-import { MDBBtn, MDBInput } from 'mdbreact';
+import { MDBBtn, MDBInput, MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import val from 'validator';
@@ -46,13 +46,14 @@ class Signup extends Component {
 
    verifyUser = (user) => {
       let bool = true;
-      const { password, passwordRepeat, username } = user;
-      bool &= val.isEmail(username);
+      const { password, passwordRepeat, username, registerKey } = user;
+      bool &= !val.isEmpty(username);
+      bool &= !val.isEmpty(registerKey);
       bool &= verifySignup(password, passwordRepeat);
       return bool;
    };
 
-   createUser = async (e) => {
+   signUp = async (e) => {
       e.preventDefault();
       const { user } = this.state;
       const userVerified = this.verifyUser(user);
@@ -77,66 +78,64 @@ class Signup extends Component {
    };
 
    render() {
-      const currentComponent = '/signup';
-      const { isLoggedIn, user, redirectToHome } = this.state;
-      const { username, passwordRepeat, password, registerKey } = user;
-
-      if (isLoggedIn && !redirectToHome) {
-         this.props.history.push('/' + DASHBOARD);
-         //return <Redirect from={currentComponent} to="/dashboard" />;
-      } else if (redirectToHome) {
-         this.props.history.push('/');
-         //return <Redirect to="/" />;
-      }
+      const { username, registerKey, password, passwordRepeat } = this.state;
       return (
-         <div className="container">
-            <div className="card bg-card-background text-light">
-               <div className="card-body">
-                  <h1 className="text-center text-dark">MyLA Register</h1>
-                  <form onSubmit={this.createUser}>
-                     <div className="form-group">
-                        <MDBInput
-                           label="Username"
-                           type="email"
-                           name="username"
-                           id="username"
-                           maxLength="30"
-                           value={username}
-                           onChange={this.handleOnChange}
-                        />
-                        <MDBInput
-                           label="Register Key"
-                           type="text"
-                           name="registerKey"
-                           maxLength="200"
-                           value={registerKey}
-                           onChange={this.handleOnChange}
-                        />
-                        <MDBInput
-                           label="Passwort"
-                           type="password"
-                           name="password"
-                           className="form-control"
-                           onChange={this.handleOnChange}
-                        />
-                        <MDBInput
-                           label="Password Repeat"
-                           type="password"
-                           name="passwordRepeat"
-                           maxLength="50"
-                           value={passwordRepeat}
-                           onChange={this.handleOnChange}
-                        />
-                        <div className="div_button_split">
-                           <MDBBtn type="button" className="btn btn_split btn_dhbw" onClick={this.props.handleShowLogin}>
-                              Login
-                           </MDBBtn>
+         <div className="background">
+            <div className="container">
+               <div className="card bg-card-background text-light">
+                  <div className="card-body">
+                     <h1 className="text-center text-dark">MyLA Register</h1>
+                     <form onSubmit={this.signUp}>
+                        <div className="form-group">
+                           <MDBInput
+                              label="Username"
+                              type="email"
+                              name="username"
+                              id="username"
+                              maxLength="30"
+                              value={username}
+                              onChange={this.handleOnChange}
+                           />
+                           <MDBInput
+                              label="Register Key"
+                              type="text"
+                              name="registerKey"
+                              maxLength="200"
+                              value={registerKey}
+                              onChange={this.handleOnChange}
+                           />
+                           <MDBInput
+                              label="Password"
+                              type="password"
+                              name="password"
+                              value={password}
+                              className="form-control"
+                              onChange={this.handleOnChange}
+                           />
+                           <MDBInput
+                              label="Password Repeat"
+                              type="password"
+                              name="passwordRepeat"
+                              maxLength="50"
+                              value={passwordRepeat}
+                              onChange={this.handleOnChange}
+                           />
                            <MDBBtn type="submit" className="btn btn_split btn_dhbw">
                               Sign Up
                            </MDBBtn>
+                           <div className="fg-dhbw-links">
+                              <MDBNav>
+                                 <MDBNavItem>
+                                    <MDBNavLink activate to={'/'} className="fg-dhbw-red">
+                                       <MDBIcon icon="backward" className="fg-dhbw-icon" />
+                                       Back
+                                    </MDBNavLink>
+                                 </MDBNavItem>
+                              </MDBNav>
+                           </div>
                         </div>
-                     </div>
-                  </form>
+                     </form>
+                  </div>
                </div>
             </div>
          </div>
