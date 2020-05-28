@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
+import * as swalHelper from '../../util/swalHelper';
+import { getFading } from '../../util/util';
 import { NEW_SURVEY } from '../constants';
 import './Survey.css';
 
@@ -12,24 +14,18 @@ class SurveyMasterCard extends Component {
       this.state = {};
    }
 
-   getFading = (type) => {
-      switch (type) {
-         case 1:
-            return 'fadeInLeft';
-         case 2:
-            return 'fadeInDown';
-         case 3:
-            return 'fadeInRight';
-         default:
-            return 'fadeInDown';
-      }
-   };
-
    // Not yet implemented from BE
    delteSurvey = async (surveyMasterId) => {
       const user = getStoredUser();
+      console.log('user', user);
       const resObj = await deleteSurveyMaster(user, surveyMasterId);
       console.log('resObj', resObj);
+      if (resObj && resObj.status === 200) {
+         swalHelper.success(resObj.message);
+         this.props.loadSurveys();
+      } else {
+         return swalHelper.error(resObj.message);
+      }
    };
 
    // Not yet implemented from BE
@@ -49,7 +45,7 @@ class SurveyMasterCard extends Component {
       const { survey, type } = infos;
       return (
          <MDBCol md="4" key={counter}>
-            <MDBAnimation reveal type={this.getFading(type)}>
+            <MDBAnimation reveal type={getFading(type)}>
                <MDBCard cascade className="my-3 grey lighten-4 survey-card">
                   <MDBCardBody cascade className="text-center">
                      <MDBCardTitle>

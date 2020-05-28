@@ -20,6 +20,7 @@ import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import './Survey.css';
 import { surveys } from './surveys';
+import { SURVEY } from '../constants';
 
 SurveyJSCreator.StylesManager.applyTheme('default');
 
@@ -49,8 +50,12 @@ class SurveyCreator extends Component {
       const user = getStoredUser();
       const createdSurvey = JSON.parse(this.surveyCreator.text);
       const resObj = await createSurveyMaster(user, createdSurvey);
-      if (resObj && resObj.status === 201) return swalHelper.success('Survey successful created!');
-      return swalHelper.error("Survey couldn't be created!");
+      if (resObj && resObj.status === 201) {
+         swalHelper.success('Survey successful created!');
+         this.props.history.push('/' + SURVEY);
+      } else {
+         return swalHelper.error("Survey couldn't be created!");
+      }
    };
 
    componentDidMount() {

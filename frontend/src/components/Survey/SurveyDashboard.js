@@ -35,13 +35,16 @@ class SurveyDashboard extends Component {
       }
    };
 
-   componentDidMount = async () => {
-      //getAllOwnSurveyMasters
+   loadSurveys = async () => {
       const user = getStoredUser();
       const resObj = await getAllOwnSurveyMasters(user);
       if (resObj && resObj.status === 200) {
          this.setState({ surveys: resObj.payload });
       }
+   };
+   componentDidMount = async () => {
+      //getAllOwnSurveyMasters
+      this.loadSurveys();
    };
 
    render() {
@@ -54,7 +57,12 @@ class SurveyDashboard extends Component {
             <MDBRow id="categories">
                <SurveyCreateMasterCard />
                {surveys.map((survey, key) => (
-                  <SurveyMasterCard counter={key} infos={{ survey, type: 1 }} onClickSurvey={() => this.showSurvey(survey.id)} />
+                  <SurveyMasterCard
+                     counter={key}
+                     infos={{ survey, type: 1 }}
+                     onClickSurvey={() => this.showSurvey(survey.id)}
+                     loadSurveys={this.loadSurveys}
+                  />
                ))}
             </MDBRow>
          </Fragment>

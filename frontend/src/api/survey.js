@@ -167,7 +167,8 @@ export async function updateSurveyMaster(user, survey, surveyMasterId) {
 export async function deleteSurveyMaster(user, surveyMasterId) {
    try {
       const url = PATH_BASE_URL + PATH_DELTE_SURVEY_MASTER + surveyMasterId;
-      const response = await axiosHelper.remove(url, 'deleteSurveyMaster', user);
+      const response = await axiosHelper.post(url, 'deleteSurveyMaster', user);
+      console.log('res', response);
       return response.data;
    } catch (error) {
       console.log('error on deleteSurveyMaster', error);
