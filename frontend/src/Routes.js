@@ -18,7 +18,7 @@ import {
 } from './components/constants';
 import Dashboard from './components/Dashboard/Dashboard';
 import MyLogin from './components/Home/MyLogin';
-import Startpage from './components/Home/startpage';
+import Startpage from './components/Home/Startpage';
 import SignUp from './components/SignUp/SignUp';
 import SurveyComponent from './components/Survey/SurveyComponent';
 import SurveyCreateComponent from './components/Survey/SurveyCreateComponent2';
@@ -32,7 +32,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       render={(props) => {
          if (verifySession()) {
             if (rest.path === '/') return <Redirect to={'/' + DASHBOARD} />;
-
             return <Component {...props} />;
          }
          if (rest.path === '/' + SURVEY_PARTICIPATE || rest.path === '/' + LOGIN || rest.path === '/' + SIGNUP) {
@@ -50,13 +49,6 @@ class Routes extends Component {
    }
 
    render() {
-      // let routes = (
-      //    <Switch>
-      //       <Route exact path="/" component={Startpage} />
-      //       {/* <Route exact path="/survey/participate" component={Survey} /> */}
-      //       <Route component={Startpage} />
-      //    </Switch>
-      // );
       let routes = (
          <Switch>
             <PrivateRoute exact path={'/' + SURVEY} component={SurveyComponent} />
@@ -68,8 +60,8 @@ class Routes extends Component {
             <PrivateRoute exact path={'/' + MY_ACCOUNT} component={Account} />
             <PrivateRoute exact path={'/' + ACCOUNT_PASSWORD_CHANGE} component={ChangePassword} />
             <PrivateRoute exact path={'/' + SURVEY_PARTICIPATE} component={SurveyDetails} />
-            <PrivateRoute exact path={'/' + LOGIN} component={MyLogin} />
-            <PrivateRoute exact path={'/' + SIGNUP} component={SignUp} />
+            <PrivateRoute exact path={'/' + LOGIN} component={() => <MyLogin updateRoot={this.props.updateRoot} />} />
+            <PrivateRoute exact path={'/' + SIGNUP} component={() => <SignUp updateRoot={this.props.updateRoot} />} />
             <Route exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />
          </Switch>
       );
