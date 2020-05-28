@@ -289,7 +289,9 @@ responses:
       is_public_template: false,
       results_visible: true,
       group_id: null,
-      name: null},
+      group_name: null,
+      number_of_surveys: "4",
+     },
     ...
     ]
 500 { error: "Internal Server Error" }

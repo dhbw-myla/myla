@@ -264,9 +264,14 @@ const createSurveyHelper = function (response, surveyMasterId, timestampStart, t
 exports.getAllOwnSurveyMasters = function (request, response) {
     // returns a list of survey masters of the logged-in user
     const username = request.body.username;
-    db.query(`SELECT * FROM survey_master sm
+    db.query(`SELECT sm.survey_master_id, sm.title, sm.description, sm.is_template,
+                        sm.is_public_template, sm.results_visible, g.group_id,
+                        g.name as group_name, count(s.survey_master_id) as number_of_surveys
+                FROM survey_master sm
                 LEFT JOIN survey_master_group g ON g.group_id = sm.group_id
+                LEFT JOIN survey s ON s.survey_master_id = sm.survey_master_id
                 WHERE sm.user_id = (SELECT user_id FROM users WHERE username = $1)
+                GROUP BY sm.survey_master_id, g.group_id
                 ORDER BY sm.survey_master_id DESC;`,
             [username], (err, result) => {
         if (err) {
