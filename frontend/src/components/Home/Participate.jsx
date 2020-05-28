@@ -25,7 +25,7 @@ class Participate extends Component {
    joinSurvey = async (e) => {
       e.preventDefault();
       const { surveycode } = this.state;
-      const valid = !validator.isEmpty(surveycode);
+      const valid = surveycode && !validator.isEmpty(surveycode);
       if (valid) {
          const resObj = await getSurveyBySurveyCode(surveycode);
          if (resObj && resObj.status === 200) {
@@ -35,10 +35,12 @@ class Participate extends Component {
                pathname: '/' + SURVEY_PARTICIPATE,
                surveyToParticipate: resObj.payload,
             });
-            swalHelper.successTimer('Loading Survey!', 'Loading Survey with code: ' + surveycode, 'Loaded Survey.');
+            swalHelper.successTimer('Loading Survey!', 'Loading Survey with code: ' + surveycode, 'Survey loaded.');
          } else {
-            swalHelper.error('Could not find Survey!', 'Maybe no Surveycode was given.', true);
+            swalHelper.error('Could not find Survey!', 'Surveycode not found.');
          }
+      } else {
+         swalHelper.error('Could not find Survey!', 'No Surveycode given.');
       }
    };
 

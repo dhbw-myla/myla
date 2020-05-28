@@ -66,10 +66,10 @@ class Signup extends Component {
             this.props.updateRoot();
          } else {
             const { message } = resObj;
-            swalHelper.error('Could not register!', 'Error on registering\n\n' + message, true);
+            swalHelper.error('Could not register!', 'Error on registering\n\n' + message);
          }
       } else {
-         swalHelper.error('Could not register!', "Passwords didn't match.", true);
+         swalHelper.error('Could not register!', "Passwords didn't match.");
       }
    };
 

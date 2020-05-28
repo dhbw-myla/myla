@@ -19,7 +19,7 @@ class ChangePassword extends Component {
    handleOnSave = async () => {
       const { newPassword, repeatPassword, oldPassword } = this.state;
 
-      if (validator.isEmpty(newPassword)) return swalHelper.error('ERROR!', "Passwords can't be empty.", true);
+      if (validator.isEmpty(newPassword)) return swalHelper.error('ERROR!', "Passwords can't be empty.");
 
       if (verifyPassword(newPassword, repeatPassword)) {
          const user = getStoredUser();
@@ -29,9 +29,9 @@ class ChangePassword extends Component {
          const { status } = resObj;
          status === 200
             ? swalHelper.success('Password changed!', 'Your password has been updated!', true)
-            : swalHelper.error('ERROR!', 'Password has not been changed!', true);
+            : swalHelper.error('ERROR!', 'Password has not been changed!');
       } else {
-         swalHelper.error('ERROR!', "Passwords didn't match.", true);
+         swalHelper.error('ERROR!', "Passwords didn't match.");
       }
    };
 

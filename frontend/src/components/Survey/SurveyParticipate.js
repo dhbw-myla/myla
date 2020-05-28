@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import * as SurveyPDF from 'survey-pdf';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
+import { submitSurvey } from '../../api/interaction';
+import * as swalHelper from '../../util/swalHelper';
 
 Survey.StylesManager.applyTheme('default');
 
@@ -18,12 +20,36 @@ class SurveyDetails extends Component {
    }
 
    // TODO implement API
-   onComplete(result) {
-      const { survey } = this.props;
+   onComplete = async (result) => {
+      const { surveyToParticipate } = this.props.history.location;
+      // survey meta info surveyjs for use
+      const { survey } = surveyToParticipate;
+
       console.log('Complete! ', result);
       console.log('SurveyID', survey.id);
       console.log('Complete! data', result.data);
-   }
+
+      const resObj = await submitSurvey(result.data, survey.survey_code);
+
+      if (resObj && resObj.status === 200) {
+         swalHelper.success('Survey send!', 'Thank you for participating in this survey.', true);
+         this.props.history.replace('/');
+      } else {
+         return swalHelper.error('Survey could not be send!', 'Please try again in some minutes.');
+      }
+   };
+
+   // {
+   // "answers": {
+   //   "question_name_1": "answer1",
+   //   "question_name_2": "answer2",
+   //   "question_name_3": [
+   //      "answer3_1",
+   //      "answer3_2"
+   //    ],
+   //    ...
+   //    }
+   //  }
 
    savePDF = (model) => {
       const { survey } = this.props;
