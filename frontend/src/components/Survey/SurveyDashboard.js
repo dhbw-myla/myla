@@ -1,10 +1,8 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
-import React, { Component, Fragment } from 'react';
-
+import React, { Component } from 'react';
 import { getAllOwnSurveyMasters } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import SurveyCreateMasterCard from './SurveyCreateMasterCard';
-import SurveyDetails from './SurveyDetails';
 import SurveyMasterCard from './SurveyMasterCard';
 import { surveys } from './surveys';
 
@@ -51,30 +49,22 @@ class SurveyDashboard extends Component {
    render() {
       const { showSurvey, surveys } = this.state;
 
-      const whatToRender = showSurvey ? (
-         <SurveyDetails survey={this.state.surveyToShow} onClickReturn={this.returnToOverview} />
-      ) : (
-         <Fragment>
-            <MDBRow id="categories">
-               <SurveyCreateMasterCard />
-               {surveys.map((survey, key) => (
-                  <SurveyMasterCard
-                     counter={key}
-                     infos={{ survey, type: 1 }}
-                     onClickSurvey={() => this.showSurvey(survey.id)}
-                     loadSurveys={this.loadSurveys}
-                  />
-               ))}
-            </MDBRow>
-         </Fragment>
-      );
-
       return (
          <MDBContainer>
             <MDBRow>
                <MDBCol md="12" className="mt-4">
                   <h2 className="text-center my-5 font-weight-bold">{this.getHeading(showSurvey)}</h2>
-                  {whatToRender}
+                  <MDBRow id="categories">
+                     <SurveyCreateMasterCard />
+                     {surveys.map((survey, key) => (
+                        <SurveyMasterCard
+                           counter={key}
+                           infos={{ survey, type: 1 }}
+                           onClickSurvey={() => this.showSurvey(survey.id)}
+                           loadSurveys={this.loadSurveys}
+                        />
+                     ))}
+                  </MDBRow>
                </MDBCol>
             </MDBRow>
          </MDBContainer>

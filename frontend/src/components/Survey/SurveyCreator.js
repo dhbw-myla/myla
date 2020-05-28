@@ -54,7 +54,7 @@ class SurveyCreator extends Component {
          swalHelper.success('Survey Master saved!', 'Survey Master has been saved successfully! You can access it via Survey Masters.');
          this.props.history.push('/' + SURVEY);
       } else {
-         return swalHelper.error('Could not save Survey Master!', 'Please try again.', true);
+         return swalHelper.error('Could not save Survey Master!', 'Please try again.');
       }
    };
 

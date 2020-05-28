@@ -22,7 +22,7 @@ import Startpage from './components/Home/Startpage';
 import SignUp from './components/SignUp/SignUp';
 import SurveyCreator from './components/Survey/SurveyCreator';
 import SurveyDashboard from './components/Survey/SurveyDashboard';
-import SurveyDetails from './components/Survey/SurveyDetails';
+import SurveyParticipate from './components/Survey/SurveyParticipate';
 import Account from './components/Users/Account';
 import ChangePassword from './components/Users/ChangePassword';
 
@@ -59,7 +59,7 @@ class Routes extends Component {
             <PrivateRoute exact path={'/' + ADMIN_USERS} component={UsersComponent} />
             <PrivateRoute exact path={'/' + MY_ACCOUNT} component={Account} />
             <PrivateRoute exact path={'/' + ACCOUNT_PASSWORD_CHANGE} component={ChangePassword} />
-            <PrivateRoute exact path={'/' + SURVEY_PARTICIPATE} component={SurveyDetails} />
+            <PrivateRoute exact path={'/' + SURVEY_PARTICIPATE} component={SurveyParticipate} />
             <PrivateRoute exact path={'/' + LOGIN} component={() => <Login updateRoot={this.props.updateRoot} />} />
             <PrivateRoute exact path={'/' + SIGNUP} component={() => <SignUp updateRoot={this.props.updateRoot} />} />
             <Route exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />

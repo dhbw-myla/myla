@@ -18,13 +18,13 @@ class EditUserComponent extends Component {
    handleOnSave = async () => {
       const { newPassword } = this.state;
 
-      if (newPassword.length === 0) return swalHelper.error('ERROR!', "Password can't be empty.", true);
+      if (newPassword.length === 0) return swalHelper.error('ERROR!', "Password can't be empty.");
 
       const { userToEdit } = this.props;
       const usernameForPasswordReset = userToEdit.username;
       const resObj = await resetPasswordOfUser({ ...getStoredUser(), usernameForPasswordReset, newPassword });
       if (resObj && resObj.status === 200) return swalHelper.success('Password changed!', 'The password has been updated!', true);
-      return swalHelper.error('ERROR!', 'The password has not been changed.', true);
+      return swalHelper.error('ERROR!', 'The password has not been changed.');
    };
 
    render() {

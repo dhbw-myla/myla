@@ -42,10 +42,10 @@ class Login extends Component {
             this.props.history.push('/' + DASHBOARD);
             this.props.updateRoot();
          } else {
-            swalHelper.error('ERROR!', 'Could not log in!', true);
+            swalHelper.error('ERROR!', 'Could not log in!');
          }
       } else {
-         swalHelper.error('ERROR!', 'Please fill every field.', true);
+         swalHelper.error('ERROR!', 'Please fill every field.');
       }
    };
 

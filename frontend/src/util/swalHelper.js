@@ -10,20 +10,12 @@ export const warning = (title, html, btnText) => {
    });
 };
 
-export const error = (title, html, isQuick, btnText) => {
-   const quick = isQuick
-      ? {
-           showConfirmButton: false,
-           timer: 1500,
-        }
-      : {};
-
+export const error = (title, html, btnText) => {
    Swal.fire({
       title: title || swalTypes.ERROR + '!',
       html: html || 'Error',
       icon: swalTypes.ERROR,
       confirmButtonText: btnText || 'OK',
-      ...quick,
    });
 };
 
