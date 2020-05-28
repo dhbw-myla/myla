@@ -18,7 +18,7 @@ class SurveyResultCard extends Component {
                   <MDBCardBody cascade className="text-center">
                      <MDBCardTitle>
                         <MDBIcon icon="cubes" className="icon-dhbw-red pr-2" />
-                        <strong>{surveyResult.title}</strong>
+                        <strong>{surveyResult.survey_title}</strong>
                      </MDBCardTitle>
                      <MDBCardText>{surveyResult.description}</MDBCardText>
                      <MDBNavLink

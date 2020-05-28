@@ -1,3 +1,8 @@
 .dhbw_bottom{
     margin-bottom: '10%' !important;
 }
+
+.dhbw_result_background{
+    background-color: white !important;
+    padding: 10px;
+}

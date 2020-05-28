@@ -7,7 +7,7 @@ import SurveyResultCard from './SurveyResultCard';
 import SurveyResultDetails from './SurveyResultDetails';
 import surveys from './surveys.json';
 
-class Dashboard extends Component {
+class ResultDashboard extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -61,7 +61,7 @@ class Dashboard extends Component {
       let title = 'Survey Results Dashboard';
 
       if (showSurveyResult) {
-         title = 'Survey: ' + surveyResultToShow.title;
+         title = 'Survey: ' + surveyResultToShow.survey_title;
          whatToRender = (
             <Fragment>
                <MDBRow>{BtnDefault(this.returnToOverview, 'Back to overview')}</MDBRow>
@@ -108,4 +108,4 @@ class Dashboard extends Component {
    }
 }
 
-export default Dashboard;
+export default ResultDashboard;
