@@ -20,8 +20,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Home/Login';
 import Startpage from './components/Home/Startpage';
 import SignUp from './components/SignUp/SignUp';
-import SurveyComponent from './components/Survey/SurveyComponent';
 import SurveyCreator from './components/Survey/SurveyCreator';
+import SurveyDashboard from './components/Survey/SurveyDashboard';
 import SurveyDetails from './components/Survey/SurveyDetails';
 import Account from './components/Users/Account';
 import ChangePassword from './components/Users/ChangePassword';
@@ -51,7 +51,7 @@ class Routes extends Component {
    render() {
       let routes = (
          <Switch>
-            <PrivateRoute exact path={'/' + SURVEY} component={SurveyComponent} />
+            <PrivateRoute exact path={'/' + SURVEY} component={SurveyDashboard} />
             <PrivateRoute exact path={'/' + NEW_SURVEY} component={SurveyCreator} />
             <PrivateRoute exact path={'/' + MODIFY_SURVEY} component={SurveyCreator} />
             <PrivateRoute exact path={'/' + ADMIN} component={AdminComponent} />

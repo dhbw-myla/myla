@@ -64,7 +64,7 @@ class SurveyMasterCard extends Component {
                         className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                         onClick={() => this.props.onClickSurvey(survey)}
                      >
-                        Show survey
+                        Publish Survey
                      </MDBNavLink>
                      <MDBIcon id="editIcon" icon="edit" onClick={() => this.modifySurvey(survey.survey_master_id)} />
                      <MDBIcon id="trashIcon" icon="trash" onClick={() => this.delteSurvey(survey.survey_master_id)} />

@@ -7,7 +7,7 @@ import SurveyDetails from './SurveyDetails';
 import SurveyMasterCard from './SurveyMasterCard';
 import { surveys } from './surveys';
 
-class SurveyComponent extends Component {
+class SurveyDashboard extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -74,4 +74,4 @@ class SurveyComponent extends Component {
    }
 }
 
-export default SurveyComponent;
+export default SurveyDashboard;
