@@ -29,15 +29,6 @@
    float: right;
 }
 
-.background {
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: cover;
-   margin: auto;
-   min-height: 94vh;
-   background-image: url(assets/DHBWIntro.jpg);
-}
-
 .fg-dhbw-red {
    color: #757575;
 }
