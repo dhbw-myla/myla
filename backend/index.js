@@ -62,7 +62,7 @@ app.post("/getSurveyMaster/:masterId", routes.getSurveyMaster);
 app.put("/updateSurveyMaster/:masterId", routes.updateSurveyMaster);
 app.delete("/deleteSurveyMaster/:masterId", routes.deleteSurveyMaster);
 
-app.get("/getAllOwnGroups", routes.getAllOwnGroups);
+app.post("/getAllOwnGroups", routes.getAllOwnGroups);
 app.post("/createGroup", routes.createGroup);
 
 // Participating in survey
