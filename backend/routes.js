@@ -900,7 +900,7 @@ exports.createExampleDatabase = function (request, response) {
                     let groupId = result2.rows[0].group_id;
                     db.query('INSERT INTO survey_master (title, description, user_id) VALUES ($1, $2, $3) RETURNING survey_master_id;', ["Survey Master 1", "First Survey Master - Created When Filling Database Automatically", userId], (err, result3) => {
                         let surveyMasterId1 = result3.rows[0].survey_master_id;
-                        db.query('INSERT INTO survey (survey_code, timestamp_start, survey_master_id) VALUES ($1, $2, $3) RETURNING survey_id;', ["XYZ123", new Date().toISOString(), surveyMasterId1], (err, result4) => {
+                        db.query('INSERT INTO survey (survey_code, timestamp_start, survey_master_id, survey_title) VALUES ($1, $2, $3, $4) RETURNING survey_id;', ["XYZ123", new Date().toISOString(), surveyMasterId1, "survey today..."], (err, result4) => {
                             let surveyId1 = result4.rows[0].survey_id;
                             db.query('INSERT INTO survey_comment (timestamp, text, survey_id) VALUES ($1, $2, $3);', [new Date().toISOString(), "First Comment", surveyId1]);
                         });
@@ -917,7 +917,7 @@ exports.createExampleDatabase = function (request, response) {
                     });
                     db.query('INSERT INTO survey_master (title, description, user_id, group_id) VALUES ($1, $2, $3, $4) RETURNING survey_master_id;', ["Survey Master 2", "Second Survey Master - This One Is Part Of A Group", userId, groupId], (err, result5) => {
                         let surveyMasterId2 = result5.rows[0].survey_master_id;
-                        db.query('INSERT INTO survey (survey_code, timestamp_start, survey_master_id) VALUES ($1, $2, $3) RETURNING survey_id;', ["ABC456", new Date().toISOString(), surveyMasterId2], (err, result6) => {
+                        db.query('INSERT INTO survey (survey_code, timestamp_start, survey_master_id, survey_title) VALUES ($1, $2, $3, $4) RETURNING survey_id;', ["ABC456", new Date().toISOString(), surveyMasterId2, "survey wwi17seb (32.05.2020)"], (err, result6) => {
                             let surveyId2 = result6.rows[0].survey_id;
                             db.query('INSERT INTO survey_comment (timestamp, text, survey_id) VALUES ($1, $2, $3);', [new Date().toISOString(), "Second Comment", surveyId2]);
                         });
