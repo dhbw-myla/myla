@@ -21,8 +21,27 @@ import * as swalHelper from '../../util/swalHelper';
 import './Survey.css';
 import { surveys } from './surveys';
 import { SURVEY } from '../constants';
+import './SurveyEditor.css';
 
-SurveyJSCreator.StylesManager.applyTheme('default');
+const mainColor = '#ff0000';
+
+const defaultThemeColorsEditor = SurveyJSCreator.StylesManager.ThemeColors['default'];
+defaultThemeColorsEditor['$primary-color'] = mainColor;
+defaultThemeColorsEditor['$secondary-color'] = mainColor;
+defaultThemeColorsEditor['$primary-hover-color'] = mainColor;
+defaultThemeColorsEditor['$primary-text-color'] = mainColor;
+defaultThemeColorsEditor['$selection-border-color'] = mainColor;
+defaultThemeColorsEditor['$main-color'] = mainColor;
+defaultThemeColorsEditor['$main-hover-color'] = mainColor;
+defaultThemeColorsEditor['$text-color'] = mainColor;
+defaultThemeColorsEditor['$header-color'] = mainColor;
+defaultThemeColorsEditor['$header-background-color'] = mainColor;
+defaultThemeColorsEditor['$body-container-background-color'] = mainColor;
+defaultThemeColorsEditor['$btn-primary'] = mainColor;
+
+SurveyJSCreator.StylesManager.applyTheme();
+
+// SurveyJSCreator.StylesManager.applyTheme('default');
 
 //widgets.icheck(SurveyKo, $);
 widgets.prettycheckbox(SurveyKo);

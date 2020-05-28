@@ -1,7 +1,7 @@
 import { MDBContainer } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import * as SurveyPDF from 'survey-pdf';
+// import * as SurveyPDF from 'survey-pdf';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import { submitSurvey } from '../../api/interaction';
@@ -52,10 +52,10 @@ class SurveyDetails extends Component {
    //  }
 
    savePDF = (model) => {
-      const { survey } = this.props;
-      const surveyPDF = new SurveyPDF.SurveyPDF(survey);
-      surveyPDF.data = model.data;
-      surveyPDF.save();
+      // const { survey } = this.props;
+      // const surveyPDF = new SurveyPDF.SurveyPDF(survey);
+      // surveyPDF.data = model.data;
+      // surveyPDF.save();
    };
 
    componentDidMount() {

@@ -1,0 +1,22 @@
+.btn-primary {
+   background-color: rgb(255, 0, 0) !important;
+}
+
+.svd_survey_header {
+   /* //display:  */
+}
+
+.sv_main .sv_body {
+   border-top: 2px solid #ff0000 !important;
+}
+
+.svd-survey-placeholder-root .svd-survey-placeholder .svd-empty-message-container .svd-empty-message {
+   color: #ff0000;
+}
+
+.svd-empty-message-container img {
+}
+
+.sv_main.sv_main .sv-boolean__switch {
+   background-color: #ff0000 !important;
+}
