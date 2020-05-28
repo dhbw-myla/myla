@@ -16,7 +16,7 @@ import {
    SURVEY,
    SURVEY_PARTICIPATE,
 } from './components/constants';
-import Dashboard from './components/Dashboard/Dashboard';
+import ResultDashboard from './components/ResultDashboard/ResultDashboard';
 import Login from './components/Home/Login';
 import Startpage from './components/Home/Startpage';
 import SignUp from './components/SignUp/SignUp';
@@ -55,7 +55,7 @@ class Routes extends Component {
             <PrivateRoute exact path={'/' + NEW_SURVEY} component={SurveyCreator} />
             <PrivateRoute exact path={'/' + MODIFY_SURVEY} component={SurveyCreator} />
             <PrivateRoute exact path={'/' + ADMIN} component={AdminComponent} />
-            <PrivateRoute exact path={'/' + DASHBOARD} component={Dashboard} />
+            <PrivateRoute exact path={'/' + DASHBOARD} component={ResultDashboard} />
             <PrivateRoute exact path={'/' + ADMIN_USERS} component={UsersComponent} />
             <PrivateRoute exact path={'/' + MY_ACCOUNT} component={Account} />
             <PrivateRoute exact path={'/' + ACCOUNT_PASSWORD_CHANGE} component={ChangePassword} />

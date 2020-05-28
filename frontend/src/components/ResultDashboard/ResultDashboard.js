@@ -2,9 +2,9 @@ import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
 import Select from 'react-select';
 import { BtnDefault } from '../Button/BtnDefault';
+import './resultDashboard.css';
 import SurveyResultCard from './SurveyResultCard';
 import SurveyResultDetails from './SurveyResultDetails';
-import './dashboard.css';
 import surveys from './surveys.json';
 
 class Dashboard extends Component {
