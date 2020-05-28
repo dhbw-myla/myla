@@ -29,6 +29,16 @@
    float: right;
 }
 
+.icon-dhbw-red {
+   color: #e30613;
+}
+
+.btn-outline-dhbw-red {
+   color: rgba(227, 6, 19, 0.9);
+   background-color: transparent;
+   border: 1px solid rgba(227, 6, 19, 0.5);
+}
+
 .fg-dhbw-red {
    color: #757575;
 }
@@ -61,6 +71,10 @@
 }
 
 body {
-   background-color: #aaaaaa;
    background-image: none;
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+   background-color: #eeeeee !important;
 }

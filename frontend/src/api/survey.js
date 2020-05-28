@@ -158,6 +158,7 @@ export async function updateSurveyMaster(user, survey, surveyMasterId) {
 }
 
 /*
+ * TODO: use POST instead of DELETE
  * 200 { message: "Successfully Deleted Survey Master" }
  * 400 { message: "You Can't Delete This Survey Master Because There Are Already Surveys Based On That Master" }
  * 403 { error: "Forbidden" }
@@ -167,7 +168,7 @@ export async function updateSurveyMaster(user, survey, surveyMasterId) {
 export async function deleteSurveyMaster(user, surveyMasterId) {
    try {
       const url = PATH_BASE_URL + PATH_DELTE_SURVEY_MASTER + surveyMasterId;
-      const response = await axiosHelper.post(url, 'deleteSurveyMaster', user);
+      const response = await axiosHelper.remove(url, 'deleteSurveyMaster', user);
       console.log('res', response);
       return response.data;
    } catch (error) {

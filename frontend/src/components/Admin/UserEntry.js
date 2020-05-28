@@ -23,7 +23,7 @@ class UserEntry extends Component {
                         tag="button"
                         to="#"
                         color="mdb-color"
-                        className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                        className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
                         onClick={() => this.props.handleOnEditUser(entry)}
                      >
                         Edit

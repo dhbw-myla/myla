@@ -100,7 +100,6 @@ class Dashboard extends Component {
             <MDBRow>
                <MDBCol md="12" className="mt-4">
                   <h2 className="text-center my-5 font-weight-bold">{title}</h2>
-                  <hr className="my-5" />
                   {whatToRender}
                </MDBCol>
             </MDBRow>

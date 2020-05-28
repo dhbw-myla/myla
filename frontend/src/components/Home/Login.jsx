@@ -37,15 +37,15 @@ class Login extends Component {
       if (valid) {
          const resObj = await login({ username, password });
          if (resObj && resObj.status === 200) {
-            swalHelper.success('Welcome');
+            swalHelper.success('Welcome!', 'Login was successful.', true);
             setUserToStorage(resObj.payload);
             this.props.history.push('/' + DASHBOARD);
             this.props.updateRoot();
          } else {
-            swalHelper.error('Error on log in!');
+            swalHelper.error('ERROR!', 'Could not log in!', true);
          }
       } else {
-         swalHelper.error('Not filled out');
+         swalHelper.error('ERROR!', 'Please fill every field.', true);
       }
    };
 

@@ -4,6 +4,7 @@
 
 .survey-card {
    width: auto;
+   padding-bottom: 0.6rem;
 }
 
 #surveyCreatorContainer {

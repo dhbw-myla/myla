@@ -28,7 +28,7 @@ class UsersComponent extends Component {
       if (resObj.status === 200) {
          this.setState({ users: resObj.payload });
       } else {
-         swalHelper.error(resObj.message);
+         swalHelper.error('ERROR!', resObj.message);
          this.props.history.push('/' + MY_ACCOUNT);
       }
    };

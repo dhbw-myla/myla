@@ -2,8 +2,7 @@ import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbre
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
-import { getSurveyMaster } from '../../api/survey';
-import { getStoredUser } from '../../auth/verifyPw';
+import { getSurveyBySurveyCode } from '../../api/interaction';
 import * as swalHelper from '../../util/swalHelper';
 import { LOGIN, SIGNUP, SURVEY_PARTICIPATE } from '../constants';
 
@@ -28,17 +27,18 @@ class Participate extends Component {
       const { surveycode } = this.state;
       const valid = !validator.isEmpty(surveycode);
       if (valid) {
-         const user = getStoredUser();
-         const resObj = await getSurveyMaster(user, this.state.surveycode);
-         if (resObj) {
+         const resObj = await getSurveyBySurveyCode(surveycode);
+         if (resObj && resObj.status === 200) {
+            // 200 {survey: { ... }, questions: [ { ... } ] }
+            console.log('resObj', resObj.payload);
             this.props.history.push({
                pathname: '/' + SURVEY_PARTICIPATE,
-               state: { surveyToParticipate: resObj },
+               surveyToParticipate: resObj.payload,
             });
+            swalHelper.successTimer('Loading Survey!', 'Loading Survey with code: ' + surveycode, 'Loaded Survey.');
+         } else {
+            swalHelper.error('Could not find Survey!', 'Maybe no Surveycode was given.', true);
          }
-         swalHelper.success('Load Survey: ' + surveycode);
-      } else {
-         swalHelper.error('No Surveycode was given');
       }
    };
 

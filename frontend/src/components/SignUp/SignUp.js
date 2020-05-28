@@ -61,15 +61,15 @@ class Signup extends Component {
          const resObj = await register(user);
          if (resObj && resObj.status === 201) {
             setUserToStorage(resObj.payload);
-            swalHelper.success('Successfully signed Up!');
+            swalHelper.success('Sign Up successful!', 'You have successfully signed up to MyLA.', true);
             this.props.history.push('/' + DASHBOARD);
             this.props.updateRoot();
          } else {
             const { message } = resObj;
-            swalHelper.error('Error on registering\n\n' + message);
+            swalHelper.error('Could not register!', 'Error on registering\n\n' + message, true);
          }
       } else {
-         swalHelper.error("Passwords didn't match");
+         swalHelper.error('Could not register!', "Passwords didn't match.", true);
       }
    };
 

@@ -1,11 +1,13 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
+
+import { createSurveyBasedOnMaster, deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { getFading } from '../../util/util';
 import { NEW_SURVEY } from '../constants';
+
 import './Survey.css';
 
 class SurveyMasterCard extends Component {
@@ -14,21 +16,25 @@ class SurveyMasterCard extends Component {
       this.state = {};
    }
 
-   // Not yet implemented from BE
-   delteSurvey = async (surveyMasterId) => {
+   deleteSurvey = async (surveyMasterId) => {
       const user = getStoredUser();
       console.log('user', user);
-      const resObj = await deleteSurveyMaster(user, surveyMasterId);
-      console.log('resObj', resObj);
-      if (resObj && resObj.status === 200) {
-         swalHelper.success(resObj.message);
-         this.props.loadSurveys();
+
+      const shouldDelete = await swalHelper.question('Are You sure?', 'Should delete survey master?', 'OK!', 'No!', true);
+      if (shouldDelete) {
+         const resObj = await deleteSurveyMaster(user, surveyMasterId);
+         if (resObj && resObj.status === 200) {
+            swalHelper.success('Success!', resObj.message);
+            this.props.loadSurveys();
+         } else {
+            return swalHelper.error('ERROR!', resObj.message);
+         }
       } else {
-         return swalHelper.error(resObj.message);
+         swalHelper.warning('WARNING!', 'Survey Master has not been deleted!');
       }
    };
 
-   // Not yet implemented from BE
+   // FIXME: Not yet implemented in BE
    modifySurvey = async (surveyMasterId) => {
       const user = getStoredUser();
       const resObj = await getSurveyMaster(user, surveyMasterId);
@@ -38,6 +44,26 @@ class SurveyMasterCard extends Component {
             state: { surveyToEdit: resObj.payload },
          });
       }
+   };
+
+   publishSurvey = async (surveyMasterId) => {
+      // const surveyStart = new Date();
+      // const surveyEnd = new Date();
+      const resObj = await createSurveyBasedOnMaster(getStoredUser(), null, null, surveyMasterId); //(user, timestampStart, timestampEnd, surveyMasterId)
+      if (resObj && resObj.status === 201) {
+         swalHelper.success(
+            'Survey created!',
+            "It's now live for 7 days with code: <br><br> <code style='color:#e30613; font-size: 1.5rem; font-weight: bold; letter-spacing: 0.4rem;'>" +
+               resObj.payload.surveyCode +
+               '</code>'
+         );
+      } else {
+         swalHelper.error('ERROR!', 'Survey not created.');
+      }
+   };
+
+   calulateSurveys = () => {
+      return 0;
    };
 
    render() {
@@ -57,13 +83,15 @@ class SurveyMasterCard extends Component {
                         tag="button"
                         to="#"
                         color="mdb-color"
-                        className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
-                        onClick={() => this.props.onClickSurvey(survey)}
+                        className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
+                        onClick={() => this.publishSurvey(survey.survey_master_id)}
                      >
                         Publish Survey
                      </MDBNavLink>
                      <MDBIcon id="editIcon" icon="edit" onClick={() => this.modifySurvey(survey.survey_master_id)} />
-                     <MDBIcon id="trashIcon" icon="trash" onClick={() => this.delteSurvey(survey.survey_master_id)} />
+                     <MDBIcon id="trashIcon" icon="trash" onClick={() => this.deleteSurvey(survey.survey_master_id)} />
+                     <MDBIcon id="trashIcon" icon="id-card" onClick={() => this.deleteSurvey(survey.survey_master_id)} />
+                     {this.calulateSurveys()}
                   </MDBCardBody>
                </MDBCard>
             </MDBAnimation>

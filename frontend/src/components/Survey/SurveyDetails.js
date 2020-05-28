@@ -1,10 +1,9 @@
-import { MDBBtn, MDBContainer } from 'mdbreact';
+import { MDBContainer } from 'mdbreact';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import * as SurveyPDF from 'survey-pdf';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
-import { surveys } from './surveys';
-import { withRouter } from 'react-router-dom';
 
 Survey.StylesManager.applyTheme('default');
 
@@ -33,35 +32,23 @@ class SurveyDetails extends Component {
       surveyPDF.save();
    };
 
-   terminateSurvey = () => {
-      this.props.history.replace('/');
-   };
-
    componentDidMount() {
-      //const { survey } = this.props;
-      console.log('surveys', surveys);
-      const survey = surveys[0];
-      console.log('survey', survey);
-      this.setState({ survey });
+      const { surveyToParticipate } = this.props.history.location;
+      // survey meta info surveyjs for use
+      const { survey, surveyjs } = surveyToParticipate;
+
+      this.setState({ survey, surveyjs });
    }
 
    render() {
-      const { survey } = this.state;
-      const model = new Survey.Model(survey);
+      const { survey, surveyjs } = this.state;
+      const model = new Survey.Model(surveyjs);
 
-      if (survey) {
-         console.log('lö', survey.pages.length);
-      }
       return (
          <MDBContainer id="survey-participate">
             <h1>{survey ? survey.title : ''}</h1>
-            <hr className="my-5" />
             <div className="surveyjs">
                <Survey.Survey model={model} onComplete={this.onComplete.bind(this)} onValueChanged={this.onValueChanged.bind(this)} />
-               <h3>SurveyPDF export:</h3>
-               <MDBBtn onClick={() => this.savePDF(model)}>Save PDF</MDBBtn>
-
-               <MDBBtn onClick={this.terminateSurvey}>Beenden</MDBBtn>
             </div>
          </MDBContainer>
       );
