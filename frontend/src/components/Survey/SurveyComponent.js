@@ -1,10 +1,10 @@
-import { MDBCol, MDBContainer, MDBNavLink, MDBRow } from 'mdbreact';
+import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
 import { getAllOwnSurveyMasters } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
-import { NEW_SURVEY } from '../constants';
-import MySurveyCard from './MySurveyCard';
+import SurveyCreateMasterCard from './SurveyCreateMasterCard';
 import SurveyDetails from './SurveyDetails';
+import SurveyMasterCard from './SurveyMasterCard';
 import { surveys } from './surveys';
 
 class SurveyComponent extends Component {
@@ -45,26 +45,16 @@ class SurveyComponent extends Component {
    };
 
    render() {
-      const { showSurvey } = this.state;
+      const { showSurvey, surveys } = this.state;
 
       const whatToRender = showSurvey ? (
          <SurveyDetails survey={this.state.surveyToShow} onClickReturn={this.returnToOverview} />
       ) : (
          <Fragment>
-            <MDBRow>
-               <MDBNavLink
-                  tag="button"
-                  to={'/' + NEW_SURVEY}
-                  color="mdb-color"
-                  className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
-                  onClick={this.scrollToTop}
-               >
-                  Create new Survey
-               </MDBNavLink>
-            </MDBRow>
             <MDBRow id="categories">
-               {this.state.surveys.map((survey, key) => (
-                  <MySurveyCard counter={key} infos={{ survey, type: 1 }} onClickSurvey={() => this.showSurvey(survey.id)} />
+               <SurveyCreateMasterCard />
+               {surveys.map((survey, key) => (
+                  <SurveyMasterCard counter={key} infos={{ survey, type: 1 }} onClickSurvey={() => this.showSurvey(survey.id)} />
                ))}
             </MDBRow>
          </Fragment>

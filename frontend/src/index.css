@@ -38,6 +38,10 @@
    background-image: url(assets/DHBWIntro.jpg);
 }
 
+.icon-dhbw-red {
+   color: #e30613;
+}
+
 .fg-dhbw-red {
    color: #757575;
 }

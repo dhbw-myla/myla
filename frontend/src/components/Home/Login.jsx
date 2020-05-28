@@ -3,10 +3,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
 import { login } from '../../api/auth';
-import { getSurveyMaster } from '../../api/survey';
-import { getStoredUser, setUserToStorage } from '../../auth/verifyPw';
+import { setUserToStorage } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { DASHBOARD, SURVEY_PARTICIPATE } from '../constants';
+import { DASHBOARD } from '../constants';
 import './startpage.css';
 
 class Login extends Component {
@@ -28,25 +27,6 @@ class Login extends Component {
          ...prevState, // keep all other key-value pairs
          [name]: value, // update the value of specific key
       }));
-   };
-
-   joinSurvey = async (e) => {
-      e.preventDefault();
-      const { surveycode } = this.state;
-      const valid = !validator.isEmpty(surveycode);
-      if (valid) {
-         const user = getStoredUser();
-         const resObj = await getSurveyMaster(user, this.state.surveycode);
-         if (resObj) {
-            this.props.history.push({
-               pathname: '/' + SURVEY_PARTICIPATE,
-               state: { surveyToParticipate: resObj },
-            });
-         }
-         swalHelper.success('Load Survey: ' + surveycode);
-      } else {
-         swalHelper.error('No Surveycode was given');
-      }
    };
 
    handleLogin = async (e) => {
