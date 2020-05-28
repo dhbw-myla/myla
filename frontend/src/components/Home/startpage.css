@@ -6,6 +6,25 @@
    align-self: center;
 }
 
+@media only screen and (max-width: 600px) {
+   .card {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      opacity: 0.95;
+      align-self: center;
+   }
+ }
+body {
+   background-image: url(../../assets/DHBWIntro.jpg);
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+   background-color: #464646;
+ }
+
+
 .container {
    padding-top: 7rem; /*vertical Alignment needed*/
    margin: auto;
