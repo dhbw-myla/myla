@@ -1,4 +1,4 @@
-import { MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
+import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
@@ -59,7 +59,6 @@ class Login extends Component {
          if (resObj && resObj.status === 200) {
             swalHelper.success('Welcome');
             setUserToStorage(resObj.payload);
-            //this.setState({ success: true });
             this.props.history.push('/' + DASHBOARD);
             this.props.updateRoot();
          } else {
@@ -76,7 +75,7 @@ class Login extends Component {
             <div className="container">
                <div className="card bg-card-background text-light">
                   <div className="card-body">
-                     <h1 className="text-center text-dark">MyLA</h1>
+                     <h1 className="text-center text-dark">MyLA Login</h1>
                      <form onSubmit={this.handleLogin}>
                         <div className="form-group">
                            <MDBInput
@@ -95,6 +94,9 @@ class Login extends Component {
                               onChange={this.handleOnChange}
                            />
                         </div>
+                        <MDBBtn type="submit" className="btn btn_split btn_dhbw">
+                           Login
+                        </MDBBtn>
                         <div className="fg-dhbw-links">
                            <MDBNav>
                               <MDBNavItem>

@@ -14,6 +14,7 @@ export const register = async ({ username, password, registerKey }) => {
    try {
       const url = PATH_BASE_URL + PATH_REGISTER;
       const response = await axiosHelper.post(url, 'register', { username, password, registerKey });
+      console.log('res', response);
       return response.data;
    } catch (error) {
       console.log('error on register', error);

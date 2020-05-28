@@ -84,12 +84,12 @@ class Signup extends Component {
             <div className="container">
                <div className="card bg-card-background text-light">
                   <div className="card-body">
-                     <h1 className="text-center text-dark">MyLA Register</h1>
+                     <h1 className="text-center text-dark">MyLA Sign Up</h1>
                      <form onSubmit={this.signUp}>
                         <div className="form-group">
                            <MDBInput
                               label="Username"
-                              type="email"
+                              type="text"
                               name="username"
                               id="username"
                               maxLength="30"

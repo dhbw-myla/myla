@@ -38,7 +38,7 @@ class Participate extends Component {
                               <MDBNavItem>
                                  <MDBNavLink activate to={'/' + SIGNUP} className="fg-dhbw-red">
                                     <MDBIcon icon="user-plus" className="fg-dhbw-icon" />
-                                    Signup
+                                    Sign Up
                                  </MDBNavLink>
                               </MDBNavItem>
                            </MDBNav>
