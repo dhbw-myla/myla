@@ -242,15 +242,16 @@ const createSurveyCode = function () {
     return result;
 };
 
-const createSurveyHelper = function (response, surveyMasterId, timestampStart, timestampEnd) {
+const createSurveyHelper = function (response, surveyMasterId, timestampStart, timestampEnd, surveyTitle) {
     if (!timestampStart) { timestampStart = null; }
     if (!timestampEnd) { timestampEnd = null; }
+    if (!surveyTitle) { surveyTitle = ""; }
     
     // create survey
     let surveyCode = createSurveyCode();
-    db.query(`INSERT INTO survey (survey_code, timestamp_start, timestamp_end, survey_master_id)
-                    VALUES ($1, $2, $3, $4) RETURNING survey_id;`,
-            [surveyCode, timestampStart, timestampEnd, surveyMasterId], (err, result) => {
+    db.query(`INSERT INTO survey (survey_code, timestamp_start, timestamp_end, survey_master_id, survey_title)
+                    VALUES ($1, $2, $3, $4, $5) RETURNING survey_id;`,
+            [surveyCode, timestampStart, timestampEnd, surveyMasterId, surveyTitle], (err, result) => {
         if (err) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
@@ -355,7 +356,7 @@ const checkIfSurveyMasterIdIsAllowedForUser = function (surveyMasterId, username
 exports.createSurveyBasedOnMaster = async function (request, response) {
     const username = request.body.username;
     let surveyMasterId = request.params.masterId;
-    let { timestampStart, timestampEnd } = request.body;
+    let { timestampStart, timestampEnd, surveyTitle } = request.body;
     
     // make sure that no one tries to create a survey based on a survey master which is by someone else
     // not to be confused with: creating survey master based on template
@@ -363,7 +364,7 @@ exports.createSurveyBasedOnMaster = async function (request, response) {
     if (!isAllowed) {
         return responseHelper.sendClientError(response, 403);
     }
-    createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd);
+    createSurveyHelper(response, surveyMasterId, timestampStart, timestampEnd, surveyTitle);
 };
 
 exports.getSurveyMaster = async function (request, response) {
@@ -614,7 +615,7 @@ exports.submitSurvey = function (request, response) {
                 FROM survey INNER JOIN
                     question q on survey.survey_master_id = q.survey_master_id
                 WHERE survey_code = $1
-                AND timestamp_start < $2
+                AND (timestamp_start IS NULL OR timestamp_start < $2)
                 AND (timestamp_end IS NULL OR timestamp_end > $2);`,
             [surveyCode, new Date().toISOString()], (err, result) => {
         if (err) {
@@ -899,7 +900,7 @@ exports.createExampleDatabase = function (request, response) {
                     let groupId = result2.rows[0].group_id;
                     db.query('INSERT INTO survey_master (title, description, user_id) VALUES ($1, $2, $3) RETURNING survey_master_id;', ["Survey Master 1", "First Survey Master - Created When Filling Database Automatically", userId], (err, result3) => {
                         let surveyMasterId1 = result3.rows[0].survey_master_id;
-                        db.query('INSERT INTO survey (survey_code, timestamp_start, survey_master_id) VALUES ($1, $2, $3) RETURNING survey_id;', ["XYZ123", new Date().toISOString(), surveyMasterId1], (err, result4) => {
+                        db.query('INSERT INTO survey (survey_code, timestamp_start, survey_master_id, survey_title) VALUES ($1, $2, $3, $4) RETURNING survey_id;', ["XYZ123", new Date().toISOString(), surveyMasterId1, "survey today..."], (err, result4) => {
                             let surveyId1 = result4.rows[0].survey_id;
                             db.query('INSERT INTO survey_comment (timestamp, text, survey_id) VALUES ($1, $2, $3);', [new Date().toISOString(), "First Comment", surveyId1]);
                         });
@@ -916,7 +917,7 @@ exports.createExampleDatabase = function (request, response) {
                     });
                     db.query('INSERT INTO survey_master (title, description, user_id, group_id) VALUES ($1, $2, $3, $4) RETURNING survey_master_id;', ["Survey Master 2", "Second Survey Master - This One Is Part Of A Group", userId, groupId], (err, result5) => {
                         let surveyMasterId2 = result5.rows[0].survey_master_id;
-                        db.query('INSERT INTO survey (survey_code, timestamp_start, survey_master_id) VALUES ($1, $2, $3) RETURNING survey_id;', ["ABC456", new Date().toISOString(), surveyMasterId2], (err, result6) => {
+                        db.query('INSERT INTO survey (survey_code, timestamp_start, survey_master_id, survey_title) VALUES ($1, $2, $3, $4) RETURNING survey_id;', ["ABC456", new Date().toISOString(), surveyMasterId2, "survey wwi17seb (32.05.2020)"], (err, result6) => {
                             let surveyId2 = result6.rows[0].survey_id;
                             db.query('INSERT INTO survey_comment (timestamp, text, survey_id) VALUES ($1, $2, $3);', [new Date().toISOString(), "Second Comment", surveyId2]);
                         });

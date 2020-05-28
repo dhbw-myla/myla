@@ -215,6 +215,7 @@ responses:
 200 [{survey_id: 69,
       timestamp_start: "2019-12-15T15:54:19.861Z",
       timestamp_end: null,
+      survey_title: "survey specific title",
       survey_master_id: 42,
       survey_code: "II41KMQAUM",
       title: "Survey Master 2",
@@ -360,7 +361,8 @@ body:
   "username": "user",
   "sessionId": "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77",
   "timestampStart": "2019-12-01 00:00:00",
-  "timestampEnd": "2019-12-31 23:59:59"
+  "timestampEnd": "2019-12-01 23:59:59",
+  "surveyTitle": "survey WWI 17 SE B (01.12.2019)",
 }
 ```
 responses:
@@ -382,7 +384,7 @@ body:
 ```
 responses:
 ```
-200 similar to GET /getSurveyBySurveyCode, except that it's payload.surveyMaster instead of payload.survey and there are no timestamps
+200 similar to GET /getSurveyBySurveyCode, except that it's payload.surveyMaster instead of payload.survey and there are no timestamps and no survey specific title
 403 { error: "Forbidden" }
 404 { message: "No Survey Master Found" }
 500 { error: "Internal Server Error" }
@@ -469,6 +471,7 @@ responses:
       description: "Second Survey Master",
       timestamp_start: "2019-12-15T15:54:19.861Z",
       timestamp_end: null,
+      survey_title: "title specific for this survey",
       results_visible: false,
       is_template: false,
       is_public_template: false,
@@ -569,6 +572,7 @@ responses:
       survey_id: 69,
       timestamp_start: "2019-12-31T23:00:00.000Z",
       timestamp_end: "2020-12-31T22:59:59.000Z",
+      survey_title: "survey specific title",
       survey_master_id: 52,
       survey_code: "052JOJ6FIV",
       description: "",
