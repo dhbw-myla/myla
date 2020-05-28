@@ -18,7 +18,7 @@ import {
 } from './components/constants';
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Home/Login';
-import Startpage from './components/Home/Startpage';
+import Startpage from './components/Home/startpage';
 import SignUp from './components/SignUp/SignUp';
 import SurveyCreator from './components/Survey/SurveyCreator';
 import SurveyDashboard from './components/Survey/SurveyDashboard';
