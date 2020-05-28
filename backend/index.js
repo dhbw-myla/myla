@@ -85,6 +85,27 @@ app.post('/secretpage', function (request, response) {
 });
 app.get('/createExampleDatabase', routes.createExampleDatabase);
 
+// JSON Response on Errors
+function sendNotImplementedError (req, res) {
+    res.status(404).json({
+        status: 404,
+        message: `Cannot ${req.method} ${req.originalUrl}`,
+        payload: null,
+    });
+}
+app.get('*', sendNotImplementedError);
+app.post('*', sendNotImplementedError);
+app.put('*', sendNotImplementedError);
+app.delete('*', sendNotImplementedError);
+app.use(function (err, req, res, next) {
+    console.error(`[ERROR]: ${err.message}`);
+    res.status(500).json({
+        status: 500,
+        message: "Internal Server Error",
+        payload: null,
+    });
+});
+
 // Start App
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
