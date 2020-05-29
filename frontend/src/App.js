@@ -17,7 +17,7 @@ const showNavbarComponent = (updateRoot) => {
 
 const addMarginToPageBottom = () => {
    if (verifySession()) {
-      return { height: '94vh', marginBottom: '15%' };
+      return { height: '94vh', marginBottom: '17rem' };
    }
 
    return { height: '94vh' };

@@ -15,20 +15,24 @@
       align-self: center;
    }
 }
-
-body {
+/* if you want the background only on the Startpage
+.background {
    background-position: center center;
    background-repeat: no-repeat;
    background-attachment: fixed;
    background-size: cover;
    background-image: url(../../assets/DHBWIntro.jpg);
 }
+*/
 
-.container {
-   padding-top: 7rem; /*vertical Alignment needed*/
-   margin: auto;
-   width: 100%;
-   height: 94vh;
+
+/* if you want the background everywhere*/
+body {
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+   background-image: url(../../assets/DHBWIntro.jpg);
 }
 
 .logo {

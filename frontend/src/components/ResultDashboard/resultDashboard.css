@@ -1,8 +1,25 @@
-.dhbw_bottom{
-    margin-bottom: '10%' !important;
-}
 
 .dhbw_result_background{
     background-color: white !important;
     padding: 10px;
 }
+.alignBackButton{
+    margin-left: 2rem;
+}
+
+.dhbw_header_margin{
+    margin-bottom: 5%;
+    padding: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    h2{
+        margin-bottom: 5%;
+        padding: 0;
+        font-size: 1.5rem;
+    }
+ }
+
+ .dhbw_result_container{
+    margin-top: -5rem !important;
+ }

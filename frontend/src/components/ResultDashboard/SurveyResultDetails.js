@@ -36,82 +36,43 @@ class SurveyResultDetails extends Component {
       this.setState({ resultsOfSurvey: {}, showCharts: false });
    }
 
-   dataBar = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [
-         {
-            label: 'Penis',
-            data: [12, 19, 30, 5, 2, 150],
-            backgroundColor: [
-               'rgba(255, 134, 159, 0.4)',
-               'rgba(98,  182, 239, 0.4)',
-               'rgba(255, 218, 128, 0.4)',
-               'rgba(113, 205, 205, 0.4)',
-               'rgba(170, 128, 252, 0.4)',
-               'rgba(255, 177, 101, 0.4)',
-               'rgba(255, 134, 159, 0.4)',
-               'rgba(98,  182, 239, 0.4)',
-               'rgba(255, 218, 128, 0.4)',
-               'rgba(113, 205, 205, 0.4)',
-               'rgba(170, 128, 252, 0.4)',
-               'rgba(255, 177, 101, 0.4)',
-            ],
-            borderWidth: 2,
-            borderColor: [
-               'rgba(255, 134, 159, 1)',
-               'rgba(98,  182, 239, 1)',
-               'rgba(255, 218, 128, 1)',
-               'rgba(113, 205, 205, 1)',
-               'rgba(170, 128, 252, 1)',
-               'rgba(255, 177, 101, 1)',
-               'rgba(255, 134, 159, 1)',
-               'rgba(98,  182, 239, 1)',
-               'rgba(255, 218, 128, 1)',
-               'rgba(113, 205, 205, 1)',
-               'rgba(170, 128, 252, 1)',
-               'rgba(255, 177, 101, 1)',
-            ],
-         },
-      ],
-   };
-   barChartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-         xAxes: [
-            {
-               barPercentage: 0.5,
-               gridLines: {
-                  display: true,
-                  color: 'rgba(0, 0, 0, 0.1)',
-               },
-            },
-         ],
-         yAxes: [
-            {
-               gridLines: {
-                  display: true,
-                  color: 'rgba(0, 0, 0, 0.1)',
-               },
-               ticks: {
-                  beginAtZero: true,
-               },
-            },
-         ],
-      },
-   };
-
    buildBarChart(question, answers) {
-
-      let labels = Object.keys(answers);
+      let maxRating = 5;
+      let minRating = 1;
+      let labels = [];
       let data = [];
+
+      if (question.rateMin !== undefined) {
+         minRating = question.rateMin;
+      }
+
+      if (question.rateMax !== undefined) {
+         maxRating = question.rateMax;
+      }
+
+      for (let i = minRating; i <= maxRating; i++) {
+         labels.push(i);
+         if (answers[i]) {
+            data.push(answers[i]);
+         } else {
+            data.push(0);
+         }
+      }
+
+      if (question.minRateDescription !== undefined) {
+         labels[0] = question.minRateDescription;
+      }
+
+      if (question.maxRateDescription !== undefined) {
+         labels[labels.length - 1] = question.maxRateDescription;
+      }
 
       let dataBar = {
          labels: labels,
          datasets: [
             {
-               label: 'Penis',
-               data: [12, 19, 30, 5, 2, 150],
+               label: 'Votes',
+               data: data,
                backgroundColor: [
                   'rgba(255, 134, 159, 0.4)',
                   'rgba(98,  182, 239, 0.4)',
@@ -144,7 +105,11 @@ class SurveyResultDetails extends Component {
             },
          ],
       };
+
       let barChartOptions = {
+         legend: {
+            display: false,
+         },
          responsive: true,
          maintainAspectRatio: false,
          scales: {
@@ -201,7 +166,7 @@ class SurveyResultDetails extends Component {
                if (answers[question.choices[l]]) {
                   data.push(answers[question.choices[l]]);
                } else {
-                  data.push(0)
+                  data.push(0);
                }
             }
          }
@@ -273,7 +238,7 @@ class SurveyResultDetails extends Component {
             chart = this.buildBarChart(question, answers);
             break;
          default:
-            chart = <Bar data={this.dataBar} options={this.barChartOptions} />;
+            chart = 'Nothing to show... :-(';
       }
 
       return (
@@ -287,29 +252,17 @@ class SurveyResultDetails extends Component {
    }
 
    render() {
-      /**
-       * What to show?
-       * One section for each question
-       *    If type is
-       *          text --> einfach auflisten
-       *          multipletext --> einfach auflisten
-       *          matrixdropdown --> TDB
-       *          matrix --> TBD
-       *          boolean --> kreisdia
-       *          imagepicker --> TBD
-       *          rating --> balkendia
-       *          comment --> auflisten
-       *          dropdown --> kreis oder balkendia
-       *          radio --> balkendiagramm
-       *          checkbox --> balkendiagramm
-       *
-       */
       const { resultsOfSurvey, showCharts } = this.state;
 
       if (!showCharts) {
          return loadingSpinner('Results are loading ...');
       } else {
-         return <MDBContainer>{resultsOfSurvey.questions.map((result, key) => this.buildSection(result, key))}</MDBContainer>;
+         return (
+            <MDBContainer>
+               <div className="dhbw_result_container"></div>
+               {resultsOfSurvey.questions.map((result, key) => this.buildSection(result, key))}
+            </MDBContainer>
+         );
       }
    }
 }
