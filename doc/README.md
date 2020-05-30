@@ -96,7 +96,7 @@
 | ____Unterteilung der Gliederungsansichten     |              | :red_circle: |              |              |              |            |                                                         |
 | ____Bestimmung von Darstellungsformen         |              | :red_circle: |              |              |              |            |                                                         |
 | Sicherheit                                    |              |              |              |              |              |            |                                                         |
-| ____Authentifizierung                         | :red_circle: |              |              |              |              |            |                                                         |
+| ____Authentifizierung                         | :white_check_mark: |              |              |              |              |            |                                                         |
 | ____Datenschutz                               |              |              |              |              |              |            | Beschreibung inwiefern das für das Projekt wichtig ist. |
 | ____Verschlüsselung?                          |              |              |              |              |              |            |                                                         |
 | **<u>Implementierung</u>**                    |              |              |              |              |              |            |                                                         |
@@ -116,6 +116,12 @@
 | Fazit                                         |              |              |              |              |              |            |                                                         |
 | Ausblick                                      |              |              |              |              |              |            |                                                         |
 
+Legende:
+- :red_circle: verantwortlich/Interesse, aber noch kein nennenswerter Fortschritt
+- :white_check_mark: fertig
+- :ok: fertig und reviewed / final
+
+Symbole:
 - :red_circle: `:red_circle:`
 - :question: `:question:`
 - :interrobang: `:interrobang:`
