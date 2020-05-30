@@ -1,7 +1,6 @@
-import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { getFading } from '../../util/util';
+import Card from '../Card/Card';
 import { NEW_SURVEY } from '../constants';
 import './Survey.css';
 
@@ -13,28 +12,16 @@ class SurveyMasterCard extends Component {
 
    render() {
       return (
-         <MDBCol md="4">
-            <MDBAnimation reveal type={getFading(1)}>
-               <MDBCard cascade className="my-3 grey lighten-4 survey-card">
-                  <MDBCardBody cascade className="text-center">
-                     <MDBCardTitle>
-                        <MDBIcon far icon="plus-square" className="icon-dhbw-red pr-2" />
-                        <strong>New Survey Master</strong>
-                     </MDBCardTitle>
-                     <MDBCardText>Create a new master template.</MDBCardText>
-                     <MDBNavLink
-                        tag="button"
-                        to={'/' + NEW_SURVEY}
-                        color="mdb-color"
-                        className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
-                        onClick={this.scrollToTop}
-                     >
-                        Create new Survey Master
-                     </MDBNavLink>
-                  </MDBCardBody>
-               </MDBCard>
-            </MDBAnimation>
-         </MDBCol>
+         <Card
+            content={{
+               isFar: true,
+               cardIcon: 'plus-square',
+               cardTitle: 'New Survey Master',
+               cardText: 'Create a new master template.',
+               fadingType: 1,
+               navLinks: [{ to: '/' + NEW_SURVEY, onClick: this.scrollToTop, buttonText: 'Create new Survey Master' }],
+            }}
+         />
       );
    }
 }
