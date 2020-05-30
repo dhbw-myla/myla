@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-
-import { verifySession } from './auth/verifyPw';
+import { getStoredUser, verifySession } from './auth/verifyPw';
 import AdminComponent from './components/Admin/AdminComponent';
 import CreateNewUser from './components/Admin/CreateNewUser';
 import RegisterKey from './components/Admin/RegisterKey';
@@ -30,12 +29,25 @@ import SurveyDashboard from './components/Survey/SurveyDashboard';
 import SurveyParticipate from './components/Survey/SurveyParticipate';
 import Account from './components/Users/Account';
 import ChangePassword from './components/Users/ChangePassword';
+import * as swalHelper from './util/swalHelper';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
    <Route
       {...rest}
       render={(props) => {
          if (verifySession()) {
+            const user = getStoredUser();
+            const { isPasswordChangeRequired } = user;
+            if (isPasswordChangeRequired) {
+               swalHelper.warning('Password change required!', 'A password reset was issued to your account. Please update your password.');
+               return <ChangePassword {...props} />;
+            }
+            if (rest.path === '/' + LOGIN) {
+               return <ResultDashboard {...props} />;
+            }
+            if (rest.path === '/' + SIGNUP) {
+               return <AdminComponent {...props} />;
+            }
             if (rest.path === '/') return <Redirect to={'/' + DASHBOARD} />;
             return <Component {...props} />;
          }
