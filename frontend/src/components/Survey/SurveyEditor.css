@@ -24,30 +24,63 @@
    content: url(../../assets/DHBW-Logo.png) !important;
 }
 
-.svd-accordion-tab-header > span{
+.svd-accordion-tab-header > span {
    color: rgb(103, 106, 108) !important;
 }
 
 .svd-secondary-icon > .svd-svg-icon {
    fill: rgb(103, 106, 108) !important;
- }
+}
 
- .svd-secondary-icon > .svd-svg-icon:hover {
+.svd-secondary-icon > .svd-svg-icon:hover {
    fill: #e30613 !important;
- }
+}
 
- .svd_container .sjs-cb-container:hover input:checked ~ .checkmark{
+.svd_container .sjs-cb-container:hover input:checked ~ .checkmark {
    fill: #e30613 !important;
- }
+}
 
- .sv_main.sv_default_css input:not([type="button"]):not([type="reset"]):not([type="submit"]):not([type="image"]):not([type="checkbox"]):not([type="radio"]):focus{
-    border-color: #e30613 !important;
- }
+.sv_main.sv_default_css
+   input:not([type='button']):not([type='reset']):not([type='submit']):not([type='image']):not([type='checkbox']):not([type='radio']):focus {
+   border-color: #e30613 !important;
+}
 
- #surveyCreatorContainer{
-    height: 101%;
-    overflow: auto;
-    background-color: #f4f4f4;
- }
+#surveyCreatorContainer {
+   height: 101%;
+   overflow: auto;
+   background-color: #f4f4f4;
+}
 
+.svd-survey-placeholder-root .svd-survey-placeholder .svd-empty-message-container .svd-empty-message {
+   color: #e30613 !important;
+}
 
+.sv_main input[type='button'],
+.sv_main button {
+   background-color: #e30613 !important;
+}
+
+.sv_main.sv_default_css input[type='button'],
+.sv_default_css button {
+   background-color: #e30613 !important;
+}
+
+.sv_main.sv_main .sv_q_file_choose_button {
+   background-color: #e30613 !important;
+}
+
+.noUi-connect {
+   background: #e30613 !important;
+}
+
+.sjs-sortablejs-result {
+   border: 1px solid #e30613 !important;
+}
+
+.sjs-sortablejs-source {
+   border: 1px solid #e30613 !important;
+}
+
+.sjs-sortablejs-item {
+   background-color: #e30613 !important;
+}
