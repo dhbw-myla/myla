@@ -1,34 +1,50 @@
-% !TEX root =  ../sicherheit.tex
+% !TEX root =  ../../../master.tex
 \subsection{Authentifizierung}
 \label{sec:authentifizierung}
 \authorsection{\authorNL}
 
-Kunden sollen die Möglichkeit haben, sich zu registrieren.
-Dabei setzen sie ein Passwort, welches im Anschluss gemeinsam mit der E-Mail-Adresse zur sicheren Authentifizierung dient.
+Um einen angemessen Schutz der gespeicherten Daten zu gewährleisten, soll jeder Benutzer nur seine eigenen Daten einsehen können.
+Ebenso sind auch die ausführbaren Aktionen auf den Benutzer zu beschränken, auf den sich diese beziehen.
+Dies bedeutet, dass ein angemeldet Benutzer nur die Ergebnisse seiner eigenen Umfragen sehen kann, nicht aber die Ergebnisse von Umfragen anderer Benutzer.
 
-Das Passwort wird dabei nicht im Klartext gespeichert, sondern in Form eines Hash\-wertes. % TODO: Details Hash + Quelle
-Bei der Berechnung des Hash\-wertes wird ein benutzer\-spezifischer Salt mit dem Passwort verknüpft, um die Passwörter gegen Angriffe mit \enquote{Rainbow Tables} abzusichern. % TODO: Erläuterung + Quelle
-Der Hash aus Salt und Passwort wird in der Datenbank gespeichert, sodass ein Ausschnitt der Datenbank in vereinfachter Form wie folgt aussehen könnte:
+Daher muss ein Benutzer vom System identifiziert werden können.
+Die erstellten Umfragen können dann einer solchen digitalen Identität zugeordnet werden.
+Zum Anlegen dieser digitalen Identität erfolgt eine Registrierung mit Nutzername und Passwort.
+Zusätzlich muss ein Registrierungsschlüssel angegeben werden, sodass lediglich befugte Personen, Benutzer erstellen können.
 
-\setlength{\tabcolsep}{6pt}
-\begin{tabular}{|l|l|l|}
-	\hline
-	email & salt & hashSHA1 \\
-	\hline
-	max@muster.de & 1952e9 & 3b9c4352194e71abfc3931f6634ef6355018149b \\
-	\hline
-	erika@musterfrau.eu & d4aeff & f8b2f89758a31e17228233b5bd26b7267aa92ea8 \\
-	\hline
-\end{tabular}
+Das geheime Passwort ist lediglich dem jeweiligen Nutzer bekannt, sodass dieser sich damit authentisieren kann.
+Der Server speichert das Passwort in der Datenbank, damit bei einer Anmeldung geprüft werden kann, ob der Nutzer auch der ist, der er vorgibt zu sein.
 
-In beiden Fällen ist das Klartextpasswort \enquote{geheim}.
-Durch den Salt ist dies aber nicht direkt erkennbar.
+Aus Sicherheitsgründen wird das Passwort allerdings nicht im Klartext gespeichert.
+Andernfalls wären alle Nutzerpasswörter in der Datenbank, für alle die auf diese Zugriff haben, einsehbar.
+Sowohl potenzielle Angreifer, die möglicherweise durch Sicherheitslücken Zugang erhalten, als auch einfach die Betreiber der hier entwickelten Webanwendung hätten somit also Kenntnis von den Passwörtern aller Nutzer.
+Dies ist insbesondere deswegen kritisch, da viele Nutzer dieselben oder ähnliche Passwörter bei mehreren Diensten verwenden.
+Aufgrund der sich hieraus ergebenden Gefahren muss das Passwort also anders gespeichert werden.
 
-Wenn sich nun ein Benutzer versucht anzumelden, gibt er das Passwort an.
-In der Verarbeitungsschicht muss dann zum betreffenden Nutzer der Salt herausgesucht werden, mit dem eingegebenen Passwort verknüpft und anschließend gehasht werden.
-Stimmt dieser Hash mit dem aus der Datenbank überein, so war das Passwort korrekt und der Nutzer konnte seine Identität erfolgreich bestätigen.
+Hierbei hat sich in der Praxis das Speichern eines kryptographischen Hashwertes etabliert.
+Eine kryptographische Hashfunktion bildet einen Text beliebiger Länge auf einen zufällig erscheinenden Text mit fixer Länge ab.
+Es handelt sich dabei um eine deterministische Einwegfunktion, d.\,h., wenn derselbe Text, also hier dasselbe Passwort, in eine solche Funktion eingegeben wird, resultiert jedes Mal auch derselbe Hashwert.
+Es ist allerdings nicht beziehungsweise nur mit einem enorm großen Aufwand möglich, die zu einem Hashwert gehörige Eingabe zu berechnen.
 
-Wenn sich ein Kunde mit seinem Benutzerkonto erfolgreich anmeldet, wird eine \textit{Session\-ID} erzeugt.
-Diese wird sowohl in der Datenbank und als auch in Form eines Cookies im Webbrowser des Benutzers gespeichert, damit im folgenden Verlauf einerseits die Authentifizierung gewährleistet bleibt und andererseits das Passwort nicht mehr benutzt werden muss. % TODO: Quelle
+Das bedeutet für die Speicherung des Passworts, dass dieses praktisch nicht aus dem Hash ermittelt werden kann.
+Bei einer Anmeldung kann die Korrektheit jedoch geprüft werden, indem der gespeicherte Hashwert mit dem Hash des eingegebenen Passworts abgeglichen wird.
 
-Jeder benutzer\-spezifische Aufruf der \acs{API} muss dann eine eindeutige Identifikation des Benutzers, z.B. die E-Mail-Adresse und die \textit{SessionID} des Benutzers enthalten, damit in der Verarbeitungsschicht sichergestellt werden kann, dass die auszuführende Aktion auch autorisiert ist. % TODO: Erläuterung am Beispiel
+Als weitere Sicherheitsmaßnahmen werden Salt und Pepper genutzt.
+Dabei handelt es sich um weitere zufällige Zeichenketten, die dem Passwort angehangen werden, um Angriffe zu erschweren.
+Der Salt ist für jeden Benutzer spezifisch und wird neben dem Passworthash in der Datenbank gespeichert.
+Dadurch ist es möglich, dass selbst wenn zwei Benutzer dasselbe Passwort gewählt haben, die Hashwerte verschieden sind.
+Ebenso erschwert es das Knacken der Passworthashes, da ein Angreifer die Hashes nicht im Voraus berechnen kann.
+Der Pepper ist für alle Nutzer derselbe und außerhalb der Datenbank gespeichert.
+Dieser wird in einer Konfigurationsdatei definiert und entsprechend vom Programm geladen.
+Dies erschwert ebenso Angriffe auf die Hashwerte, da ein Angreifer, der lediglich Zugang zur Datenbank hat, den Pepper nicht kennt, sodass das Knacken deutlich schwieriger wird.
+
+Nutzer, die sich registriert oder angemeldet haben, erhalten eine sogenannte SessionID.
+Diese wird dann bei \acs{API}-Aufrufen zur Authentifizierung genutzt, sodass hier nicht jedes Mal, dass Passwort genutzt werden muss.
+
+Sollte ein Nutzer sein Passwort vergessen, kann diese von Administratoren zurückgesetzt werden.
+Es muss danach allerdings direkt wieder vom Nutzer geändert werden.
+
+Auf der anderen Seite müssen sich Personen, die Umfragen beantworten, nicht anmelden.
+Entsprechend haben Sie nur eine sehr eingeschränkte Sicht.
+Sie können auf Umfragen lediglich über einen zehnstelligen Code zugreifen.
+Dadurch ist es auch nur schwer bis gar nicht möglich auf Umfragen zuzugreifen, die nicht mit einem geteilt wurden.
