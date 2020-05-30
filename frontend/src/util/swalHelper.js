@@ -101,11 +101,11 @@ export const question = async (title, html, answerTrue, answerFalse, revertButto
    return result;
 };
 
-export const questionWithInput = async (title, html, answerTrue, answerFalse, revertButtons) => {
+export const questionWithInput = async (title, html, inputType, answerTrue, answerFalse, revertButtons) => {
    const result = await Swal.fire({
       title: title,
       html: html,
-      input: 'password',
+      input: inputType,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: answerTrue,

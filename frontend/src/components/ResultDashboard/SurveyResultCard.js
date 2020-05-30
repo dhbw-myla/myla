@@ -2,6 +2,7 @@ import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, 
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { getFading } from '../../util/util';
+import Card from '../Card/Card';
 
 class SurveyResultCard extends Component {
    constructor(props) {
@@ -11,29 +12,19 @@ class SurveyResultCard extends Component {
 
    render() {
       const { counter, surveyResult, type } = this.props;
+      console.log(surveyResult);
       return (
-         <MDBCol md="4" key={counter}>
-            <MDBAnimation reveal type={getFading(type)}>
-               <MDBCard cascade className="my-3 grey lighten-4 survey-card">
-                  <MDBCardBody cascade className="text-center">
-                     <MDBCardTitle>
-                        <MDBIcon icon="cubes" className="icon-dhbw-red pr-2" />
-                        <strong>{surveyResult.survey_title}</strong>
-                     </MDBCardTitle>
-                     <MDBCardText>{surveyResult.description}</MDBCardText>
-                     <MDBNavLink
-                        tag="button"
-                        to="#"
-                        color="mdb-color"
-                        className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
-                        onClick={() => this.props.onClickSurveyResult(surveyResult)}
-                     >
-                        Show survey
-                     </MDBNavLink>
-                  </MDBCardBody>
-               </MDBCard>
-            </MDBAnimation>
-         </MDBCol>
+         <Card
+            content={{
+               isFar: false,
+               cardIcon: 'cubes',
+               cardTitle: surveyResult.survey_title,
+               cardText: surveyResult.description,
+               surveyCode: surveyResult.survey_code,
+               fadingType: type,
+               navLinks: [{ to: '#', onClick: () => this.props.onClickSurveyResult(surveyResult), buttonText: 'Show survey' }],
+            }}
+         />
       );
    }
 }

@@ -34,7 +34,7 @@ class UserEntry extends Component {
    handleOnChangePassword = async ({ username }) => {
       const title = 'Changing password of: ' + username;
       const html = 'Please enter the new password below.';
-      const result = await swalHelper.questionWithInput(title, html, 'Yes', 'No', true);
+      const result = await swalHelper.questionWithInput(title, html, 'password', 'Yes', 'No', true);
       if (result) {
          const resObj = await resetPasswordOfUser(getStoredUser(), username, result.value);
          if (resObj && resObj.status === 200) {

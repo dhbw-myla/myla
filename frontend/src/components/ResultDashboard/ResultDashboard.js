@@ -6,13 +6,15 @@ import './resultDashboard.css';
 import SurveyResultCard from './SurveyResultCard';
 import SurveyResultDetails from './SurveyResultDetails';
 import surveys from './surveys.json';
+import { getStoredUser } from '../../auth/verifyPw';
+import { getAllOwnSurveys } from '../../api/survey';
 
 class ResultDashboard extends Component {
    constructor(props) {
       super(props);
       this.state = {
          showSurveyResult: false,
-         surveyResults: surveys,
+         surveyResults: {},
          surveyResultToShow: 0,
          selectOptions: {},
          filteredSurveyResults: surveys,
@@ -40,7 +42,7 @@ class ResultDashboard extends Component {
    };
 
    componentDidMount() {
-      //getAllOwnSurveys(getStoredUser()).then(response => this.setState({surveyResults:response.payload, filteredSurveyResults:response.payload}));
+      getAllOwnSurveys(getStoredUser()).then(response => this.setState({surveyResults:response.payload, filteredSurveyResults:response.payload}));
       this.buildSelectOptions();
    }
 
