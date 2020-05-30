@@ -7,7 +7,7 @@ import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { getFading } from '../../util/util';
 import { NEW_SURVEY } from '../constants';
-
+import validator from 'validator';
 import './Survey.css';
 
 class SurveyMasterCard extends Component {
@@ -49,16 +49,31 @@ class SurveyMasterCard extends Component {
    publishSurvey = async (surveyMasterId) => {
       // const surveyStart = new Date();
       // const surveyEnd = new Date();
-      const resObj = await createSurveyBasedOnMaster(getStoredUser(), null, null, surveyMasterId); //(user, timestampStart, timestampEnd, surveyMasterId)
-      if (resObj && resObj.status === 201) {
-         swalHelper.success(
-            'Survey created!',
-            "It's now live for 7 days with code: <br><br> <code style='color:#e30613; font-size: 1.5rem; font-weight: bold; letter-spacing: 0.4rem;'>" +
-               resObj.payload.surveyCode +
-               '</code>'
-         );
+
+      const result = await swalHelper.questionWithInput(
+         'Publish Survey',
+         'What would you like to name your survey?',
+         'text',
+         'Publish',
+         'Cancel'
+      );
+      if (result) {
+         const surveyTitle = result.value;
+         const resObj = await createSurveyBasedOnMaster(getStoredUser(), null, null, surveyMasterId, surveyTitle); //(user, timestampStart, timestampEnd, surveyMasterId)
+         if (resObj && resObj.status === 201) {
+            swalHelper.success(
+               'Survey created!',
+               "It's now live for 7 days with code: <br><br> <code style='color:#e30613; font-size: 1.5rem; font-weight: bold; letter-spacing: 0.4rem;'>" +
+                  resObj.payload.surveyCode +
+                  '</code>'
+            );
+         } else {
+            swalHelper.error('ERROR!', 'Survey not created.');
+         }
+      } else if (result == undefined) {
+         swalHelper.error('Not published!', 'You forgot to name the published survey.');
       } else {
-         swalHelper.error('ERROR!', 'Survey not created.');
+         swalHelper.warning('Not published!', 'You canceled the publication of this survey.');
       }
    };
 
