@@ -61,13 +61,11 @@ class ResultDashboard extends Component {
       let title = 'Survey Results Dashboard';
 
       if (showSurveyResult) {
-       title = 'Survey: ' + surveyResultToShow.survey_title;
+         title = 'Survey: ' + surveyResultToShow.survey_title;
          whatToRender = (
             <Fragment>
                <div className="alignBackButton">
-                  <MDBRow>
-                     {BtnDefault(this.returnToOverview, 'Back to overview')}
-                </MDBRow>
+                  <MDBRow>{BtnDefault(this.returnToOverview, 'Back to overview')}</MDBRow>
                </div>
                <SurveyResultDetails className="dhbw_bottom" survey={surveyResultToShow} />
             </Fragment>
@@ -103,7 +101,10 @@ class ResultDashboard extends Component {
          <MDBContainer>
             <MDBRow>
                <MDBCol md="12" className="mt-4">
-               <div className="dhbw_header_margin"><h2 className="text-center my-5 font-weight-bold">{title}</h2></div>
+                  <div className="dhbw_header_margin">
+                     <h2 className="text-center my-5 font-weight-bold">{title}</h2>
+                  </div>
+                  <hr className="mt-5" />
                   {whatToRender}
                </MDBCol>
             </MDBRow>

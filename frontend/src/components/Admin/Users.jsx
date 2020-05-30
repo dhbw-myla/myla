@@ -6,7 +6,6 @@ import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { BtnDefault } from '../Button/BtnDefault';
 import { ADMIN, MY_ACCOUNT } from '../constants';
-import EditUserComponent from '../Users/EditUser';
 import './Admin.css';
 import UserEntry from './UserEntry';
 
@@ -22,8 +21,6 @@ class UsersComponent extends Component {
    componentDidMount = async () => {
       const user = getStoredUser();
       const resObj = await getUsers(user);
-
-      console.log('users', resObj.payload);
 
       if (resObj && resObj.status === 200) {
          this.setState({ users: resObj.payload });
@@ -46,32 +43,28 @@ class UsersComponent extends Component {
    };
 
    render() {
-      const { users, editUser, userToEdit } = this.state;
+      const { users } = this.state;
 
-      if (editUser) {
-         return <EditUserComponent userToEdit={userToEdit} handleOnBack={this.handleBack} />;
-      } else {
-         return (
-            <MDBContainer>
-               <MDBRow>
-                  <MDBCol md="12" className="mt-4">
-                     <div className="dhbw_header_margin">
-                        <h2 className="text-center my-5 font-weight-bold">Users on System</h2>
-                     </div>
-                     <hr className="mt-5" />
-                  </MDBCol>
-               </MDBRow>
-               <MDBRow>
-                  <div className="admin-back-button">{BtnDefault(this.handleBackToAdmin, 'Back to admin overview')}</div>
-               </MDBRow>
-               <MDBRow>
-                  {users.map((user, key) => (
-                     <UserEntry entry={user} key={key} handleOnEditUser={this.handleEditUser} />
-                  ))}
-               </MDBRow>
-            </MDBContainer>
-         );
-      }
+      return (
+         <MDBContainer>
+            <MDBRow>
+               <MDBCol md="12" className="mt-4">
+                  <div className="dhbw_header_margin">
+                     <h2 className="text-center my-5 font-weight-bold">Users on System</h2>
+                  </div>
+                  <hr className="mt-5" />
+               </MDBCol>
+            </MDBRow>
+            <MDBRow>
+               <div className="admin-back-button">{BtnDefault(this.handleBackToAdmin, 'Back to admin overview')}</div>
+            </MDBRow>
+            <MDBRow>
+               {users.map((user, key) => (
+                  <UserEntry entry={user} key={key} handleOnEditUser={this.handleEditUser} />
+               ))}
+            </MDBRow>
+         </MDBContainer>
+      );
    }
 }
 

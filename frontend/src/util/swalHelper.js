@@ -84,3 +84,21 @@ export const question = async (title, html, answerTrue, answerFalse, revertButto
 
    return result;
 };
+
+export const questionWithInput = async (title, html, answerTrue, answerFalse, revertButtons) => {
+   const result = await Swal.fire({
+      title: title,
+      html: html,
+      input: 'password',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: answerTrue,
+      cancelButtonText: answerFalse,
+      reverseButtons: revertButtons,
+   }).then((result) => {
+      if (result.value) return result;
+      else if (result.dismiss === Swal.DismissReason.cancel) return false;
+   });
+
+   return result;
+};

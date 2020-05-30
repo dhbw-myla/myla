@@ -1,22 +1,21 @@
 .btn-primary {
-   background-color: rgb(255, 0, 0) !important;
+   background-color: #e30613 !important;
 }
 
 .svd_survey_header {
-   /* //display:  */
 }
 
 .sv_main .sv_body {
-   border-top: 2px solid #ff0000 !important;
+   border-top: 2px solid #e30613 !important;
 }
 
 .svd-survey-placeholder-root .svd-survey-placeholder .svd-empty-message-container .svd-empty-message {
-   color: #ff0000;
+   color: rgb(103, 106, 108);
 }
 
 .svd-empty-message-container img {
 }
 
 .sv_main.sv_main .sv-boolean__switch {
-   background-color: #ff0000 !important;
+   background-color: #e30613 !important;
 }

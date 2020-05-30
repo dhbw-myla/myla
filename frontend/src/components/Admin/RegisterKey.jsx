@@ -71,10 +71,7 @@ class RegisterKey extends Component {
                            <div className="fg-dhbw-links">
                               <MDBNav>
                                  <MDBNavItem>
-                                    <MDBNavLink activate to={'/' + ADMIN} className="fg-dhbw-red">
-                                       <MDBIcon icon="backward" className="fg-dhbw-icon" />
-                                       Back
-                                    </MDBNavLink>
+                                    <MDBNavLink activate to={'/' + ADMIN} className="fg-dhbw-red"></MDBNavLink>
                                  </MDBNavItem>
                               </MDBNav>
                            </div>
