@@ -106,7 +106,7 @@ class SurveyMasterCard extends Component {
                      <MDBIcon id="editIcon" icon="edit" onClick={() => this.modifySurvey(survey.survey_master_id)} />
                      <MDBIcon id="trashIcon" icon="trash" onClick={() => this.deleteSurvey(survey.survey_master_id)} />
                      <MDBIcon id="count" icon="id-card" /*onClick={() => this.deleteSurvey(survey.survey_master_id)}*/ />
-                     {this.calulateSurveys()}
+                     {survey.number_of_surveys}
                   </MDBCardBody>
                </MDBCard>
             </MDBAnimation>
