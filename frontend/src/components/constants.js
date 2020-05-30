@@ -26,6 +26,6 @@ export const QUESTION_TYPE_TEXT = 'text';
 export const QUESTION_TYPE_MULTIPLE_TEXT = 'multipletext';
 export const QUESTION_TYPE_BOOLEAN = 'boolean';
 export const QUESTION_TYPE_RATING = 'rating';
-export const QUESTION_TYPE_RADIO = 'radio';
+export const QUESTION_TYPE_RADIOGROUP = 'radiogroup';
 export const QUESTION_TYPE_CHECKBOX = 'checkbox';
 export const QUESTION_TYPE_COMMENT = 'comment';

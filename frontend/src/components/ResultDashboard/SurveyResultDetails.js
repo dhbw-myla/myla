@@ -8,7 +8,7 @@ import {
    QUESTION_TYPE_COMMENT,
    QUESTION_TYPE_DROPDOWN,
    QUESTION_TYPE_MULTIPLE_TEXT,
-   QUESTION_TYPE_RADIO,
+   QUESTION_TYPE_RADIOGROUP,
    QUESTION_TYPE_RATING,
    QUESTION_TYPE_TEXT,
 } from '../constants';
@@ -16,6 +16,8 @@ import SectionContainer from '../sectionContainer';
 import { loadingSpinner } from '../Spinner/Loading';
 import './resultDashboard.css';
 import surveyResult from './69surveydata.json';
+import {getSurveyResults} from '../../api/interaction'
+import { getStoredUser } from '../../auth/verifyPw';
 
 class SurveyResultDetails extends Component {
    constructor(props) {
@@ -26,10 +28,11 @@ class SurveyResultDetails extends Component {
       };
    }
    componentDidMount() {
-      // getSurveyResults(getStoredUser(), this.props.survey.id).then((response) => {
-      //    this.setState({ resultsOfSurvey: response.payload, showCharts: true })
-      // });
-      this.setState({ resultsOfSurvey: surveyResult, showCharts: true });
+      getSurveyResults(getStoredUser(), this.props.survey.survey_id).then((response) => {
+         console.log('resResults', response.payload);
+          this.setState({ resultsOfSurvey: response.payload, showCharts: true })
+      });
+      //this.setState({ resultsOfSurvey: surveyResult, showCharts: true });
    }
 
    componentWillUnmount() {
@@ -158,13 +161,13 @@ class SurveyResultDetails extends Component {
    buildPieChart(question, answers) {
       let labels = [];
       let data = [];
-
+      
       if (question.choices) {
          if (question.choices.length !== labels.length) {
             for (let l in question.choices) {
-               labels.push(question.choices[l]);
-               if (answers[question.choices[l]]) {
-                  data.push(answers[question.choices[l]]);
+               labels.push(question.choices[l].text);
+               if (answers[question.choices[l].value]) {
+                  data.push(answers[question.choices[l].value]);
                } else {
                   data.push(0);
                }
@@ -231,7 +234,7 @@ class SurveyResultDetails extends Component {
          case QUESTION_TYPE_BOOLEAN:
          case QUESTION_TYPE_DROPDOWN:
          case QUESTION_TYPE_CHECKBOX:
-         case QUESTION_TYPE_RADIO:
+         case QUESTION_TYPE_RADIOGROUP:
             chart = this.buildPieChart(question, answers);
             break;
          case QUESTION_TYPE_RATING:

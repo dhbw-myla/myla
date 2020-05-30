@@ -105,10 +105,10 @@ export async function createSurveyMaster(user, survey) {
  * 403 { error: "Forbidden" }
  * 500 { error: "Internal Server Error" }
  */
-export async function createSurveyBasedOnMaster(user, timestampStart, timestampEnd, surveyMasterId) {
+export async function createSurveyBasedOnMaster(user, timestampStart, timestampEnd, surveyMasterId, surveyTitle) {
    try {
       const url = PATH_BASE_URL + PATH_CREATE_SURVEY_BASED_ON_MASTER + surveyMasterId;
-      const response = await axiosHelper.post(url, 'createSurveyBasedOnMaster', { ...user, timestampStart, timestampEnd });
+      const response = await axiosHelper.post(url, 'createSurveyBasedOnMaster', { ...user, timestampStart, timestampEnd, surveyTitle });
       return response.data;
    } catch (error) {
       console.log('error on createSurveyBasedOnMaster', error);

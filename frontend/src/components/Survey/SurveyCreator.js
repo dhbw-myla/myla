@@ -15,11 +15,10 @@ import * as SurveyJSCreator from 'survey-creator';
 import 'survey-creator/survey-creator.css';
 import * as SurveyKo from 'survey-knockout';
 import * as widgets from 'surveyjs-widgets';
-import { createSurveyMaster } from '../../api/survey';
+import { createSurveyMaster, updateSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import './Survey.css';
-import { surveys } from './surveys';
 import { SURVEY } from '../constants';
 import './SurveyEditor.css';
 
@@ -60,38 +59,56 @@ widgets.bootstrapslider(SurveyKo);
 class SurveyCreator extends Component {
    constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {
+         editSurvey: false
+      };
    }
 
    surveyCreator;
 
    saveCreatedSurvey = async () => {
+      const {editSurvey} = this.state;
+
       const user = getStoredUser();
       const createdSurvey = JSON.parse(this.surveyCreator.text);
-      const resObj = await createSurveyMaster(user, createdSurvey);
-      if (resObj && resObj.status === 201) {
-         swalHelper.success('Survey Master saved!', 'Survey Master has been saved successfully! You can access it via Survey Masters.');
-         this.props.history.push('/' + SURVEY);
+      let resObj = undefined;
+      if (editSurvey){
+         const {surveyToEdit} = this.props.history.location;
+         const {surveyMaster} = surveyToEdit;
+         resObj = await updateSurveyMaster(user, createdSurvey, surveyMaster.survey_master_id);
       } else {
-         return swalHelper.error('Could not save Survey Master!', 'Please try again.');
+         resObj = await createSurveyMaster(user, createdSurvey);
       }
+            if (resObj && (resObj.status === 201 || resObj.status === 200)) {
+               swalHelper.success('Survey Master saved!', 'Survey Master has been saved successfully! You can access it via Survey Masters.');
+               this.props.history.push('/' + SURVEY);
+            } else {
+               return swalHelper.error('Could not save Survey Master!', 'Please try again.');
+            }
    };
 
    componentDidMount() {
       let options = { showEmbededSurveyTab: false, showTranslationTab:false, showTestSurveyTab:true, showJSONEditorTab:false, designerHeight:""  };
       const {surveyToEdit} = this.props.history.location;
-      debugger
       this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
       if (surveyToEdit) {
-         const {surveyMaster, surveyjs} = surveyToEdit;
-         //this.surveyCreator.text = surveyjs;
-         //this.surveyCreator = new SurveyJSCreator.SurveyEditor(surveys[0]);
-         //this.surveyCreator = new SurveyJSCreator.SurveyEditor();
+         const {surveyjs} = surveyToEdit;
+         this.surveyCreator.text = JSON.stringify(surveyjs);
+         this.setState({editSurvey: true})
       }
       this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
 
       //Change and remove useless things
-      document.getElementsByClassName('svd_survey_header--hidden')[0].classList.remove("svd_survey_header--hidden");
+      let element = document.getElementsByClassName('svd_survey_header--hidden')[0]
+      if(element){
+         element.classList.remove("svd_survey_header--hidden");
+      }
+   }
+
+   componentWillUnmount(){
+      this.state = {
+         editSurvey: false
+      };
    }
 
    render() {
