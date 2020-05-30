@@ -22,12 +22,7 @@ export const parseToJsonObject = (obj) => {
 };
 
 export const getFading = (type) => {
-   switch (type) {
-      case 1:
-         return 'fadeInLeft';
-      case 2:
-         return 'fadeInUp';
-      case 3:
-         return 'fadeInRight';
-   }
+   if (type === 1) return 'fadeInLeft';
+   else if (type === 2) return 'fadeInUp';
+   else if (type === 3) return 'fadeInRight';
 };

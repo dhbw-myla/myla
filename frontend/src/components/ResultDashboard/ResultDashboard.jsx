@@ -16,7 +16,7 @@ class ResultDashboard extends Component {
       super(props);
       this.state = {
          showSurveyResult: false,
-         surveyResults: {},
+         surveyResults: [],
          surveyResultToShow: 0,
          selectOptions: {},
          filteredSurveyResults: surveys,
