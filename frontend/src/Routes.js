@@ -21,7 +21,7 @@ import {
    SURVEY_PARTICIPATE,
 } from './components/constants';
 import Login from './components/Home/Login';
-import Startpage from './components/Home/Startpage';
+import Startpage from './components/Home/startpage';
 import ResultDashboard from './components/ResultDashboard/ResultDashboard';
 import SignUp from './components/SignUp/SignUp';
 import SurveyCreator from './components/Survey/SurveyCreator';
@@ -65,7 +65,7 @@ class Routes extends Component {
             <PrivateRoute exact path={'/' + CHANGE_REGISTER_KEY} component={RegisterKey} />
             <PrivateRoute exact path={'/' + MY_ACCOUNT} component={Account} />
             <PrivateRoute exact path={'/' + ACCOUNT_PASSWORD_CHANGE} component={ChangePassword} />
-            <PrivateRoute exact path={'/' + SURVEY_PARTICIPATE} component={SurveyParticipate} />
+            <PrivateRoute path={'/' + SURVEY_PARTICIPATE} component={SurveyParticipate} />
             <PrivateRoute exact path={'/' + LOGIN} component={() => <Login updateRoot={this.props.updateRoot} />} />
             <PrivateRoute exact path={'/' + SIGNUP} component={() => <SignUp updateRoot={this.props.updateRoot} />} />
             <Route exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />

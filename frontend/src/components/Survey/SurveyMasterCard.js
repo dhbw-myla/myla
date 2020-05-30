@@ -41,7 +41,7 @@ class SurveyMasterCard extends Component {
       if (resObj && resObj.status === 200) {
          this.props.history.push({
             pathname: '/' + NEW_SURVEY,
-            state: { surveyToEdit: resObj.payload },
+            surveyToEdit: resObj.payload,
          });
       }
    };
@@ -90,7 +90,7 @@ class SurveyMasterCard extends Component {
                      </MDBNavLink>
                      <MDBIcon id="editIcon" icon="edit" onClick={() => this.modifySurvey(survey.survey_master_id)} />
                      <MDBIcon id="trashIcon" icon="trash" onClick={() => this.deleteSurvey(survey.survey_master_id)} />
-                     <MDBIcon id="trashIcon" icon="id-card" onClick={() => this.deleteSurvey(survey.survey_master_id)} />
+                     <MDBIcon id="count" icon="id-card" /*onClick={() => this.deleteSurvey(survey.survey_master_id)}*/ />
                      {this.calulateSurveys()}
                   </MDBCardBody>
                </MDBCard>

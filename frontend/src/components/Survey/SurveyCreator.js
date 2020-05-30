@@ -27,16 +27,16 @@ const mainColor = '#e30613';
 
 const defaultThemeColorsEditor = SurveyJSCreator.StylesManager.ThemeColors['default'];
 defaultThemeColorsEditor['$primary-color'] = mainColor;
-//defaultThemeColorsEditor['$secondary-color'] = mainColor;
-//defaultThemeColorsEditor['$primary-hover-color'] = mainColor;
+defaultThemeColorsEditor['$secondary-color'] = mainColor;
+defaultThemeColorsEditor['$primary-hover-color'] = mainColor;
 //defaultThemeColorsEditor['$primary-text-color'] = mainColor;
-//defaultThemeColorsEditor['$selection-border-color'] = mainColor;
+defaultThemeColorsEditor['$selection-border-color'] = mainColor;
 //defaultThemeColorsEditor['$main-color'] = mainColor;
-//defaultThemeColorsEditor['$main-hover-color'] = mainColor;
-//defaultThemeColorsEditor['$text-color'] = mainColor;
+defaultThemeColorsEditor['$main-hover-color'] = mainColor;
+defaultThemeColorsEditor['$text-color'] = mainColor;
 //defaultThemeColorsEditor['$header-color'] = mainColor;
 //defaultThemeColorsEditor['$header-background-color'] = mainColor;
-//defaultThemeColorsEditor['$body-container-background-color'] = mainColor;
+defaultThemeColorsEditor['$body-container-background-color'] = mainColor;
 //defaultThemeColorsEditor['$btn-primary'] = mainColor;
 
 SurveyJSCreator.StylesManager.applyTheme();
@@ -78,22 +78,20 @@ class SurveyCreator extends Component {
    };
 
    componentDidMount() {
-      let options = { showEmbededSurveyTab: true };
-      const a = false;
-      if (!a) {
-         this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
-      } else {
-         this.surveyCreator = new SurveyJSCreator.SurveyEditor(surveys[0]);
-         this.surveyCreator = new SurveyJSCreator.SurveyEditor();
-         const { location } = this.props.history;
-         const { surveyToEdit } = location.state;
-         const { surveyMaster, surveyjs } = surveyToEdit;
-         console.log('edit surveyMaster', surveyMaster);
-         console.log('edit surveyjs', surveyjs);
+      let options = { showEmbededSurveyTab: false, showTranslationTab:false, showTestSurveyTab:true, showJSONEditorTab:false, designerHeight:""  };
+      const {surveyToEdit} = this.props.history.location;
+      debugger
+      this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
+      if (surveyToEdit) {
+         const {surveyMaster, surveyjs} = surveyToEdit;
+         //this.surveyCreator.text = surveyjs;
+         //this.surveyCreator = new SurveyJSCreator.SurveyEditor(surveys[0]);
+         //this.surveyCreator = new SurveyJSCreator.SurveyEditor();
       }
       this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
-      // https://surveyjs.io/Examples/Survey-Creator?id=loadfromservice&theme=bootstrap#content-js
-      //this.surveyCreator.loadSurvey(surveyToEdit.id);
+
+      //Change and remove useless things
+      document.getElementsByClassName('svd_survey_header--hidden')[0].classList.remove("svd_survey_header--hidden");
    }
 
    render() {
