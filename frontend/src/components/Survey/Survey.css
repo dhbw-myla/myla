@@ -11,12 +11,10 @@
    margin-top: 1.9rem;
 }
 
-#editIcon,
-#trashIcon {
+.specialIcons {
    margin-left: 1rem;
 }
-
-#trashIcon:hover {
+.specialIcons:hover {
    color: #e30613;
 }
 
@@ -24,30 +22,30 @@
    padding-top: 3rem;
 }
 
-.sv_progress_bar{
+.sv_progress_bar {
    background-color: #e30613 !important;
 }
 
-.sv_next_btn{
+.sv_next_btn {
    background-color: #e30613 !important;
 }
 
-.sv_prev_btn{
+.sv_prev_btn {
    background-color: #e30613 !important;
 }
 
-.sv_complete_btn{
+.sv_complete_btn {
    background-color: #e30613 !important;
 }
 
-.sv_q_dropdown_control{
-   border-color:  rgb(103, 106, 108) !important;
+.sv_q_dropdown_control {
+   border-color: rgb(103, 106, 108) !important;
 }
 
 .surveyjs .sv_header {
-   display:none;
+   display: none;
 }
 
 .surveyjs .sv_main .sv_body {
-   border-top: 0px  !important;
+   border-top: 0px !important;
 }
