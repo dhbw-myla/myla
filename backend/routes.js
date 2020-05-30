@@ -859,7 +859,7 @@ exports.upgradeUserToAdmin = async function (request, response) {
 
     db.query(`UPDATE users
                 SET is_admin = true
-                WHERE username = $2`,
+                WHERE username = $1`,
     [usernameToBeUpgraded], (err, result) => {
         if (err) {
             // db failed
