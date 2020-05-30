@@ -1,5 +1,5 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { getFading } from '../../util/util';
 
@@ -18,9 +18,21 @@ class Card extends Component {
    };
 
    render() {
-      const { isFar, cardIcon, cardTitle, cardText, surveyCode, fadingType, navLinks } = this.props.content;
-      if (surveyCode) {
-      }
+      const { isFar, cardIcon, cardTitle, cardText, surveyCode, fadingType, navLinks, specialIcons } = this.props.content;
+
+      const handleSpecialIcons = () => {
+         return specialIcons
+            ? specialIcons.map((specialIcon) => {
+                 return (
+                    <Fragment>
+                       <MDBIcon className="specialIcons" icon={specialIcon.icon} onClick={specialIcon.onClick} />{' '}
+                       <span>{specialIcon.count}</span>
+                    </Fragment>
+                 );
+              })
+            : null;
+      };
+
       return (
          <MDBCol md="4">
             <MDBAnimation reveal type={getFading(fadingType)}>
@@ -39,13 +51,14 @@ class Card extends Component {
                            tag="button"
                            to={navLink.to}
                            color="mdb-color"
-                           className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
+                           className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline btn-inside-padding"
                            onClick={navLink.onClick}
                            disabled={navLink.disabled}
                         >
                            {navLink.buttonText}
                         </MDBNavLink>
                      ))}
+                     {handleSpecialIcons()}
                   </MDBCardBody>
                </MDBCard>
             </MDBAnimation>
