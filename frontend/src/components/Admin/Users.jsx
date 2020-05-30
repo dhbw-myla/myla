@@ -1,12 +1,13 @@
-import { MDBBtn, MDBCol, MDBContainer, MDBRow } from 'mdbreact';
+import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import { getUsers } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
+import { BtnDefault } from '../Button/BtnDefault';
 import { ADMIN, MY_ACCOUNT } from '../constants';
 import EditUserComponent from '../Users/EditUser';
+import './Admin.css';
 import UserEntry from './UserEntry';
 
 class UsersComponent extends Component {
@@ -21,6 +22,8 @@ class UsersComponent extends Component {
    componentDidMount = async () => {
       const user = getStoredUser();
       const resObj = await getUsers(user);
+
+      console.log('users', resObj.payload);
 
       if (resObj && resObj.status === 200) {
          this.setState({ users: resObj.payload });
@@ -51,20 +54,20 @@ class UsersComponent extends Component {
          return (
             <MDBContainer>
                <MDBRow>
-                  <MDBCol md="12" className="text-center my-5 font-weight-bold">
-                     <h2>Users on System</h2>
+                  <MDBCol md="12" className="mt-4">
+                     <div className="dhbw_header_margin">
+                        <h2 className="text-center my-5 font-weight-bold">Users on System</h2>
+                     </div>
                      <hr className="mt-5" />
                   </MDBCol>
+               </MDBRow>
+               <MDBRow>
+                  <div className="admin-back-button">{BtnDefault(this.handleBackToAdmin, 'Back to admin overview')}</div>
                </MDBRow>
                <MDBRow>
                   {users.map((user, key) => (
                      <UserEntry entry={user} key={key} handleOnEditUser={this.handleEditUser} />
                   ))}
-               </MDBRow>
-               <MDBRow>
-                  <MDBBtn type="button" className="btn_dhbw" onClick={this.handleBackToAdmin}>
-                     Back
-                  </MDBBtn>
                </MDBRow>
             </MDBContainer>
          );

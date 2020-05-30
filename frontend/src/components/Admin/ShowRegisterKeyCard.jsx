@@ -1,8 +1,8 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
-import { ADMIN, USERS } from '../constants';
+import { CHANGE_REGISTER_KEY } from '../constants';
+import { getStoredUser } from '../../auth/verifyPw';
 
 class ShowRegisterKeyCard extends Component {
    constructor(props) {
@@ -10,9 +10,15 @@ class ShowRegisterKeyCard extends Component {
       this.state = {};
    }
 
-   showRegisterKey = () => {};
+   showRegisterKey = () => {
+      this.setState({ editRegisterKey: true });
+   };
 
    render() {
+      if (this.state.editRegisterKey) {
+         this.props.history.push('/' + CHANGE_REGISTER_KEY);
+      }
+      console.log('asdasdasd', getStoredUser());
       return (
          <MDBCol md="4">
             <MDBAnimation reveal type="">
@@ -20,7 +26,7 @@ class ShowRegisterKeyCard extends Component {
                   <MDBCardBody cascade className="text-center">
                      <MDBCardTitle>
                         <MDBIcon icon="key" className="blue-text pr-2" />
-                        <strong>Edit register key</strong>
+                        <strong>Edit Register Key</strong>
                      </MDBCardTitle>
                      <MDBCardText>See current register key or edit that key.</MDBCardText>
                      <MDBNavLink

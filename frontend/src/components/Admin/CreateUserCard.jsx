@@ -24,7 +24,7 @@ class CreateUserCard extends Component {
                   <MDBCardBody cascade className="text-center">
                      <MDBCardTitle>
                         <MDBIcon icon="users" className="blue-text pr-2" />
-                        <strong>Create new user</strong>
+                        <strong>Create New User</strong>
                      </MDBCardTitle>
                      <MDBCardText>Create a new user.</MDBCardText>
                      <MDBNavLink

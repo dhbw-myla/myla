@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { upgradeUserToAdmin } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
+import './Admin.css';
 
 class UserEntry extends Component {
    constructor(props) {
@@ -23,13 +24,34 @@ class UserEntry extends Component {
       }
    };
 
+   getAbc = (username, isAdmin) => {
+      if (isAdmin) {
+         return (
+            <MDBNavLink tag="button" to="#" color="mdb-color" className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline" disabled>
+               Is admin
+            </MDBNavLink>
+         );
+      } else {
+         return (
+            <MDBNavLink
+               tag="button"
+               to="#"
+               color="mdb-color"
+               className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
+               onClick={() => this.makeUserToAdmin(username)}
+            >
+               Make admin
+            </MDBNavLink>
+         );
+      }
+   };
    render() {
       const { entry } = this.props;
       const { username } = entry;
       return (
          <MDBCol md="4">
             <MDBAnimation reveal type="">
-               <MDBCard cascade className="my-3 grey lighten-4">
+               <MDBCard cascade className="my-3 grey lighten-4 user-card">
                   <MDBCardBody cascade className="text-center">
                      <MDBCardTitle>
                         <MDBIcon icon="users" className="blue-text pr-2" />
@@ -45,15 +67,7 @@ class UserEntry extends Component {
                      >
                         Edit
                      </MDBNavLink>
-                     <MDBNavLink
-                        tag="button"
-                        to="#"
-                        color="mdb-color"
-                        className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
-                        onClick={() => this.makeUserToAdmin(username)}
-                     >
-                        Make admin
-                     </MDBNavLink>
+                     {this.getAbc(username, entry.is_admin)}
                   </MDBCardBody>
                </MDBCard>
             </MDBAnimation>

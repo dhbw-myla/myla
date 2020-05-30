@@ -16,7 +16,9 @@ export const PASSWORD_CHANGE = 'passwordchange';
 export const ACCOUNT_PASSWORD_CHANGE = MY_ACCOUNT + '/' + PASSWORD_CHANGE;
 export const LOGIN = 'login';
 export const SIGNUP = 'signup';
-export const CREATE_NEW_USERS = `{ADMIN}${USERS}/${NEW}`;
+export const CREATE_NEW_USERS = `${ADMIN}/${USERS}/${NEW}`;
+export const REGISTER_KEY = 'registerkey';
+export const CHANGE_REGISTER_KEY = `${ADMIN}/${REGISTER_KEY}`;
 
 //Survey question types
 export const QUESTION_TYPE_DROPDOWN = 'dropdown';

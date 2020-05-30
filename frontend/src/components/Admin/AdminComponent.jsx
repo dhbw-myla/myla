@@ -16,9 +16,11 @@ class AdminComponent extends Component {
       return (
          <MDBContainer>
             <MDBRow>
-               <MDBCol md="12" className="text-center my-5 font-weight-bold">
-                  <h2>Admin Bereich</h2>
-                  {/* <hr className="mt-5" /> */}
+               <MDBCol md="12" className="mt-4">
+                  <div className="dhbw_header_margin">
+                     <h2 className="text-center my-5 font-weight-bold">Admin Space</h2>
+                  </div>
+                  <hr className="mt-5" />
                </MDBCol>
             </MDBRow>
             <MDBRow>
