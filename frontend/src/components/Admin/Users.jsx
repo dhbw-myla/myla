@@ -18,6 +18,15 @@ class UsersComponent extends Component {
       };
    }
 
+   loadUsers = async () => {
+      const user = getStoredUser();
+      const resObj = await getUsers(user);
+
+      if (resObj && resObj.status === 200) {
+         this.setState({ users: resObj.payload });
+      }
+   };
+
    componentDidMount = async () => {
       const user = getStoredUser();
       const resObj = await getUsers(user);
@@ -60,7 +69,13 @@ class UsersComponent extends Component {
             </MDBRow>
             <MDBRow>
                {users.map((user, key) => (
-                  <UserEntry entry={user} key={key} fadingType={ (key % 3) + 1 } handleOnEditUser={this.handleEditUser} />
+                  <UserEntry
+                     entry={user}
+                     key={key}
+                     fadingType={(key % 3) + 1}
+                     handleOnEditUser={this.handleEditUser}
+                     loadUsers={this.loadUsers}
+                  />
                ))}
             </MDBRow>
          </MDBContainer>

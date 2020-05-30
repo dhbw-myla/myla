@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-
+import { withRouter } from 'react-router-dom';
 import { resetPasswordOfUser, upgradeUserToAdmin } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import Card from '../Card/Card';
-
 import './Admin.css';
 
 class UserEntry extends Component {
@@ -13,13 +12,15 @@ class UserEntry extends Component {
       this.state = {};
    }
 
-   makeUserToAdmin = async (username) => {
+   promoteUserToAdmin = async (username) => {
       const shouldUpdate = await swalHelper.question(`Upgrade user ${username} to admin?`, null, 'Yes', 'No', true);
       if (shouldUpdate) {
+         console.log('current user', getStoredUser());
          const resObj = await upgradeUserToAdmin(getStoredUser(), username);
          resObj && resObj.status === 200
-            ? swalHelper.successTimer(`User ${username} upgraded to admin!`, null, 'ficken')
+            ? swalHelper.successTimer(`Promoting user!`, `User with username ${username} is being promoted.`, 'User has been promoted!')
             : swalHelper.error(resObj.error || resObj.message);
+         this.props.loadUsers();
       } else {
          swalHelper.warning(`User ${username} was not upgraded to admin!`);
       }
@@ -29,8 +30,23 @@ class UserEntry extends Component {
       if (is_admin) {
          return { to: '#', buttonText: 'Is admin', disabled: is_admin };
       } else {
-         return { to: '#', onClick: () => this.makeUserToAdmin(username), buttonText: 'Promote to admin' };
+         return { to: '#', onClick: () => this.promoteUserToAdmin(username), buttonText: 'Promote to admin' };
       }
+   };
+
+   getChangePasswordButton = (username, entry) => {
+      if (getStoredUser().username === username) {
+         return { to: '#', buttonText: "Can't set password", disabled: true };
+      } else {
+         return { to: '#', onClick: () => this.handleOnChangePassword(entry), buttonText: 'Set password' };
+      }
+   };
+
+   getIsOwnUser = (username) => {
+      if (getStoredUser().username === username) {
+         return false;
+      }
+      return true;
    };
 
    handleOnChangePassword = async ({ username }) => {
@@ -41,6 +57,10 @@ class UserEntry extends Component {
          const resObj = await resetPasswordOfUser(getStoredUser(), username, result.value);
          if (resObj && resObj.status === 200) {
             swalHelper.success('Password changed!', `The password of user ${username} has been updated successfully.`, false);
+            // this.props.loadUsers();
+            if (resObj && resObj.status === 200) {
+               this.setState({ users: resObj.payload });
+            }
          } else {
             swalHelper.error('Password could not be changed!', `The password of user ${username} could <b>not</b> be changed.`);
          }
@@ -65,19 +85,21 @@ class UserEntry extends Component {
       const { entry, fadingType } = this.props;
       const { username, is_admin } = entry;
       const adminButton = this.getAdminButton(username, is_admin);
+      const changePasswordButton = this.getChangePasswordButton(username, entry);
+      const isOwnUser = this.getIsOwnUser(username);
       return (
          <Card
             content={{
-               isFar: false,
+               isFar: isOwnUser,
                cardIcon: 'user',
                cardTitle: username,
-               cardText: 'Edit password for ' + username,
+               cardText: `Edit password for ${username}`,
                fadingType: fadingType,
-               navLinks: [{ to: '#', onClick: () => this.handleOnChangePassword(entry), buttonText: 'Change Password' }, adminButton],
+               navLinks: [changePasswordButton, adminButton],
             }}
          />
       );
    }
 }
 
-export default UserEntry;
+export default withRouter(UserEntry);

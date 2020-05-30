@@ -16,11 +16,9 @@ class CreateNewUser extends Component {
       const { value, name } = event.target;
 
       this.setState((prevState) => ({
-         user: {
-            // object that we want to update
-            ...prevState.user, // keep all other key-value pairs
-            [name]: value, // update the value of specific key
-         },
+         // object that we want to update
+         ...prevState, // keep all other key-value pairs
+         [name]: value, // update the value of specific key
       }));
    };
 
@@ -33,7 +31,11 @@ class CreateNewUser extends Component {
       if (shouldCreateNewUser) {
          const resObj = await createUser(getStoredUser(), newUsername, newPassword);
          resObj && resObj.status === 201
-            ? swalHelper.successTimer(`User ${newUsername} created!`, null, 'ficken')
+            ? swalHelper.successTimer(
+                 `New user being created!`,
+                 `New user with username ${newUsername} is being created.`,
+                 'User has been created!'
+              )
             : swalHelper.error(resObj.error || resObj.message);
       } else {
          swalHelper.warning(`User ${newUsername} was not created!`);
