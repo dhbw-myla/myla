@@ -1,13 +1,10 @@
-import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import { createSurveyBasedOnMaster, deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { getFading } from '../../util/util';
-import { NEW_SURVEY } from '../constants';
-
+import Card from '../Card/Card';
+import { DASHBOARD, NEW_SURVEY, SURVEY } from '../constants';
 import './Survey.css';
 
 class SurveyMasterCard extends Component {
@@ -22,7 +19,9 @@ class SurveyMasterCard extends Component {
 
       const shouldDelete = await swalHelper.question('Are You sure?', 'Should delete survey master?', 'OK!', 'No!', true);
       if (shouldDelete) {
+         console.log('id', surveyMasterId);
          const resObj = await deleteSurveyMaster(user, surveyMasterId);
+         console.log('resObj', resObj);
          if (resObj && resObj.status === 200) {
             swalHelper.success('Success!', resObj.message);
             this.props.loadSurveys();
@@ -46,6 +45,11 @@ class SurveyMasterCard extends Component {
       }
    };
 
+   // TODO: implement
+   handleToResults = (surveyMasterId) => {
+      this.props.history.push('/' + DASHBOARD);
+   };
+
    publishSurvey = async (surveyMasterId) => {
       // const surveyStart = new Date();
       // const surveyEnd = new Date();
@@ -67,6 +71,7 @@ class SurveyMasterCard extends Component {
                   resObj.payload.surveyCode +
                   '</code>'
             );
+            this.props.loadSurveys();
          } else {
             swalHelper.error('ERROR!', 'Survey not created.');
          }
@@ -81,32 +86,26 @@ class SurveyMasterCard extends Component {
       const { counter, infos } = this.props;
       const { survey, type } = infos;
       return (
-         <MDBCol md="4" key={counter}>
-            <MDBAnimation reveal type={getFading(type)}>
-               <MDBCard cascade className="my-3 grey lighten-4 survey-card">
-                  <MDBCardBody cascade className="text-center">
-                     <MDBCardTitle>
-                        <MDBIcon icon="cubes" className="icon-dhbw-red pr-2" />
-                        <strong>{survey.title}</strong>
-                     </MDBCardTitle>
-                     <MDBCardText>{survey.description}</MDBCardText>
-                     <MDBNavLink
-                        tag="button"
-                        to="#"
-                        color="mdb-color"
-                        className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
-                        onClick={() => this.publishSurvey(survey.survey_master_id)}
-                     >
-                        Publish Survey
-                     </MDBNavLink>
-                     <MDBIcon id="editIcon" icon="edit" onClick={() => this.modifySurvey(survey.survey_master_id)} />
-                     <MDBIcon id="trashIcon" icon="trash" onClick={() => this.deleteSurvey(survey.survey_master_id)} />
-                     <MDBIcon id="count" icon="id-card" /*onClick={() => this.deleteSurvey(survey.survey_master_id)}*/ />
-                     {survey.number_of_surveys}
-                  </MDBCardBody>
-               </MDBCard>
-            </MDBAnimation>
-         </MDBCol>
+         <Card
+            content={{
+               isFar: false,
+               cardIcon: 'cubes',
+               cardTitle: survey.title,
+               cardText: survey.description,
+               fadingType: type,
+               navLinks: [{ to: '#', onClick: () => this.publishSurvey(survey.survey_master_id), buttonText: 'Publish Survey' }],
+               specialIcons: [
+                  { id: 'editIcon', icon: 'edit', onClick: () => this.modifySurvey(survey.survey_master_id) },
+                  { id: 'trashIcon', icon: 'trash', onClick: () => this.deleteSurvey(survey.survey_master_id) },
+                  {
+                     id: 'count',
+                     icon: 'id-card',
+                     onClick: () => this.handleToResults(survey.survey_master_id),
+                     count: survey.number_of_surveys,
+                  },
+               ],
+            }}
+         />
       );
    }
 }
