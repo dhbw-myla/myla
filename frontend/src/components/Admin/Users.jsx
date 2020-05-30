@@ -1,10 +1,11 @@
-import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
+import { MDBBtn, MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+
 import { getUsers } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { MY_ACCOUNT } from '../constants';
+import { ADMIN, MY_ACCOUNT } from '../constants';
 import EditUserComponent from '../Users/EditUser';
 import UserEntry from './UserEntry';
 
@@ -17,15 +18,11 @@ class UsersComponent extends Component {
       };
    }
 
-   getUsersFromDB = async () => {
+   componentDidMount = async () => {
       const user = getStoredUser();
       const resObj = await getUsers(user);
-      return resObj;
-   };
 
-   componentDidMount = async () => {
-      const resObj = await this.getUsersFromDB();
-      if (resObj.status === 200) {
+      if (resObj && resObj.status === 200) {
          this.setState({ users: resObj.payload });
       } else {
          swalHelper.error('ERROR!', resObj.message);
@@ -39,6 +36,10 @@ class UsersComponent extends Component {
 
    handleBack = () => {
       this.setState({ editUser: false, userToEdit: null });
+   };
+
+   handleBackToAdmin = () => {
+      this.props.history.push('/' + ADMIN);
    };
 
    render() {
@@ -59,6 +60,11 @@ class UsersComponent extends Component {
                   {users.map((user, key) => (
                      <UserEntry entry={user} key={key} handleOnEditUser={this.handleEditUser} />
                   ))}
+               </MDBRow>
+               <MDBRow>
+                  <MDBBtn type="button" className="btn_dhbw" onClick={this.handleBackToAdmin}>
+                     Back
+                  </MDBBtn>
                </MDBRow>
             </MDBContainer>
          );
