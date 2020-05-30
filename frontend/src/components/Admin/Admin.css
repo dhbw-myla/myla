@@ -1,0 +1,15 @@
+.admin-card {
+   width: auto !important;
+}
+
+.user-card {
+   width: auto !important;
+}
+
+.admin-back-button {
+   margin-left: 1rem;
+}
+
+.btn-change-password {
+   margin-bottom: 1rem !important;
+}

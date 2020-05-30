@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { verifySession } from './auth/verifyPw';
 import AdminComponent from './components/Admin/AdminComponent';
+import CreateNewUser from './components/Admin/CreateNewUser';
+import RegisterKey from './components/Admin/RegisterKey';
 import UsersComponent from './components/Admin/Users';
 import {
    ACCOUNT_PASSWORD_CHANGE,
    ADMIN,
    ADMIN_USERS,
+   CHANGE_REGISTER_KEY,
+   CREATE_NEW_USERS,
    DASHBOARD,
    LOGIN,
    MODIFY_SURVEY,
@@ -16,9 +20,9 @@ import {
    SURVEY,
    SURVEY_PARTICIPATE,
 } from './components/constants';
-import ResultDashboard from './components/ResultDashboard/ResultDashboard';
 import Login from './components/Home/Login';
-import Startpage from './components/Home/startpage';
+import Startpage from './components/Home/Startpage';
+import ResultDashboard from './components/ResultDashboard/ResultDashboard';
 import SignUp from './components/SignUp/SignUp';
 import SurveyCreator from './components/Survey/SurveyCreator';
 import SurveyDashboard from './components/Survey/SurveyDashboard';
@@ -57,6 +61,8 @@ class Routes extends Component {
             <PrivateRoute exact path={'/' + ADMIN} component={AdminComponent} />
             <PrivateRoute exact path={'/' + DASHBOARD} component={ResultDashboard} />
             <PrivateRoute exact path={'/' + ADMIN_USERS} component={UsersComponent} />
+            <PrivateRoute exact path={'/' + CREATE_NEW_USERS} component={CreateNewUser} />
+            <PrivateRoute exact path={'/' + CHANGE_REGISTER_KEY} component={RegisterKey} />
             <PrivateRoute exact path={'/' + MY_ACCOUNT} component={Account} />
             <PrivateRoute exact path={'/' + ACCOUNT_PASSWORD_CHANGE} component={ChangePassword} />
             <PrivateRoute exact path={'/' + SURVEY_PARTICIPATE} component={SurveyParticipate} />
