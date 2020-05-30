@@ -647,6 +647,8 @@ exports.submitSurvey = function (request, response) {
             let answ = answers[questionName];
             if (typeof answ === "string") {
                 answ = [answ];
+            } else if (typeof answ === "boolean") {
+                answ = [String(answ)];
             } else if (Array.isArray(answ)) {
                 // everything fine
             } else {
@@ -655,7 +657,8 @@ exports.submitSurvey = function (request, response) {
                 continue;
             }
 
-            for(let a of answ) {
+            for (let a of answ) {
+                if (typeof a !== "string") continue;
                 try {
                     db.query(`INSERT INTO answer (answer, survey_id, question_id, timestamp)
                                     VALUES ($1, $2, $3, $4);`,
