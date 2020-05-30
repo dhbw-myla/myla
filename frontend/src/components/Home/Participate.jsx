@@ -30,7 +30,6 @@ class Participate extends Component {
          const resObj = await getSurveyBySurveyCode(surveycode);
          if (resObj && resObj.status === 200) {
             // 200 {survey: { ... }, questions: [ { ... } ] }
-            console.log('resObj', resObj.payload);
             this.props.history.push({
                pathname: '/' + SURVEY_PARTICIPATE + '/' + surveycode,
                surveyToParticipate: resObj.payload,

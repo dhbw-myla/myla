@@ -2,10 +2,12 @@ import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbre
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
+
 import { login } from '../../api/auth';
 import { setUserToStorage } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { DASHBOARD } from '../constants';
+import { ACCOUNT_PASSWORD_CHANGE, DASHBOARD } from '../constants';
+
 import './startpage.css';
 
 class Login extends Component {
@@ -39,7 +41,12 @@ class Login extends Component {
          if (resObj && resObj.status === 200) {
             swalHelper.success('Welcome!', 'Login was successful.', true);
             setUserToStorage(resObj.payload);
-            this.props.history.push('/' + DASHBOARD);
+            if (resObj.payload.isPasswordChangeRequired) {
+               this.props.history.push({ pathname: '/' + ACCOUNT_PASSWORD_CHANGE, password });
+               swalHelper.warning('Password change required!', 'A password reset was issued to your account. Please update your password.');
+            } else {
+               this.props.history.push('/' + DASHBOARD);
+            }
             this.props.updateRoot();
          } else {
             swalHelper.error('ERROR!', 'Could not log in!');
@@ -60,6 +67,7 @@ class Login extends Component {
                         <div className="form-group">
                            <MDBInput
                               label="Username"
+                              icon="user"
                               type="text"
                               name="username"
                               className="form-control"
@@ -68,6 +76,7 @@ class Login extends Component {
                            />
                            <MDBInput
                               label="Passwort"
+                              icon="key"
                               type="password"
                               className="form-control"
                               name="password"
