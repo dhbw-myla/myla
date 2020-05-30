@@ -1,9 +1,8 @@
-import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { ADMIN, USERS } from '../constants';
 import Card from '../Card/Card';
+import { ADMIN, USERS } from '../constants';
 
 class ShowUsersCard extends Component {
    constructor(props) {

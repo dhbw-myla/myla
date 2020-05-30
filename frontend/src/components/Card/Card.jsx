@@ -1,12 +1,9 @@
 import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
+
 import { getFading } from '../../util/util';
 
 class Card extends Component {
-   constructor(props) {
-      super(props);
-   }
-
    displaySurveyCode = (surveyCode) => {
       if (surveyCode) {
          return (

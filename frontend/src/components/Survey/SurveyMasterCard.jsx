@@ -7,7 +7,7 @@ import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { getFading } from '../../util/util';
 import { NEW_SURVEY } from '../constants';
-import validator from 'validator';
+
 import './Survey.css';
 
 class SurveyMasterCard extends Component {
@@ -70,15 +70,11 @@ class SurveyMasterCard extends Component {
          } else {
             swalHelper.error('ERROR!', 'Survey not created.');
          }
-      } else if (result == undefined) {
+      } else if (result === undefined) {
          swalHelper.error('Not published!', 'You forgot to name the published survey.');
       } else {
          swalHelper.warning('Not published!', 'You canceled the publication of this survey.');
       }
-   };
-
-   calulateSurveys = () => {
-      return 0;
    };
 
    render() {

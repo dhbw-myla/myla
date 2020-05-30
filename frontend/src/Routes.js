@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+
 import { verifySession } from './auth/verifyPw';
 import AdminComponent from './components/Admin/AdminComponent';
 import CreateNewUser from './components/Admin/CreateNewUser';
@@ -21,7 +22,7 @@ import {
    SURVEY_PARTICIPATE,
 } from './components/constants';
 import Login from './components/Home/Login';
-import Startpage from './components/Home/startpage';
+import Startpage from './components/Home/Startpage';
 import ResultDashboard from './components/ResultDashboard/ResultDashboard';
 import SignUp from './components/SignUp/SignUp';
 import SurveyCreator from './components/Survey/SurveyCreator';

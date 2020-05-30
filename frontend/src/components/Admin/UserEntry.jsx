@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+
 import { resetPasswordOfUser, upgradeUserToAdmin } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import Card from '../Card/Card';
+
 import './Admin.css';
 
 class UserEntry extends Component {
@@ -60,7 +62,7 @@ class UserEntry extends Component {
    };
 
    render() {
-      const { entry, fadingType, content } = this.props;
+      const { entry, fadingType } = this.props;
       const { username, is_admin } = entry;
       const adminButton = this.getAdminButton(username, is_admin);
       return (

@@ -1,10 +1,11 @@
 import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import validator from 'validator';
+
 import { changePassword } from '../../api/auth';
 import { getStoredUser, setNewSessionId, verifyPassword } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { MY_ACCOUNT } from '../constants';
+
 import './changePassword.css';
 
 class ChangePassword extends Component {
@@ -61,13 +62,12 @@ class ChangePassword extends Component {
                               onChange={this.handleOnChange}
                            />
                            <MDBInput
-                              className="change-password icon"
+                              className="form-control change-password icon"
                               label="Enter new password"
                               type="password"
                               icon="key"
                               name="newPassword"
                               value={newPassword}
-                              className="form-control change-password icon"
                               onChange={this.handleOnChange}
                            />
                            <MDBInput
@@ -85,7 +85,7 @@ class ChangePassword extends Component {
                            <div className="fg-dhbw-links">
                               <MDBNav>
                                  <MDBNavItem>
-                                    <MDBNavLink activate to='#' className="fg-dhbw-red" onClick={this.props.handleOnClickUserProfil}>
+                                    <MDBNavLink activate to="#" className="fg-dhbw-red" onClick={this.props.handleOnClickUserProfil}>
                                        <MDBIcon icon="backward" className="fg-dhbw-icon" />
                                        Back
                                     </MDBNavLink>

@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 // import * as SurveyPDF from 'survey-pdf';
 import * as Survey from 'survey-react';
-import 'survey-react/survey.css';
-import { submitSurvey } from '../../api/interaction';
+
+import { getSurveyBySurveyCode, submitSurvey } from '../../api/interaction';
 import * as swalHelper from '../../util/swalHelper';
-import { getSurveyBySurveyCode } from '../../api/interaction';
+
+import 'survey-react/survey.css';
 
 Survey.StylesManager.applyTheme('default');
-
 
 const mainColor = '#e30613';
 
@@ -79,26 +79,22 @@ class SurveyDetails extends Component {
    componentDidMount() {
       const { surveyToParticipate } = this.props.history.location;
       // survey meta info surveyjs for use
-      let survey, surveyjs = undefined;
 
-      if(surveyToParticipate){
-         survey = surveyToParticipate.survey;
-         surveyjs = surveyToParticipate.surveyjs;
+      if (surveyToParticipate) {
+         const { survey, surveyjs } = surveyToParticipate;
          this.setState({ survey, surveyjs });
-      }else{
-         let surveycode = this.props.location.pathname.replace("/survey/participate/","");
-         getSurveyBySurveyCode(surveycode).then((response) =>{
+      } else {
+         const surveycode = this.props.location.pathname.replace('/survey/participate/', '');
+         getSurveyBySurveyCode(surveycode).then((response) => {
             if (response && response.status === 200) {
-               survey = response.payload.survey;
-               surveyjs = response.payload.surveyjs;
+               const { survey, surveyjs } = response.payload;
                this.setState({ survey, surveyjs });
-               swalHelper.successTimer('Loading Survey!', 'Loading Survey with code: ' +  'Survey loaded.');
+               swalHelper.successTimer('Loading Survey!', `Loading Survey with code: ${surveycode} loaded.`);
             } else {
                swalHelper.error('Could not find Survey!', 'Surveycode not found.');
             }
          });
       }
-      
    }
 
    render() {

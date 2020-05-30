@@ -1,5 +1,18 @@
-import 'bootstrap-slider/dist/css/bootstrap-slider.css';
 import $ from 'jquery';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import * as SurveyJSCreator from 'survey-creator';
+import * as SurveyKo from 'survey-knockout';
+import * as widgets from 'surveyjs-widgets';
+
+import { createSurveyMaster, updateSurveyMaster } from '../../api/survey';
+import { getStoredUser } from '../../auth/verifyPw';
+import * as swalHelper from '../../util/swalHelper';
+import { SURVEY } from '../constants';
+
+import './Survey.css';
+import './SurveyEditor.css';
+import 'bootstrap-slider/dist/css/bootstrap-slider.css';
 import 'jquery-bar-rating';
 import 'jquery-bar-rating/dist/themes/css-stars.css';
 import 'jquery-bar-rating/dist/themes/fontawesome-stars.css';
@@ -7,20 +20,9 @@ import 'jquery-ui/themes/base/all.css';
 import 'jquery-ui/ui/widgets/datepicker.js';
 import 'nouislider/distribute/nouislider.css';
 import 'pretty-checkbox/dist/pretty-checkbox.css';
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import 'select2/dist/css/select2.css';
 import 'select2/dist/js/select2.js';
-import * as SurveyJSCreator from 'survey-creator';
 import 'survey-creator/survey-creator.css';
-import * as SurveyKo from 'survey-knockout';
-import * as widgets from 'surveyjs-widgets';
-import { createSurveyMaster, updateSurveyMaster } from '../../api/survey';
-import { getStoredUser } from '../../auth/verifyPw';
-import * as swalHelper from '../../util/swalHelper';
-import './Survey.css';
-import { SURVEY } from '../constants';
-import './SurveyEditor.css';
 
 const mainColor = '#e30613';
 
@@ -73,8 +75,8 @@ class SurveyCreator extends Component {
       const createdSurvey = JSON.parse(this.surveyCreator.text);
       let resObj = undefined;
 
-      const {title, description} = createdSurvey;
-      if(!title || !description || title === ""  || title === "" ){
+      const { title, description } = createdSurvey;
+      if (!title || !description || title === '' || title === '') {
          return swalHelper.error('Could not save Survey Master!', 'Please insert a title and a description.');
       }
 
@@ -119,9 +121,7 @@ class SurveyCreator extends Component {
    }
 
    componentWillUnmount() {
-      this.state = {
-         editSurvey: false,
-      };
+      this.setState({ editSurvey: false });
    }
 
    render() {

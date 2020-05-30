@@ -1,12 +1,12 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import './Admin.css';
+
 import CreateUserCard from './CreateUserCard';
 import RegisterKeyCard from './RegisterKeyCard';
 import ShowUsersCard from './ShowUsersCard';
-import Card from '../Card/Card';
-import { CREATE_NEW_USERS } from '../constants';
+
+import './Admin.css';
 
 class AdminComponent extends Component {
    constructor(props) {

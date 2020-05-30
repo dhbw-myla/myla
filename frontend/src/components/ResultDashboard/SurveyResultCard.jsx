@@ -1,7 +1,6 @@
-import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { getFading } from '../../util/util';
+
 import Card from '../Card/Card';
 
 class SurveyResultCard extends Component {
@@ -12,7 +11,6 @@ class SurveyResultCard extends Component {
 
    render() {
       const { counter, surveyResult, type } = this.props;
-      console.log(surveyResult);
       return (
          <Card
             content={{

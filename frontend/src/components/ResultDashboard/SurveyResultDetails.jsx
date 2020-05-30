@@ -2,6 +2,9 @@ import { MDBCard, MDBCardBody, MDBCardText, MDBCol, MDBContainer, MDBRow } from 
 import React, { Component } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { withRouter } from 'react-router-dom';
+
+import { getSurveyResults } from '../../api/interaction';
+import { getStoredUser } from '../../auth/verifyPw';
 import {
    QUESTION_TYPE_BOOLEAN,
    QUESTION_TYPE_CHECKBOX,
@@ -14,10 +17,8 @@ import {
 } from '../constants';
 import SectionContainer from '../sectionContainer';
 import { loadingSpinner } from '../Spinner/Loading';
+
 import './resultDashboard.css';
-import surveyResult from './69surveydata.json';
-import {getSurveyResults} from '../../api/interaction'
-import { getStoredUser } from '../../auth/verifyPw';
 
 class SurveyResultDetails extends Component {
    constructor(props) {
@@ -30,7 +31,7 @@ class SurveyResultDetails extends Component {
    componentDidMount() {
       getSurveyResults(getStoredUser(), this.props.survey.survey_id).then((response) => {
          console.log('resResults', response.payload);
-          this.setState({ resultsOfSurvey: response.payload, showCharts: true })
+         this.setState({ resultsOfSurvey: response.payload, showCharts: true });
       });
       //this.setState({ resultsOfSurvey: surveyResult, showCharts: true });
    }
@@ -161,7 +162,7 @@ class SurveyResultDetails extends Component {
    buildPieChart(question, answers) {
       let labels = [];
       let data = [];
-      
+
       if (question.choices) {
          if (question.choices.length !== labels.length) {
             for (let l in question.choices) {

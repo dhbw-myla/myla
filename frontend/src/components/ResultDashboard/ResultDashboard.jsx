@@ -1,13 +1,15 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
 import Select from 'react-select';
+
+import { getAllOwnSurveys } from '../../api/survey';
+import { getStoredUser } from '../../auth/verifyPw';
 import { BtnDefault } from '../Button/BtnDefault';
-import './resultDashboard.css';
 import SurveyResultCard from './SurveyResultCard';
 import SurveyResultDetails from './SurveyResultDetails';
 import surveys from './surveys.json';
-import { getStoredUser } from '../../auth/verifyPw';
-import { getAllOwnSurveys } from '../../api/survey';
+
+import './resultDashboard.css';
 
 class ResultDashboard extends Component {
    constructor(props) {
@@ -42,7 +44,9 @@ class ResultDashboard extends Component {
    };
 
    componentDidMount() {
-      getAllOwnSurveys(getStoredUser()).then(response => this.setState({surveyResults:response.payload, filteredSurveyResults:response.payload}));
+      getAllOwnSurveys(getStoredUser()).then((response) =>
+         this.setState({ surveyResults: response.payload, filteredSurveyResults: response.payload })
+      );
       this.buildSelectOptions();
    }
 

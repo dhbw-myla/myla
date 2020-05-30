@@ -1,16 +1,17 @@
 import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import validator from 'validator';
+
 import { setRegisterKey } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { ADMIN } from '../constants';
-import { withRouter } from 'react-router-dom';
 
 class RegisterKey extends Component {
    constructor(props) {
       super(props);
-      this.state = { currentRegisterKey: '', newRegisterKey: '' };
+      this.state = { newRegisterKey: '' };
    }
 
    handleOnChange = (event) => {
@@ -56,7 +57,7 @@ class RegisterKey extends Component {
    };
 
    render() {
-      const { currentRegisterKey, newRegisterKey } = this.state;
+      const { newRegisterKey } = this.state;
 
       return (
          <div className="background">
