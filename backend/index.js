@@ -60,7 +60,7 @@ app.post("/createSurveyBasedOnMaster/:masterId", routes.createSurveyBasedOnMaste
 
 app.post("/getSurveyMaster/:masterId", routes.getSurveyMaster);
 app.put("/updateSurveyMaster/:masterId", routes.updateSurveyMaster);
-app.delete("/deleteSurveyMaster/:masterId", routes.deleteSurveyMaster);
+app.post("/deleteSurveyMaster/:masterId", routes.deleteSurveyMaster);
 
 app.post("/getAllOwnGroups", routes.getAllOwnGroups);
 app.post("/createGroup", routes.createGroup);
