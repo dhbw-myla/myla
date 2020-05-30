@@ -60,54 +60,67 @@ class SurveyCreator extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         editSurvey: false
+         editSurvey: false,
       };
    }
 
    surveyCreator;
 
    saveCreatedSurvey = async () => {
-      const {editSurvey} = this.state;
+      const { editSurvey } = this.state;
 
       const user = getStoredUser();
       const createdSurvey = JSON.parse(this.surveyCreator.text);
       let resObj = undefined;
-      if (editSurvey){
-         const {surveyToEdit} = this.props.history.location;
-         const {surveyMaster} = surveyToEdit;
+
+      const {title, description} = createdSurvey;
+      if(!title || !description || title === ""  || title === "" ){
+         return swalHelper.error('Could not save Survey Master!', 'Please insert a title and a description.');
+      }
+
+      if (editSurvey) {
+         const { surveyToEdit } = this.props.history.location;
+         const { surveyMaster } = surveyToEdit;
          resObj = await updateSurveyMaster(user, createdSurvey, surveyMaster.survey_master_id);
       } else {
          resObj = await createSurveyMaster(user, createdSurvey);
       }
-            if (resObj && (resObj.status === 201 || resObj.status === 200)) {
-               swalHelper.success('Survey Master saved!', 'Survey Master has been saved successfully! You can access it via Survey Masters.');
-               this.props.history.push('/' + SURVEY);
-            } else {
-               return swalHelper.error('Could not save Survey Master!', 'Please try again.');
-            }
+
+      if (resObj && (resObj.status === 201 || resObj.status === 200)) {
+         swalHelper.success('Survey Master saved!', 'Survey Master has been saved successfully! You can access it via Survey Masters.');
+         this.props.history.push('/' + SURVEY);
+      } else {
+         return swalHelper.error('Could not save Survey Master!', 'Please try again.');
+      }
    };
 
    componentDidMount() {
-      let options = { showEmbededSurveyTab: false, showTranslationTab:false, showTestSurveyTab:true, showJSONEditorTab:false, designerHeight:""  };
-      const {surveyToEdit} = this.props.history.location;
+      let options = {
+         showEmbededSurveyTab: false,
+         showTranslationTab: false,
+         showTestSurveyTab: true,
+         showJSONEditorTab: false,
+         designerHeight: '',
+      };
+      const { surveyToEdit } = this.props.history.location;
       this.surveyCreator = new SurveyJSCreator.SurveyCreator('surveyCreatorContainer', options);
       if (surveyToEdit) {
-         const {surveyjs} = surveyToEdit;
+         const { surveyjs } = surveyToEdit;
          this.surveyCreator.text = JSON.stringify(surveyjs);
-         this.setState({editSurvey: true})
+         this.setState({ editSurvey: true });
       }
       this.surveyCreator.saveSurveyFunc = this.saveCreatedSurvey;
 
       //Change and remove useless things
-      let element = document.getElementsByClassName('svd_survey_header--hidden')[0]
-      if(element){
-         element.classList.remove("svd_survey_header--hidden");
+      let element = document.getElementsByClassName('svd_survey_header--hidden')[0];
+      if (element) {
+         element.classList.remove('svd_survey_header--hidden');
       }
    }
 
-   componentWillUnmount(){
+   componentWillUnmount() {
       this.state = {
-         editSurvey: false
+         editSurvey: false,
       };
    }
 
