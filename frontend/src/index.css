@@ -49,7 +49,7 @@
 }
 
 .icon-dhbw-red {
-   color: #e30613;
+   color: #e30613 !important;
 }
 
 .btn-outline-dhbw-red {
@@ -96,4 +96,12 @@ body {
    background-attachment: fixed;
    background-size: cover;
    background-color: #eeeeee !important;
+}
+
+.md-form input[type="password"]:not(.browser-default):not([readonly]):focus + label {
+   color: #e30613;
+}
+
+.md-form input[type="text"]:not(.browser-default):not([readonly]):focus + label {
+   color: #e30613;
 }

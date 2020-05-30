@@ -60,7 +60,7 @@ class UsersComponent extends Component {
             </MDBRow>
             <MDBRow>
                {users.map((user, key) => (
-                  <UserEntry entry={user} key={key} handleOnEditUser={this.handleEditUser} />
+                  <UserEntry entry={user} key={key} fadingType={ (key % 3) + 1 } handleOnEditUser={this.handleEditUser} />
                ))}
             </MDBRow>
          </MDBContainer>

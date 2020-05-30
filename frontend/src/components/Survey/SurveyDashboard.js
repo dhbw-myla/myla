@@ -62,7 +62,7 @@ class SurveyDashboard extends Component {
                      {surveys.map((survey, key) => (
                         <SurveyMasterCard
                            counter={key}
-                           infos={{ survey, type: 1 }}
+                           infos={{ survey, type: (key % 3) + 2 }}
                            onClickSurvey={() => this.showSurvey(survey.id)}
                            loadSurveys={this.loadSurveys}
                         />

@@ -36,6 +36,22 @@ export const success = (title, html, isQuick, btnText) => {
    });
 };
 
+export const show = (title, html, isQuick, btnText) => {
+   const quick = isQuick
+      ? {
+           showConfirmButton: false,
+           timer: 1500,
+        }
+      : {};
+
+   Swal.fire({
+      title: title || swalTypes.SUCCESS + '!',
+      html: html || 'Success',
+      confirmButtonText: btnText || 'OK',
+      ...quick,
+   });
+};
+
 export const successTimer = (title, html, endText) => {
    let timerInterval;
    Swal.fire({
@@ -99,6 +115,26 @@ export const questionWithInput = async (title, html, answerTrue, answerFalse, re
       if (result.value) return result;
       else if (result.dismiss === Swal.DismissReason.cancel) return false;
    });
+
+   return result;
+};
+
+export const chain = async (title, html1, html2, html3, confirmButton, lastConfirmButton) => {
+   const result = await Swal.mixin({
+      input: 'password',
+      showCancelButton: true,
+      confirmButtonText: confirmButton,
+      progressSteps: ['1', '2', '3'],
+   })
+      .queue([
+         { title: title, html: html1 },
+         { title: title, html: html2 },
+         { title: title, html: html3, confirmButtonText: lastConfirmButton },
+      ])
+      .then((result) => {
+         if (result.value) return result;
+         else if (result.dismiss === Swal.DismissReason.cancel) return false;
+      });
 
    return result;
 };
