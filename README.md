@@ -76,9 +76,9 @@ _db/dbconfig.js_:
 ```
 module.exports = {
   user: 'postgres',
-  host: '127.0.0.1',
+  host: 'postgres',
   database: 'myla',
-  password: 'yourpostgrespassword',
+  password: 'postgres',
   port: 5432,
 };
 ```
@@ -145,6 +145,8 @@ body:
   "registerKey": "https://knowyourmeme.com/memes/let-me-in"
 }
 ```
+You will become an admin automatically if use the username `admin` (assumed it's not yet used).
+
 responses:
 ```
 201 { username: "user", sessionId: "5b1d1c1c2723ac89ec0ed766e88ca2ff2c3426b26f76e19e9d67a155595e78f2cb488a254cc0b3f0413fb6719d041e77" }

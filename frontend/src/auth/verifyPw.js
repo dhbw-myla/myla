@@ -35,6 +35,12 @@ export const setUserToStorage = (user) => {
    sessionStorage.setItem('user', JSON.stringify(user));
 };
 
+export const setNewSessionId = (sessionId) =>{
+   const user = getStoredUser();
+   user.sessionId = sessionId;
+   setUserToStorage(user);
+}
+
 export const isUserAdmin = async () => {
    const user = getStoredUser();
    if (!util.checkIfUndefiniedOrNull(user)) {

@@ -26,10 +26,8 @@ export const getFading = (type) => {
       case 1:
          return 'fadeInLeft';
       case 2:
-         return 'fadeInDown';
+         return 'fadeInUp';
       case 3:
          return 'fadeInRight';
-      default:
-         return 'fadeInDown';
    }
 };

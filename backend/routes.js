@@ -30,7 +30,8 @@ exports.register = function (request, response) {
                 // hashing failed
                 return responseHelper.sendInternalServerError(response, err);
             }
-            db.query('INSERT INTO users (username, password, session_id) VALUES ($1, $2, $3);', [username, hash, sessionId], (err, result) => {
+            db.query('INSERT INTO users (username, password, session_id, is_admin) VALUES ($1, $2, $3, $4);',
+            [username, hash, sessionId, username==="admin"], (err, result) => {
                 if (err) {
                     // db failed
                     if (err.code === "23505" || err.constraint === "unique_username") {

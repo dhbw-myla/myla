@@ -41,7 +41,7 @@ class SurveyMasterCard extends Component {
       if (resObj && resObj.status === 200) {
          this.props.history.push({
             pathname: '/' + NEW_SURVEY,
-            state: { surveyToEdit: resObj.payload },
+            surveyToEdit: resObj.payload,
          });
       }
    };
@@ -49,21 +49,32 @@ class SurveyMasterCard extends Component {
    publishSurvey = async (surveyMasterId) => {
       // const surveyStart = new Date();
       // const surveyEnd = new Date();
-      const resObj = await createSurveyBasedOnMaster(getStoredUser(), null, null, surveyMasterId); //(user, timestampStart, timestampEnd, surveyMasterId)
-      if (resObj && resObj.status === 201) {
-         swalHelper.success(
-            'Survey created!',
-            "It's now live for 7 days with code: <br><br> <code style='color:#e30613; font-size: 1.5rem; font-weight: bold; letter-spacing: 0.4rem;'>" +
-               resObj.payload.surveyCode +
-               '</code>'
-         );
-      } else {
-         swalHelper.error('ERROR!', 'Survey not created.');
-      }
-   };
 
-   calulateSurveys = () => {
-      return 0;
+      const result = await swalHelper.questionWithInput(
+         'Publish Survey',
+         'What would you like to name your survey?',
+         'text',
+         'Publish',
+         'Cancel'
+      );
+      if (result) {
+         const surveyTitle = result.value;
+         const resObj = await createSurveyBasedOnMaster(getStoredUser(), null, null, surveyMasterId, surveyTitle); //(user, timestampStart, timestampEnd, surveyMasterId)
+         if (resObj && resObj.status === 201) {
+            swalHelper.success(
+               'Survey created!',
+               "It's now live for 7 days with code: <br><br> <code style='color:#e30613; font-size: 1.5rem; font-weight: bold; letter-spacing: 0.4rem;'>" +
+                  resObj.payload.surveyCode +
+                  '</code>'
+            );
+         } else {
+            swalHelper.error('ERROR!', 'Survey not created.');
+         }
+      } else if (result === undefined) {
+         swalHelper.error('Not published!', 'You forgot to name the published survey.');
+      } else {
+         swalHelper.warning('Not published!', 'You canceled the publication of this survey.');
+      }
    };
 
    render() {
@@ -90,8 +101,8 @@ class SurveyMasterCard extends Component {
                      </MDBNavLink>
                      <MDBIcon id="editIcon" icon="edit" onClick={() => this.modifySurvey(survey.survey_master_id)} />
                      <MDBIcon id="trashIcon" icon="trash" onClick={() => this.deleteSurvey(survey.survey_master_id)} />
-                     <MDBIcon id="trashIcon" icon="id-card" onClick={() => this.deleteSurvey(survey.survey_master_id)} />
-                     {this.calulateSurveys()}
+                     <MDBIcon id="count" icon="id-card" /*onClick={() => this.deleteSurvey(survey.survey_master_id)}*/ />
+                     {survey.number_of_surveys}
                   </MDBCardBody>
                </MDBCard>
             </MDBAnimation>

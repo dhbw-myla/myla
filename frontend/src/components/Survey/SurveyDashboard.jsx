@@ -1,17 +1,17 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
+
 import { getAllOwnSurveyMasters } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import SurveyCreateMasterCard from './SurveyCreateMasterCard';
 import SurveyMasterCard from './SurveyMasterCard';
-import { surveys } from './surveys';
 
 class SurveyDashboard extends Component {
    constructor(props) {
       super(props);
       this.state = {
          showSurvey: false,
-         surveys: surveys,
+         surveys: [],
       };
    }
 
@@ -38,6 +38,7 @@ class SurveyDashboard extends Component {
       const user = getStoredUser();
       const resObj = await getAllOwnSurveyMasters(user);
       if (resObj && resObj.status === 200) {
+         console.log('loadSurveys', resObj.payload);
          this.setState({ surveys: resObj.payload });
       }
    };
@@ -62,7 +63,7 @@ class SurveyDashboard extends Component {
                      {surveys.map((survey, key) => (
                         <SurveyMasterCard
                            counter={key}
-                           infos={{ survey, type: 1 }}
+                           infos={{ survey, type: ((key + 1) % 3) + 1 }}
                            onClickSurvey={() => this.showSurvey(survey.id)}
                            loadSurveys={this.loadSurveys}
                         />

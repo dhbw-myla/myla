@@ -3,11 +3,29 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 // import * as SurveyPDF from 'survey-pdf';
 import * as Survey from 'survey-react';
-import 'survey-react/survey.css';
-import { submitSurvey } from '../../api/interaction';
+
+import { getSurveyBySurveyCode, submitSurvey } from '../../api/interaction';
 import * as swalHelper from '../../util/swalHelper';
 
+import 'survey-react/survey.css';
+
 Survey.StylesManager.applyTheme('default');
+
+const mainColor = '#e30613';
+
+const defaultThemeColorsEditor = Survey.StylesManager.ThemeColors['default'];
+defaultThemeColorsEditor['$primary-color'] = mainColor;
+defaultThemeColorsEditor['$secondary-color'] = mainColor;
+defaultThemeColorsEditor['$primary-hover-color'] = mainColor;
+defaultThemeColorsEditor['$primary-text-color'] = mainColor;
+defaultThemeColorsEditor['$selection-border-color'] = mainColor;
+defaultThemeColorsEditor['$main-color'] = mainColor;
+defaultThemeColorsEditor['$main-hover-color'] = mainColor;
+defaultThemeColorsEditor['$text-color'] = mainColor;
+defaultThemeColorsEditor['$header-color'] = mainColor;
+defaultThemeColorsEditor['$header-background-color'] = mainColor;
+defaultThemeColorsEditor['$body-container-background-color'] = mainColor;
+defaultThemeColorsEditor['$btn-primary'] = mainColor;
 
 class SurveyDetails extends Component {
    constructor(props) {
@@ -61,9 +79,22 @@ class SurveyDetails extends Component {
    componentDidMount() {
       const { surveyToParticipate } = this.props.history.location;
       // survey meta info surveyjs for use
-      const { survey, surveyjs } = surveyToParticipate;
 
-      this.setState({ survey, surveyjs });
+      if (surveyToParticipate) {
+         const { survey, surveyjs } = surveyToParticipate;
+         this.setState({ survey, surveyjs });
+      } else {
+         const surveycode = this.props.location.pathname.replace('/survey/participate/', '');
+         getSurveyBySurveyCode(surveycode).then((response) => {
+            if (response && response.status === 200) {
+               const { survey, surveyjs } = response.payload;
+               this.setState({ survey, surveyjs });
+               swalHelper.successTimer('Loading Survey!', `Loading Survey with code: ${surveycode} loaded.`);
+            } else {
+               swalHelper.error('Could not find Survey!', 'Surveycode not found.');
+            }
+         });
+      }
    }
 
    render() {
@@ -72,7 +103,11 @@ class SurveyDetails extends Component {
 
       return (
          <MDBContainer id="survey-participate">
-            <h1>{survey ? survey.title : ''}</h1>
+            <div className="dhbw_header_margin">
+               <h2 className="text-center my-5 font-weight-bold">{survey ? survey.survey_title : ''}</h2>
+               <h5 className="font-weight-bold">Description: {survey ? survey.description : ''}</h5>
+            </div>
+            <hr className="mt-5" />
             <div className="surveyjs">
                <Survey.Survey model={model} onComplete={this.onComplete.bind(this)} onValueChanged={this.onValueChanged.bind(this)} />
             </div>

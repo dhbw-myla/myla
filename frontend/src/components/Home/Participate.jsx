@@ -32,7 +32,7 @@ class Participate extends Component {
             // 200 {survey: { ... }, questions: [ { ... } ] }
             console.log('resObj', resObj.payload);
             this.props.history.push({
-               pathname: '/' + SURVEY_PARTICIPATE,
+               pathname: '/' + SURVEY_PARTICIPATE + '/' + surveycode,
                surveyToParticipate: resObj.payload,
             });
             swalHelper.successTimer('Loading Survey!', 'Loading Survey with code: ' + surveycode, 'Survey loaded.');

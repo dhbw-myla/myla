@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+
 import { verifySession } from './auth/verifyPw';
 import AdminComponent from './components/Admin/AdminComponent';
 import CreateNewUser from './components/Admin/CreateNewUser';
@@ -65,7 +66,7 @@ class Routes extends Component {
             <PrivateRoute exact path={'/' + CHANGE_REGISTER_KEY} component={RegisterKey} />
             <PrivateRoute exact path={'/' + MY_ACCOUNT} component={Account} />
             <PrivateRoute exact path={'/' + ACCOUNT_PASSWORD_CHANGE} component={ChangePassword} />
-            <PrivateRoute exact path={'/' + SURVEY_PARTICIPATE} component={SurveyParticipate} />
+            <PrivateRoute path={'/' + SURVEY_PARTICIPATE} component={SurveyParticipate} />
             <PrivateRoute exact path={'/' + LOGIN} component={() => <Login updateRoot={this.props.updateRoot} />} />
             <PrivateRoute exact path={'/' + SIGNUP} component={() => <SignUp updateRoot={this.props.updateRoot} />} />
             <Route exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />

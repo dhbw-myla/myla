@@ -1,13 +1,11 @@
-import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 
-import { upgradeUserToAdmin } from '../../api/admin';
+import { resetPasswordOfUser, upgradeUserToAdmin } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import './Admin.css';
+import Card from '../Card/Card';
 
-import { resetPasswordOfUser } from '../../api/admin';
-import { ADMIN_USERS } from '../constants';
+import './Admin.css';
 
 class UserEntry extends Component {
    constructor(props) {
@@ -27,33 +25,18 @@ class UserEntry extends Component {
       }
    };
 
-   getAbc = (username, isAdmin) => {
-      if (isAdmin) {
-         return (
-            <MDBNavLink tag="button" to="#" color="mdb-color" className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline" disabled>
-               Is admin
-            </MDBNavLink>
-         );
+   getAdminButton = (username, is_admin) => {
+      if (is_admin) {
+         return { to: '#', buttonText: 'Is admin', disabled: is_admin };
       } else {
-         return (
-            <MDBNavLink
-               tag="button"
-               to="#"
-               color="mdb-color"
-               className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline"
-               onClick={() => this.makeUserToAdmin(username)}
-            >
-               Promote to admin
-            </MDBNavLink>
-         );
+         return { to: '#', onClick: () => this.makeUserToAdmin(username), buttonText: 'Promote to admin' };
       }
    };
 
    handleOnChangePassword = async ({ username }) => {
       const title = 'Changing password of: ' + username;
       const html = 'Please enter the new password below.';
-      const result = await swalHelper.questionWithInput(title, html, 'Yes', 'No', true);
-      console.log('result', result);
+      const result = await swalHelper.questionWithInput(title, html, 'password', 'Yes', 'No', true);
       if (result) {
          const resObj = await resetPasswordOfUser(getStoredUser(), username, result.value);
          if (resObj && resObj.status === 200) {
@@ -79,32 +62,20 @@ class UserEntry extends Component {
    };
 
    render() {
-      const { entry } = this.props;
-      const { username } = entry;
+      const { entry, fadingType } = this.props;
+      const { username, is_admin } = entry;
+      const adminButton = this.getAdminButton(username, is_admin);
       return (
-         <MDBCol md="4">
-            <MDBAnimation reveal type="">
-               <MDBCard cascade className="my-3 grey lighten-4 user-card">
-                  <MDBCardBody cascade className="text-center">
-                     <MDBCardTitle>
-                        <MDBIcon icon="users" className="blue-text pr-2" />
-                        <strong>{username}</strong>
-                     </MDBCardTitle>
-                     <MDBCardText>Edit details for {username}</MDBCardText>
-                     <MDBNavLink
-                        tag="button"
-                        to="#"
-                        color="mdb-color"
-                        className="btn btn-outline-dhbw-red btn-sm btn-rounded d-inline btn-change-password"
-                        onClick={() => this.handleOnChangePassword(entry)}
-                     >
-                        Change Password
-                     </MDBNavLink>
-                     {this.getAbc(username, entry.is_admin)}
-                  </MDBCardBody>
-               </MDBCard>
-            </MDBAnimation>
-         </MDBCol>
+         <Card
+            content={{
+               isFar: false,
+               cardIcon: 'user',
+               cardTitle: username,
+               cardText: 'Edit password for ' + username,
+               fadingType: fadingType,
+               navLinks: [{ to: '#', onClick: () => this.handleOnChangePassword(entry), buttonText: 'Change Password' }, adminButton],
+            }}
+         />
       );
    }
 }

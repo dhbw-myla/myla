@@ -15,6 +15,8 @@ import { clearSessionStorage, isUserAdmin, verifySession } from '../../auth/veri
 import * as swalHelper from '../../util/swalHelper';
 import { ADMIN, DASHBOARD, MY_ACCOUNT, NOT_YET_IMPLEMENTED, SURVEY } from '../constants';
 import './Navigation.css';
+import {logout} from '../../api/auth';
+import {getStoredUser} from '../../auth/verifyPw'
 
 class NavbarComponent extends Component {
    constructor(props) {
@@ -34,12 +36,13 @@ class NavbarComponent extends Component {
    };
 
    logOutUser = () => {
-      // TODO: use logout from auth.js
-      clearSessionStorage();
-      this.closeCollapse('mainNavbarCollapse');
-      swalHelper.success('Logged out!', 'Logout successful!', true);
-      this.props.updateRoot();
-      this.forceUpdate();
+      logout(getStoredUser()).then((response) => {
+         clearSessionStorage();
+         this.closeCollapse('mainNavbarCollapse');
+         swalHelper.success('Logged out!', 'Logout successful!', true);
+         this.props.updateRoot();
+         this.forceUpdate();
+      })
    };
 
    render() {

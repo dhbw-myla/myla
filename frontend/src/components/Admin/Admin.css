@@ -13,3 +13,7 @@
 .btn-change-password {
    margin-bottom: 1rem !important;
 }
+
+.card > body {
+   text-transform: capitalize
+}
