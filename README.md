@@ -76,9 +76,9 @@ _db/dbconfig.js_:
 ```
 module.exports = {
   user: 'postgres',
-  host: '127.0.0.1',
+  host: 'postgres',
   database: 'myla',
-  password: 'yourpostgrespassword',
+  password: 'postgres',
   port: 5432,
 };
 ```
