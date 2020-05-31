@@ -21,7 +21,7 @@ import {getStoredUser} from '../../auth/verifyPw'
 class NavbarComponent extends Component {
    constructor(props) {
       super(props);
-      this.state = { collapseID: '' };
+      this.state = { collapseID: '', isAdmin: false };
    }
 
    toggleCollapse = (collapseID) => () =>
@@ -40,25 +40,30 @@ class NavbarComponent extends Component {
          clearSessionStorage();
          this.closeCollapse('mainNavbarCollapse');
          swalHelper.success('Logged out!', 'Logout successful!', true);
+         this.setState({isAdmin:false});
          this.props.updateRoot();
          this.forceUpdate();
       })
    };
+
+   componentWillMount(){
+      isUserAdmin().then(resp => this.setState({isAdmin:resp}))
+   }
 
    render() {
       const overlay = (
          <div id="sidenav-overlay" style={{ backgroundColor: 'transparent' }} onClick={this.toggleCollapse('mainNavbarCollapse')} />
       );
 
-      const { collapseID } = this.state;
+      const { collapseID, isAdmin } = this.state;
 
       const sessionAvaliable = verifySession();
 
       if (!sessionAvaliable) {
          return null;
       }
-
-      const navIsAdmin = isUserAdmin() ? (
+      
+      const navIsAdmin = isAdmin ? (
          <MDBNavItem>
             <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + ADMIN}>
                <strong>Admin</strong>

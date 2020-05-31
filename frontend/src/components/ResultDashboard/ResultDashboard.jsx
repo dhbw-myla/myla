@@ -7,7 +7,6 @@ import { getStoredUser } from '../../auth/verifyPw';
 import { BtnDefault } from '../Button/BtnDefault';
 import SurveyResultCard from './SurveyResultCard';
 import SurveyResultDetails from './SurveyResultDetails';
-import surveys from './surveys.json';
 
 import './resultDashboard.css';
 
@@ -19,7 +18,7 @@ class ResultDashboard extends Component {
          surveyResults: [],
          surveyResultToShow: 0,
          selectOptions: {},
-         filteredSurveyResults: surveys,
+         filteredSurveyResults: [],
       };
    }
 

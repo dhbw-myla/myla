@@ -85,26 +85,35 @@ class SurveyMasterCard extends Component {
    render() {
       const { counter, infos } = this.props;
       const { survey, type } = infos;
+
+      const editIcon = { id: 'editIcon', icon: 'edit', onClick: () => this.modifySurvey(survey.survey_master_id) };
+      const trashIcon = { id: 'trashIcon', icon: 'trash', onClick: () => this.deleteSurvey(survey.survey_master_id) };
+
+      const content = {
+         isFar: false,
+         cardIcon: 'cubes',
+         cardTitle: survey.title,
+         cardText: survey.description,
+         fadingType: type,
+         navLinks: [{ to: '#', onClick: () => this.publishSurvey(survey.survey_master_id), buttonText: 'Publish Survey' }],
+         specialIcons: [
+            {
+               id: 'count',
+               icon: 'id-card',
+               onClick: () => this.handleToResults(survey.survey_master_id),
+               count: survey.number_of_surveys,
+            },
+         ],
+      };
+      
+      if(survey.number_of_surveys == 0) {
+         content.specialIcons.splice(0, 0, editIcon);
+         content.specialIcons.splice(1, 0, trashIcon);
+      }
+
       return (
          <Card
-            content={{
-               isFar: false,
-               cardIcon: 'cubes',
-               cardTitle: survey.title,
-               cardText: survey.description,
-               fadingType: type,
-               navLinks: [{ to: '#', onClick: () => this.publishSurvey(survey.survey_master_id), buttonText: 'Publish Survey' }],
-               specialIcons: [
-                  { id: 'editIcon', icon: 'edit', onClick: () => this.modifySurvey(survey.survey_master_id) },
-                  { id: 'trashIcon', icon: 'trash', onClick: () => this.deleteSurvey(survey.survey_master_id) },
-                  {
-                     id: 'count',
-                     icon: 'id-card',
-                     onClick: () => this.handleToResults(survey.survey_master_id),
-                     count: survey.number_of_surveys,
-                  },
-               ],
-            }}
+            content={content}
          />
       );
    }

@@ -144,10 +144,13 @@ class SurveyResultDetails extends Component {
    }
 
    buildAnswerList(answers) {
+      if(answers === undefined || Object.keys(answers).length === 0){
+         return "Nothing to show... :-("
+      }
       return (
          <MDBCol>
             <MDBRow my-3 grey lighten-4 survey-card>
-               {answers.map((answer) => (
+               {Object.keys(answers).map((answer) => (
                   <MDBCard cascade className="my-4 grey lighten-4 survey-card">
                      <MDBCardBody cascade className="text-center">
                         <MDBCardText>{answer}</MDBCardText>
