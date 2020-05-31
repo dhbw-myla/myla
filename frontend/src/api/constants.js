@@ -19,6 +19,7 @@ export const PATH_CREATE_SURVEY_BASED_ON_MASTER = 'createSurveyBasedOnMaster/';
 export const PATH_GET_SURVEY_MASTER = 'getSurveyMaster/';
 export const PATH_UPDATE_SURVEY_MASTER = 'updateSurveyMaster/';
 export const PATH_DELTE_SURVEY_MASTER = 'deleteSurveyMaster/';
+export const PATH_GET_ALL_OWN_SURVEYS_FOR_SURVEY_MASTER = 'getAllOwnSurveysForSurveyMaster/';
 
 // Groups
 export const PATH_GET_ALL_OWN_GROUPS = 'getAllOwnGroups/';

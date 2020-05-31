@@ -10,6 +10,7 @@ import {
    PATH_GET_ALL_SURVEY_MASTER_TEMPLATES,
    PATH_GET_SURVEY_MASTER,
    PATH_UPDATE_SURVEY_MASTER,
+   PATH_GET_ALL_OWN_SURVEYS_FOR_SURVEY_MASTER,
 } from './constants';
 
 /*
@@ -134,6 +135,18 @@ export async function getSurveyMaster(user, surveyMasterId) {
       return error.response.data;
    }
 }
+
+export const getAllOwnSurveysForSurveyMaster = async (user, surveyMasterId) => {
+   try {
+      const url = PATH_BASE_URL + PATH_GET_ALL_OWN_SURVEYS_FOR_SURVEY_MASTER + surveyMasterId;
+      const response = await axiosHelper.post(url, 'getSurveyMaster', user);
+      return response.data;
+   } catch (error) {
+      console.log('error on getSurveyMaster', error);
+      return error.response.data;
+   }
+};
+
 /*
       200 { surveyMasterId: ... }
       400 { message: "You Can't Update This Survey Master Because There Are Already Surveys Based On That Master" }
