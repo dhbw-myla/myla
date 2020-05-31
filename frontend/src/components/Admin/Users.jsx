@@ -65,7 +65,7 @@ class UsersComponent extends Component {
                </MDBCol>
             </MDBRow>
             <MDBRow>
-               <div className="admin-back-button">{BtnDefault(this.handleBackToAdmin, 'Back to admin overview')}</div>
+               <div className="admin-back-button">{BtnDefault(this.handleBackToAdmin, 'Back to admin space')}</div>
             </MDBRow>
             <MDBRow>
                {users.map((user, key) => (

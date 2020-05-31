@@ -2,7 +2,6 @@ import { MDBCard, MDBCardBody, MDBCardText, MDBCol, MDBContainer, MDBRow } from 
 import React, { Component } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { withRouter } from 'react-router-dom';
-
 import { getSurveyResults } from '../../api/interaction';
 import { getStoredUser } from '../../auth/verifyPw';
 import {
@@ -17,7 +16,6 @@ import {
 } from '../constants';
 import SectionContainer from '../sectionContainer';
 import { loadingSpinner } from '../Spinner/Loading';
-
 import './resultDashboard.css';
 
 class SurveyResultDetails extends Component {
@@ -30,7 +28,6 @@ class SurveyResultDetails extends Component {
    }
    componentDidMount() {
       getSurveyResults(getStoredUser(), this.props.survey.survey_id).then((response) => {
-         console.log('resResults', response.payload);
          this.setState({ resultsOfSurvey: response.payload, showCharts: true });
       });
       //this.setState({ resultsOfSurvey: surveyResult, showCharts: true });
@@ -144,9 +141,6 @@ class SurveyResultDetails extends Component {
    }
 
    buildAnswerList(answers) {
-      if(answers === undefined || Object.keys(answers).length === 0){
-         return "Nothing to show... :-("
-      }
       return (
          <MDBCol>
             <MDBRow my-3 grey lighten-4 survey-card>
@@ -165,6 +159,7 @@ class SurveyResultDetails extends Component {
    buildPieChart(question, answers) {
       let labels = [];
       let data = [];
+      debugger;
 
       if (question.choices) {
          if (question.choices.length !== labels.length) {
@@ -229,23 +224,27 @@ class SurveyResultDetails extends Component {
       let chart;
       let number = key + 1;
 
-      switch (question.type) {
-         case QUESTION_TYPE_TEXT:
-         case QUESTION_TYPE_MULTIPLE_TEXT:
-         case QUESTION_TYPE_COMMENT:
-            chart = this.buildAnswerList(answers);
-            break;
-         case QUESTION_TYPE_BOOLEAN:
-         case QUESTION_TYPE_DROPDOWN:
-         case QUESTION_TYPE_CHECKBOX:
-         case QUESTION_TYPE_RADIOGROUP:
-            chart = this.buildPieChart(question, answers);
-            break;
-         case QUESTION_TYPE_RATING:
-            chart = this.buildBarChart(question, answers);
-            break;
-         default:
-            chart = 'Nothing to show... :-(';
+      if (answers === undefined || Object.keys(answers).length === 0) {
+         chart = 'Nothing to show... :-(';
+      } else {
+         switch (question.type) {
+            case QUESTION_TYPE_TEXT:
+            case QUESTION_TYPE_MULTIPLE_TEXT:
+            case QUESTION_TYPE_COMMENT:
+               chart = this.buildAnswerList(answers);
+               break;
+            case QUESTION_TYPE_BOOLEAN:
+            case QUESTION_TYPE_DROPDOWN:
+            case QUESTION_TYPE_CHECKBOX:
+            case QUESTION_TYPE_RADIOGROUP:
+               chart = this.buildPieChart(question, answers);
+               break;
+            case QUESTION_TYPE_RATING:
+               chart = this.buildBarChart(question, answers);
+               break;
+            default:
+               chart = 'Nothing to show... :-(';
+         }
       }
 
       return (

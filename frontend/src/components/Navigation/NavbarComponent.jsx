@@ -10,13 +10,12 @@ import {
    MDBTooltip,
 } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
+import { logout } from '../../api/auth';
 import DHBWLogo from '../../assets/DHBW-Logo_neu.png';
-import { clearSessionStorage, isUserAdmin, verifySession } from '../../auth/verifyPw';
+import { clearSessionStorage, getStoredUser, isUserAdmin, verifySession } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { ADMIN, DASHBOARD, MY_ACCOUNT, NOT_YET_IMPLEMENTED, SURVEY } from '../constants';
 import './Navigation.css';
-import {logout} from '../../api/auth';
-import {getStoredUser} from '../../auth/verifyPw'
 
 class NavbarComponent extends Component {
    constructor(props) {
@@ -40,14 +39,14 @@ class NavbarComponent extends Component {
          clearSessionStorage();
          this.closeCollapse('mainNavbarCollapse');
          swalHelper.success('Logged out!', 'Logout successful!', true);
-         this.setState({isAdmin:false});
+         this.setState({ isAdmin: false });
          this.props.updateRoot();
          this.forceUpdate();
-      })
+      });
    };
 
-   componentWillMount(){
-      isUserAdmin().then(resp => this.setState({isAdmin:resp}))
+   componentWillMount() {
+      isUserAdmin().then((resp) => this.setState({ isAdmin: resp }));
    }
 
    render() {
@@ -62,7 +61,7 @@ class NavbarComponent extends Component {
       if (!sessionAvaliable) {
          return null;
       }
-      
+
       const navIsAdmin = isAdmin ? (
          <MDBNavItem>
             <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + ADMIN}>

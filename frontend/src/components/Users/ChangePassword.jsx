@@ -2,12 +2,10 @@ import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbre
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
-
 import { changePassword } from '../../api/auth';
 import { getStoredUser, setNewSessionId, setUserToStorage, verifyPassword } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { MY_ACCOUNT } from '../constants';
-
 import './changePassword.css';
 
 class ChangePassword extends Component {
@@ -32,7 +30,6 @@ class ChangePassword extends Component {
          user.newPassword = newPassword;
          user.password = oldPassword;
          const resObj = await changePassword(user);
-         console.log('resObj', resObj);
          if (resObj && resObj.status === 200) {
             resObj.payload.isPasswordChangeRequired = false;
             setUserToStorage(resObj.payload);

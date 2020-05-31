@@ -3,11 +3,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 // import * as SurveyPDF from 'survey-pdf';
 import * as Survey from 'survey-react';
-
+import 'survey-react/survey.css';
 import { getSurveyBySurveyCode, submitSurvey } from '../../api/interaction';
 import * as swalHelper from '../../util/swalHelper';
-
-import 'survey-react/survey.css';
 
 Survey.StylesManager.applyTheme('default');
 
@@ -34,7 +32,7 @@ class SurveyDetails extends Component {
    }
 
    onValueChanged(result) {
-      console.log('value changed!');
+      // console.log('value changed!');
    }
 
    // TODO implement API
@@ -42,10 +40,6 @@ class SurveyDetails extends Component {
       const { surveyToParticipate } = this.props.history.location;
       // survey meta info surveyjs for use
       const { survey } = surveyToParticipate;
-
-      console.log('Complete! ', result);
-      console.log('SurveyID', survey.id);
-      console.log('Complete! data', result.data);
 
       const resObj = await submitSurvey(result.data, survey.survey_code);
 

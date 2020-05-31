@@ -15,13 +15,10 @@ class SurveyMasterCard extends Component {
 
    deleteSurvey = async (surveyMasterId) => {
       const user = getStoredUser();
-      console.log('user', user);
 
       const shouldDelete = await swalHelper.question('Are You sure?', 'Should delete survey master?', 'OK!', 'No!', true);
       if (shouldDelete) {
-         console.log('id', surveyMasterId);
          const resObj = await deleteSurveyMaster(user, surveyMasterId);
-         console.log('resObj', resObj);
          if (resObj && resObj.status === 200) {
             swalHelper.success('Success!', resObj.message);
             this.props.loadSurveys();
@@ -45,9 +42,12 @@ class SurveyMasterCard extends Component {
       }
    };
 
-   // TODO: implement
-   handleToResults = (surveyMasterId) => {
-      this.props.history.push('/' + DASHBOARD);
+   handleToResults = (surveyMasterId, numberOfSurveys) => {
+      if (numberOfSurveys > 0) {
+         this.props.history.push({ pathname: '/' + DASHBOARD, state: { loadResultsToGivenSurvey: true, surveyMasterId } });
+      } else {
+         swalHelper.warning('There are no published surveys avaliable.');
+      }
    };
 
    publishSurvey = async (surveyMasterId) => {
@@ -86,7 +86,7 @@ class SurveyMasterCard extends Component {
       const { infos } = this.props;
       const { survey, type } = infos;
 
-      const editIcon = { id: 'editIcon', icon: 'edit', onClick: () => this.modifySurvey(survey.survey_master_id), visible: true  };
+      const editIcon = { id: 'editIcon', icon: 'edit', onClick: () => this.modifySurvey(survey.survey_master_id), visible: true };
       const trashIcon = { id: 'trashIcon', icon: 'trash', onClick: () => this.deleteSurvey(survey.survey_master_id), visible: true };
 
       const content = {
@@ -97,27 +97,24 @@ class SurveyMasterCard extends Component {
          fadingType: type,
          navLinks: [{ to: '#', onClick: () => this.publishSurvey(survey.survey_master_id), buttonText: 'Publish Survey' }],
          specialIcons: [
-            editIcon, trashIcon,
+            editIcon,
+            trashIcon,
             {
                id: 'count',
                icon: 'id-card',
-               onClick: () => this.handleToResults(survey.survey_master_id),
+               onClick: () => this.handleToResults(survey.survey_master_id, survey.number_of_surveys),
                count: survey.number_of_surveys,
-               visible: true
+               visible: true,
             },
          ],
       };
-      debugger;
-      if(survey.number_of_surveys !== "0") {
+
+      if (survey.number_of_surveys !== '0') {
          content.specialIcons[0].visible = false;
          content.specialIcons[1].visible = false;
       }
 
-      return (
-         <Card
-            content={content}
-         />
-      );
+      return <Card content={content} />;
    }
 }
 

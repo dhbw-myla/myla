@@ -1,14 +1,12 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
 import Select from 'react-select';
-
-import { getAllOwnSurveys } from '../../api/survey';
+import { getAllOwnSurveys, getAllOwnSurveysForSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import { BtnDefault } from '../Button/BtnDefault';
+import './resultDashboard.css';
 import SurveyResultCard from './SurveyResultCard';
 import SurveyResultDetails from './SurveyResultDetails';
-
-import './resultDashboard.css';
 
 class ResultDashboard extends Component {
    constructor(props) {
@@ -17,21 +15,19 @@ class ResultDashboard extends Component {
          showSurveyResult: false,
          surveyResults: [],
          surveyResultToShow: 0,
-         selectOptions: {},
          filteredSurveyResults: [],
+         filterBySurveyMaster: false,
       };
    }
 
-   buildSelectOptions() {
-      const { surveyResults } = this.state;
-
+   buildSelectOptions(surveyResults) {
+      const selectOptions = [];
       if (Object.keys(surveyResults).length === 0) {
-         return;
+         return selectOptions;
       }
 
-      const selectOptions = [];
-      surveyResults.forEach((surveyResult) => selectOptions.push({ label: surveyResult.title, value: surveyResult.survey_id }));
-      this.setState({ selectOptions });
+      surveyResults.forEach((surveyResult) => selectOptions.push({ label: surveyResult.survey_title, value: surveyResult.survey_id }));
+      return selectOptions;
    }
 
    showSurveyResults = (surveyResult) => {
@@ -42,11 +38,31 @@ class ResultDashboard extends Component {
       this.setState({ showSurveyResult: false, surveyToShow: null });
    };
 
+   loadSurvey = () => {
+      const { location } = this.props.history;
+      return location && location.state && location.state.loadResultsToGivenSurvey;
+   };
+
+   getSurveyResults = () => {
+      if (this.loadSurvey()) {
+         const { surveyMasterId } = this.props.location.state;
+         getAllOwnSurveysForSurveyMaster(getStoredUser(), surveyMasterId).then((resObj) => {
+            this.setState({ surveyResults: resObj.payload, filteredSurveyResults: resObj.payload, filterBySurveyMaster: true });
+         });
+      } else {
+         getAllOwnSurveys(getStoredUser()).then((resObj) =>
+            this.setState({ surveyResults: resObj.payload, filteredSurveyResults: resObj.payload, filterBySurveyMaster: false })
+         );
+      }
+   };
+
    componentDidMount() {
-      getAllOwnSurveys(getStoredUser()).then((response) =>
-         this.setState({ surveyResults: response.payload, filteredSurveyResults: response.payload })
-      );
-      this.buildSelectOptions();
+      this.getSurveyResults();
+   }
+
+   //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
+   componentWillReceiveProps(nextProps) {
+      this.getSurveyResults();
    }
 
    onSelectChange = (value) => {
@@ -60,28 +76,27 @@ class ResultDashboard extends Component {
    };
 
    render() {
-      const { showSurveyResult, selectOptions, surveyResultToShow, filteredSurveyResults } = this.state;
-
+      const { showSurveyResult, surveyResultToShow, filteredSurveyResults, surveyResults, filterBySurveyMaster } = this.state;
       let whatToRender;
-      let title = 'Survey Results Dashboard';
+      let title = filterBySurveyMaster ? 'Loaded Results' : 'Survey Results Dashboard';
 
       if (showSurveyResult) {
          title = 'Survey: ' + surveyResultToShow.survey_title;
          whatToRender = (
             <Fragment>
                <div className="alignBackButton">
-                  <MDBRow>{BtnDefault(this.returnToOverview, 'Back to overview')}</MDBRow>
+                  <MDBRow>{BtnDefault(this.returnToOverview, 'Back to dashboard')}</MDBRow>
                </div>
                <SurveyResultDetails className="dhbw_bottom" survey={surveyResultToShow} />
             </Fragment>
          );
       } else {
+         const selectOptions = this.buildSelectOptions(surveyResults);
          whatToRender = (
             <Fragment>
                <Select
                   className="basic-single"
                   classNamePrefix="select"
-                  defaultValue={selectOptions[0]}
                   name="survey-filter"
                   options={selectOptions}
                   onChange={this.onSelectChange}

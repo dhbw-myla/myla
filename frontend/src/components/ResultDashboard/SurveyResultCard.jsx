@@ -17,10 +17,10 @@ class SurveyResultCard extends Component {
                isFar: false,
                cardIcon: 'cubes',
                cardTitle: surveyResult.survey_title,
-               cardText: surveyResult.description,
+               cardText: 'Survey Master: ' + surveyResult.title,
                surveyCode: surveyResult.survey_code,
                fadingType: type,
-               navLinks: [{ to: '#', onClick: () => this.props.onClickSurveyResult(surveyResult), buttonText: 'Show survey' }],
+               navLinks: [{ to: '#', onClick: () => this.props.onClickSurveyResult(surveyResult), buttonText: 'Show survey results' }],
             }}
          />
       );

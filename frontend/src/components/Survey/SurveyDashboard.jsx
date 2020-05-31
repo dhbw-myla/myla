@@ -1,6 +1,5 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
-
 import { getAllOwnSurveyMasters } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import SurveyCreateMasterCard from './SurveyCreateMasterCard';
@@ -20,7 +19,6 @@ class SurveyDashboard extends Component {
    };
 
    returnToOverview = () => {
-      console.log('onClickReturn');
       this.setState({ showSurvey: false, surveyToShow: null });
    };
 
@@ -38,7 +36,6 @@ class SurveyDashboard extends Component {
       const user = getStoredUser();
       const resObj = await getAllOwnSurveyMasters(user);
       if (resObj && resObj.status === 200) {
-         console.log('loadSurveys', resObj.payload);
          this.setState({ surveys: resObj.payload });
       }
    };

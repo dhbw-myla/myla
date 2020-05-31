@@ -13,16 +13,15 @@ class UserEntry extends Component {
    }
 
    promoteUserToAdmin = async (username) => {
-      const shouldUpdate = await swalHelper.question(`Upgrade user ${username} to admin?`, null, 'Yes', 'No', true);
+      const shouldUpdate = await swalHelper.question(`Promote user ${username} to admin?`, null, 'Yes', 'No', true);
       if (shouldUpdate) {
-         console.log('current user', getStoredUser());
          const resObj = await upgradeUserToAdmin(getStoredUser(), username);
          resObj && resObj.status === 200
             ? swalHelper.successTimer(`Promoting user!`, `User with username ${username} is being promoted.`, 'User has been promoted!')
             : swalHelper.error(resObj.error || resObj.message);
          this.props.loadUsers();
       } else {
-         swalHelper.warning(`User ${username} was not upgraded to admin!`);
+         swalHelper.warning(`User ${username} was not promoted to admin!`);
       }
    };
 
