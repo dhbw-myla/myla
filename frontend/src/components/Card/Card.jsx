@@ -2,6 +2,7 @@ import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, 
 import React, { Component, Fragment } from 'react';
 
 import { getFading } from '../../util/util';
+import './card.css';
 
 class Card extends Component {
    displaySurveyCode = (surveyCode) => {
@@ -19,13 +20,13 @@ class Card extends Component {
 
    render() {
       const { isFar, cardIcon, cardTitle, cardText, surveyCode, fadingType, navLinks, specialIcons } = this.props.content;
-
+      
       const handleSpecialIcons = () => {
          return specialIcons
             ? specialIcons.map((specialIcon) => {
                  return (
                     <Fragment>
-                       <MDBIcon className="specialIcons" icon={specialIcon.icon} onClick={specialIcon.onClick} />{' '}
+                       <MDBIcon className={"specialIcons "+ (specialIcon.visible ? '' : 'card_hidden_icon')} icon={specialIcon.icon} onClick={specialIcon.onClick} />{' '}
                        <span>{specialIcon.count}</span>
                     </Fragment>
                  );

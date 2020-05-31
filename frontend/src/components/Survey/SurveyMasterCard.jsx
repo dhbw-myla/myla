@@ -4,7 +4,7 @@ import { createSurveyBasedOnMaster, deleteSurveyMaster, getSurveyMaster } from '
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import Card from '../Card/Card';
-import { DASHBOARD, NEW_SURVEY, SURVEY } from '../constants';
+import { DASHBOARD, NEW_SURVEY } from '../constants';
 import './Survey.css';
 
 class SurveyMasterCard extends Component {
@@ -83,11 +83,11 @@ class SurveyMasterCard extends Component {
    };
 
    render() {
-      const { counter, infos } = this.props;
+      const { infos } = this.props;
       const { survey, type } = infos;
 
-      const editIcon = { id: 'editIcon', icon: 'edit', onClick: () => this.modifySurvey(survey.survey_master_id) };
-      const trashIcon = { id: 'trashIcon', icon: 'trash', onClick: () => this.deleteSurvey(survey.survey_master_id) };
+      const editIcon = { id: 'editIcon', icon: 'edit', onClick: () => this.modifySurvey(survey.survey_master_id), visible: true  };
+      const trashIcon = { id: 'trashIcon', icon: 'trash', onClick: () => this.deleteSurvey(survey.survey_master_id), visible: true };
 
       const content = {
          isFar: false,
@@ -97,18 +97,20 @@ class SurveyMasterCard extends Component {
          fadingType: type,
          navLinks: [{ to: '#', onClick: () => this.publishSurvey(survey.survey_master_id), buttonText: 'Publish Survey' }],
          specialIcons: [
+            editIcon, trashIcon,
             {
                id: 'count',
                icon: 'id-card',
                onClick: () => this.handleToResults(survey.survey_master_id),
                count: survey.number_of_surveys,
+               visible: true
             },
          ],
       };
-      
-      if(survey.number_of_surveys == 0) {
-         content.specialIcons.splice(0, 0, editIcon);
-         content.specialIcons.splice(1, 0, trashIcon);
+      debugger;
+      if(survey.number_of_surveys !== "0") {
+         content.specialIcons[0].visible = false;
+         content.specialIcons[1].visible = false;
       }
 
       return (

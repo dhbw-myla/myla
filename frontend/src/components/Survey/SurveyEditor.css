@@ -15,7 +15,7 @@
 }
 
 .svd-empty-message-container > .svd-empty-message + img {
-   content: url(../../assets/DHBW-Logo.png) !important;
+   content: url(../../assets/DHBW-Logo-square.png) !important;
 }
 
 .svd-accordion-tab-header > span {
