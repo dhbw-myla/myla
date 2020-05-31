@@ -9,8 +9,8 @@ class Footer extends Component {
    }
    render() {
       return (
-         <MDBFooter color="grey darken-2">
-            <p className="footer-copyright mb-0 py-3 mh-5 text-center fixed-bottom grey darken-2">
+         <MDBFooter color="grey darken-2" dark>
+            <p className="footer-copyright mb-0 py-3 mh-5 text-center fixed-bottom">
                &copy; {new Date().getFullYear()} Sascha Görnert, Niko Lockenvitz, Rene Fischer, Martin Sandig, Erik Jansky
                {/*, Julian Rolle */}
             </p>
