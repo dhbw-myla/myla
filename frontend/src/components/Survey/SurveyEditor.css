@@ -2,18 +2,12 @@
    background-color: #e30613 !important;
 }
 
-.svd_survey_header {
-}
-
 #surveyCreatorContainer .sv_main .sv_body {
    border-top: 2px solid #e30613 !important;
 }
 
 .svd-survey-placeholder-root .svd-survey-placeholder .svd-empty-message-container .svd-empty-message {
    color: rgb(103, 106, 108);
-}
-
-.svd-empty-message-container img {
 }
 
 .sv_main.sv_main .sv-boolean__switch {
