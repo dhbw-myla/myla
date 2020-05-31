@@ -9,24 +9,37 @@ class Card extends Component {
       if (surveyCode) {
          return (
             <span>
-               <br />
-               Survey Code:{' '}
-               <code style={{ color: '#e30613', fontSize: '1rem', fontWeight: 'bold', letterSpacing: '0.2rem' }}>{surveyCode}</code>
+               <br /> <code style={{ color: '#e30613', fontSize: '1rem', fontWeight: 'bold', letterSpacing: '0.2rem' }}>{surveyCode}</code>
             </span>
          );
       }
       return null;
    };
 
+   displayCardSubtitle = (cardSubtitle) => {
+      if (cardSubtitle) {
+         return (
+            <span>
+               <u>{cardSubtitle}</u>
+               <br />
+            </span>
+         );
+      }
+   };
+
    render() {
-      const { isFar, cardIcon, cardTitle, cardText, surveyCode, fadingType, navLinks, specialIcons } = this.props.content;
-      
+      const { isFar, cardIcon, cardTitle, cardSubtitle, cardText, surveyCode, fadingType, navLinks, specialIcons } = this.props.content;
+
       const handleSpecialIcons = () => {
          return specialIcons
             ? specialIcons.map((specialIcon) => {
                  return (
                     <Fragment>
-                       <MDBIcon className={"specialIcons "+ (specialIcon.visible ? '' : 'card_hidden_icon')} icon={specialIcon.icon} onClick={specialIcon.onClick} />{' '}
+                       <MDBIcon
+                          className={'specialIcons ' + (specialIcon.visible ? '' : 'card_hidden_icon')}
+                          icon={specialIcon.icon}
+                          onClick={specialIcon.onClick}
+                       />
                        <span>{specialIcon.count}</span>
                     </Fragment>
                  );
@@ -44,7 +57,9 @@ class Card extends Component {
                         <strong>{cardTitle}</strong>
                      </MDBCardTitle>
                      <MDBCardText>
+                        {this.displayCardSubtitle(cardSubtitle)}
                         {cardText}
+                        <br />
                         {this.displaySurveyCode(surveyCode)}
                      </MDBCardText>
                      {navLinks.map((navLink) => (
