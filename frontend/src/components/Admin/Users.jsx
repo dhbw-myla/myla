@@ -25,7 +25,7 @@ class UsersComponent extends Component {
       const resObj = await getUsers(user);
 
       if (resObj && resObj.status === 200) {
-         this.setState({ users: resObj.payload });
+         this.setState({ users: resObj.payload, filteredUsers: resObj.payload });
       }
    };
 
