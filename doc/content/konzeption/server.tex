@@ -1,2 +1,23 @@
 % !TEX root =  ../../master.tex
 \section{Server}
+
+% VORSCHLAG: -Rene
+
+\subsection{\acl{API}}
+% PLAGIAT
+Die \acf{API} dient zur Kommunikation zwischen Client und Server, dabei soll dem Client ermöglichen werden auf Ressourcen des Servers zuzugreifen.
+Dazu müssen zunächst Routen definiert werden, welche nach dem Programmierparadigma \ac{REST} aufgebaut werden.
+Derartige Schnittstellen stellen über die \ac{HTTP}-Methoden die \ac{CRUD}-Operationen zur Verfügung, da in der Regel der Server vorwiegend zur Datenhaltung dient.
+
+% Abschnitt zur vollständigkeit drin. geht mir mehr um das gesamtpaket, dass sowas da is
+% In der Anwendung sollen jedoch Datensätze nicht durch den Mitarbeiter verändert werden können, sondern lediglich Änderungen im \ac{ERP}-System eine Änderung der Daten hervorrufen.
+% Dies kann über eine Schnittstelle gelöst werden, jedoch müsste dazu das \ac{ERP}-System angepasst werden, sodass Änderungen direkt weitergegeben werden.
+% Da eine solche Veränderung jedoch nicht möglich ist, greift die Anwendung direkt auf die Datenbank des \ac{ERP}-Systems zu, um Änderungen festzustellen und in eine eigene Datenbank, wie in Kapitel \ref{chapter:Daten-Transfer} beschrieben, zu übertragen.
+
+% Aus diesem Grund müssen die Routen lediglich lesend zur Verfügung stehen, sodass der Client alle geplanten Funktionen nutzen kann.
+% Dabei stellt die \ac{API} grundlegend für jede Berechnung des Servers eine Route zur Verfügung, sodass der Client modular aufgebaut werden kann und eventuelle Einbindungen in bereits bestehende Systeme möglich sind.
+%Dennoch ist es dem Nutzer möglich, die Ergebnisse der Berechnung durch eine Sortierung oder Beschränkung, u. a. auf das betrachtete Geschäftsjahr, über in der Anfrage vermerkte Parameter anzupassen.
+
+Zur Authentifizierung existiert ebenso eine Route, welche den Nutzer überprüft und ein Token ausstellt.
+Das Token muss anschließend bei jeder Anfrage übergeben werden, um die jeweilige Route nutzen zu können.
+

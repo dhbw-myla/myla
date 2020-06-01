@@ -1,3 +1,12 @@
 % !TEX root =  ../sicherheit.tex
 \subsection{Datenschutz}
 Der Grund, dass Teilnehmer von Umfragen sich nicht anmelden sollen, liegt im Datenschutz.
+
+
+% Vorschlag - Rene aus BA:
+
+% Auch der Datenschutz spielt für das zu entwickelnde System eine Rolle, da neben dem Kontonamen des Mitarbeiters zur Authentifizierung Informationen über den Lieferanten gespeichert werden, welche in manchen Fällen Informationen über die Bezugsperson beinhalten. Dies lässt sich aufgrund der Art der Datenhaltung im \ac{ERP}-System nicht vermeiden.
+
+% Aus diesem Grund muss die \ac*{DSGVO}\autocite{dsgvo} berücksichtigt werden, welche es vorsieht, dass auf Wunsch des Anwenders alle personenbezogenen Daten ausgegeben werden können und gegebenenfalls gelöscht werden können. Aufgrund der versteckten personenbezogenen Daten in den Lieferanten ist es deshalb notwendig die Lieferanten-Relation beim Datentransfer vollständig zu überprüfen und Anpassungen vorzunehmen. Somit müssen die Datensätze nicht in verschiedenen Systemen angepasst werden und der bisherige Workflow der Mitarbeiter bleibt gleich. Sofern ein Mitarbeiter seine Daten einsehen oder Löschen möchte, muss dieser sich an den Systemadministrator wenden, welcher alle zum Mitarbeiter gehörenden Datensätze aus der Token-Relation auslesen und gegebenenfalls darin löschen kann.
+
+% Eine Weitergabe an Dritte erfolgt nicht, da alle Mitarbeiter, die Berechtigungen für das neue System haben, berechtigt sind das \ac{ERP}-System zu verwenden. Zudem werden Informationen über Token nicht nach außen gegeben, da es sich lediglich um eine Sicherheitsmaßnahme handelt, welche automatisiert abläuft.

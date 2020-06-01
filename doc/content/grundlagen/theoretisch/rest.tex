@@ -49,3 +49,41 @@ Durch die im \ac{HTTP}-Protokoll implementierten Methoden wie GET, POST, PUT und
 Außerdem erfüllt es weitere wesentliche Bedingungen, die von \ac{REST} gefordert werden, wie beispielsweise die Zustandslosigkeit. 
 Die aktuelle Version ist \ac{HTTP}/2\autocite{MS-Belshe.2015}, jedoch wird auch die ältere Version \ac{HTTP}/1.1\autocite{MS-Fielding.1999} noch verwendet. 
 Die Form der Nutzdaten für die Übertragung bei \ac{REST}ful-\acp{API} ist dabei meist die \ac{JSON} oder \ac{XML}.\autocite[Vgl.][S. 97]{MS-Tilkov.2015} 
+
+
+% Alternative Rene's PA2:
+
+\subsection{\acf{REST}}
+Schnittstellen sind in der heutigen Webentwicklung allgegenwärtig und nicht mehr wegzudenken.
+So verwenden nicht nur Internetriesen wie Facebook\autocite{rf-facebook-api} eine öffentliche \ac{API}, sondern auch beispielsweise die Deutsche Bahn\autocite{rf-db-api} oder die New York Times\autocite{rf-nyt-api}.
+Allein Google betreut über 100 verschiedene öffentliche \acp{API}\autocite{rf-google-api-alle}.
+Dabei sind \ac{REST}-Schnittstellen der dominierende Schnittstellentyp\autocite{rf-heise-google}, da diese leicht zu entwickeln sind\autocite{rf-rodriguez2008restful} und dem Entwickler die Entscheidung über das Datenformat für den Datenaustausch und über den Transportweg überlassen\autocite{rf-graphql-heise}.
+
+Durch die Verwendung einer \ac{API} ist es möglich, das System nach der Microservice-Architektur auszurichten und somit die Wartbarkeit und Langlebigkeit zu verbessern.
+So können Anwendungsteile leicht ersetzt, erneuert oder entfernt werden, ohne das zugrundeliegende System zu verändern.\autocite{rf-fowler2015microservices}
+
+Allgemein hat die \ac{REST}-Architektur, welche erstmals von Roy Thomas Fielding in seiner Dissertation vorgestellt wurde, sechs Grundprinzipien, die bei der Entwicklung beachtet werden müssen.
+Das erste Grundprinzip stellt die Trennung der Benutzeroberfläche und der Datenspeicherung dar, da somit die Skalierbarkeit stark verbessert wird.
+Als zweites Grundprinzip wird die Zustandslosigkeit angesehen. Hierbei handelt es sich um eine Restriktion, dass jede Anfrage alle benötigten Daten beinhalten muss.
+Damit wird sichergestellt, dass jede Anfrage von jedem Client aus bei gleicher Grundlage die gleichen Ergebnisse zur Folge hat.
+Dabei werden Aktionen isoliert betrachtet, was sowohl das Nachvollziehen dieser erleichtert, da keine Aktionen in Relation zueinander stehen, als auch die Zuverlässigkeit des Systems verbessert, da im Fehlerfall lediglich die fehlerhaften Aktionen zurückgesetzt werden müssen.
+
+Cache ist laut Fielding der dritte Grundsatz.
+Dabei wird festgelegt, ob Antworten vom Server gespeichert und erneut verwendet werden dürfen, was die Effizienz des Systems erhöht und redundante Anfrage unterbindet.
+Ein weiteres Grundprinzip sind gleichartige Schnittstellen.
+Diese sollen es dem Nutzer ermöglichen schnell die Struktur zu verstehen und den Code allgemein vereinfachen bzw. Arbeitsschritte nachvollziehbar gestalten.
+Als fünftes Prinzip ist das Aufteilen des Systems in Schichten vorgesehen.
+Die Schichten sollen ermöglichen, dass jede Komponente nur die direkten Nachbarkomponenten kennt und keine Daten oder Funktionalitäten aus anderen Schichten auslesen und verwenden kann.
+Dabei liegt der Fokus auf der Skalierbarkeit des Gesamtsystems, sodass eine Lastverteilung auch über Netzwerke möglich ist.
+
+Der letzte Grundbaustein in der \ac{REST}-Architektur sind optional nachladbare Funktionalitäten, dabei handelt es sich um Funktionen, die erst im späteren Verlauf hinzugefügt werden und den Funktionsumfang des Systems erweitern.
+Dieser Baustein wird als optional angesehen, da das Nachladen in manchen Fällen unerwünscht oder auch unerlaubt ist.
+Somit ist dieses Prinzip lediglich zum Aufzeigen der Möglichkeit vorhanden und muss nicht unterstützt werden.
+
+Eine Ressource verkörpert in \ac{REST} eine Abstraktion der Information in jeglicher Form. Dadurch können ein Bild oder Dokument eine Ressource darstellen, aber auch komplexere Sachverhalte oder reale Dinge bis hin zu Lebewesen können laut der Definition von Fielding eine Ressource sein.
+Relevant ist dabei nur, dass das Ziel einer Hypertext-Referenz mit der Definition der Ressource übereinstimmt.
+
+Unterschieden werden statische und nicht statische Ressourcen, was zur Folge haben kann, dass zwei Ressourcen zu einem bestimmten Zeitpunkt denselben Wert verkörpern.
+Diese Unterscheidung ermöglicht, dass eine statische Ressource jederzeit denselben Zielwert zurückliefert, während eine nicht statische Ressource verwendet werden kann, um beispielsweise die aktuellste Version des Wertes zurück zu geben.
+Auch der Transportweg der Ressource ist abstrakt definiert und muss vom Entwickler festgelegt werden.
+Ziel dabei ist die Konsistenz des Programms und die Schaffung von gleichartigen Schnittstellen.\autocite{rf-fielding2000architectural}\autocite{rf-richardson2013restful}

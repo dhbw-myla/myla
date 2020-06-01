@@ -19,3 +19,25 @@ Teilnehmer der Umfrage sollen anonym an den Umfragen partizipieren können. Dabe
 Nach einer Umfrage soll es einem Dozenten ermöglicht werden, die Ergebnisse der Umfrage direkt einzusehen, wobei es ihm dabei ermöglicht wird, die Ergebnisse im zeitlichen Verlauf zu betrachten, um den Lernfortschritt der Studenten überblicken zu können.
 Außerdem soll er verschiedene Ansichten nutzen können und es soll ihm ermöglicht werden, die Ergebnisse grafisch anschaulich in einem Diagramm zu betrachten.
 
+
+% VORSCHLAG - Tabularx ist irgndwie broke im repo hier - bst durch andere anpassungen in der config.. sollte man nochmal drüber schauen! falls fragen sind, einfach mich fragn - Rene
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{l|k|r}
+      \toprule
+      {Bezeichnung} & {Art} & {Beschreibung} \\
+      \midrule
+      {\label{Anf:A1}A1} & technisch & Anforderung 1 in kurz \\
+      \hline
+      {\label{Anf:A2}A2} & fachlich & Anforderung 2 in kurz \\
+      \hline
+      {\label{Anf:A3}A3} & fachlich & Anforderung 3 in kurz \\
+      \hline
+      {\label{Anf:A4}A4} & fachlich und technisch & Anforderung 4 in kurz \\
+      \bottomrule
+    %   ... weiter für weitere Anforderungen
+    \end{tabularx}
+    \caption{Anforderungen}
+    \label{tab:Anforderungen}
+\end{table}

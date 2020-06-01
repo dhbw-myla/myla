@@ -209,6 +209,15 @@
 %\usepackage{import}				% better import of section in several files
 \usepackage{subfigure}
 
+
+% funktioniert aktuell nicht wie normal -> muss man nochmal drüber schauen.. oder ersetzen
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{b}{X}
+\newcolumntype{s}{>{\hsize=.5\hsize\raggedleft\arraybackslash}X}
+\newcolumntype{k}{>{\hsize=.5\hsize\arraybackslash}X}
+\newcolumntype{r}{>{\raggedright\arraybackslash}X}
+
 % page header/footer
 \RequirePackage[automark,headsepline,footsepline]{scrpage2}
 \pagestyle{scrheadings}
