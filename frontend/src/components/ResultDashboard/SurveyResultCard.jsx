@@ -10,9 +10,10 @@ class SurveyResultCard extends Component {
    }
 
    render() {
-      const { surveyResult, type } = this.props;
+      const { surveyResult, type, counter } = this.props;
       return (
          <Card
+            key={counter}
             content={{
                isFar: false,
                cardIcon: 'cubes',

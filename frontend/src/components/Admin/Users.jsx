@@ -1,6 +1,7 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import Select from 'react-select';
 import { getUsers } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
@@ -15,6 +16,7 @@ class UsersComponent extends Component {
       this.state = {
          users: [],
          editUser: false,
+         filteredUsers: [],
       };
    }
 
@@ -32,7 +34,7 @@ class UsersComponent extends Component {
       const resObj = await getUsers(user);
 
       if (resObj && resObj.status === 200) {
-         this.setState({ users: resObj.payload });
+         this.setState({ users: resObj.payload, filteredUsers: resObj.payload });
       } else {
          swalHelper.error('ERROR!', resObj.message);
          this.props.history.push('/' + MY_ACCOUNT);
@@ -51,8 +53,29 @@ class UsersComponent extends Component {
       this.props.history.push('/' + ADMIN);
    };
 
-   render() {
+   onSelectChange = (value) => {
       const { users } = this.state;
+      if (value !== null) {
+         const filteredUsers = users.filter((surveyResult) => surveyResult.user_id === value.value);
+         this.setState({ filteredUsers });
+      } else {
+         this.setState({ filteredUsers: users });
+      }
+   };
+
+   buildSelectOptions(users) {
+      const selectOptions = [];
+      if (Object.keys(users).length === 0) {
+         return selectOptions;
+      }
+
+      users.forEach((user) => selectOptions.push({ label: user.username, value: user.user_id }));
+      return selectOptions;
+   }
+
+   render() {
+      const { users, filteredUsers } = this.state;
+      const selectOptions = this.buildSelectOptions(users);
 
       return (
          <MDBContainer>
@@ -67,8 +90,16 @@ class UsersComponent extends Component {
             <MDBRow>
                <div className="admin-back-button">{BtnDefault(this.handleBackToAdmin, 'Back to admin space')}</div>
             </MDBRow>
+            <Select
+               className="basic-single"
+               classNamePrefix="select"
+               name="survey-filter"
+               options={selectOptions}
+               onChange={this.onSelectChange}
+               isClearable={true}
+            />
             <MDBRow>
-               {users.map((user, key) => (
+               {filteredUsers.map((user, key) => (
                   <UserEntry
                      entry={user}
                      key={key}

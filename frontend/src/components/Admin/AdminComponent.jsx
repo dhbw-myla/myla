@@ -1,17 +1,15 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import './Admin.css';
 import CreateUserCard from './CreateUserCard';
 import RegisterKeyCard from './RegisterKeyCard';
 import ShowUsersCard from './ShowUsersCard';
 
-import './Admin.css';
-
 class AdminComponent extends Component {
    constructor(props) {
       super(props);
-      this.state = {};
+      this.state = { selectOptions: {} };
    }
 
    render() {
@@ -26,9 +24,9 @@ class AdminComponent extends Component {
                </MDBCol>
             </MDBRow>
             <MDBRow>
-               <ShowUsersCard />
                <RegisterKeyCard />
                <CreateUserCard />
+               <ShowUsersCard />
             </MDBRow>
          </MDBContainer>
       );

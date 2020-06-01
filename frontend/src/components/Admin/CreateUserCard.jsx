@@ -24,7 +24,7 @@ class CreateUserCard extends Component {
                cardIcon: 'users',
                cardTitle: 'Create New User',
                cardText: 'Create a new user.',
-               fadingType: 3,
+               fadingType: 2,
                navLinks: [{ to: '#', onClick: this.handleCreateNewUser, buttonText: 'Create' }],
             }}
          />

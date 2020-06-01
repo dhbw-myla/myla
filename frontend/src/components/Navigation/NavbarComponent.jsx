@@ -87,7 +87,7 @@ class NavbarComponent extends Component {
                      </MDBNavItem> */}
                      <MDBNavItem>
                         <MDBNavLink onClick={this.closeCollapse('mainNavbarCollapse')} to={'/' + DASHBOARD}>
-                           <strong>Active Surveys</strong>
+                           <strong>Published Surveys</strong>
                         </MDBNavLink>
                      </MDBNavItem>
                      <MDBNavItem>

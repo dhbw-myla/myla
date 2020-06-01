@@ -49,10 +49,10 @@ class Account extends Component {
                            content={{
                               isFar: false,
                               cardIcon: 'cubes',
-                              cardTitle: 'Active Surveys',
+                              cardTitle: 'Published Surveys',
                               cardText: 'See your active surveys.',
                               fadingType: 2,
-                              navLinks: [{ to: '/' + DASHBOARD, buttonText: 'Show Active Surveys' }],
+                              navLinks: [{ to: '/' + DASHBOARD, buttonText: 'Show Published Surveys' }],
                            }}
                         />
                         <Card

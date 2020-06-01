@@ -42,7 +42,7 @@ class RegisterKeyCard extends Component {
                cardIcon: 'key',
                cardTitle: 'Edit Register Key',
                cardText: 'See current register key or edit the key.',
-               fadingType: 2,
+               fadingType: 1,
                navLinks: [
                   { to: '#', onClick: this.showRegisterKey, buttonText: 'Show' },
                   { to: '#', onClick: this.editRegisterKey, buttonText: 'Edit' },

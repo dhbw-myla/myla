@@ -1,7 +1,8 @@
-import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink } from 'mdbreact';
+import { MDBAnimation, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon, MDBNavLink, MDBTooltip } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
-
+import { PATH_SERVER_URL } from '../../api/constants';
 import { getFading } from '../../util/util';
+import { SURVEY_PARTICIPATE } from '../constants';
 import './card.css';
 
 class Card extends Component {
@@ -9,7 +10,24 @@ class Card extends Component {
       if (surveyCode) {
          return (
             <span>
-               <br /> <code style={{ color: '#e30613', fontSize: '1rem', fontWeight: 'bold', letterSpacing: '0.2rem' }}>{surveyCode}</code>
+               <br /> <code className="survey_code">{surveyCode}</code>
+               <MDBIcon
+                  className="specialIcons material-tooltip-main"
+                  icon="clipboard"
+                  onClick={() => navigator.clipboard.writeText(PATH_SERVER_URL + SURVEY_PARTICIPATE + surveyCode)}
+               />
+            </span>
+         );
+      }
+      return null;
+   };
+
+   displayCardCount = (cardCount) => {
+      if (cardCount) {
+         return (
+            <span>
+               <br />
+               Times published: <span className="survey_code">{cardCount}</span>
             </span>
          );
       }
@@ -28,19 +46,34 @@ class Card extends Component {
    };
 
    render() {
-      const { isFar, cardIcon, cardTitle, cardSubtitle, cardText, surveyCode, fadingType, navLinks, specialIcons } = this.props.content;
+      const {
+         isFar,
+         cardIcon,
+         cardTitle,
+         cardSubtitle,
+         cardText,
+         surveyCode,
+         cardCount,
+         fadingType,
+         navLinks,
+         specialIcons,
+      } = this.props.content;
 
       const handleSpecialIcons = () => {
          return specialIcons
             ? specialIcons.map((specialIcon) => {
                  return (
                     <Fragment>
-                       <MDBIcon
-                          className={'specialIcons ' + (specialIcon.visible ? '' : 'card_hidden_icon')}
-                          icon={specialIcon.icon}
-                          onClick={specialIcon.onClick}
-                       />
-                       <span>{specialIcon.count}</span>
+                       <MDBTooltip domElement tag="span" placement="top">
+                          <span>
+                             <MDBIcon
+                                className="specialIcons material-tooltip-main"
+                                icon={specialIcon.icon}
+                                onClick={specialIcon.onClick}
+                             />
+                          </span>
+                          <span>{specialIcon.title}</span>
+                       </MDBTooltip>
                     </Fragment>
                  );
               })
@@ -61,9 +94,11 @@ class Card extends Component {
                         {cardText}
                         <br />
                         {this.displaySurveyCode(surveyCode)}
+                        {this.displayCardCount(cardCount)}
                      </MDBCardText>
-                     {navLinks.map((navLink) => (
+                     {navLinks.map((navLink, index) => (
                         <MDBNavLink
+                           key={index}
                            tag="button"
                            to={navLink.to}
                            color="mdb-color"

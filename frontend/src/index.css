@@ -54,6 +54,7 @@
    color: rgba(227, 6, 19, 0.9);
    background-color: transparent;
    border: 1px solid rgba(227, 6, 19, 0.5);
+   margin: 0.5rem;
 }
 
 .btn-inside-padding {
@@ -106,4 +107,12 @@ body {
 
 .md-form input[type='text']:not(.browser-default):not([readonly]):focus + label {
    color: #e30613;
+}
+
+/* Select bar on survey masters and published surveys */
+.css-1pahdxg-control,
+.css-1pahdxg-control:hover,
+.css-1pahdxg-control:focus {
+   border-color: #e30613 !important;
+   box-shadow: 0 0 0 1px #e30613 !important;
 }

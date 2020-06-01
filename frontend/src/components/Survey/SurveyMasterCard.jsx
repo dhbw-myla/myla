@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { createSurveyBasedOnMaster, deleteSurveyMaster, getSurveyMaster } from '../../api/survey';
+import { createSurveyBasedOnMaster, deleteSurveyMaster, getSurveyMaster, createSurveyMaster } from '../../api/survey';
 import { getStoredUser } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import Card from '../Card/Card';
@@ -50,6 +50,22 @@ class SurveyMasterCard extends Component {
       }
    };
 
+   copySurvey = async (survey) => {
+      const resObj = await getSurveyMaster(getStoredUser(), survey.survey_master_id);
+      if (resObj && resObj.status === 200) {
+         const surveyjs = resObj.payload.surveyjs;
+         const resObj2 = await createSurveyMaster(getStoredUser(), surveyjs);
+         if (resObj2 && resObj2.status === 201) {
+            swalHelper.success('Survey copied!');
+            this.props.loadSurveys();
+         } else {
+            swalHelper.error('ERROR!', 'Survey not copied.');
+         }
+      } else {
+         swalHelper.error('ERROR!', 'Survey not copied.');
+      }
+   };
+
    publishSurvey = async (surveyMasterId) => {
       // const surveyStart = new Date();
       // const surveyEnd = new Date();
@@ -67,7 +83,7 @@ class SurveyMasterCard extends Component {
          if (resObj && resObj.status === 201) {
             swalHelper.success(
                'Survey created!',
-               "It's now live for 7 days with code: <br><br> <code style='color:#e30613; font-size: 1.5rem; font-weight: bold; letter-spacing: 0.4rem;'>" +
+               "It's now live with code: <br><br> <code style='color:#e30613; font-size: 1.5rem; font-weight: bold; letter-spacing: 0.4rem;'>" +
                   resObj.payload.surveyCode +
                   '</code>'
             );
@@ -86,8 +102,27 @@ class SurveyMasterCard extends Component {
       const { infos } = this.props;
       const { survey, type } = infos;
 
-      const editIcon = { id: 'editIcon', icon: 'edit', onClick: () => this.modifySurvey(survey.survey_master_id), visible: true };
-      const trashIcon = { id: 'trashIcon', icon: 'trash', onClick: () => this.deleteSurvey(survey.survey_master_id), visible: true };
+      const editIcon = {
+         id: 'editIcon',
+         icon: 'edit',
+         onClick: () => this.modifySurvey(survey.survey_master_id),
+         title: 'Edit this survey',
+      };
+      const trashIcon = {
+         id: 'trashIcon',
+         icon: 'trash',
+         onClick: () => this.deleteSurvey(survey.survey_master_id),
+         title: 'Delete this survey',
+      };
+      const publishedIcon = {
+         id: 'count',
+         icon: 'id-card',
+         onClick: () => this.handleToResults(survey.survey_master_id, survey.number_of_surveys),
+         title: 'Go to published versions of this survey',
+      };
+      const copyIcon = { id: 'copyIcon', icon: 'copy', onClick: () => this.copySurvey(survey), title: 'Copy this survey' };
+
+      const specialIcons = survey.number_of_surveys === '0' ? [editIcon, copyIcon, trashIcon] : [copyIcon, publishedIcon];
 
       const content = {
          isFar: false,
@@ -96,23 +131,9 @@ class SurveyMasterCard extends Component {
          cardText: survey.description,
          fadingType: type,
          navLinks: [{ to: '#', onClick: () => this.publishSurvey(survey.survey_master_id), buttonText: 'Publish Survey' }],
-         specialIcons: [
-            editIcon,
-            trashIcon,
-            {
-               id: 'count',
-               icon: 'id-card',
-               onClick: () => this.handleToResults(survey.survey_master_id, survey.number_of_surveys),
-               count: survey.number_of_surveys,
-               visible: true,
-            },
-         ],
+         specialIcons: specialIcons,
+         cardCount: survey.number_of_surveys,
       };
-
-      if (survey.number_of_surveys !== '0') {
-         content.specialIcons[0].visible = false;
-         content.specialIcons[1].visible = false;
-      }
 
       return <Card content={content} />;
    }

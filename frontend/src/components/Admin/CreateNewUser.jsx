@@ -1,5 +1,6 @@
 import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import validator from 'validator';
 import { createUser } from '../../api/admin';
 import { getStoredUser } from '../../auth/verifyPw';
@@ -30,13 +31,16 @@ class CreateNewUser extends Component {
       const shouldCreateNewUser = await swalHelper.question(`Create new user ${newUsername}?`, null, 'Yes', 'No', true);
       if (shouldCreateNewUser) {
          const resObj = await createUser(getStoredUser(), newUsername, newPassword);
-         resObj && resObj.status === 201
-            ? swalHelper.successTimer(
-                 `New user being created!`,
-                 `New user with username ${newUsername} is being created.`,
-                 'User has been created!'
-              )
-            : swalHelper.error(resObj.error || resObj.message);
+         if (resObj && resObj.status === 201) {
+            swalHelper.successTimer(
+               `New user being created!`,
+               `New user with username ${newUsername} is being created.`,
+               'User has been created!'
+            );
+            this.props.history.push(`/${ADMIN}`);
+         } else {
+            swalHelper.error(resObj.error || resObj.message);
+         }
       } else {
          swalHelper.warning(`User ${newUsername} was not created!`);
       }
@@ -75,7 +79,7 @@ class CreateNewUser extends Component {
                            <div className="fg-dhbw-links">
                               <MDBNav>
                                  <MDBNavItem>
-                                    <MDBNavLink activate to={'/' + ADMIN} className="fg-dhbw-red">
+                                    <MDBNavLink activate="true" to={'/' + ADMIN} className="fg-dhbw-red">
                                        <MDBIcon icon="backward" className="fg-dhbw-icon" />
                                        Back
                                     </MDBNavLink>
@@ -92,4 +96,4 @@ class CreateNewUser extends Component {
    }
 }
 
-export default CreateNewUser;
+export default withRouter(CreateNewUser);

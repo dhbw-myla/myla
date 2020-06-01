@@ -6,6 +6,8 @@ import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import { getSurveyBySurveyCode, submitSurvey } from '../../api/interaction';
 import * as swalHelper from '../../util/swalHelper';
+import { setSurveyCodeToStorage, verifyFirstAccess } from '../../util/util';
+import { SURVEY_PARTICIPATE } from '../constants';
 
 Survey.StylesManager.applyTheme('default');
 
@@ -37,48 +39,48 @@ class SurveyDetails extends Component {
 
    // TODO implement API
    onComplete = async (result) => {
-      const { surveyToParticipate } = this.props.history.location;
-      // survey meta info surveyjs for use
-      const { survey } = surveyToParticipate;
-
-      const resObj = await submitSurvey(result.data, survey.survey_code);
+      const surveycode = this.props.location.pathname.replace('/' + SURVEY_PARTICIPATE, '');
+      const resObj = await submitSurvey(result.data, surveycode);
 
       if (resObj && resObj.status === 200) {
          swalHelper.success('Survey send!', 'Thank you for participating in this survey.', true);
+         setSurveyCodeToStorage(surveycode);
          this.props.history.replace('/');
       } else {
          return swalHelper.error('Survey could not be send!', 'Please try again in some minutes.');
       }
    };
 
-   // {
-   // "answers": {
-   //   "question_name_1": "answer1",
-   //   "question_name_2": "answer2",
-   //   "question_name_3": [
-   //      "answer3_1",
-   //      "answer3_2"
-   //    ],
-   //    ...
-   //    }
-   //  }
-
-   savePDF = (model) => {
-      // const { survey } = this.props;
-      // const surveyPDF = new SurveyPDF.SurveyPDF(survey);
-      // surveyPDF.data = model.data;
-      // surveyPDF.save();
-   };
-
-   componentDidMount() {
-      const { surveyToParticipate } = this.props.history.location;
-      // survey meta info surveyjs for use
-
-      if (surveyToParticipate) {
-         const { survey, surveyjs } = surveyToParticipate;
+   loadSurvey = async (surveycode) => {
+      const resObj = await getSurveyBySurveyCode(surveycode);
+      if (resObj && resObj.status === 200) {
+         const { survey, surveyjs } = resObj.payload;
          this.setState({ survey, surveyjs });
       } else {
-         const surveycode = this.props.location.pathname.replace('/survey/participate/', '');
+         this.getSurveyCodeFromUrl();
+      }
+      if (resObj && resObj.status === 200) {
+         swalHelper.successTimer('Loading Survey!', 'Loading Survey with code: ' + surveycode, 'Survey loaded.');
+      } else {
+         swalHelper.error('Could not find Survey!', 'Surveycode not found.');
+      }
+   };
+
+   componentDidMount = async () => {
+      const surveycode = this.props.location.pathname.replace('/' + SURVEY_PARTICIPATE, '');
+      // FIXME: await is needed to work. dont know why.
+      if (await verifyFirstAccess(surveycode)) {
+         this.loadSurvey(surveycode);
+      } else {
+         swalHelper.error('Cannot participate twice.', 'You already participated in this survey!');
+         this.props.history.replace('/');
+      }
+   };
+
+   getSurveyCodeFromUrl = () => {
+      const surveycode = this.props.location.pathname.replace('/' + SURVEY_PARTICIPATE, '');
+
+      if (verifyFirstAccess(surveycode)) {
          getSurveyBySurveyCode(surveycode).then((response) => {
             if (response && response.status === 200) {
                const { survey, surveyjs } = response.payload;
@@ -88,8 +90,14 @@ class SurveyDetails extends Component {
                swalHelper.error('Could not find Survey!', 'Surveycode not found.');
             }
          });
+      } else {
+         swalHelper.error('Cannot participate twice.', 'You already participated in this survey!');
       }
-   }
+   };
+
+   componentWillReceiveProps = () => {
+      this.getSurveyCodeFromUrl();
+   };
 
    render() {
       const { survey, surveyjs } = this.state;

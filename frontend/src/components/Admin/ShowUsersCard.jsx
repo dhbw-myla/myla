@@ -25,7 +25,7 @@ class ShowUsersCard extends Component {
                cardIcon: 'users',
                cardTitle: 'Show Users',
                cardText: 'See all users.',
-               fadingType: 1,
+               fadingType: 3,
                navLinks: [{ to: '#', onClick: this.showUsers, buttonText: 'Show' }],
             }}
          />

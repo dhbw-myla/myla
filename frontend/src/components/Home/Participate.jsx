@@ -31,7 +31,7 @@ class Participate extends Component {
          if (resObj && resObj.status === 200) {
             // 200 {survey: { ... }, questions: [ { ... } ] }
             this.props.history.push({
-               pathname: '/' + SURVEY_PARTICIPATE + '/' + surveycode,
+               pathname: '/' + SURVEY_PARTICIPATE + surveycode,
                surveyToParticipate: resObj.payload,
             });
             swalHelper.successTimer('Loading Survey!', 'Loading Survey with code: ' + surveycode, 'Survey loaded.');
@@ -65,13 +65,13 @@ class Participate extends Component {
                         <div className="fg-dhbw-links">
                            <MDBNav>
                               <MDBNavItem>
-                                 <MDBNavLink activate to={'/' + LOGIN} className="fg-dhbw-red">
+                                 <MDBNavLink activate="true" to={'/' + LOGIN} className="fg-dhbw-red">
                                     <MDBIcon icon="sign-in-alt" className="fg-dhbw-icon" />
                                     Login
                                  </MDBNavLink>
                               </MDBNavItem>
                               <MDBNavItem>
-                                 <MDBNavLink activate to={'/' + SIGNUP} className="fg-dhbw-red">
+                                 <MDBNavLink activate="true" to={'/' + SIGNUP} className="fg-dhbw-red">
                                     <MDBIcon icon="user-plus" className="fg-dhbw-icon" />
                                     Sign Up
                                  </MDBNavLink>

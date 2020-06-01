@@ -2,6 +2,7 @@
    margin-left: auto;
    margin-right: auto;
    width: 30rem;
+   max-height: 30rem;
    opacity: 0.95;
    align-self: center;
 }
@@ -24,7 +25,6 @@
    background-image: url(../../assets/DHBWIntro.jpg);
 }
 */
-
 
 /* if you want the background everywhere*/
 body {

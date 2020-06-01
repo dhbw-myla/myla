@@ -1,3 +1,10 @@
 .card_hidden_icon {
-    visibility: hidden;
+   visibility: hidden;
+}
+
+.survey_code {
+   color: #e30613;
+   font-size: 1rem;
+   font-weight: bold;
+   letter-spacing: 0.2rem;
 }

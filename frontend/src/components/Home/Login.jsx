@@ -2,12 +2,10 @@ import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbre
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
-
 import { login } from '../../api/auth';
-import { setUserToStorage } from '../../auth/verifyPw';
+import { setUserToStorage, setNewSessionId } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import { ACCOUNT_PASSWORD_CHANGE, DASHBOARD } from '../constants';
-
 import './startpage.css';
 
 class Login extends Component {
@@ -41,6 +39,7 @@ class Login extends Component {
          if (resObj && resObj.status === 200) {
             swalHelper.success('Welcome!', 'Login was successful.', true);
             setUserToStorage(resObj.payload);
+            setNewSessionId(resObj.payload.sessionId);
             if (resObj.payload.isPasswordChangeRequired) {
                this.props.history.push({ pathname: '/' + ACCOUNT_PASSWORD_CHANGE, password });
                swalHelper.warning('Password change required!', 'A password reset was issued to your account. Please update your password.');
@@ -89,7 +88,7 @@ class Login extends Component {
                         <div className="fg-dhbw-links">
                            <MDBNav>
                               <MDBNavItem>
-                                 <MDBNavLink activate to={'/'} className="fg-dhbw-red">
+                                 <MDBNavLink activate="true" to={'/'} className="fg-dhbw-red">
                                     <MDBIcon icon="backward" className="fg-dhbw-icon" />
                                     Back
                                  </MDBNavLink>

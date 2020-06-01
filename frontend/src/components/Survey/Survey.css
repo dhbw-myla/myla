@@ -12,7 +12,7 @@
 }
 
 .specialIcons {
-   margin-left: 1rem;
+   margin: 0.5rem;
 }
 .specialIcons:hover {
    color: #e30613;
@@ -48,4 +48,17 @@
 
 .surveyjs .sv_main .sv_body {
    border-top: 0px !important;
+}
+
+.sv_main.sv_default_css .sv_q_rating_item.active .sv_q_rating_item_text {
+   background-color: #e30613 !important;
+   border-color: #e30613 !important;
+}
+
+.sv_main .sv_q_rating_item .sv_q_rating_item_text:hover {
+   border: 1px solid #e30613 !important;
+}
+
+.sv_main.sv_default_css textarea:focus {
+   border-color: #e30613 !important;
 }

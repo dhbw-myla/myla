@@ -1,6 +1,6 @@
 import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import validator from 'validator';
 import { changePassword } from '../../api/auth';
 import { getStoredUser, setNewSessionId, setUserToStorage, verifyPassword } from '../../auth/verifyPw';
@@ -36,7 +36,7 @@ class ChangePassword extends Component {
             setNewSessionId(resObj.payload.sessionId);
 
             swalHelper.success('Password changed!', 'Your password has been updated!', true);
-            this.props.history.push(`/${MY_ACCOUNT}`);
+            this.props.handleOnClickUserProfil();
          } else {
             swalHelper.error('ERROR!', 'Password has not been changed!');
          }
@@ -54,6 +54,7 @@ class ChangePassword extends Component {
 
    render() {
       const { newPassword, repeatPassword, oldPassword } = this.state;
+
       return (
          <div className="background">
             <div className="container">
@@ -96,7 +97,7 @@ class ChangePassword extends Component {
                            <div className="fg-dhbw-links">
                               <MDBNav>
                                  <MDBNavItem>
-                                    <MDBNavLink activate to="#" className="fg-dhbw-red" onClick={this.props.handleOnClickUserProfil}>
+                                    <MDBNavLink activate="true" to="#" className="fg-dhbw-red" onClick={this.props.handleOnClickUserProfil}>
                                        <MDBIcon icon="backward" className="fg-dhbw-icon" />
                                        Back
                                     </MDBNavLink>

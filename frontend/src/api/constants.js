@@ -1,5 +1,6 @@
 // Base
 export const PATH_SERVER = 'http://localhost/';
+export const PATH_SERVER_URL = 'http://localhost:3000/';
 export const PATH_API = 'api/';
 export const PATH_BASE_URL = PATH_SERVER + PATH_API;
 

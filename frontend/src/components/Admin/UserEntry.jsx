@@ -21,7 +21,7 @@ class UserEntry extends Component {
             : swalHelper.error(resObj.error || resObj.message);
          this.props.loadUsers();
       } else {
-         swalHelper.warning(`User ${username} was not promoted to admin!`);
+         swalHelper.warning(`Promotion stopped!`, `${username} has not been promoted to admin!`);
       }
    };
 
