@@ -1,11 +1,18 @@
 % !TEX root =  ../technisch.tex
 \subsection{Docker}
 
+Bei heutiger Softwareentwicklung spielt die Art und Weise, wie eine Software bereitgestellt wird, eine zentrale Rolle. 
+Gerade bei der Entwicklung einer verteilten Architektur wie die der Microservices\footnote{siehe \ref{ch:microservice}} ist dies besonders wichtig, da die einzelnen Schritte dieses Prozesses weitestgehend automatisch durchgeführt werden sollen. 
+Weiterhin benötigen Microservices in der Regel nur sehr wenige Hardware-Ressourcen und arbeiten autonom. 
+Aus diesen Gründen ist es sinnvoll die vorhandenen Ressourcen eines Servers sinnvoll zu verteilen und gleichzeitig eine isolierte Umgebung für die einzelnen Microservices zu schaffen.
+
+Hierbei hat sich in den letzten Jahren der Begriff bzw. die Technologie Docker besonders etabliert.
+Docker ist eine von dem Unternehmen Docker Inc. entwickelte Software, welche eine Art der Container-Virtualisierung ermöglicht. 
+Die Software baut dabei auf eine Vielzahl von Open-Source-Projekten auf.
+
+
 % PLAGIAT
 
-\textcolor{red}{\textbf{DER TEXT MUSS NOCH PLAGIATSFREI GEMACHT WERDEN!}}
-
-Docker ist eine von dem Unternehmen Docker Inc. entwickelte Software, welche eine Art der Container-Virtualisierung ermöglicht. 
 Die Container-Virtualisierung ist eine leichtgewichtige und ressourcenschonende Variante der Virtualisierung von Arbeitsumgebungen für Anwendungen. 
 Im Gegensatz zu virtuellen Maschinen bilden Container kein eigenständiges System ab, welches über virtuelle Hardware und ein vollständiges Betriebssystem verfügt. 
 Vielmehr stellen sie eine isolierte Umgebung für eine spezifische Anwendung dar, welche die Ressourcen des zugrundeliegenden Systems verwenden. 
