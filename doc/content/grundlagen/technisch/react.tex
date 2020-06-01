@@ -1,2 +1,66 @@
 % !TEX root =  ../technisch.tex
 \subsection{React}
+\label{ssec:React}
+
+Das Front-End beschreibt die Darstellung einer Webseite im Browser. Die wohl bekannteste Sprache, um eine Webseite zu erstellen ist die \ac{HTML} in Verbindung mit einem \ac{CSS}, welches zum Gestalten der Webseite genutzt wird. Das \ac{CSS} wird in ein eigene Datei ausgelagert, um eine bessere Übersicht und Lesbarkeit im \ac{HTML}-Code zu bekommen. 
+
+Eine heutige Front-End-Entwicklung findet häufig mit sog. Frameworks oder Libraries statt. 
+Diese basieren aber auf \ac{HTML} und \ac{JS}. 
+Der Unterschied zwischen einem Framework und einer Librarie lässt sich wie folgt erklären: Ein Framework besteht aus mehreren Libraries wohingegen eine Librarie eine Sammlung von Klassen und Funktionen darstellt.\autocite{Libary_vs_Framework} Der Informatiker Ralph Johnson beschreibt ein Framework so: 
+%
+\begin{quote}
+	\enquote{Das Framework stellt eine wiederverwendbare, gemeinsame Struktur für Anwendungen zur Verfügung. Entwickler binden das Framework in ihre eigenen Anwendungen ein und erweitern es so, dass es ihre bestimmten Anforderungen erfüllt.}
+	\begin{center}{\textit{Ralph Johnson gemeinsam mit Brian Foote}}\end{center}
+\end{quote}
+%
+
+Das \ac{DOM} bildet die Schnittstelle zwischen \ac{HTML} und \ac{JS}. Alle \ac{HTML}-Elemente werden in Objekte umgewandelt. 
+D.h., dass der Browser nie mit den eigentlichen \ac{HTML}-Code arbeitet, sondern mit umgewandelten \ac{DOM}-Objekten. 
+Jeder Tag, der in \ac{HTML} geschrieben wird, wird im \ac{DOM} als Objekt dargestellt. 
+Alle Objekte sind in einer sog. Baumstruktur angeordnet und als Eltern\&Kind-Prinzip bezeichnet. 
+Man kann dies gut anhand der \ac{HTML}-Struktur erkennen (siehe Quelltext \vref{lst:ParentAndChild}). 
+Das Body-Objekt ist ein Kind vom Head-Objekt. Jedes Eltern-Objekt kann mehrere Kinder haben und diese wiederum mehrere Kinder. 
+\begin{lstlisting}[caption={Eltern\&Kind-Prinzip},label={lst:ParentAndChild},language=HTML, showstringspaces={false}]
+<!DOCTYPE HTML">
+ <html>  
+   <head> <!-- Eltern -->
+    <title>Demo Eltern und Kind Prinzip</title> 
+   </head>
+   <body> <!-- Kind -->
+    many code
+   </body>
+ </html>
+\end{lstlisting}
+
+
+% https://books.google.de/books?id=2zrCDwAAQBAJ&printsec=frontcover&dq=react+hartmann&hl=de&sa=X&ved=0ahUKEwirn-u66uDpAhVExKYKHefEAPsQ6AEIKjAA#v=onepage&q=react%20hartmann&f=false 
+React\footnote{\url{https://reactjs.org}} ist ein solches Framework. Es ist eine Open-Source-JavaScript-Bibliothek mit deren Hilfe man sog. \acfp{SPA} erstellen kann.\autocite[ ][]{hartmann2019react} 
+Das Hauptaugenmerkt von React ist der komponentenbasierte Aufbau. Eine Komponente stellt den Zustand der \acs{SPA} dar. 
+Sie repräsentiert einen fachlichen Teil wie z.B. ein \enquote{einfaches} Eingabefeld \jinline|(Input)| oder auch komplexere Komponenten wie ein Formular.
+Durch den komponentenbasierten Aufbau kann React nicht nur für Webanwendungen sondern auch für iOS oder auch Android entwickelt werden. 
+Quelltext \vref{lst:ReactKomponente} stellt eine Begrüßungs-Komponente dar, die einen Namen als Parameter \jinline|(props)| übergeben bekommt. 
+
+\begin{lstlisting}[caption={React-Komponente: Greeting},label={lst:ReactKomponente},language=HTML, showstringspaces={false}]
+	import React from 'React'
+	
+	export const greeting = (name) => {
+		return <h3>Hello {name}</h3>
+	}
+\end{lstlisting}
+
+Dieses Vorgehen wird bei React als \emph{deklarative Komponente} bezeichnet und deshalb oft auch unter dem Begriff \texttt{UI as a Function} wiederzufinden. \autocite[ ][]{hartmann2019react} 
+Wird eine Komponente in der \acs{SPA} geladen, wird der \acs{DOM} angepasst. 
+Hierbei werden nur die tatsächlichen Änderungen vorgenommen und nicht die komplette Seite geladen. \newline
+Komponenten können einen internen Zustand haben \jinline|state| oder über externe Zustände \jinline|(properties)| verändert werden. So kann z.B. ein Komponente Account einen \jinline|state| 
+
+Wie in Quelltext \vref{lst:ReactKomponente} zu erkennen ist, hat die Komponente im Return-Statement eine \jinline|{ }|. 
+Diese ist eine typisches React-Syntax. 
+I.d.R. haben diese Komponenten die Dateiendung \acf{JSX}. 
+Sie wird empfohlen bei der Verwendung von React. 
+\acs{JSX} ist eine Erweiterung der \emph{Grammatik} und sorgt dafür, die interne Struktur zu ordnen und später wieder in \acs{HTML} darzustellen.\autocite[ ][]{WasIstJSX} 
+
+Ein Feature von React ist das Erstellen von sog. \acfp{PWA}. 
+Durch solch eine \acs{PWA} ist es möglich, Anwendungen auf dem \emph{Homescreen} seines Smartphones zu installieren. 
+Dies sieht dann aus wie ein App aus dem Play- oder Apple-Store. 
+Solche \acsp*{PWA} können offlinefähig sein, sodass sie auch verwendet werden könnne, wenn der Benutzer keine Internetverbindung hat. \autocite[ ][]{hartmann2019react} 
+

@@ -1,2 +1,19 @@
 % !TEX root =  ../technisch.tex
 \subsection{Postgre\acs{SQL}}
+
+\subsection*{Definition}
+\label{ssec:Datenbanken_Definition}
+Gemäß Steiner ist eine Datenbank eine selbstständige und auf Dauer ausgelegte Datenorganisation, welche einen Datenbestand sicher und flexibel verwalten kann. Sie soll dem Benutzer einen einfachen Zugriff auf die Daten bieten und muss verhindern, dass ein Benutzer Daten manipulieren und einsehen kann, für die er keine Zugriffsrechte hat. Der Benutzer muss die Möglichkeit haben die Daten anzupassen, ohne dass Anwendungsprogramme angepasst werden müssen.\autocite[Vgl.][S.5 f.]{Book_DB_2} 
+
+\subsection*{Bestandteile}
+\label{ssec:Datenbanken_Bestandteile}
+Eine \acf{DB} besteht aus zwei Komponenten: dem \acf{DBMS} und der \acs{DB} selbst. 
+Das \ac{DBMS} ist für die logische Datenverwaltung der \acs{DB} verantwortlich, die aus einer oder mehreren Datenbanken bestehen kann. 
+Programme können nur über bestimmte Schnittstellen des \acs{DBMS} auf die Datenbanken zugreifen z.B. mittels \acs{SQL}.\autocite{Book_DB_1}\autocite{Book_DB_2}\\
+Der Vorteil über ein normiertes Interface eines \acs{DBMS} auf die \acs{DB} zuzugreifen liegt darin, dass der Programmierer keine Kenntnis über die innerliche physikalische Struktur der Daten haben muss. 
+Dies übernimmt das \acs{DBMS}.\autocite[vgl. S.4][]{Schicker2017DatenbankenSQL} \\
+Befehle, die in einer \acs{SQL}-Datenbank zur Verfügung stehen sind u.a. Select zum Auswählen eines oder mehreren Datensätzen, Update zum Ändern eines Datensatzes, Insert zum Einfügen eines neuen Datensatzen und Delete zum Löschen eines oder mehreren Datensätzen. \\
+Typischerweise sind in \acs{SQL} die Daten tabellarisch gespeichert. 
+Eine Zeile in einer \acs{DB} wird als Tupel und eine Spalte als Attribut bezeichnet.\autocite[vgl. S.4][]{Schicker2017DatenbankenSQL}
+Ein Superschlüssel besteht aus einem oder mehreren Attributen und ist in jeder Relation einmalig und zwingend notwendig ist. Ein Primary-Key, der in einer anderen Relation benutzt wird heißt Fremdschlüssel. Mit ihm lassen sich verschiedene Beziehungen zwischen den Relationen setzen. Wichtig ist hierbei, dass der ... nur die Werte haben kann, die er auch in seiner Relation besitzt. Ein Beispiel für die Verwendung eines Primärschlüssels wäre z.B. die Kundennummer, da sie einzigartig ist. Ein Superschlüssel besteht aus mehreren einzelnen Attributen und identifiziert jedes Tupel eindeutig. Ein Schlüsselkandidat ist ein Attribut, dass aus mehreren einzelnen Attributen besteht, falls er ein Superschlüssel und minimal ist, was bedeutet, \enquote{dass beim Weglassen eines einzelnen Attributs eines zusammengesetzten
+Attributs die Eindeutigkeit verloren geht}.\autocite[vgl. S.31 f.][]{Schicker2017DatenbankenSQL} s
