@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, withRouter } from 'react-router-dom';
 
 // Components
 import Routes from './Routes';
@@ -17,7 +17,7 @@ const showNavbarComponent = (updateRoot) => {
 
 const addMarginToPageBottom = () => {
    if (verifySession()) {
-      return { height: '100vh', marginBottom: '6rem' };
+      return { height: '100vh', marginBottom: '22rem' };
    }
 
    return { height: '94vh' };
@@ -45,4 +45,4 @@ class App extends Component {
    }
 }
 
-export default App;
+export default withRouter(App);

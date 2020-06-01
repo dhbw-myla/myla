@@ -22,12 +22,24 @@ class Card extends Component {
       return null;
    };
 
-   displayCardCount = (cardCount) => {
-      if (cardCount) {
+   displayCardCount = (cardCount, countText) => {
+      if (cardCount && countText) {
          return (
             <span>
                <br />
-               Times published: <span className="survey_code">{cardCount}</span>
+            {countText} <span className="survey_code">{cardCount}</span>
+            </span>
+         );
+      }
+      return null;
+   };
+
+   displaySurveyCount = (surveyCount, surveyText) => {
+      if (surveyCount && surveyText) {
+         return (
+            <span>
+               <br />
+            {surveyText} <span className="survey_code">{surveyCount}</span>
             </span>
          );
       }
@@ -57,6 +69,9 @@ class Card extends Component {
          fadingType,
          navLinks,
          specialIcons,
+         countText,
+         surveyText,
+         surveyCount
       } = this.props.content;
 
       const handleSpecialIcons = () => {
@@ -93,8 +108,9 @@ class Card extends Component {
                         {this.displayCardSubtitle(cardSubtitle)}
                         {cardText}
                         <br />
+                        {this.displaySurveyCount(surveyCount,surveyText)}
                         {this.displaySurveyCode(surveyCode)}
-                        {this.displayCardCount(cardCount)}
+                        {this.displayCardCount(cardCount, countText)}
                      </MDBCardText>
                      {navLinks.map((navLink, index) => (
                         <MDBNavLink

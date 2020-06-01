@@ -1,5 +1,5 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import { getUsers } from '../../api/admin';
@@ -82,32 +82,32 @@ class UsersComponent extends Component {
             <MDBRow>
                <MDBCol md="12" className="mt-4">
                   <div className="dhbw_header_margin">
-                     <h2 className="text-center my-5 font-weight-bold">Users Space</h2>
+                     <h2 className="text-center caption my-5 font-weight-bold">Users Space</h2>
                   </div>
                   <hr className="mt-5" />
+                  <Fragment>
+                     <div className="admin-back-button">{BtnDefault(this.handleBackToAdmin, 'Back to admin space')}</div>
+                     <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        name="survey-filter"
+                        options={selectOptions}
+                        onChange={this.onSelectChange}
+                        isClearable={true}
+                     />
+                     <MDBRow>
+                        {filteredUsers.map((user, key) => (
+                           <UserEntry
+                              entry={user}
+                              key={key}
+                              fadingType={(key % 3) + 1}
+                              handleOnEditUser={this.handleEditUser}
+                              loadUsers={this.loadUsers}
+                           />
+                        ))}
+                     </MDBRow>
+                  </Fragment>
                </MDBCol>
-            </MDBRow>
-            <MDBRow>
-               <div className="admin-back-button">{BtnDefault(this.handleBackToAdmin, 'Back to admin space')}</div>
-            </MDBRow>
-            <Select
-               className="basic-single"
-               classNamePrefix="select"
-               name="survey-filter"
-               options={selectOptions}
-               onChange={this.onSelectChange}
-               isClearable={true}
-            />
-            <MDBRow>
-               {filteredUsers.map((user, key) => (
-                  <UserEntry
-                     entry={user}
-                     key={key}
-                     fadingType={(key % 3) + 1}
-                     handleOnEditUser={this.handleEditUser}
-                     loadUsers={this.loadUsers}
-                  />
-               ))}
             </MDBRow>
          </MDBContainer>
       );

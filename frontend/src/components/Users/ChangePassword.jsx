@@ -1,11 +1,10 @@
 import { MDBBtn, MDBIcon, MDBInput, MDBNav, MDBNavItem, MDBNavLink } from 'mdbreact';
 import React, { Component } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import validator from 'validator';
 import { changePassword } from '../../api/auth';
 import { getStoredUser, setNewSessionId, setUserToStorage, verifyPassword } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { MY_ACCOUNT } from '../constants';
 import './changePassword.css';
 
 class ChangePassword extends Component {

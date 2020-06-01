@@ -22,7 +22,7 @@ class ResultDashboard extends Component {
 
    buildSelectOptions(surveyResults) {
       const selectOptions = [];
-      if (Object.keys(surveyResults).length === 0) {
+      if (!surveyResults || Object.keys(surveyResults).length === 0) {
          return selectOptions;
       }
 
@@ -79,9 +79,15 @@ class ResultDashboard extends Component {
       const { showSurveyResult, surveyResultToShow, filteredSurveyResults, surveyResults, filterBySurveyMaster } = this.state;
       let whatToRender;
       let title = filterBySurveyMaster ? 'Loaded Results' : 'Survey Results Dashboard';
+      let subtitle = null;
+      let numberOfParticipants = null;
+      let surveyDescription = null;
 
       if (showSurveyResult) {
+         subtitle = 'Survey Master: ' + surveyResultToShow.title;
          title = 'Survey: ' + surveyResultToShow.survey_title;
+         numberOfParticipants = 'Number of Participants: ' + surveyResultToShow.participants; 
+         surveyDescription = 'Description: ' + surveyResultToShow.description;
          whatToRender = (
             <Fragment>
                <div className="alignBackButton">
@@ -122,7 +128,7 @@ class ResultDashboard extends Component {
             <MDBRow>
                <MDBCol md="12" className="mt-4">
                   <div className="dhbw_header_margin">
-                     <h2 className="text-center my-5 font-weight-bold">{title}</h2>
+                     <h2 className="caption text-center my-5 font-weight-bold">{title}</h2>
                   </div>
                   <hr className="mt-5" />
                   {whatToRender}

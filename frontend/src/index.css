@@ -116,3 +116,7 @@ body {
    border-color: #e30613 !important;
    box-shadow: 0 0 0 1px #e30613 !important;
 }
+
+main > .container {
+   height: 100%;
+}

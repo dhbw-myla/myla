@@ -82,7 +82,7 @@ class Signup extends Component {
       return (
          <div className="background">
             <div className="container">
-               <div className="card bg-card-background text-light">
+               <div className="card dhbw_signup_card bg-card-background text-light">
                   <div className="card-body">
                      <h1 className="text-center text-dark">MyLA Sign Up</h1>
                      <form onSubmit={this.signUp}>
@@ -91,6 +91,7 @@ class Signup extends Component {
                               label="Username"
                               type="text"
                               name="username"
+                              icon="user"
                               id="username"
                               maxLength="30"
                               value={username}
@@ -100,6 +101,7 @@ class Signup extends Component {
                               label="Register Key"
                               type="text"
                               name="registerKey"
+                              icon="key"
                               maxLength="200"
                               value={registerKey}
                               onChange={this.handleOnChange}
@@ -108,6 +110,7 @@ class Signup extends Component {
                               label="Password"
                               type="password"
                               name="password"
+                              icon="key"
                               value={password}
                               className="form-control"
                               onChange={this.handleOnChange}
@@ -116,6 +119,7 @@ class Signup extends Component {
                               label="Password Repeat"
                               type="password"
                               name="passwordRepeat"
+                              icon="key"
                               maxLength="50"
                               value={passwordRepeat}
                               onChange={this.handleOnChange}

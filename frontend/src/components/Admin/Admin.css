@@ -8,6 +8,7 @@
 
 .admin-back-button {
    margin-left: 1rem;
+   margin-bottom: 2rem;
 }
 
 .btn-change-password {
@@ -17,3 +18,4 @@
 .card > body {
    text-transform: capitalize
 }
+

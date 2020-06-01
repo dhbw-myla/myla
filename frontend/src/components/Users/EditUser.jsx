@@ -36,7 +36,7 @@ class EditUser extends Component {
       return (
          <MDBContainer>
             <MDBRow>
-               <MDBCol md="12" className="text-center my-5 font-weight-bold">
+               <MDBCol md="12" className="text-center caption my-5 font-weight-bold">
                   <h2>{'Edit user: ' + username}</h2>
                   <hr className="mt-5" />
                </MDBCol>

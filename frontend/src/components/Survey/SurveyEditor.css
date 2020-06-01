@@ -40,7 +40,7 @@
 }
 
 #surveyCreatorContainer {
-   height: 101%;
+   height: 128%;
    overflow: auto;
    background-color: #f4f4f4;
 }
@@ -77,4 +77,8 @@
 
 .sjs-sortablejs-item {
    background-color: #e30613 !important;
+}
+
+.svd-vertical-container__cell-content .card{
+   max-height: 100%;
 }

@@ -13,3 +13,7 @@
 .threeButtons:last-child {
    margin-left: auto;
 }
+
+.dhbw_signup_card {
+   max-height: 100% !important;
+}

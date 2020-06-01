@@ -16,6 +16,7 @@ const SectionContainer = ({
    flexCenter,
    flexCenterVert,
    flexColumn,
+   participants
 }) => {
    const classes = classNames(
       'section',
@@ -28,16 +29,17 @@ const SectionContainer = ({
       className
    );
 
-   description = description ? <p>{description}</p> : '';
+   description = description ?<h4 className="mb-2">{description}</h4> : '';
    title = title ? <h2 className="mb-3">{title}</h2> : '';
    header = header ? <h4 className="mb-2">{header}</h4> : '';
-
+   participants = participants ? <h5 className="mb-2">Participants: {participants}</h5> : '';
    return (
       <Fragment>
          {title}
          {header}
          <MDBContainer fluid key={number} className={classes} style={style}>
             {description}
+            {participants}
             {children}
          </MDBContainer>
       </Fragment>

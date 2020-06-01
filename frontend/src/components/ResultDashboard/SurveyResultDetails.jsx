@@ -52,11 +52,12 @@ class SurveyResultDetails extends Component {
       }
 
       for (let i = minRating; i <= maxRating; i++) {
-         labels.push(i);
          if (answers[i]) {
             data.push(answers[i]);
+            labels.push(i + " (" + answers[i] + ")");
          } else {
             data.push(0);
+            labels.push(i);
          }
       }
 
@@ -159,23 +160,24 @@ class SurveyResultDetails extends Component {
    buildPieChart(question, answers) {
       let labels = [];
       let data = [];
-      debugger;
 
       if (question.choices) {
          if (question.choices.length !== labels.length) {
             for (let l in question.choices) {
-               labels.push(question.choices[l].text);
                if (answers[question.choices[l].value]) {
+                  labels.push(question.choices[l].text + ' (' + answers[question.choices[l].value] + ')');
                   data.push(answers[question.choices[l].value]);
                } else {
+                  labels.push(question.choices[l].text + ' (0)');
                   data.push(0);
                }
             }
          }
       } else {
-         labels = Object.keys(answers);
+         labels = []
          for (let a in answers) {
             data.push(answers[a]);
+            labels.push(a + " (" + answers[a] + ")")
          }
       }
 
@@ -223,6 +225,12 @@ class SurveyResultDetails extends Component {
       const { question, answers } = surveyResult;
       let chart;
       let number = key + 1;
+      let participants = 0;
+
+      debugger;
+      for(let a in answers){
+         participants += parseInt(answers[a])
+      }
 
       if (answers === undefined || Object.keys(answers).length === 0) {
          chart = 'Nothing to show... :-(';
@@ -249,7 +257,7 @@ class SurveyResultDetails extends Component {
 
       return (
          <div className="dhbw_result_background">
-            <SectionContainer number={number} title={'Question ' + number} header={question.title} noBorder={true}>
+            <SectionContainer number={number} title={'Question ' + number} header={question.title} participants={participants} noBorder={true}>
                {chart}
                <hr className="my-5" />
             </SectionContainer>
@@ -259,14 +267,30 @@ class SurveyResultDetails extends Component {
 
    render() {
       const { resultsOfSurvey, showCharts } = this.state;
+      let subtitle = null;
+      let numberOfParticipants = null;
+      let surveyDescription = null;
+      subtitle = 'Survey Master: ' + resultsOfSurvey.title;
+      numberOfParticipants = 'Number of Participants: ' + resultsOfSurvey.participants;
+      surveyDescription = resultsOfSurvey.description;
+
 
       if (!showCharts) {
          return loadingSpinner('Results are loading ...');
       } else {
          return (
             <MDBContainer>
-               <div className="dhbw_result_container"></div>
+              <div className="dhbw_result_container"></div>
+              <SectionContainer number={454} noBorder={true} className="dhbw_result_background">
+               <div className="dashboard-fg-dhbw-links">
+                  <p className="caption font-weight-bold dhbw_margin_p">{subtitle}</p>
+                  <p className="font-weight-bold caption dhbw_margin_p">{numberOfParticipants}</p>
+               </div>
+               <p className="font-weight-bold caption dhbw_margin_p">Description: </p> 
+               <p className="dhbw_margin_p">{surveyDescription}</p>
+               </SectionContainer>
                {resultsOfSurvey.questions.map((result, key) => this.buildSection(result, key))}
+
             </MDBContainer>
          );
       }

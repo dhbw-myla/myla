@@ -77,7 +77,7 @@ class SurveyDashboard extends Component {
             <MDBRow>
                <MDBCol md="12" className="mt-4">
                   <div className="dhbw_header_margin">
-                     <h2 className="text-center my-5 font-weight-bold">{this.getHeading(showSurvey)}</h2>
+                     <h2 className="text-center caption my-5 font-weight-bold">{this.getHeading(showSurvey)}</h2>
                   </div>
                   <hr className="mt-5" />
                   <Select

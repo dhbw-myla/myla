@@ -133,6 +133,7 @@ class SurveyMasterCard extends Component {
          navLinks: [{ to: '#', onClick: () => this.publishSurvey(survey.survey_master_id), buttonText: 'Publish Survey' }],
          specialIcons: specialIcons,
          cardCount: survey.number_of_surveys,
+         countText: "Times published:"
       };
 
       return <Card content={content} />;

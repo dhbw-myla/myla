@@ -18,16 +18,16 @@ ToDo's:
 * [x] users space (korrekter titel?) &rarr; Suchfunktion
 * [x] survey master &rarr; Suchfunktion
 * [x] promote to admin cancel schön machen
-* [ ] **MARTIN/ERIK**: survey master title in **results**
-* [ ] **MARTIN/ERIK**: UND DESSGRIBSCHEN
+* [x] **MARTIN/ERIK**: survey master title in **results**
+* [x] **MARTIN/ERIK**: UND DESSGRIBSCHEN
 * [x] copy survey link to clipboard (entweder package oder schnell selbst mit ein paar zeilen code und invisible input)
 * [x] store survey code in local storage after completion &rarr; show that already participated
 * [x] survey participate seite neuladen, history nicht gesetzt, complete, bei url &rarr; vielleicht in backlog
-* [ ] **MARTIN/ERIK**: in legenden in klammern die anzahl, z. B. true (2), false (4)
-* [ ] **MARTIN/ERIK**: results tailnehmärantsaal, im survey-object gibt es dann das feld `participations`
+* [x] **MARTIN/ERIK**: in legenden in klammern die anzahl, z. B. true (2), false (4)
+* [ ]  **BACK-END**: results tailnehmärantsaal, im survey-object gibt es dann das feld `participations`
 * [ ] **BACK-END**: number of survey participations
-* [ ] **MARTIN/ERIK**: pro frage nochmal summe der antworten :poop:
-* [ ] **MARTIN/ERIK**: results-ansicht: abgerundete ecken (nicht kanten!!!!!! kanten sind halt glatt!)
+* [ ] **BACK-END**: pro frage nochmal summe der antworten :poop: 
+* [x] **MARTIN/ERIK**: results-ansicht: abgerundete ecken (nicht kanten!!!!!! kanten sind halt glatt!)
 * [x] neuen user anlegen &rarr; man sollte auf admin space zurückkehren
 * [ ] :o2: register key &rarr; input type password oder type text?! -- RENE, Sascha: bleibt so.s
 * [ ] **BACK-END**: Admin erstellt Nutzer &rarr; requestPasswordChange muss true sein
