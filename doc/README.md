@@ -75,23 +75,23 @@
 | ____React                                  |                    | :red_circle: |              |              |              |              |                                                         |
 | **<u>Anforderungsanalyse</u>**             |                    |              |              |              |              |              |                                                         |
 | Ist-Analyse                                |                    |              | :red_circle: |              |              | :red_circle: |                                                         |
-| Anforderungen                              |                    |              |              |              | :question:   | :red_circle: |                                                         |
-| Abgrenzung zu Alternativen                 |                    |              |              |              | :question:   | :red_circle: |                                                         |
+| Anforderungen                              |                    |              |              |              |              | :red_circle: |                                                         |
+| Abgrenzung zu Alternativen                 |                    |              |              |              |              | :red_circle: |                                                         |
 | **<u>Konzeption</u>**                      |                    |              |              |              |              |              |                                                         |
 | Gesamtkonzept                              |                    |              |              |              |              |              |                                                         |
 | ____Architektur                            |                    |              | :red_circle: |              |              |              |                                                         |
 | ____Server                                 | :red_circle:       |              |              |              |              |              |                                                         |
 | ____Client                                 |                    | :red_circle: |              |              |              |              |                                                         |
 | Personas                                   |                    |              |              |              |              |              |                                                         |
-| ____Dozent                                 |                    |              |              |              | :question:   | :red_circle: |                                                         |
-| ____Student                                |                    |              |              |              | :question:   | :red_circle: |                                                         |
+| ____Dozent                                 |                    |              |              |              | :red_circle: | :red_circle: |                                                         |
+| ____Student                                |                    |              |              |              | :red_circle: | :red_circle: |                                                         |
 | User-Journey                               |                    | :red_circle: | :red_circle: |              |              |              | Screenshots mit Markierung + BPMN                       |
 | Bestandteile des Servers                   |                    |              |              |              |              |              |                                                         |
 | ____Datenhaltung/Datenmodell               | :red_circle:       |              |              |              |              |              |                                                         |
 | ____Schnittstelle                          | :red_circle:       |              |              |              |              |              |                                                         |
 | Client                                     |                    |              |              |              |              |              |                                                         |
-| ____Unterteilung der Gliederungsansichten  |                    | :red_circle: |              |              |              |              |                                                         |
-| ____Bestimmung von Darstellungsformen      |                    | :red_circle: |              |              |              |              |                                                         |
+| ____Unterteilung der Gliederungsansichten  |                    | :red_circle: |              | :red_circle: | :red_circle: |              |                                                         |
+| ____Bestimmung von Darstellungsformen      |                    | :red_circle: |              | :red_circle: | :red_circle: |              |                                                         |
 | Sicherheit                                 |                    |              |              |              |              |              |                                                         |
 | ____Authentifizierung                      | :white_check_mark: |              |              |              |              |              |                                                         |
 | ____Datenschutz                            | :question:         |              | :question:   |              |              |              | Beschreibung inwiefern das für das Projekt wichtig ist. |
@@ -101,9 +101,9 @@
 | ____Datenhaltung                           | :red_circle:       |              |              |              |              |              |                                                         |
 | ____Schnittstelle                          | :red_circle:       |              |              |              |              |              |                                                         |
 | Client                                     |                    |              |              |              |              |              |                                                         |
-| ____Auswahl der Visualisierungs-Bibliothek |                    | :red_circle: | :question:   | :question:   |              |              |                                                         |
-| ____Startansicht                           |                    | :red_circle: | :question:   | :question:   |              |              |                                                         |
-| ____Weitere Seiten...                      |                    | :red_circle: | :question:   | :question:   |              |              | kommt noch viel dazu.                                   |
+| ____Auswahl der Visualisierungs-Bibliothek |                    | :red_circle: | :question:   | :red_circle: | :red_circle: |              |                                                         |
+| ____Startansicht                           |                    | :red_circle: | :question:   | :red_circle: | :red_circle: |              |                                                         |
+| ____Weitere Seiten...                      |                    | :red_circle: | :question:   | :red_circle: | :red_circle: |              | kommt noch viel dazu.                                   |
 | Sicherheit                                 |                    |              |              |              |              |              |                                                         |
 | ____Zugriffskontrolle                      | :red_circle:       | :red_circle: |              |              |              |              |                                                         |
 | **<u>Fazit und Ausblick</u>**              |                    |              |              |              |              |              |                                                         |
