@@ -30,16 +30,22 @@ exports.register = function (request, response) {
                 // hashing failed
                 return responseHelper.sendInternalServerError(response, err);
             }
-            db.query('INSERT INTO users (username, password, session_id, is_admin) VALUES ($1, $2, $3, $4);',
-            [username, hash, sessionId, username==="admin"], (err, result) => {
+            db.query(`SELECT username FROM users
+                        WHERE lower(username) = lower($1)`,
+            [username], (err, result) => {
                 if (err) {
-                    // db failed
-                    if (err.code === "23505" || err.constraint === "unique_username") {
-                        return responseHelper.sendClientError(response, "Username Already Exists");
-                    }
                     return responseHelper.sendInternalServerError(response, err);
+                } else if (result.rows.length > 0) {
+                    return responseHelper.sendClientError(response, "Username Already Exists");
                 }
-                responseHelper.send(response, 201, "", { username, sessionId });
+
+                db.query('INSERT INTO users (username, password, session_id, is_admin) VALUES ($1, $2, $3, $4);',
+                [username, hash, sessionId, username.toLowerCase()==="admin"], (err, result) => {
+                    if (err) {
+                        return responseHelper.sendInternalServerError(response, err);
+                    }
+                    responseHelper.send(response, 201, "", { username, sessionId });
+                });
             });
         });
     });
@@ -49,7 +55,7 @@ exports.login = function (request, response) {
     // checks whether password is correct
     // returns session id from db or creates one if there is none
     const { username, password } = request.body;
-    db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
+    db.query('SELECT * FROM users WHERE lower(username) = lower($1);', [username], (err, dbResult) => {
         if (err || dbResult.rows.length !== 1) {
             // user not found
             return responseHelper.sendClientError(response, "Login Failed");
@@ -73,7 +79,7 @@ exports.login = function (request, response) {
                 let sessionId;
                 if (!dbSessionId ) {
                     sessionId = authHelper.createSessionId();
-                    db.query('UPDATE users SET session_id = $1 WHERE username = $2;', [sessionId, username], (err, result) => {
+                    db.query('UPDATE users SET session_id = $1 WHERE lower(username) = lower($2);', [sessionId, username], (err, result) => {
                         if (err) {
                             // db failed
                             return responseHelper.sendInternalServerError(response, err);
@@ -93,7 +99,7 @@ exports.changePassword = function (request, response) {
     // check whether old password is correct
     // updates password and generates new session id which is returned
     const { username, password, newPassword } = request.body;
-    db.query('SELECT * FROM users WHERE username = $1;', [username], (err, dbResult) => {
+    db.query('SELECT * FROM users WHERE lower(username) = lower($1);', [username], (err, dbResult) => {
         if (err) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
@@ -123,7 +129,7 @@ exports.changePassword = function (request, response) {
                                 SET password = $1,
                                     password_change_required = false,
                                     session_id = $2
-                                WHERE username = $3`,
+                                WHERE lower(username) = lower($3)`,
                     [hash, sessionId, username], (err, result) => {
                         if (err) {
                             // db failed
@@ -141,7 +147,7 @@ exports.logout = function (request, response) {
     // logs out user by removing session id from db
     // only working if logged in -> is checked in index.js/auth-check
     const { username } = request.body;
-    db.query('UPDATE users SET session_id = NULL WHERE username = $1;', [username], (err, result) => {
+    db.query('UPDATE users SET session_id = NULL WHERE lower(username) = lower($1);', [username], (err, result) => {
         if (err) {
             // db failed?
             return responseHelper.sendInternalServerError(response, err);
@@ -155,7 +161,7 @@ exports.getAllOwnSurveys = function (request, response) {
     const username = request.body.username;
     db.query(`SELECT *
                 FROM survey s JOIN (SELECT * FROM survey_master
-                                    WHERE user_id = (SELECT user_id FROM users WHERE username = $1)) sm
+                                    WHERE user_id = (SELECT user_id FROM users WHERE lower(username) = lower($1))) sm
                     ON s.survey_master_id = sm.survey_master_id
                     LEFT JOIN survey_master_group g ON g.group_id = sm.group_id
                 ORDER BY sm.survey_master_id DESC, s.survey_id DESC;`,
@@ -173,7 +179,7 @@ exports.getAllOwnSurveysForSurveyMaster = function (request, response) {
     const surveyMasterId = request.params.masterId;
     db.query(`SELECT *
                 FROM survey s JOIN (SELECT * FROM survey_master
-                                    WHERE user_id = (SELECT user_id FROM users WHERE username = $1)
+                                    WHERE user_id = (SELECT user_id FROM users WHERE lower(username) = lower($1))
                                         AND survey_master_id = $2) sm
                     ON s.survey_master_id = sm.survey_master_id
                     LEFT JOIN survey_master_group g ON g.group_id = sm.group_id
@@ -192,8 +198,8 @@ exports.getAllSurveyMasterTemplates = function (request, response) {
     const username = request.body.username;
     db.query(`SELECT u.username, sm.survey_master_id, sm.title, sm.description, sm.group_id
                 FROM survey_master sm JOIN users u ON sm.user_id = u.user_id
-                WHERE (u.username = $1 AND sm.is_template = TRUE)
-                    OR (u.username != $1 AND sm.is_public_template = TRUE)`,
+                WHERE (lower(u.username) = lower($1) AND sm.is_template = TRUE)
+                    OR (lower(u.username) != lower($1) AND sm.is_public_template = TRUE)`,
             [username], (err, result) => {
         if (err) {
             // db failed
@@ -209,8 +215,8 @@ exports.getAllQuestionTemplates = function (request, response) {
     db.query(`SELECT u.username, q.question_id, q.question_json
                 FROM question q JOIN survey_master sm ON q.survey_master_id = sm.survey_master_id
                         JOIN users u ON sm.user_id = u.user_id
-                WHERE (u.username = $1 AND q.is_template = TRUE)
-                    OR (u.username != $1 AND q.is_public_template = TRUE)`,
+                WHERE (lower(u.username) = lower($1) AND q.is_template = TRUE)
+                    OR (lower(u.username) != lower($1) AND q.is_public_template = TRUE)`,
             [username], (err, result) => {
         if (err) {
             // db failed
@@ -223,7 +229,7 @@ exports.getAllQuestionTemplates = function (request, response) {
 const checkIfGroupIdIsAllowedForUser = function (groupId, username) {
     return new Promise(resolve => {
         db.query(`SELECT * FROM users u JOIN survey_master_group g ON g.user_id = u.user_id
-                    WHERE u.username = $1 AND g.group_id = $2;`, [username, groupId], (err, result) => {
+                    WHERE lower(u.username) = lower($1) AND g.group_id = $2;`, [username, groupId], (err, result) => {
             if (err || result.rows.length !== 1) {
                 resolve(false);
             } else {
@@ -271,7 +277,7 @@ exports.getAllOwnSurveyMasters = function (request, response) {
                 FROM survey_master sm
                 LEFT JOIN survey_master_group g ON g.group_id = sm.group_id
                 LEFT JOIN survey s ON s.survey_master_id = sm.survey_master_id
-                WHERE sm.user_id = (SELECT user_id FROM users WHERE username = $1)
+                WHERE sm.user_id = (SELECT user_id FROM users WHERE lower(username) = lower($1))
                 GROUP BY sm.survey_master_id, g.group_id
                 ORDER BY sm.survey_master_id DESC;`,
             [username], (err, result) => {
@@ -311,7 +317,7 @@ exports.createSurveyMaster = async function (request, response) {
     // create SurveyMaster
     let sqlStatement = `INSERT INTO survey_master (title, description, results_visible, is_template, is_public_template, user_id`;
     if (groupId) { sqlStatement += ', group_id'; }
-    sqlStatement += `) VALUES ($1, $2, $3, $4, $5, (SELECT user_id FROM users WHERE username=$6)`;
+    sqlStatement += `) VALUES ($1, $2, $3, $4, $5, (SELECT user_id FROM users WHERE lower(username)=lower($6))`;
     if (groupId) { sqlStatement += ', $7'; }
     sqlStatement += ') RETURNING survey_master_id;';
     let args = [title, description, resultsVisible, isTemplate, isPublicTemplate, username];
@@ -349,7 +355,7 @@ exports.createSurveyMaster = async function (request, response) {
 const checkIfSurveyMasterIdIsAllowedForUser = function (surveyMasterId, username) {
     return new Promise(resolve => {
         db.query(`SELECT * FROM users u JOIN survey_master sm ON u.user_id = sm.user_id
-                    WHERE sm.survey_master_id = $1 AND u.username = $2;`, [surveyMasterId, username], (err, result) => {
+                    WHERE sm.survey_master_id = $1 AND lower(u.username) = lower($2);`, [surveyMasterId, username], (err, result) => {
             if (err || result.rows.length !== 1) {
                 resolve(false);
             } else {
@@ -381,7 +387,7 @@ exports.getSurveyMaster = async function (request, response) {
     db.query(`SELECT *
                 FROM survey_master
                 WHERE survey_master_id = $1
-                    AND user_id = (SELECT user_id FROM users WHERE username = $2);`,
+                    AND user_id = (SELECT user_id FROM users WHERE lower(username) = lower($2));`,
     [surveyMasterId, username], (err, resultSurveyMaster) => {
         if (err) {
             // db failed
@@ -429,7 +435,7 @@ function changeSurveyMasterIfNoSurvey (username, surveyMasterId, response, callb
     // check if survey master belongs to user
     db.query(`SELECT *
                 FROM survey_master sm INNER JOIN users u ON sm.user_id = u.user_id
-                WHERE u.username = $1 AND sm.survey_master_id = $2;`,
+                WHERE lower(u.username) = lower($1) AND sm.survey_master_id = $2;`,
     [username, surveyMasterId], (err, result1) => {
         if (err) {
             // db failed
@@ -447,7 +453,7 @@ function changeSurveyMasterIfNoSurvey (username, surveyMasterId, response, callb
                 // db failed
                 return responseHelper.sendInternalServerError(response, err);
             } else if (result2.rows.length > 0) {
-                return responseHelper.sendClientError(response, 400, "You Can't Delete This Survey Master Because There Are Already Surveys Based On That Master");
+                return responseHelper.sendClientError(response, 400, "You Can't Edit/Delete This Survey Master Because There Are Already Surveys Based On That Master");
             }
 
             callback();
@@ -540,7 +546,7 @@ exports.getAllOwnGroups = function (request, response) {
     const username = request.body.username;
     db.query(`SELECT g.group_id, g.name as group_name, u.username
                 FROM survey_master_group g JOIN users u ON g.user_id = u.user_id
-                WHERE u.username = $1;`, [username], (err, result) => {
+                WHERE lower(u.username) = lower($1);`, [username], (err, result) => {
         if (err) {
             // db failed
             return responseHelper.sendInternalServerError(response, err);
@@ -553,7 +559,7 @@ exports.createGroup = function (request, response) {
     const username = request.body.username;
     const { name } = request.body;
     db.query(`INSERT INTO survey_master_group (name, user_id)
-                VALUES ($1, (SELECT user_id FROM users WHERE username = $2))
+                VALUES ($1, (SELECT user_id FROM users WHERE lower(username) = lower($2)))
                 RETURNING group_id;`,
             [name, username], (err, result) => {
         if (err) {
@@ -703,7 +709,7 @@ exports.getSurveyResults = async function (request, response) {
                     INNER JOIN survey_master sm ON s.survey_master_id = sm.survey_master_id
                     INNER JOIN question q ON sm.survey_master_id = q.survey_master_id
                     INNER JOIN users u ON sm.user_id = u.user_id
-                WHERE u.username = $1 AND s.survey_id = $2;`,
+                WHERE lower(u.username) = lower($1) AND s.survey_id = $2;`,
             [username, surveyId], (err, questions) => {
         if (err) {
             // db failed
@@ -748,7 +754,7 @@ exports.getSurveyResults = async function (request, response) {
 const checkIfUserIsAdmin = function (username) {
     return new Promise(resolve => {
         db.query(`SELECT * FROM users
-                    WHERE username = $1 AND is_admin = true;`, [username], (err, result) => {
+                    WHERE lower(username) = lower($1) AND is_admin = true;`, [username], (err, result) => {
             if (err || result.rows.length !== 1) {
                 resolve(false);
             } else {
@@ -778,6 +784,15 @@ exports.createUser = async function (request, response) {
     const isAdmin = await checkIfUserIsAdmin(username);
     if (!isAdmin) { return responseHelper.sendClientError(response, 403); }
 
+    db.query(`SELECT username FROM users
+                        WHERE lower(username) = lower($1)`,
+            [newUsername], (err, result) => {
+        if (err) {
+            return responseHelper.sendInternalServerError(response, err);
+        } else if (result.rows.length > 0) {
+            return responseHelper.sendClientError(response, "Username Already Exists");
+        }
+
     const preparedPassword = authHelper.preparePassword(newPassword);
     bcrypt.hash(preparedPassword, BCRYPT_SALT, function(err, hash) {
         if (err) {
@@ -793,6 +808,8 @@ exports.createUser = async function (request, response) {
             }
             responseHelper.send(response, 201, "", { userId: result.rows[0].user_id });
         });
+    });
+
     });
 };
 
@@ -846,7 +863,7 @@ exports.resetPasswordOfUser = async function (request, response) {
                     SET password = $1,
                         password_change_required = true,
                         session_id = NULL
-                    WHERE username = $2`,
+                    WHERE lower(username) = lower($2)`,
         [hash, usernameForPasswordReset], (err, result) => {
             if (err) {
                 // db failed
@@ -867,7 +884,7 @@ exports.upgradeUserToAdmin = async function (request, response) {
 
     db.query(`UPDATE users
                 SET is_admin = true
-                WHERE username = $1`,
+                WHERE lower(username) = lower($1)`,
     [usernameToBeUpgraded], (err, result) => {
         if (err) {
             // db failed
