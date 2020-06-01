@@ -1,0 +1,1034 @@
+{
+	"info": {
+		"_postman_id": "f87b3afc-9201-432d-a7ef-8ba4d70f2cf2",
+		"name": "MyLA Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User creation",
+			"item": [
+				{
+					"name": "register admin",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b9dded6b-d5e9-4002-9fe5-83fef3e3757a",
+								"exec": [
+									"pm.environment.set(\"backend\", \"http://localhost/api\");\r",
+									"pm.environment.set(\"registerKey\", \"\\\"a\\\"\");\r",
+									"pm.environment.set(\"exampleAdmin\", \"\\\"admin\\\"\");\r",
+									"pm.environment.set(\"exampleAdminPW\", \"\\\"123\\\"\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "36753fa3-a99d-4110-a37a-cf3f48f07e07",
+								"exec": [
+									"pm.test(\"Admin erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.sessionId) {\r",
+									"    pm.environment.set(\"adminSessionID\", '\"' + pm.response.json().payload.sessionId + '\"');\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": {{exampleAdmin}},\n\t\"password\": {{exampleAdminPW}},\n\t\"registerKey\": {{registerKey}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/register",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register testuser1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "88e480d3-3d57-4e7a-8374-b9481aba4f68",
+								"exec": [
+									"pm.environment.set(\"exampleUser1\", \"\\\"TestNutzer1\\\"\");\r",
+									"pm.environment.set(\"exampleUser1PW\", \"\\\"123\\\"\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "caf7b244-e79d-42af-8009-39c7dc5b2b9e",
+								"exec": [
+									"pm.test(\"Test Nutzer 1 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.sessionId) {\r",
+									"    pm.environment.set(\"user1SessionID\", '\"' + pm.response.json().payload.sessionId + '\"');\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": {{exampleUser1}},\n\t\"password\": {{exampleUser1PW}},\n\t\"registerKey\": {{registerKey}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/register",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register testuser2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "71d44faf-98d2-4537-bb6e-87de743170a5",
+								"exec": [
+									"pm.environment.set(\"exampleUser2\", \"\\\"TestNutzer2\\\"\");\r",
+									"pm.environment.set(\"exampleUser2PW\", \"\\\"123\\\"\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ecb62147-bf33-41dc-968a-e7570fb8303d",
+								"exec": [
+									"pm.test(\"Test Nutzer 2 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.sessionId) {\r",
+									"    pm.environment.set(\"user2SessionID\", '\"' + pm.response.json().payload.sessionId + '\"');\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": {{exampleUser2}},\n\t\"password\": {{exampleUser2PW}},\n\t\"registerKey\": {{registerKey}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/register",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register testuser3",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a3f10bb3-bd78-493e-9175-6cba76fa02e9",
+								"exec": [
+									"pm.environment.set(\"exampleUser3\", \"\\\"TestNutzer3\\\"\");\r",
+									"pm.environment.set(\"exampleUser3PW\", \"\\\"123\\\"\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8123f346-77ef-4a74-8181-d5a544a3a349",
+								"exec": [
+									"pm.test(\"Test Nutzer 3 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.sessionId) {\r",
+									"    pm.environment.set(\"user3SessionID\", '\"' + pm.response.json().payload.sessionId + '\"');\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": {{exampleUser3}},\n\t\"password\": {{exampleUser3PW}},\n\t\"registerKey\": {{registerKey}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/register",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register testuser4",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a1301691-c077-48e6-8658-806a8c278dd7",
+								"exec": [
+									"pm.environment.set(\"exampleUser4\", \"\\\"TestNutzer4\\\"\");\r",
+									"pm.environment.set(\"exampleUser4PW\", \"\\\"123\\\"\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c6439dc1-3c08-4847-b099-61ad8eb99c4f",
+								"exec": [
+									"pm.test(\"Test Nutzer 4 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.sessionId) {\r",
+									"    pm.environment.set(\"user4SessionID\", '\"' + pm.response.json().payload.sessionId + '\"');\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": {{exampleUser4}},\n\t\"password\": {{exampleUser4PW}},\n\t\"registerKey\": {{registerKey}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/register",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4df2d4c-307f-4ce5-a867-8ea8750ed60b",
+								"exec": [
+									"pm.test(\"Admin einloggen.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.sessionId) {\r",
+									"    pm.environment.set(\"adminSessionID\", '\"' + pm.response.json().payload.sessionId + '\"');\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": {{exampleAdmin}},\n\t\"password\": {{exampleAdminPW}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/login",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upgrade testuser1 to Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b187a713-659e-4274-aa07-b801aa067b37",
+								"exec": [
+									"pm.test(\"Testuser1 zum Admin befördern.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"console.log(pm.request);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exampleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"usernameToBeUpgraded\": {{exampleUser1}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/upgradeUserToAdmin",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"upgradeUserToAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Example Survey Creation",
+			"item": [
+				{
+					"name": "create Survey Master 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "773d98ec-6d89-4f84-bc19-426fae9bf6a4",
+								"exec": [
+									"pm.test(\"Survey Master 1 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.surveyMasterId) {\r",
+									"    pm.environment.set(\"surveyMasterId1\", pm.response.json().payload.surveyMasterId);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exampleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"resultsVisible\": true,\r\n  \"isTemplate\": true,\r\n  \"isPublicTemplate\": false,\r\n  \"survey\": {\r\n\t\"title\": \"Projektmanagement Template\",\r\n\t\"description\": \"Dies ist eine Umfrage zur Projektmanagement-Vorlesung.\",\r\n\t\"pages\": [\r\n\t\t{\r\n\t\t\t\"name\": \"page1\",\r\n\t\t\t\"elements\": [\r\n\t    \t\t{\r\n    \t\t\t\t\"type\": \"checkbox\",\r\n    \t\t\t\t\"name\": \"question1\",\r\n    \t\t\t\t\"title\": \"Welche Notationsart würden Sie in zukünftigen Projekten verwenden, um Geschäftsprozesse zu modellieren? (mehrere Antworten möglich)\",\r\n    \t\t\t\t\"choices\": [\r\n    \t\t\t\t\t{\r\n    \t\t\t\t\t\t\"value\": \"item1\",\r\n    \t\t\t\t\t\t\"text\": \"BPMN - Business Process Model and Notation\"\r\n    \t\t\t\t\t},\r\n    \t\t\t\t\t{\r\n    \t\t\t\t\t\t\"value\": \"item2\",\r\n    \t\t\t\t\t\t\"text\": \"BPMN 2.0 - Business Process Model and Notation 2.0\"\r\n    \t\t\t\t\t},\r\n    \t\t\t\t\t{\r\n    \t\t\t\t\t\t\"value\": \"item3\",\r\n    \t\t\t\t\t\t\"text\": \"EPK - Ereignisgesteuerte Prozesskette\"\r\n    \t\t\t\t\t},\r\n    \t\t\t\t\t{\r\n    \t\t\t\t\t\t\"value\": \"item4\",\r\n    \t\t\t\t\t\t\"text\": \"eEPK - erweiterte Ereignisgesteuerte Prozesskette\"\r\n    \t\t\t\t\t},\r\n    \t\t\t\t\t{\r\n    \t\t\t\t\t\t\"value\": \"item5\",\r\n    \t\t\t\t\t\t\"text\": \"VKD - Vorgangskettendiagramm\"\r\n    \t\t\t\t\t}\r\n    \t\t\t\t]\r\n    \t\t\t},\r\n    \t\t\t{\r\n    \t\t\t\t\"type\": \"rating\",\r\n    \t\t\t\t\"name\": \"question2\",\r\n    \t\t\t\t\"title\": \"Bewerten Sie die Vorlesung. 5 = Gut, 1 = Schlecht\"\r\n    \t\t\t},\r\n    \t\t\t{\r\n    \t\t\t\t\"type\": \"boolean\",\r\n    \t\t\t\t\"name\": \"question3\",\r\n    \t\t\t\t\"title\": \"Würden Sie die Vorlesung erneut besuchen?\",\r\n    \t\t\t\t\"labelTrue\": \"Ja\",\r\n    \t\t\t\t\"labelFalse\": \"Nein\"\r\n    \t\t\t}\r\n\t\t\t],\r\n\t\t\t\"title\": \"Seite 1\",\r\n\t\t\t\"description\": \"Diese Umfrage besitzt nur eine Seite.\"\r\n\t\t}\r\n\t]\r\n  },\r\n  \"groupId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createSurveyMaster",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createSurveyMaster"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Survey Master 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "752b7720-b294-4459-b588-b39063d1e299",
+								"exec": [
+									"pm.test(\"Survey Master 2 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.surveyMasterId) {\r",
+									"    pm.environment.set(\"surveyMasterId2\", pm.response.json().payload.surveyMasterId);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exampleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"resultsVisible\": true,\r\n  \"isTemplate\": true,\r\n  \"isPublicTemplate\": false,\r\n  \"survey\": {\r\n\t\"title\": \"Kurze Survey Template\",\r\n\t\"description\": \"Kurze Survey für Demonstrationszwecke.\",\r\n\t\"pages\": [\r\n\t\t{\r\n\t\t\t\"name\": \"page1\",\r\n\t\t\t\"elements\": [\r\n    \t\t\t{\r\n    \t\t\t\t\"type\": \"boolean\",\r\n    \t\t\t\t\"name\": \"question1\",\r\n    \t\t\t\t\"title\": \"Ist das gut so?\",\r\n    \t\t\t\t\"labelTrue\": \"Ja\",\r\n    \t\t\t\t\"labelFalse\": \"Nein\"\r\n    \t\t\t}\r\n\t\t\t],\r\n\t\t\t\"title\": \"Seite 1\",\r\n\t\t\t\"description\": \"Es gibt lediglich eine Seite.\"\r\n\t\t}\r\n\t]\r\n  },\r\n  \"groupId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createSurveyMaster",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createSurveyMaster"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Survey Master 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2eae4af6-780d-42b0-83b0-c2bbb56e20c5",
+								"exec": [
+									"pm.test(\"Survey Master 3 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.surveyMasterId) {\r",
+									"    pm.environment.set(\"surveyMasterId3\", pm.response.json().payload.surveyMasterId);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exampleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"resultsVisible\": true,\r\n  \"isTemplate\": true,\r\n  \"isPublicTemplate\": false,\r\n  \"survey\": {\r\n\t\"title\": \"Survey mit Rechtschraibfehler\",\r\n\t\"description\": \"Hier eine Beschreibung.\",\r\n\t\"pages\": [\r\n\t\t{\r\n\t\t\t\"name\": \"page1\",\r\n\t\t\t\"elements\": [\r\n    \t\t\t{\r\n    \t\t\t\t\"type\": \"boolean\",\r\n    \t\t\t\t\"name\": \"question1\",\r\n    \t\t\t\t\"title\": \"Boolean?\",\r\n    \t\t\t\t\"labelTrue\": \"Yes\",\r\n    \t\t\t\t\"labelFalse\": \"No\"\r\n    \t\t\t}\r\n\t\t\t],\r\n\t\t\t\"title\": \"Seite 1\",\r\n\t\t\t\"description\": \"Seitenbeschreibung\"\r\n\t\t}\r\n\t]\r\n  },\r\n  \"groupId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createSurveyMaster",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createSurveyMaster"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create 1.Survey based on Master 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9c8de48-9b05-4707-9c95-5f94c2fe05b9",
+								"exec": [
+									"pm.test(\"Survey 1 für Survey Master 1 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.surveyCode) {\r",
+									"    pm.environment.set(\"surveyCode1\", pm.response.json().payload.surveyCode);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exampleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"surveyTitle\": \"Projektmanagement - WWI17SEB\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createSurveyBasedOnMaster/{{surveyMasterId1}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createSurveyBasedOnMaster",
+								"{{surveyMasterId1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create 2.Survey based on Master 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b5f91d51-d5c8-4306-9763-fc4ca2801fe8",
+								"exec": [
+									"pm.test(\"Survey 2 für Survey Master 1 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.surveyCode) {\r",
+									"    pm.environment.set(\"surveyCode2\", pm.response.json().payload.surveyCode);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exampleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"surveyTitle\": \"Projektmanagement - WWI19SEC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createSurveyBasedOnMaster/{{surveyMasterId1}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createSurveyBasedOnMaster",
+								"{{surveyMasterId1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Survey based on Master 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f7b370b3-460d-4217-b2dc-2dee00887846",
+								"exec": [
+									"pm.test(\"Survey für Survey Master 2 erstellen.\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"if(pm.response.json().payload && pm.response.json().payload.surveyCode) {\r",
+									"    pm.environment.set(\"surveyCode3\", pm.response.json().payload.surveyCode);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": {{exampleAdmin}},\r\n  \"sessionId\": {{adminSessionID}},\r\n  \"surveyTitle\": \"Kurzes Beispiel - WWI19SEC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/createSurveyBasedOnMaster/{{surveyMasterId2}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"createSurveyBasedOnMaster",
+								"{{surveyMasterId2}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Example Survey Interaction",
+			"item": [
+				{
+					"name": "submit 1.Anwsers to Survey 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce9534dd-e27d-4f98-aabf-cae7b2ae4fdf",
+								"exec": [
+									"pm.test(\"1. Mal Survey 1 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": [\n            \"item1\",\n            \"item2\"\n        ],\n        \"question2\": \"1\",\n        \"question3\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode1}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit 2.Anwsers to Survey 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fe55c377-cae0-4051-9d92-640efd6ece09",
+								"exec": [
+									"pm.test(\"2. Mal Survey 1 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": [\n            \"item2\",\n            \"item4\"\n        ],\n        \"question2\": \"3\",\n        \"question3\": false\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode1}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit 3.Anwsers to Survey 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aa9d445-c490-46b5-9e41-0b487a4ae476",
+								"exec": [
+									"pm.test(\"3. Mal Survey 1 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": [\n            \"item4\",\n            \"item5\"\n        ],\n        \"question2\": \"5\",\n        \"question3\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode1}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit 4.Anwsers to Survey 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e956d1a8-a386-46f1-a95f-6cf4a6e2255c",
+								"exec": [
+									"pm.test(\"4. Mal Survey 1 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": [\n            \"item4\",\n            \"item2\"\n        ],\n        \"question2\": \"4\",\n        \"question3\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode1}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit 5.Anwsers to Survey 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "324c6f6b-0e9c-472c-a822-64839d11f189",
+								"exec": [
+									"pm.test(\"5. Mal Survey 1 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": \"item4\",\n        \"question2\": \"5\",\n        \"question3\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode1}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit 1.Anwsers to Survey 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5cb0f46d-9089-4905-b0f0-5f2c882f530c",
+								"exec": [
+									"pm.test(\"1. Mal Survey 2 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode3}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit 2.Anwsers to Survey 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a897adc8-8f78-4b45-bf88-24c2df2c810b",
+								"exec": [
+									"pm.test(\"2. Mal Survey 2 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": false\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode3}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit 3.Anwsers to Survey 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd504c6d-407b-4c66-baad-5195a43e5adf",
+								"exec": [
+									"pm.test(\"3. Mal Survey 2 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode3}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit 4.Anwsers to Survey 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dcda2d8a-1392-40ae-878f-e08a0887a3f0",
+								"exec": [
+									"pm.test(\"4. Mal Survey 2 beantworten.\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"answers\": {\n        \"question1\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend}}/submitSurvey/{{surveyCode3}}",
+							"host": [
+								"{{backend}}"
+							],
+							"path": [
+								"submitSurvey",
+								"{{surveyCode3}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
