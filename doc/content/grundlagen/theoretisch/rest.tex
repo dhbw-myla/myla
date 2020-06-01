@@ -1,2 +1,51 @@
 % !TEX root =  ../theoretisch.tex
 \subsection{Representational State Transfer}
+
+Die Technologie der Schnittstellen zur Kommunikation zwischen Softwaresystemen hat sich im Verlauf der Jahre stetig geändert. 
+Hierzu gibt es verschiedenste Arten von Schnittstellen. 
+Gerade die bekannten Internetunternehmen wie Google\autocite{MS-GoogleLLC.2020}, Twitter\autocite{MS-TwitterInc..01.03.2020} oder Microsoft\autocite{MS-MicrosoftCorporation.21.05.2018} bieten teilweise dutzende öffentliche Schnittstellen in Form von \acp{API} an.
+
+Der wohl bekannteste und derzeit aktuellste Schnittstellentyp von \acp{API} sind auf dem \ac{REST}-Paradigma basierende Schnittstellen. 
+Dieses Paradigma bzw. diese Architekturweise wurde von Roy Thomas Fielding in seiner Dissertation\autocite{MS-Fielding.} vorgestellt und wurde ursprünglich für verteilte hypermediale Systeme entworfen. 
+\ac{REST} ist selbst kein Standard, sondern beschreibt sechs Prinzipien für eine Web-Architektur. 
+Das erste Prinzip beruht auf einer Client-Server-Architektur, bei der die Benutzerschnittstelle von der Datenhaltung entkoppelt wird.
+Dadurch soll eine höhere Skalierbarkeit und Portabilität für verschiedene Plattformen gewährleistet werden.
+Ebenfalls ist hierdurch eine unabhängige Weiterentwicklung der Komponenten möglich. 
+Das zweite Prinzip bezieht sich auf die Zustandslosigkeit (engl. \enquote{stateless}). 
+Damit ist gemeint, dass alle Anfragen vom Client an den Server stets alle nötigen Informationen beinhalten, die der Server benötigt. 
+Dieser arbeitet somit kontextlos und muss sich keine Sitzungsinformationen speichern. 
+Alle Anfragen können somit atomar und isoliert voneinander betrachtet werden. Dadurch erhöht sich die Zuverlässigkeit sowie ebenfalls die Skalierbarkeit.
+
+Der dritte Grundsatz nach \citeauthor{MS-Fielding.} ist der Cache. 
+Damit ist das Zwischenspeichern bzw. das Vorhalten von Daten gemeint, die schon einmal benutzt wurden. 
+Laut diesem Prinzip sollen die Daten als \enquote{cachable} oder \enquote{not cachable} markiert werden. 
+Dadurch soll die gesamte Netzwerkeffizienz verbessert bzw. die Netzwerkauslastung verringert werden. 
+Dem Vorteil der Performanceverbesserung steht jedoch die Problematik, das Original auf dem Server mit dem Inhalt des Caches synchron zu halten, gegenüber. 
+Veraltete Daten im Cache können gegebenenfalls zu fehlerhaften Ergebnissen führen. 
+Das nächste Prinzip bezieht sich auf die Gestaltung der Schnittstellen. 
+Diese sollen in einer einheitlichen und standardisierten Form definiert werden. 
+Dadurch vereinfacht sich laut \citeauthor{MS-Fielding.} die Gesamtsystemarchitektur. 
+
+Das fünfte Prinzip nach \citeauthor{MS-Fielding.} ist die hierarchische Strukturierung des Gesamtsystems in verschiedene Schichten. 
+Hierdurch wird eine Restriktion vorgenommen, bei der jede Komponente des Systems nur mit der unmittelbar angrenzenden Schicht kommunizieren darf. 
+Dadurch werden einzelne Dienste von der Außenwelt abgekapselt bzw. von der Umgebung isoliert und die Sicherheit des Systems erhöht. 
+Das letzte Prinzip der \ac{REST}-Architektur ist \enquote{Code-on-Demand}.
+Dieses Prinzip ist optional und bezieht sich darauf, dass die Client-Funktionalität durch das Herunterladen von ausführbarem Code erweitert werden kann. 
+
+Neben den gerade genannten sechs Prinzipien beschreibt \citeauthor{MS-Fielding.} in seiner Dissertation noch die zu \ac{REST} gehörigen Datenelemente. 
+Die wichtigsten Datenelemente sind dabei die Ressource und die Ressourcenbezeichnung (engl. \enquote{Resource Identifier}). 
+Eine Ressource stellt dabei eine Abstraktion jeglicher Informationen dar. 
+Es ist dabei irrelevant, ob es sich um ein Bild, Dokument oder um komplexe Sachverhalte handelt. 
+Der Resource Identifier dient, wie der Name schon sagt, zur eindeutigen Identifizierung einer Ressource. 
+Hierzu werden in der Regel \acp{URI} oder \acp{URN} verwendet. 
+Ressourcen selbst werden entweder als statisch oder nicht statisch angesehen.
+Der Unterschied besteht darin, dass bei einer statischen Ressource stets der gleiche Wert zurückgegeben wird und sich dieser bei einer dynamischen Ressource ändern kann.\autocite[Vgl.][S. 86-90]{MS-Fielding.}
+
+Wie bereits erwähnt, beschreibt \ac{REST} keinen Standard, sondern Architekturprinzipien zur Gestaltung der \acp{API}. 
+Zur Umsetzung dieser eignet sich besonders das \ac{HTTP}, welches bereits zu einem Standard ausgearbeitet wurde. 
+\acp{API}, die nach \ac{REST}-Prinzipien entworfen sind und mit dem \ac{HTTP}-Protokoll arbeiten, werden \ac{REST}ful-\acp{API} genannt.\autocite[Vgl.][S. 180]{MS-Wolff.2016}
+Das \ac{HTTP}-Protokoll stellt die denkbar perfekte Grundlage für \ac{REST} dar. 
+Durch die im \ac{HTTP}-Protokoll implementierten Methoden wie GET, POST, PUT und DELETE ist es möglich die bereitgestellten Ressourcen zu verwalten.
+Außerdem erfüllt es weitere wesentliche Bedingungen, die von \ac{REST} gefordert werden, wie beispielsweise die Zustandslosigkeit. 
+Die aktuelle Version ist \ac{HTTP}/2\autocite{MS-Belshe.2015}, jedoch wird auch die ältere Version \ac{HTTP}/1.1\autocite{MS-Fielding.1999} noch verwendet. 
+Die Form der Nutzdaten für die Übertragung bei \ac{REST}ful-\acp{API} ist dabei meist die \ac{JSON} oder \ac{XML}.\autocite[Vgl.][S. 97]{MS-Tilkov.2015} 
