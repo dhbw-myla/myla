@@ -36,10 +36,10 @@ class Participate extends Component {
             });
             swalHelper.successTimer('Loading Survey!', 'Loading Survey with code: ' + surveycode, 'Survey loaded.');
          } else {
-            swalHelper.error('Could not find Survey!', 'Surveycode not found.');
+            swalHelper.error('Could not find Survey!', 'Survey Code not found.');
          }
       } else {
-         swalHelper.error('Could not find Survey!', 'No Surveycode given.');
+         swalHelper.error('Could not find Survey!', 'No Survey Code given.');
       }
    };
 

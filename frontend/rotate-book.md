@@ -4,7 +4,7 @@ alternativ: Turn-Book?
 
 ToDo's:
 
-* [ ] :o2: Surveycode in Popup, dass Survey Code nicht existiert -- RENE: was damit gemeint? SurveyCode nochmal in die Errormeldung? wozu?
+* [x] Surveycode in Popup, dass Survey Code nicht existiert -- RENE: was damit gemeint? SurveyCode nochmal in die Errormeldung? wozu? -- Niko: Gedächtnis wie nen Sieb? Ging darum, dass meistens "Survey Code" da steht, aber in der Fehlermeldung auf der Startseite "Surveycode"...
 * [x] Titel vom survey master paradise?! &rarr; uns fällt gerade nichts ein :-(
 * [x] It's now live for 7 days
 * [x] Anzahl bei 0 nicht anzeigen!!!!111elf
