@@ -18,7 +18,7 @@ exports.checkUserAuthorization = function (request, callback) {
     const username = request.body.username;
     const sessionId = request.body.sessionId;
     if (username === undefined || sessionId === undefined) { callback(false); return; }
-    db.query('SELECT * FROM users WHERE username = $1 AND session_id = $2;', [username, sessionId], (err, dbResult) => {
+    db.query('SELECT * FROM users WHERE lower(username) = lower($1) AND session_id = $2;', [username, sessionId], (err, dbResult) => {
         if (err || dbResult.rows.length !== 1) {
             callback(false);
         } else if (dbResult.rows[0].password_change_required) {
