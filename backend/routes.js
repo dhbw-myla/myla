@@ -667,6 +667,11 @@ exports.submitSurvey = function (request, response) {
                 } catch {}
             }
         }
+        db.query(`UPDATE survey
+                    SET participations = participations + 1
+                    WHERE survey_id = $1;`,
+                [surveyId]
+        );
         responseHelper.send(response, 200, "Submitted Answers Successfully");
     });
 };
@@ -709,7 +714,7 @@ exports.getSurveyResults = async function (request, response) {
         }
         let result = {};
         for (let prop of ["title", "survey_id", "timestamp_start", "timestamp_end",
-                "survey_master_id", "survey_code", "description"]) {
+                "survey_master_id", "survey_code", "description", "participations"]) {
             result[prop] = questions.rows[0][prop];
         }
         result.questions = [];

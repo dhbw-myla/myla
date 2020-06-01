@@ -12,7 +12,7 @@ ToDo's:
 * [ ] :o2: Max Größe Cards? -- RENE: nö.
 * [x] copy survey (frischer survey master)
 * [x] active surveys &rarr; published surveys
-* [ ] **BACK-END**: zehn Zeichen für surey code? bereits bei 4 zeichen hätten wir knapp 15 Mio. verschiedene Codes (62^4) -- RENE: sind zu lange oder? sieht dann im Frontend kacke aus und so reicht auch erstmal aus...
+* [ ] :question: **BACK-END**: zehn Zeichen für surey code? bereits bei 4 zeichen hätten wir knapp 15 Mio. verschiedene Codes (62^4) -- RENE: sind zu lange oder? sieht dann im Frontend kacke aus und so reicht auch erstmal aus...
 * [x] Change password &rarr; go back automatically?
 * [x] Change password &rarr; session id muss überschrieben werden, bzw. alles was da zurück kommt
 * [x] users space (korrekter titel?) &rarr; Suchfunktion
@@ -24,14 +24,14 @@ ToDo's:
 * [x] store survey code in local storage after completion &rarr; show that already participated
 * [x] survey participate seite neuladen, history nicht gesetzt, complete, bei url &rarr; vielleicht in backlog
 * [x] **MARTIN/ERIK**: in legenden in klammern die anzahl, z. B. true (2), false (4)
-* [ ]  **BACK-END**: results tailnehmärantsaal, im survey-object gibt es dann das feld `participations`
-* [ ] **BACK-END**: number of survey participations
-* [ ] **BACK-END**: pro frage nochmal summe der antworten :poop: 
+* [x] **MARTIN/ERIK**: results tailnehmärantsaal, im survey-object gibt es dann das feld `participations`
+* [x] **BACK-END**: number of survey participations
+* [x] **MARTIN/ERIK**: pro frage nochmal summe der antworten :poop:
 * [x] **MARTIN/ERIK**: results-ansicht: abgerundete ecken (nicht kanten!!!!!! kanten sind halt glatt!)
 * [x] neuen user anlegen &rarr; man sollte auf admin space zurückkehren
 * [ ] :o2: register key &rarr; input type password oder type text?! -- RENE, Sascha: bleibt so.s
-* [ ] **BACK-END**: Admin erstellt Nutzer &rarr; requestPasswordChange muss true sein
-* [ ] **BACK-END**: username case insensitive (irgendwie im auth helper ersetzen)
+* [x] **BACK-END**: Admin erstellt Nutzer &rarr; requestPasswordChange muss true sein
+* [x] **BACK-END**: username case insensitive (irgendwie im auth helper ersetzen)
 * [ ] i18n (zumindest faken) -- RENE: sollten wir gemeinsam drüber reden.
 * [x] blaue Umrandung der search box
 * [x] buttons back &rarr; User, Survey Master

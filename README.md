@@ -479,6 +479,7 @@ responses:
       results_visible: false,
       is_template: false,
       is_public_template: false,
+      particpations: 0,
       user_id: 25,
       group_id: 7
      },
@@ -580,6 +581,7 @@ responses:
       survey_master_id: 52,
       survey_code: "052JOJ6FIV",
       description: "",
+      participations: 6,
       questions: [
         {
           id: 117,

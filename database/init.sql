@@ -215,7 +215,8 @@ CREATE TABLE public.survey (
     timestamp_end timestamp with time zone,
     survey_master_id integer NOT NULL,
     survey_code character varying NOT NULL,
-    survey_title character varying
+    survey_title character varying,
+    participations integer DEFAULT 0
 );
 
 
