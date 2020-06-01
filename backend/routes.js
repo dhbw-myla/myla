@@ -779,7 +779,9 @@ exports.createUser = async function (request, response) {
             // hashing failed
             return responseHelper.sendInternalServerError(response, err);
         }
-        db.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING user_id;', [newUsername, hash], (err, result) => {
+        db.query(`INSERT INTO users (username, password, password_change_required)
+                    VALUES ($1, $2, $3) RETURNING user_id;`,
+        [newUsername, hash, true], (err, result) => {
             if (err || result.rows.length !== 1) {
                 // db failed
                 return responseHelper.sendInternalServerError(response, err);
