@@ -227,7 +227,6 @@ class SurveyResultDetails extends Component {
       let number = key + 1;
       let participants = 0;
 
-      debugger;
       for(let a in answers){
          participants += parseInt(answers[a])
       }
@@ -271,7 +270,7 @@ class SurveyResultDetails extends Component {
       let numberOfParticipants = null;
       let surveyDescription = null;
       subtitle = 'Survey Master: ' + resultsOfSurvey.title;
-      numberOfParticipants = 'Number of Participants: ' + resultsOfSurvey.participants;
+      numberOfParticipants = 'Number of Participations: ' + resultsOfSurvey.participations;
       surveyDescription = resultsOfSurvey.description;
 
 
@@ -287,7 +286,7 @@ class SurveyResultDetails extends Component {
                   <p className="font-weight-bold caption dhbw_margin_p">{numberOfParticipants}</p>
                </div>
                <p className="font-weight-bold caption dhbw_margin_p">Description: </p> 
-               <p className="dhbw_margin_p">{surveyDescription}</p>
+               <p className="dhbw_margin_p_description">{surveyDescription}</p>
                </SectionContainer>
                {resultsOfSurvey.questions.map((result, key) => this.buildSection(result, key))}
 

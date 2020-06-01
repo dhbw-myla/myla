@@ -32,7 +32,7 @@ const SectionContainer = ({
    description = description ?<h4 className="mb-2">{description}</h4> : '';
    title = title ? <h2 className="mb-3">{title}</h2> : '';
    header = header ? <h4 className="mb-2">{header}</h4> : '';
-   participants = participants ? <h5 className="mb-2">Participants: {participants}</h5> : '';
+   participants = participants ? <h5 className="mb-2">Participations: {participants}</h5> : '';
    return (
       <Fragment>
          {title}

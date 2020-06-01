@@ -21,8 +21,8 @@ class SurveyResultCard extends Component {
                cardSubtitle: surveyResult.title,
                cardText: surveyResult.description,
                surveyCode: surveyResult.survey_code,
-               surveyCount: surveyResult.participants,
-               surveyText: "Participants:",
+               surveyCount: surveyResult.participations,
+               surveyText: "Participations:",
                fadingType: type,
                navLinks: [{ to: '#', onClick: () => this.props.onClickSurveyResult(surveyResult), buttonText: 'Show survey results' }],
             }}

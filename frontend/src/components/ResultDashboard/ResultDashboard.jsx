@@ -79,15 +79,9 @@ class ResultDashboard extends Component {
       const { showSurveyResult, surveyResultToShow, filteredSurveyResults, surveyResults, filterBySurveyMaster } = this.state;
       let whatToRender;
       let title = filterBySurveyMaster ? 'Loaded Results' : 'Survey Results Dashboard';
-      let subtitle = null;
-      let numberOfParticipants = null;
-      let surveyDescription = null;
 
       if (showSurveyResult) {
-         subtitle = 'Survey Master: ' + surveyResultToShow.title;
          title = 'Survey: ' + surveyResultToShow.survey_title;
-         numberOfParticipants = 'Number of Participants: ' + surveyResultToShow.participants; 
-         surveyDescription = 'Description: ' + surveyResultToShow.description;
          whatToRender = (
             <Fragment>
                <div className="alignBackButton">

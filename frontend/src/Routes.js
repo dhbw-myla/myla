@@ -48,10 +48,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
             if (rest.path === '/' + SIGNUP) {
                return <AdminComponent {...props} />;
             }
-            if (rest.path === '/') return <Redirect to={'/' + DASHBOARD} />;
+            if (rest.path === '/') {
+               return <Redirect to={'/' + DASHBOARD} />;
+            }
             return <Component {...props} />;
          }
-         if (rest.path === '/' + SURVEY_PARTICIPATE || rest.path === '/' + LOGIN || rest.path === '/' + SIGNUP) {
+      
+         if (rest.path === '/' ||rest.path === '/' + SURVEY_PARTICIPATE || rest.path === '/' + LOGIN || rest.path === '/' + SIGNUP) {
             return <Component {...props} />;
          }
          return <Redirect to="/" />;
@@ -81,7 +84,7 @@ class Routes extends Component {
             <PrivateRoute path={'/' + SURVEY_PARTICIPATE} component={SurveyParticipate} />
             <PrivateRoute exact path={'/' + LOGIN} component={() => <Login updateRoot={this.props.updateRoot} />} />
             <PrivateRoute exact path={'/' + SIGNUP} component={() => <SignUp updateRoot={this.props.updateRoot} />} />
-            <Route exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />
+            <PrivateRoute exact path="/" component={() => <Startpage updateRoot={this.props.updateRoot} />} />
          </Switch>
       );
 

@@ -104,7 +104,7 @@ class NavbarComponent extends Component {
                         </MDBNavLink>
                      </MDBNavItem>
                      <MDBNavItem>
-                        <MDBNavLink onClick={this.logOutUser} to="/">
+                        <MDBNavLink onClick={this.logOutUser}  to={'/'}>
                            <strong>
                               <MDBIcon icon="sign-out-alt" />
                            </strong>
