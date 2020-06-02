@@ -10,25 +10,27 @@ Hierbei hat sich in den letzten Jahren der Begriff bzw. die Technologie Docker b
 Docker ist eine von dem Unternehmen Docker Inc. entwickelte Software, welche eine Art der Container-Virtualisierung ermöglicht. 
 Die Software baut dabei auf eine Vielzahl von Open-Source-Projekten auf.
 
-
-% PLAGIAT
-
 Die Container-Virtualisierung ist eine leichtgewichtige und ressourcenschonende Variante der Virtualisierung von Arbeitsumgebungen für Anwendungen. 
 Im Gegensatz zu virtuellen Maschinen bilden Container kein eigenständiges System ab, welches über virtuelle Hardware und ein vollständiges Betriebssystem verfügt. 
-Vielmehr stellen sie eine isolierte Umgebung für eine spezifische Anwendung dar, welche die Ressourcen des zugrundeliegenden Systems verwenden. 
+Vielmehr wird eine isolierte Umgebung für eine spezifische Anwendung zur Verfügung gestellt, welche die Ressourcen des zugrundeliegenden Systems verwenden. 
 
 \begin{figure}[h]
 	\centering
-	\captionsetup{justification=centering}
+	\captionsetup{justification=centering, format=plain}
 	\subfigure[Container-Virtualisierung]{\includegraphics[width=0.45\textwidth]{content/grundlagen/technisch/img/docker_container}}\hspace{1cm}
 	\subfigure[Virtuelle Maschine]{\includegraphics[width=0.45\textwidth]{content/grundlagen/technisch/img/docker_hypervisor}}
 	\caption[Vergleich Container-Virtualisierung vs. virtuelle Maschine]{\label{fig:docker_container}Vergleich Container-Virtualisierung vs. virtuelle Maschine, \\Quelle: \cite{MS-DockerInc..05.03.2019}}
 \end{figure}
 
-Abbildung \ref{fig:docker_container} verdeutlicht den Aufbau von Container-Virtualisierung und zeigt einen Vergleich zu Hardware-Virtualisierung.\autocite[Vgl.][]{MS-ChrissiKraus.27.07.2018}$^,$\autocite[Vgl.][]{MS-MicrosoftCorporation.31.08.2018} 
-Wie man sehen kann, setzt Docker auf dem zugrunde liegenden Betriebssystem auf, wohingegen eine virtuelle Maschine als Gast-System agiert, bei der ein Hypervisor, also ein Manager für virtuelle Maschinen\autocite[Vgl.][]{MS-ReneBust.06.04.2010}, diese verwaltet und die Verteilung der Hardware-Ressourcen übernimmt.
+Abbildung \ref{fig:docker_container} visualisiert die Architektur einer Container-Virtualisierung und zeigt einen Vergleich zur Hardware-Virtualisierung.\autocite[Vgl.][]{MS-ChrissiKraus.27.07.2018}$^,$\autocite[Vgl.][]{MS-MicrosoftCorporation.31.08.2018} 
+Wie zu sehen ist, setzt Docker auf dem zugrunde liegenden Betriebssystem auf, wohingegen eine virtuelle Maschine als Gast-System agiert. 
+Dabei verwaltet und verteilt bei virtuellen Maschinen ein Hypervisor die Ressourcen, welche die Betriebssysteme zur Verfügung gestellt bekommen. 
+Ein Hypervisor ist also ein Manager für virtuelle Maschinen\autocite[Vgl.][]{MS-ReneBust.06.04.2010}. 
+Docker-Container bekommen hingegen ihrere Ressourcen vom zugrundeliegenden Betriebssystem bereitgestellt.
 
-Weitere Vorteile von Docker sind das hohe Maß an Integration und eine gute Skalierbarkeit von Anwendungen. 
-Docker-Container lassen sich einfach erzeugen, starten und stoppen. 
-Dabei ist die sogenannte Docker-Engine, welche als Kern- und Steuerprogramm von Docker fungiert, dazu in der Lage, die Container zu replizieren bzw. die Anzahl an Containern für einen speziellen Dienst bei Bedarf beliebig zu erhöhen oder zu verringern. 
-Die Integration entsteht darin, dass Docker mit anderer Software interagieren bzw. sich von dieser steuern lassen kann.
+Vorteile von Docker sind zum einen das hohe Maß an Integration und zum anderen eine gute Skalierbarkeit von Anwendungen. 
+Dabei können die Docker-Container sehr einfach erzeugt, gestartet und gestoppt. 
+Als Kern- und Steuerprogramm von Docker fungiert die sogenannte Docker-Engine. Sie ist neben dem Starten und Stoppen in der Lage vorhandene Container zu replizieren bzw. die Anzahl an Containern für einen speziellen Dienst bei Bedarf beliebig zu erhöhen oder zu verringern.
+Hierzu kommt das Nebenprodukt Docker-Compose zum Einsatz. 
+Dieses Werkzeug dient dem Erzeugen von Multi-Container-Anwendungen.
+Der Integrationsaspekt entsteht dadurch, dass Docker mit anderer Software interagieren bzw. sich von dieser steuern lassen kann.\autocite[Vgl.][]{MS-Docker-Compose} 
