@@ -26,9 +26,6 @@
     margin-bottom: 0;
     width: 50%;
 }
-.caption{
-    text-shadow: 1px 1px #ffffff; 
-} 
 
 @media only screen and (max-width: 600px) {
     h2{

@@ -282,10 +282,10 @@ class SurveyResultDetails extends Component {
               <div className="dhbw_result_container"></div>
               <SectionContainer number={454} noBorder={true} className="dhbw_result_background">
                <div className="dashboard-fg-dhbw-links">
-                  <p className="caption font-weight-bold dhbw_margin_p">{subtitle}</p>
-                  <p className="font-weight-bold caption dhbw_margin_p">{numberOfParticipants}</p>
+                  <p className="font-weight-bold dhbw_margin_p">{subtitle}</p>
+                  <p className="font-weight-bold dhbw_margin_p">{numberOfParticipants}</p>
                </div>
-               <p className="font-weight-bold caption dhbw_margin_p">Description: </p> 
+               <p className="font-weight-bold dhbw_margin_p">Description: </p> 
                <p className="dhbw_margin_p_description">{surveyDescription}</p>
                </SectionContainer>
                {resultsOfSurvey.questions.map((result, key) => this.buildSection(result, key))}
