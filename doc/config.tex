@@ -219,6 +219,8 @@
 \newcolumntype{r}{>{\raggedright\arraybackslash}X}
 
 % page header/footer
+\RequirePackage{scrlfile}
+\ReplacePackage{scrpage2}{scrlayer-scrpage}
 \RequirePackage[automark,headsepline,footsepline]{scrpage2}
 \pagestyle{scrheadings}
 \renewcommand*{\pnumfont}{\upshape\sffamily}
