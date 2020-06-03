@@ -69,10 +69,7 @@ class ResultDashboard extends Component {
       const { surveyResults } = this.state;
       if (value !== null) {
          let filteredSurveyResults = surveyResults.filter((surveyResult) => surveyResult.survey_id === value.value);
-         if(filteredSurveyResults){
-            filteredSurveyResults = []
-         }
-         this.setState({ filteredSurveyResults:filteredSurveyResults });
+         this.setState({ filteredSurveyResults });
       } else {
          this.setState({ filteredSurveyResults: surveyResults });
       }
