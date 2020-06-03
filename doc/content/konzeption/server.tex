@@ -4,10 +4,17 @@
 % VORSCHLAG: -Rene
 
 \subsection{\acl{API}}
+Der Server soll nach außen eine \acs{API} mit einzelnen Endpunkten bieten.
+Jeder dieser \acs{API}-Endpunkte soll dann für die Ausführung einer speziellen Aktion zuständig sein.
+Der Client soll dann auf diese zugreifen können.
+
+Die \acs{API} soll dabei einerseits in Anlehnung an das Programmierparadigma \ac{REST} entwickelt werden, andererseits soll es für den Client auch einfach sein, benötigte Daten zu beschaffen oder Aktionen auszuführen.
+Wenn daher nach dem \acs{REST}-Paradigma auch manchmal getrennte \acs{API}-Endpunkte erforderlich sind, sollen diese aus Gründen der Einfachheit zu einem zusammengefasst werden.
+
 % PLAGIAT
-Die \acf{API} dient zur Kommunikation zwischen Client und Server, dabei soll dem Client ermöglichen werden auf Ressourcen des Servers zuzugreifen.
-Dazu müssen zunächst Routen definiert werden, welche nach dem Programmierparadigma \ac{REST} aufgebaut werden.
-Derartige Schnittstellen stellen über die \ac{HTTP}-Methoden die \ac{CRUD}-Operationen zur Verfügung, da in der Regel der Server vorwiegend zur Datenhaltung dient.
+%Die \acf{API} dient zur Kommunikation zwischen Client und Server, dabei soll dem Client ermöglichen werden auf Ressourcen des Servers zuzugreifen.
+%Dazu müssen zunächst Routen definiert werden, welche nach dem Programmierparadigma \ac{REST} aufgebaut werden.
+%Derartige Schnittstellen stellen über die \ac{HTTP}-Methoden die \ac{CRUD}-Operationen zur Verfügung, da in der Regel der Server vorwiegend zur Datenhaltung dient.
 
 % Abschnitt zur vollständigkeit drin. geht mir mehr um das gesamtpaket, dass sowas da is
 % In der Anwendung sollen jedoch Datensätze nicht durch den Mitarbeiter verändert werden können, sondern lediglich Änderungen im \ac{ERP}-System eine Änderung der Daten hervorrufen.
@@ -18,6 +25,21 @@ Derartige Schnittstellen stellen über die \ac{HTTP}-Methoden die \ac{CRUD}-Oper
 % Dabei stellt die \ac{API} grundlegend für jede Berechnung des Servers eine Route zur Verfügung, sodass der Client modular aufgebaut werden kann und eventuelle Einbindungen in bereits bestehende Systeme möglich sind.
 %Dennoch ist es dem Nutzer möglich, die Ergebnisse der Berechnung durch eine Sortierung oder Beschränkung, u. a. auf das betrachtete Geschäftsjahr, über in der Anfrage vermerkte Parameter anzupassen.
 
-Zur Authentifizierung existiert ebenso eine Route, welche den Nutzer überprüft und ein Token ausstellt.
-Das Token muss anschließend bei jeder Anfrage übergeben werden, um die jeweilige Route nutzen zu können.
+%Zur Authentifizierung existiert ebenso eine Route, welche den Nutzer überprüft und ein Token ausstellt.
+%Das Token muss anschließend bei jeder Anfrage übergeben werden, um die jeweilige Route nutzen zu können.
+
+\subsection{Datenhaltung und Datenmodell}
+Um die entsprechenden \acs{API}-Endpunkte mit den zugehörigen Aktionen anbieten zu können, müssen serverseitig Daten gespeichert werden.
+Dies umfasst beispielsweise die Umfragen, die zugehörigen Fragen und die darauf gegebenen Antworten.
+
+Hierfür sind relationale Datenbanken weit verbreitet, sodass auch hier, für die im Rahmen dieser Seminararbeit entwickelte Anwendung, eine solche Form der Datenhaltung genutzt wird.
+Im Folgenden wird nun das Datenmodell näher vorgestellt.
+
+Da es gemäß der Anforderungen möglich sein soll, Umfragen mehrfach durchzuführen, wird sich entschieden für Umfragen zwei Entitäten einzuführen.
+So gibt es zum einen den sogenannten \texttt{SurveyMaster} und zum anderen einen \texttt{Survey}.
+Der \texttt{SurveyMaster} entspricht dabei einer Art Vorlage, in der die einzelnen Fragen definiert werden.
+Der \texttt{Survey} stellt dann eine konkrete Umfrage dar, die auf genau einem solchen \texttt{SurveyMaster} basiert.
+Dadurch ist es möglich mehrere Umfragen mit genau denselben Fragen durchzuführen.
+
+% TODO: Grafik (ER-Modell) hier oder im Anhang einbinden
 

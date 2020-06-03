@@ -1,2 +1,20 @@
-% !TEX root =  ../sicherheit.tex
+% !TEX root =  ../../../master.tex
 \subsection{Zugriffskontrolle}
+Die Zugriffskontrolle erfolgt im Back-End.
+Da jegliche Kontrolle, die im Front-End implementiert ist, clientseitig ausgeführt wird, ist sie auch durch einen Angreifer ohne Weiteres aufzuheben und damit als unsicher anzusehen.
+Nichtsdestotrotz sind natürlich auch im Front-End entsprechende Maßnahmen implementiert.
+Diese dienen allerdings nicht dem Schutz gegen unbefugte Zugriffe, sondern sollen lediglich dafür sorgen, dass Nutzer bereits in der graphischen Darstellung erkennen, wozu sie berechtigt sind und worauf sie Zugriff haben.
+Alles andere führt für Benutzer nur zu Verwirrung.
+
+Für die tatsächliche Zugriffskontrolle im Back-End werden, wie bereits in der Konzeption in Abschnitt~\ref{sec:authentifizierung} erläutert, Passwörter beziehungsweise Session-IDs genutzt.
+Bei der Registrierung oder einer Anmeldung wird eine solche Session-ID ausgestellt.
+Bei jedem Zugriff auf einen der \acs{API}-Endpunkte wird, bevor überhaupt irgendeine Aktion ausgeführt wird, die Korrektheit dieser Session-Id geprüft.
+Damit ist sichergestellt, dass eine entsprechende Prüfung nicht versehentlich beim Implementieren eines einzelnen \acs{API}-Endpunkts vergessen werden kann.
+
+Selbstverständlich gibt es auch \acs{API}-Endpunkte, auf die Zugriffe ohne Autorisierung möglich sein müssen.
+Dies umfasst einerseits das Beantworten von Umfragen und andererseits das Registrieren und Anmelden, bei dem Nutzer logischerweise noch keine gültige Session-ID besitzen, da sie diese ja dadurch erst erhalten wollen.
+Entsprechende Ausnahmen sind über eine Whitelist gelöst, sie werden also explizit aufgelistet.
+Auch hierbei steht im Vordergrund, dass \acs{API}-Endpunkte standardmäßig geschützt sind und nicht versehentlich Sicherheitslücken entstehen.
+
+Darüber hinaus wird bei jeder Aktion die Berechtigung geprüft.
+Bei der Bearbeitung eines \texttt{SurveyMasters} wird zum Beispiel zuerst einmal validiert, ob dieser auch dem angemeldeten Nutzer zugeordnet ist.
