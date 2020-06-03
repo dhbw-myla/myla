@@ -35,7 +35,7 @@ class Card extends Component {
    };
 
    displaySurveyCount = (surveyCount, surveyText) => {
-      if (surveyCount !== undefinded && surveyText !== undefined) {
+      if (surveyCount !== undefined && surveyText !== undefined) {
          return (
             <span>
                <br />
