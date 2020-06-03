@@ -6,6 +6,7 @@ import { changePassword } from '../../api/auth';
 import { getStoredUser, setNewSessionId, setUserToStorage, verifyPassword } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
 import './changePassword.css';
+import { DASHBOARD, MY_ACCOUNT } from '../constants';
 
 class ChangePassword extends Component {
    constructor(props) {
@@ -31,11 +32,9 @@ class ChangePassword extends Component {
          const resObj = await changePassword(user);
          if (resObj && resObj.status === 200) {
             resObj.payload.isPasswordChangeRequired = false;
-            setUserToStorage(resObj.payload);
             setNewSessionId(resObj.payload.sessionId);
-
             swalHelper.success('Password changed!', 'Your password has been updated!', true);
-            this.props.handleOnClickUserProfil();
+            this.props.history.push("/" + MY_ACCOUNT);
          } else {
             swalHelper.error('ERROR!', 'Password has not been changed!');
          }

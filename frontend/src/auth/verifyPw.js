@@ -38,6 +38,7 @@ export const setUserToStorage = (user) => {
 export const setNewSessionId = (sessionId) =>{
    const user = getStoredUser();
    user.sessionId = sessionId;
+   user.isPasswordChangeRequired = false;
    setUserToStorage(user);
 }
 
