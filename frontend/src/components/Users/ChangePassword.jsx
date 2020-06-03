@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
 import { changePassword } from '../../api/auth';
-import { getStoredUser, setNewSessionId, setUserToStorage, verifyPassword } from '../../auth/verifyPw';
+import { getStoredUser, setNewSessionId, verifyPassword } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
+import { MY_ACCOUNT } from '../constants';
 import './changePassword.css';
-import { DASHBOARD, MY_ACCOUNT } from '../constants';
 
 class ChangePassword extends Component {
    constructor(props) {

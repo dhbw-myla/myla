@@ -2,8 +2,7 @@ import { MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { Component } from 'react';
 import { getStoredUser } from '../../auth/verifyPw';
 import Card from '../Card/Card';
-import { SURVEY, DASHBOARD, ACCOUNT_PASSWORD_CHANGE } from '../constants';
-import ChangePassword from './ChangePassword';
+import { ACCOUNT_PASSWORD_CHANGE, DASHBOARD, SURVEY } from '../constants';
 
 class Account extends Component {
    constructor(props) {

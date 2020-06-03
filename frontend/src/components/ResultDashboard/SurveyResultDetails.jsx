@@ -223,12 +223,7 @@ class SurveyResultDetails extends Component {
       const { question, answers } = surveyResult;
       let chart;
       let number = key + 1;
-      let participants = 0;
-
-      for(let a in answers){
-         participants += parseInt(answers[a])
-      }
-
+      
       if (answers === undefined || Object.keys(answers).length === 0) {
          chart = 'Nothing to show... :-(';
       } else {

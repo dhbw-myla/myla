@@ -56,10 +56,7 @@ class UserEntry extends Component {
          const resObj = await resetPasswordOfUser(getStoredUser(), username, result.value);
          if (resObj && resObj.status === 200) {
             swalHelper.success('Password changed!', `The password of user ${username} has been updated successfully.`, false);
-            // this.props.loadUsers();
-            if (resObj && resObj.status === 200) {
-               this.setState({ users: resObj.payload });
-            }
+            this.props.loadUsers();
          } else {
             swalHelper.error('Password could not be changed!', `The password of user ${username} could <b>not</b> be changed.`);
          }
