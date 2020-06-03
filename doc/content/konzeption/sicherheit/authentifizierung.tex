@@ -5,25 +5,26 @@
 
 Um einen angemessen Schutz der gespeicherten Daten zu gewährleisten, soll jeder Benutzer nur seine eigenen Daten einsehen können.
 Ebenso sind auch die ausführbaren Aktionen auf den Benutzer zu beschränken, auf den sich diese beziehen.
-Dies bedeutet, dass ein angemeldet Benutzer nur die Ergebnisse seiner eigenen Umfragen sehen kann, nicht aber die Ergebnisse von Umfragen anderer Benutzer.
+Dies bedeutet, dass ein angemeldeter Benutzer nur die Ergebnisse seiner eigenen Umfragen sehen kann, nicht aber die Ergebnisse von Umfragen anderer Benutzer.
 
 Daher muss ein Benutzer vom System identifiziert werden können.
 Die erstellten Umfragen können dann einer solchen digitalen Identität zugeordnet werden.
 Zum Anlegen dieser digitalen Identität erfolgt eine Registrierung mit Nutzername und Passwort.
-Zusätzlich muss ein Registrierungsschlüssel angegeben werden, sodass lediglich befugte Personen, Benutzer erstellen können.
+Zusätzlich muss ein Registrierungsschlüssel angegeben werden, sodass lediglich befugte Personen Benutzer erstellen können.
 
-Das geheime Passwort ist lediglich dem jeweiligen Nutzer bekannt, sodass dieser sich damit authentisieren kann.
+Das geheime Passwort ist nur dem jeweiligen Nutzer bekannt, sodass dieser sich damit authentisieren kann.
 Der Server speichert das Passwort in der Datenbank, damit bei einer Anmeldung geprüft werden kann, ob der Nutzer auch der ist, der er vorgibt zu sein.
 
 Aus Sicherheitsgründen wird das Passwort allerdings nicht im Klartext gespeichert.
-Andernfalls wären alle Nutzerpasswörter in der Datenbank, für alle die auf diese Zugriff haben, einsehbar.
+Andernfalls wären alle Nutzerpasswörter in der Datenbank für alle, die auf diese Zugriff haben, einsehbar.
 Sowohl potenzielle Angreifer, die möglicherweise durch Sicherheitslücken Zugang erhalten, als auch einfach die Betreiber der hier entwickelten Webanwendung hätten somit also Kenntnis von den Passwörtern aller Nutzer.
 Dies ist insbesondere deswegen kritisch, da viele Nutzer dieselben oder ähnliche Passwörter bei mehreren Diensten verwenden.
 Aufgrund der sich hieraus ergebenden Gefahren muss das Passwort also anders gespeichert werden.
 
 Hierbei hat sich in der Praxis das Speichern eines kryptographischen Hashwertes etabliert.
 Eine kryptographische Hashfunktion bildet einen Text beliebiger Länge auf einen zufällig erscheinenden Text mit fixer Länge ab.
-Es handelt sich dabei um eine deterministische Einwegfunktion, d.\,h., wenn derselbe Text, also hier dasselbe Passwort, in eine solche Funktion eingegeben wird, resultiert jedes Mal auch derselbe Hashwert.
+Es handelt sich dabei um eine deterministische Einwegfunktion.
+Das heißt, wenn derselbe Text, also hier dasselbe Passwort, in eine solche Funktion eingegeben wird, resultiert jedes Mal auch derselbe Hashwert.
 Es ist allerdings nicht beziehungsweise nur mit einem enorm großen Aufwand möglich, die zu einem Hashwert gehörige Eingabe zu berechnen.
 
 Das bedeutet für die Speicherung des Passworts, dass dieses praktisch nicht aus dem Hash ermittelt werden kann.
@@ -41,8 +42,11 @@ Dies erschwert ebenso Angriffe auf die Hashwerte, da ein Angreifer, der lediglic
 Nutzer, die sich registriert oder angemeldet haben, erhalten eine sogenannte SessionID.
 Diese wird dann bei \acs{API}-Aufrufen zur Authentifizierung genutzt, sodass hier nicht jedes Mal, dass Passwort genutzt werden muss.
 
-Sollte ein Nutzer sein Passwort vergessen, kann diese von Administratoren zurückgesetzt werden.
+Sollte ein Nutzer sein Passwort vergessen, kann dieses von Administratoren zurückgesetzt werden.
 Es muss danach allerdings direkt wieder vom Nutzer geändert werden.
+
+Wenn die Nutzung eines Registrierungsschlüssels von den Administratoren als zu unsicher angesehen wird, können Sie Nutzer auch manuell erstellen.
+Auch hier muss ein vom Administrator festgelegtes Passwort direkt beim nächsten Anmelden angepasst werden.
 
 Auf der anderen Seite müssen sich Personen, die Umfragen beantworten, nicht anmelden.
 Entsprechend haben Sie nur eine sehr eingeschränkte Sicht.
