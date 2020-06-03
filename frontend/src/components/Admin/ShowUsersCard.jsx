@@ -10,14 +10,7 @@ class ShowUsersCard extends Component {
       this.state = {};
    }
 
-   showUsers = () => {
-      this.setState({ showUsers: true });
-   };
-
    render() {
-      if (this.state.showUsers) {
-         this.props.history.push('/' + ADMIN + '/' + USERS);
-      }
       return (
          <Card
             content={{
@@ -26,7 +19,7 @@ class ShowUsersCard extends Component {
                cardTitle: 'Show Users',
                cardText: 'See all users.',
                fadingType: 3,
-               navLinks: [{ to: '#', onClick: this.showUsers, buttonText: 'Show' }],
+               navLinks: [{ to: '/' + ADMIN + '/' + USERS, buttonText: 'Show' }],
             }}
          />
       );
