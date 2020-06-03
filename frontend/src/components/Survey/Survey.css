@@ -62,3 +62,7 @@
 .sv_main.sv_default_css textarea:focus {
    border-color: #e30613 !important;
 }
+
+.surveyjs{
+   margin-bottom: 10rem;
+}

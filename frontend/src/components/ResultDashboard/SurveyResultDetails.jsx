@@ -160,7 +160,6 @@ class SurveyResultDetails extends Component {
    buildPieChart(question, answers) {
       let labels = [];
       let data = [];
-
       if (question.choices) {
          if (question.choices.length !== labels.length) {
             for (let l in question.choices) {
@@ -174,7 +173,6 @@ class SurveyResultDetails extends Component {
             }
          }
       } else {
-         labels = []
          for (let a in answers) {
             data.push(answers[a]);
             labels.push(a + " (" + answers[a] + ")")
@@ -256,7 +254,7 @@ class SurveyResultDetails extends Component {
 
       return (
          <div className="dhbw_result_background">
-            <SectionContainer number={number} title={'Question ' + number} header={question.title} participants={participants} noBorder={true}>
+            <SectionContainer number={number} title={'Question ' + number} header={question.title} noBorder={true}>
                {chart}
                <hr className="my-5" />
             </SectionContainer>
