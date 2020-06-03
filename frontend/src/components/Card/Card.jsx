@@ -23,7 +23,7 @@ class Card extends Component {
    };
 
    displayCardCount = (cardCount, countText) => {
-      if (cardCount && countText) {
+      if (cardCount !== undefinded && countText !== undefined) {
          return (
             <span>
                <br />
