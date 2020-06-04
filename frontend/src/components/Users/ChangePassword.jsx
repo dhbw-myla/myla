@@ -95,7 +95,7 @@ class ChangePassword extends Component {
                            <div className="fg-dhbw-links">
                               <MDBNav>
                                  <MDBNavItem>
-                                    <MDBNavLink activate="true" to="#" className="fg-dhbw-red" onClick={this.props.handleOnClickUserProfil}>
+                                    <MDBNavLink activate="true" to={"/"+ MY_ACCOUNT}  className="fg-dhbw-red">
                                        <MDBIcon icon="backward" className="fg-dhbw-icon" />
                                        Back
                                     </MDBNavLink>
