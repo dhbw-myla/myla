@@ -1,24 +1,13 @@
-% !TEX root =  ../sicherheit.tex
+% !TEX root =  ../../../master.tex
 \subsection{Verschlüsselung}
 
+Um die Sicherheit der Daten auch während der Übertragung zwischen Server und Client zu gewährleisten, sollten diese hierbei verschlüsselt werden.
+Hierfür bietet sich das Kommunikationsprotokoll \acs{HTTPS} an, das das Protokoll \acs{HTTP} um Vertraulichkeit, Integrität und Authentizität erweitert.
 
-% VORSCHLAG - Rene aus BA:
+Ohne eine Verschlüsselung der übertragenen Daten sind alle Überlegungen zum Datenschutz hinfällig, da ein Angreifer die Daten sonst ohne Weiteres auslesen könnte und somit Zugriff auf äußerst schützenswerten Daten hätte.
+Auch die geplanten Sicherheitsvorkehrungen, insbesondere der Schutz der gespeicherten Passwörter, bliebe wirkungslos, wenn die Daten ungeschützt übertragen werden.
+Ein Angreifer könnte sowohl Passwörter als auch Session-IDs abfangen.
+Folglich wäre die Zugangssicherung ohne großen Aufwand zu brechen.
 
-Zur Umsetzung der in Anforderung 
-%\hyperref[Anf:A10]{A10} 
-geforderten Sicherheit kann durch eine Verschlüsselung der über die \ac{API} versandten Daten erfolgen.
-Dies stellt zunächst ein weiteres Hindernis für einen potentiellen Angreifer dar, da die Kommunikation über \ac{HTTPS} sowie alle ausgelesenen Kommunikationspakete, je nach gewähltem Verschlüsselungsverfahren mit Hilfe eines oder mehrerer Schlüssel, entschlüsselt werden müssen.
-Zusätzlich zur Verschlüsselung über \ac{HTTPS} können so nur autorisierte Clients die \ac{API} verwenden, sodass gefälschte Anwendungen trotz korrekter Anmeldedaten eines Nutzers nicht die Ergebnisse einer Anfrage verwerten können.
-
-Das Verschlüsselungsverfahren würde sich je nach der Anwendergruppe und gewünschten Sicherheit der \ac{API} ergeben.
-So würde sich zunächst für die Kommunikation mit einem selbst verwalteten Client ein symmetrisches Verfahren anbieten, da der Schlüssel in beiden Systemen gesetzt werden kann und die Implementierung leicht wäre.
-Sofern mehrere Clientanwendungen von unterschiedlichen Entwicklern verwendet werden, müssen diese über eigene Schlüssel verfügen, sodass der Angriffspunkt klein gehalten wird und bei einem Angriff auf eine Anwendung nicht die Kommunikation aller ausgelesen werden kann.
-
-Diese einfache Verschlüsselung besitzt jedoch keine Zukunftssicherheit, was ein zentraler Punkt für sichere Verfahren ist.
-Deshalb darf der Schlüssel nicht dauerhaft gleichbleiben, was dazu führt, dass sowohl der Server als auch der Client regelmäßig ein Update des Schlüssels erfordern.
-Das könnte jedoch auch automatisiert werden, sodass ein Hauptschlüssel in einem Algorithmus verwendet wird, der ein Passwort, welches für eine bestimmte Zeit gültig ist, bestimmt.
-Je nach Art des Systems muss dazu jedoch jeder verwendete Schlüssel gespeichert werden, um im Cache gespeicherte verschlüsselte Anfragen entschlüsseln zu können.
-Der Client könnte jedoch ebenfalls bereits entschlüsselte Anfragen im Cache speichern, was jedoch bei einem Angriff auf die Anwendung negative Folgen haben könnte.
-
-Im konkreten Anwendungsfall ist jedoch eine symmetrische Verschlüsselung ohne einen Cache denkbar, da immer auf aktuellen Daten gearbeitet wird und gespeicherte Anfragen potentiell veraltete Daten beinhalten würden.
-Zur Gewährleistung der Zukunftssicherheit ist es jedoch notwendig das Passwort regelmäßig zu erneuern.\autocite{rf-eckert2018sicherheit}
+Daher muss bei einem tatsächlichen Betrieb ein Zertifikat erstellt und \acs{HTTPS} eingerichtet werden.
+Der dafür benötigte Implementierungsaufwand ist nicht nennenswert.
