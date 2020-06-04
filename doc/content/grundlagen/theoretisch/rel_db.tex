@@ -1,22 +1,27 @@
 % !TEX root =  ../theoretisch.tex
 \subsection{Relationale Datenbanken}
 
-Der grundlegende Aufbau relationaler Datenbanken sind Tabellen, Relationen, welche mit Daten gefüllt sind. 
-Neue Relationen können jederzeit hinzugefügt werden, die Datenbank kann ständig erweitert werden.
-Jede Spalte erhält einen Namen, beispielsweise \enquote{Nachname}, wie in der Relation \emph{Student} (siehe \vref{tab:RelStudent}) dargestellt und wird als Attribut bezeichnet. 
+\subsubsection{Allgemein}
+
+Relationale Datenbanken stellen das Grundgerüst vieler Anwendungen dar, welche Datenveränderungen häufig und vor allem in kurzer Zeit verlässlich speichern müssen.
+Dazu gehören unter anderem \ac{ERP}-Systeme oder auch von Content-Management-Systemen von Unternehmen.
+Grundlegend dienen die Datenbanken dabei zur Datenverwaltung über Tabellen, auch als \enquote{Relationen} bezeichnet.
+Neue Relationen können dabei jederzeit hinzugefügt werden, dadurch ist die Datenbank ständig erweiterbar und nicht an eine im Voraus festgelegte Struktur gebunden.
+Jede Spalte einer Tabelle besitzt einen Bezeichner, etwa \enquote{Nachname}, wie es Beispielhaft in der Relation \emph{Student} (siehe \vref{tab:RelStudent}) dargestellt wird.
+Jede Spalte stellt dabei ein Attribut der Relation dar.
 Die Zusammenfassung aller Werte, welche in einer Spalte stehen können, werden als Domäne bezeichnet.
-Unter der Annahme, dass es nur die Kurse \emph{WWI17-SEB} und \emph{WWI18-SEA} gibt, wäre die
-dazugehörige Domäne entsprechend {WWI17-SEB, WWI18-SEA}. 
-Ist ein Wert noch nicht bekannt, wird \enquote{Null} anstelle des Wertes eingetragen, dargestellt durch ein \enquote{-} in vielen
-Relationen. 
-Eine Zeile der Relation wird als Tupel bezeichnet.\autocite[vgl. S.9 ff.][]{Book_DB_2}
+Eine solche Domäne wäre etwa \emph{WWI17-SEB, WWI18-SEA}, wenn wir zunächst die Annahme treffen, dass in einer Spalte \emph{Kurse} lediglich die Werte \emph{WWI17-SEB} und \emph{WWI18-SEA} eingetragen wurden.
+Ist ein Wert noch nicht bekannt, wird der Wert \texttt{NULL} eingetragen, was in der Regel durch ein \enquote{-} visualisiert wird.
+Zeilen einer Relation werden jeweils als Tupel bezeichnet und bestehen aus meheren Werten verschiedener Spalten.\autocite[vgl. S.9 ff.][]{Book_DB_2}
 
 
 \subsubsection{Beziehungen zwischen Relationen}
-Beziehungen zwischen unterschiedlichen Relationen werden mit dem \emph{Primary Key} bzw. \emph{Foreign Key} realisiert. 
-Der \emph{Primary Key} ist ein eindeutiger Identifikationswert eines Tupel und wird durch unterstreichen innerhalb der visuell dargestellten Relation gekennzeichnet. 
-Dieser kann entweder aus mehreren Attributen zusammengesetzt sein, oder aus einem eindeutigen Identifikationsmittel, beispielsweise einer fortlaufende ID, bestehen. 
-In der Praxis wird hierbei in den meisten Fällen auf eine ID zurückgegriffen, da eine Eindeutigkeit mittels des Zusammensetzens mehrere Attribute nicht immer gewährleistet und aufwändiger ist.\autocite[vgl. S.38][]{Book_DB_2}
+Beziehungen zwischen unterschiedlichen Relationen werden mit Hilfe der \emph{Primärschlüssel (Primary Key)} sowie \emph{Fremdschlüssel (Foreign Key)} realisiert.
+Der \emph{Primary Key} ist ein eindeutiger Identifikationswert eines Tupel und wird durch unterstreichen innerhalb der visuell dargestellten Relation gekennzeichnet.
+Dieser kann entweder aus mehreren Attributen zusammengesetzt sein, oder aus einem eindeutigen Identifikationsmittel, beispielsweise einer fortlaufend erhöhten Zahl, auch als \texttt{ID} bezeichnet, bestehen.
+Als Primärschlüssel wird dabei ein Kandidatenschlüssel, welcher laut Definition den Tupel eindeutig identifizieren muss, ausgewählt.
+Ein solcher Kandidatenschlüssel kann aus mehreren Attributen bestehen, welche diese Bedingung erfüllen, oder auch aus dem gesamten Tupel.
+Da die Suche über den Primary Key jedoch mit der Größe dessen komplexer wird, wird in der Praxis in den meisten Fällen auf eine fortlaufende \texttt{ID} zurückgegriffen.\autocite{Book_DB_2}
 
 
 \begin{table}
@@ -32,71 +37,37 @@ In der Praxis wird hierbei in den meisten Fällen auf eine ID zurückgegriffen, 
 \end{table}
 
 \subsubsection{\acsu*{ER-Modell}}
-Eine Möglichkeit um mehrere Relationen zu beschreiben, bietet das \acf{ER-Modell}. 
-Es bedient sich dabei mehreren Kenngrößen, die bei der Beschreibung dargestellt werden. 
-Mit Hilfe von Entitäten (Entity) und Beziehungen (Relationship) können so ganze relationale Datenbankmodelle beschrieben werden.
+Eine Möglichkeit um eine Datenbank graphisch abzubilden, bietet das \ac{ER-Modell}.
+Dazu werden Entitäten (Entity), welche die Relationen repräsentieren, und Beziehungen (Relationship) zwischen den Entitäten in einer standardisierten Form dargestellt.
 Eine Entität bildet dabei etwas aus der realen Welt ab (Umfrage, Student, Gruppenarbeit) und besitzt Eigenschaften bzw. Attribute, die sie beschreiben (Name, Alter, Geschlecht, Umfrageart, Anzahl der Mitgleider).
-Ein Sonderfall ist die schwache Entität. 
-Ein Objekt wird schwache Entität genannt, wenn sie abhängig von einer anderen ist und ohne sie nicht existieren könnte. 
-Ein Raum könnte ohne ein Gebäude nicht existieren und ist somit eine schwache Entität. 
-Entitäten können durch Beziehungen zwischen einander verknüpft werden. 
-Hierbei gibt es drei Beziehungswerte: 1; c = {0, 1} ; m (bzw. n). 
+Ein Sonderfall einer Entität ist dabei die sogenannte \enquote{schwache} Entität.
+Ein Objekt wird schwache Entität genannt, wenn sie abhängig von einer anderen ist und ohne sie nicht existieren kann.
+Beispielhaft kann ein Raum nicht ohne ein Gebäude existieren, was ihn zu einer schwachen Entität macht. 
+Die Beziehungen zwischen den Entitäten werden über drei Beziehungswerte, \texttt{1}, \texttt{c = \{0, 1\}} sowie \texttt{n} (bzw. \texttt{m}), abgebildet.
 Daraus resultieren diese Beziehungen:
 
 \begin{itemize}
     \item 1:1 Beziehung \newline
-    Beschreibt eine Beziehung, bei der jeweils ein Objekt einem anderen zugeordnet werden kann und umgekehrt. 
-    Zum Beispiel kann ein Studen eine Matrikelnummer haben und diese Matrikelnummer kann auch nur einem Studenten zugeordnet werden.
-    \item 1:m Beziehung \newline
-    Diese Beziehung beschreibt ein Objekt, dass keins oder mehrere andere Einträge bei einem anderen haben kann. 
-    Ein Student kann nur einen Kurs besitzen aber in einem Kurs können mehrere Studenten sein. 
+    Beschreibt eine Beziehung, bei der jeweils ein Objekt genau einem anderen zugeordnet werden kann und umgekehrt.
+    Zum Beispiel hat ein Student eine Matrikelnummer und diese Matrikelnummer kann auch nur diesem Studenten zugeordnet werden.
+    \item 1:n Beziehung \newline
+    Diese Beziehung beschreibt ein Objekt, welches keinem bis mehreren Objekten zugeordnet werden kann.
+    So kann ein Student nur Teil eines Kurses sein, aber der Kurs aus keinem bis mehreren Studenten bestehen.
     \item 1:c Beziehung \newline
-    Dies bedeutet, dass ein Objekt einen oder keinen Eintrag besitzt. 
-    Meistens werden dadurch Zusatzeigenschaften ausgedrückt. 
-    Ein Student kann eine Wissenschaftliche Hilfskraft sein, aber auch nicht. 
-    Jedoch ist ein Student zwingend nötig, um einen Wissenschaftliche Hilfskraft zu beschreiben (schwache Entität).
+    Dies bedeutet, dass ein Objekt entweder keinem oder genau einem Objekt zugeordnet werden kann.
+    Meistens werden dadurch zusätzliche Eigenschaften ausgedrückt, welche in vielen Fällen nicht vorhanden sind.
+	Beispielsweise kann dabei ein Student als wissenschaftliche Hilfskraft in der Universität arbeiten und besitzt deshalb weitere Eigenschaften, die die meisten Studenten nicht besitzen.
+	Hauptsächlich dient diese Beziehung der Datensparsamkeit, da so erhebliche nicht genutzte reservierte Speicherbereiche vermieden werden können.
     \item n:m Beziehung \newline
-    Diese Beziehung steht für viele Verknüpfungen auf beiden Seiten. 
-    Betrachtet man die Entitäten Student und Gruppenarbeit, so kann ein Student mehrere Gruppenarbeiten machen und eine Gruppenarbeit kann mehrere Studenten beinhalten.
+    Relationen mit einer solchen Beziehung besitzen Objekte, die jeweils mehere Objekte zugewiesen bekommen aber auch meheren Objekten zugewiesen werden können.
+    Betrachtet man die Entitäten Student und Gruppenarbeit, kann ein Student Autor mehrerer Gruppenarbeiten sein, aber auch eine Gruppenarbeit mehrere Studenten als Autor besitzen.
 \end{itemize}
 % Normalisierungsformen ???
 
-Es gibt eine große Anzahl von Datenbanken. Hier ist ein Auszug von möglichen Datenbanken:\autocite{online_Datenbank}
-\begin{itemize}
-	\item Hierarchisches Datenbankmodell
-	\begin{itemize}
-		\item älteres DB-Modell
-		\item Lesezugriff schnell, da Baumstruktur
-		\item Nachteil: Speicher der Daten in Baumstruktur
-		\item Verknüpfungen über Eltern-Kind-Beziehungen dargestellt
-	\end{itemize}
-	\item Netzwerkdatenbankmodell
-	\begin{itemize}
-		\item unterschiedliche Suchwege, um Datensatz zu ermitteln
-		\item Ähnlichkeit mit Hierarchischen Datenbankmodell
-		\item Übersichtlichkeit verringert sich, wenn Modell ständig weiter wächst
-	\end{itemize}
-	\item Relationales Datenbankmodell
-	\begin{itemize}
-		\item drei wichtige Bausteine: Tabellen, Attribute, Beziehungen
-		\item Ansammlung von Tabellen
-		\item Vertiefungen werden über Primärschlüssel dargestellt
-		\item Normalisierung muss eingehalten werden (3 Stufen $\rightarrow$ nicht immer sinnvoll)
-	\end{itemize}
-	\item Objektorientiertes Datenbankmodell
-	\begin{itemize}
-		\item ähnlich wie in JAVA: Daten und Funktion in einem Objekt speichern
-		\item Abfrage-Sprache Object Query Language (OQL) 
-		\item Praxis kaum Anwendung, da Trennung von Daten und Funktion stattfinden muss
-		\item  mit zunehmender Anzahl an Daten nimmt Performance ab im Vgl. zu rel. DB
-	\end{itemize}
-\end{itemize}
+Durch die sogenannte \enquote{Normalisierungen} werden große Relationen, die redundante Informationen speichern auf ihre verschiedenen Teilaspekte herunter gebrochen und der verwendete Speicherplatz optimiert.
+Zudem wird durch die Normalisierung die Datenkonsistenz gewährleistet und Datenredundanz verhindert, da jeder Datensatz nur an einer Stelle vorliegen kann.
+Daten, die einer festen Struktur folgen, können dadurch einfach in die Datenbank integriert sowie effizient abgefragt werden.
 
-Eine relationale Datenbank besteht aus einer Vielzahl unterschiedlicher Relationen, welche mithilfe von Fremdschlüsseln in Beziehungen zueinander stehen können.
-Durch Normalisierungen werden große Objekte auf verschiedene Teilaspekte herunter gebrochen. 
-Außerdem wird durch Normalisierung die Konsistenz der Daten immerzu gewährt, da jeder Datensatz nur an einer Stelle vorliegen kann. Daten, die einer festen Struktur folgen, können auf einfachem Weg in die Datenbank integriert, sowie schnell
-und effizient abgefragt werden.
-
-Die Nachteile relationaler Datenbanken, ergeben sich aus deren Vorteilen. 
-Die aufgebaute Struktur, die Aufteilung eines Objektes auf viele verschiedene Spalten und Relationen, bildet ein starres System, welches nicht ohne weiteres während des Betriebs angepasst werden kann. 
-Um neue Daten verwalten zu können, kann es notwendig sein, die komplette Struktur aufwändig anzupassen.
+Die Nachteile relationaler Datenbanken, ergeben sich aus deren Vorteilen.
+Die aufgebaute Struktur, die Aufteilung eines Objektes auf viele verschiedene Spalten und Relationen, bildet ein starres System, welches Anpassungen während des Betriebs schwierig machen und das Verständnis der gespeicherten Daten voraussetzt.
+Um weitere Aspekte der Daten ebenfalls verwalten zu können, kann es notwendig sein, die komplette Struktur aufwändig anzupassen.
