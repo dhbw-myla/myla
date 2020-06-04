@@ -1,21 +1,18 @@
 \subsection{Result-Dashboard}
 \label{ssec:konzept:client:dashboard}
 
-Das Result-Dashboard soll eine wichtige Komponente dieser Anwendung sein. 
-Wie der Name schon sagt, sollen hier die Resultate der zuvor erstellten Umfragen auswählbar sein. 
-Um eine Ansprechende \acsu*{UI} zu generieren, soll hier auf ein \emph{Card-Design} verwendet werden. 
-Über eine Button auf der Karte soll es möglich sein auf ein detaillierte Auswertung zu kommen. 
+Das Dashboard soll die Kernkomponente dieser Anwendung sein. 
+Auf dieser sollen sämtliche Umfragen und deren Ergebnisse dargestellt werden, wie es in Abbildung \ref{MockDashboard} zu sehen ist.
+Über eine klickbare Auflistung, welche auf der linken Seite der Abbildung zu sehen ist, soll eine Navigation über die Umfragen erfolgen.
+Beim Anklicken einer Umfrage sollen die Diagramme und Auswertungen entsprechend geladen und angezeigt werden, sodass der Nutzer die Resulate der Umfrage überblicken kann.
+Dabei soll pro Frage ein Diagramm erstellt werden, dessen Typ sich an der Frageart orientiert.
+Beispielsweise wird bei einer Single-Choice-Frage ein Kreisdiagramm erstellt.
 
-Diese detaillierte Auswertung soll dann je nach Frageart ein bestimmtes Diagramm erstellen. 
-
-\begin{figure}
-	\missingfigure{ResultDashboard}
-	\caption[Result-Dashboard]{Result-Dashboard \\ \quelle}
-	\label{fig:MockResultDashboard}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/konzeption/client/dashboard}
+	\captionsetup{justification=centering, format=plain}
+	\caption[Mock-Up des Dashboards]{Mock-Up des Dashboards \\\figma}
+	\label{fig:MockDashboard}
 \end{figure}
 
-\begin{figure}
-	\missingfigure{ResultDetail}
-	\caption[Result-Detail]{Result-Detail \\ \quelle}
-	\label{fig:MockResultDetail}
-\end{figure}
