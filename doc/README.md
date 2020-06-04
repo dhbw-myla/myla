@@ -102,10 +102,11 @@
 | ____Weitere Seiten...                      |                    | :red_circle:       | :question:              | :red_circle:       | :red_circle:       |              | kommt noch viel dazu.                                   |
 | Sicherheit                                 |                    |                    |                         |                    |                    |              |                                                         |
 | ____Zugriffskontrolle                      | :red_circle:       | :red_circle:       |                         |                    |                    |              |                                                         |
-| **<u>User-Journey</u>**                    |                    |                    |                         |                    |                    |              |
+| **<u>User-Journey</u>**                    |                    |                    |                         |                    |                    |              |                                                         |
 | Personas                                   |                    |                    |                         |                    |                    |              |                                                         |
-| ____Dozent                                 |                    |                    |                         |                    | :red_circle:       | :red_circle: |                                                         |
-| ____Student                                |                    |                    |                         |                    | :red_circle:       | :red_circle: |                                                         |
+| ____Dozent                                 |                    |                    | :soon:                  | :soon:             |                    |              |                                                         |
+| ____Student                                |                    |                    | :soon:                  | :soon:             |                    |              |                                                         |
+| ____Student_Umfrageersteller               |                    |                    | :soon:                  | :soon:             |                    |              |                                                         |
 | User-Journey                               |                    | :red_circle:       | :red_circle:            |                    |                    |              | Screenshots mit Markierung + BPMN                       |
 | **<u>Fazit und Ausblick</u>**              |                    |                    |                         |                    |                    |              |                                                         |
 | Fazit                                      |                    |                    |                         |                    |                    |              |                                                         |
@@ -113,6 +114,7 @@
 
 Legende:
 - :red_circle: verantwortlich/Interesse, aber noch kein nennenswerter Fortschritt
+- :soon: in progress
 - :ballot_box_with_check: grundlegend fertig, jedoch noch 1-n TODOs
 - :white_check_mark: fertig
 - :ok: fertig und reviewed / final
@@ -130,3 +132,4 @@ Symbole:
 - :one: `:one:`
 - :keycap_ten: `:keycap_ten:`
 - :ok: `:ok:`
+- :soon: `:soon:`
