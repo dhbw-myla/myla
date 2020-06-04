@@ -113,6 +113,7 @@
 
 Legende:
 - :red_circle: verantwortlich/Interesse, aber noch kein nennenswerter Fortschritt
+- :ballot_box_with_check: grundlegend fertig, jedoch noch 1-n TODOs
 - :white_check_mark: fertig
 - :ok: fertig und reviewed / final
 
