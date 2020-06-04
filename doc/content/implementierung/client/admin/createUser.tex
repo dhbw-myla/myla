@@ -1,0 +1,15 @@
+\subsubsection*{Neuen Benutzer hinzufügen \faUsers}
+
+Darüber hinaus kann er über den Button \jinline|Create| einen neuen Benutzer anlegen. 
+\abb \myRefGeneral{fig:AdminCreateUserImplement} zeigt die Eingabeform. 
+Der Administrator muss hier den Benutzername und ein zufälliges Passwort wählen. 
+Erstellte Benutzer durch den Administrator oder beim Zurücksetzen eines Passwortes erhalten als Sicherheitsfeature seitens der Datenbank \todo{Ref Niko, Ref Sicherheit FE} den Eintrag \jinline|isPasswordChangeRequiered|. 
+
+\begin{figure}[hp]
+	\centering
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/AdminCreateUser.png}
+	\captionsetup{justification=centering, format=plain}
+	\caption[\acf{UI}: Neuen Benutzer der Anwendung hinzufügen]{\acf{UI}: Neuen Benutzer der Anwendung hinzufügen \\ \quelleScreenshot}
+	\label{fig:AdminCreateUserImplement}
+\end{figure}
+
