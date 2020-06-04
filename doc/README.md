@@ -11,6 +11,7 @@
       1. REST
       1. Microservices
       1. Fragebogen
+      1. Prototyping
       1. Relationale Datenbanken
       1. Learning Analytics
    1. Technische Grundlagen
@@ -67,6 +68,7 @@
 | ____REST                                   |                    |              | :red_circle: | :white_check_mark: |              |              |                                                         |
 | ____Microservices                          |                    |              |              | :white_check_mark: |              |              |                                                         |
 | ____Fragebogen                             |                    |              |              |              | :red_circle: |              |                                                         |
+| ____Prototyping                          |                    |              |              | :white_check_mark: |              |              |                                                         |
 | ____Relationale Datenbanken                |                    | :red_circle: | :red_circle: |              |              |              |                                                         |
 | ____Learning Analytics                     |                    |              | :red_circle: |              |              |              |                                                         |
 | Technische Grundlagen                      |                    |              |              |              |              |              |                                                         |
