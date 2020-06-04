@@ -1,37 +1,40 @@
 \subsection{Umfrage Dashbaord}
 \label{ssec:UmfrageDashboard}
 
-Das Herzstück der Applikation soll das Erstellen einer Umfrage sein. 
-Hier soll der Benutzer die Möglichkeit haben, eine Umfrage zu erstellen, die verschiedene Fragetypen beinhaltet. 
-Fragetypen sind exemplarisch: 
-%
+Wie zuvor in Kapitel \myRefGeneral{ssec:UmfrageErstellen} dargestellt, ist das Herzstück der Applikation das Erstellen einer Umfrage. 
+Nachdem der Benutzer eine Survey angelegt hat, findet dieser diese auf dieser Seite wieder.
+
+\abb \myRefGeneral{fig:SurveyMasterDashboard} zeigt das \emph{Survey Dashboard}.
+Der Benutzer kann hier über ein Suchleiste, die auch als Dropdown-Menü fungiert, seine erstellten Umfragen filtern. \newline
+Die erste Karte auf dieser Seite ist von ihrem Aufbau her differenziert. Über den Button \jinline|Create New Survey Master| auf der Karte mit dem Icon \faPlusSquare, kann der Benutzer eine neue Umfrage \engl{Survey} anlegen (siehe Kap. \vref{ssec:UmfrageErstellen}). \newline
+Die anderen Karten folgen einem gleichen Muster: 
 \begin{itemize}
-	\item Freitext (Single Input)
-	\item Checkbox, Matrix (Multiple Choice)
-	\item Radiogroup, Marix (Single Choice)
-	\item Dropdown 
-	\item Rating (Bewerung Skala)
-	\item Boolean (Ja/Nein)
-	\item Datepicker (Datumsfelder)
+	\item Sie beinhalten immer die Anzahl der erstellten (published) Umfragen.
+	\item Eine Survey kann immer über das Icon \faCopy\xspace kopiert werden. 
+	Hierbei werden alle Fragen übernommen und erweitert werden. 
 \end{itemize}
 %
-Der Benutzer soll einen Titel sowie eine Beschreibung seiner Umfrage definieren können. 
-Darüber hinaus soll diese erstellte Umfrage als Vorlage \engl{Template} dienen, um basierend auf ihr verschiedene Umfragen erstellen zu können oder auch eine bestehende Umfrage erweitern zu können. 
-Diese soll dann über einen neuen \emph{Sourveycode} realisiert werden. 
+Generell unterscheiden sich die Umfragen wie folgt:
+%
+% \begin{itemize}
+% 	\item Survey-Template erstellt und noch keine Umfrage erstellt.
+% 	\item Survey-Template erstellt und mindestens eine Umfrage erstellt.
+% \end{itemize}
+%
+\subsubsection*{Survey-Template -- keine Umfrage erstellt}
+%
+Der Benutzer hat die Möglichkeit, im Falle einer Falscheingabe über das Icon \faEdit\xspace wieder in den Editierungsmodus zu gelangen (vgl. \vref{ssec:UmfrageErstellen}).
+Über das Icon \faTrash\xspace lässt sich die erstellte Umfrage wieder löschen, da es hierzu noch keine gestartete Umfrage gibt. 
 
-\abb \myRefGeneral{fig:SurveyCreatorImplement} stellt den Umfrageeditor der Anwendung dar, indem der Benutzer seine Umfragen erstellen sowie editieren kann. 
-Die Umfragen sollen spezifisch nur für den angemeldeten Benutzer sichbar sein. 
-Zudem soll der Benutzer noch die Möglichkeit haben, über eine Suchfunktion in seinen Umfragen nach einer geeigneten Umfrage zu suchen. \newline
-Darüberhinaus soll dem Benutzer visuell dargestellt werden, wieviele Umfragen er basierend auf dieser Vorlage (Master Survey) erstellt hat. 
-Des weiteren soll dem Benutzer ermöglicht werden, Umfragen, die noch nicht veröffentlich wurden, zu editieren und zu löschen. \newline
-Über eine Button \enquote{Publish survey} soll der Benutzer eine Umfrage basierend auf dieser Master Survey erstellen können. 
-Ihm soll visuell dargestellt werden, dass das Anlegen erfolgreich war und den generierten Sourveycode anzeigen. 
-Diese wird seinem Result-Dashboard hinzugefügt (Kap. \myRefGeneral{ssec:ResultDashboardImplement}). 
+\subsubsection*{Survey-Template -- mindestens eine Umfrage erstellt}
+%
+Da die Umfrage bereits gestartet ist, enfallen nun die Icons \faTrash\xspace (löschen) und \faEdit\xspace (editieren).
+Als ein alleinstellungsmerkmal hat der Benutzer nun die Möglichkeit über das Icon \faIdCard\xspace zu seinen Ergebnissen zu kommen (vgl. \vref{ssec:ResultDashboardImplement}).
 
 \begin{figure}[hp]
 	\centering
-	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/CreateSurveyMaster.png}
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/SurveyMaster.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[\acf{UI}: Erstellen einer Umfrage]{\acf{UI}: Erstellen einer Umfrage \\ \quelleScreenshot}
-	\label{fig:SurveyCreatorImplement}
+	\caption[\acf{UI}: Survey Dashboard]{\acf{UI}: Survey Dashboard \\ \quelleScreenshot}
+	\label{fig:SurveyMasterDashboard}
 \end{figure}
