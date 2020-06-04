@@ -3,6 +3,12 @@
 
 \textcolor{red}{\textbf{Hier könnte der Aufbau von Docker hin...}}
 
-\input{content/implementierung/server/geschaeftslogik}
-\input{content/implementierung/server/datenhaltung}
-\input{content/implementierung/server/schnittstellen}
+Zur Implementierung der Geschäftslogik wird ein Webserver mit Node.js in Verbindung mit dem Framework Express entwickelt.
+Bei Node.js handelt es sich um eine JavaScript-Laufzeitumgebung, die die serverseitige Entwicklung mit JavaScript ermöglicht und dabei auf der V8-JavaScript-Implementierung von Google aufsetzt.\autocite[Vgl.][]{nl-openjsfoundation2020nodejs}
+Express ist ein Framework für Node.js, um Webanwendungen und \acsp{API} zu entwickeln und wegen der Einfachheit weit verbreitet.\autocite[Vgl.][]{nl-strongloop2017express}
+
+Für die Datenhaltung wird PostgreSQL, ein relationales Datenbankmanagementsystem (RDBMS), verwendet. % TODO: acro?
+Wie bei allen RDBMS können Daten über die Sprache \acs{SQL} abgefragt und editiert werden.
+Mithilfe eines entsprechenden Moduls kann sich innerhalb der Node.js-Anwendung mit der PostgreSQL-Datenbank verbunden werden, sodass \acs{SQL}-Befehle ausgeführt werden können.\autocite[Vgl.][]{nl-carlson2020nodepostgres}
+
+Für jeden \acs{API}-Endpunkt wird jeweils eine Funktion aufgerufen, die die übergebenen Daten entgegennimmt, prüft und daraufhin auf die Datenbank zugreift.

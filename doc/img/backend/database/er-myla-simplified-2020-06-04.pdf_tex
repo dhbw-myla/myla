@@ -1,0 +1,115 @@
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'er-myla-simplified-2020-06-04.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{600.75bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.5149959)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.49937578,0.2615627){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}includes\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.54806492,0.23035171){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.54806492,0.28902836){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}n\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.49937578,0.49127555){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Survey\end{tabular}}}}%
+    \put(0.40699126,0.46006457){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{survey\_id}\end{tabular}}}}%
+    \put(0.40699126,0.42760514){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}survey\_code\end{tabular}}}}%
+    \put(0.40699126,0.39514572){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}survey\_title\end{tabular}}}}%
+    \put(0.40699126,0.36268629){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}participations\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.8988764,0.47504584){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Answer\end{tabular}}}}%
+    \put(0.80649189,0.44383485){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{answer\_id}\end{tabular}}}}%
+    \put(0.80649189,0.41137543){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}timestamp\end{tabular}}}}%
+    \put(0.80649189,0.378916){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}answer\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.49937578,0.15669378){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}SurveyMaster\end{tabular}}}}%
+    \put(0.40699126,0.12548279){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{survey\_master\_id}\end{tabular}}}}%
+    \put(0.40699126,0.09302337){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}title\end{tabular}}}}%
+    \put(0.40699126,0.06056394){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}description\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.29962547,0.11050152){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}creates\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.26092385,0.08053897){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.34831461,0.08053897){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}n\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.69912609,0.11050152){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}consists of\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.66167291,0.08053897){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.74781523,0.08053897){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}n\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.8988764,0.2615627){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}belongs to\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.94756554,0.22660639){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.94756554,0.29277368){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}n\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.69912609,0.42885358){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}includes\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.66042447,0.39889103){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.74781523,0.39889103){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}n\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.8988764,0.14046407){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Question\end{tabular}}}}%
+    \put(0.80649189,0.10925308){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{question\_id}\end{tabular}}}}%
+    \put(0.80649189,0.07679366){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}question\_json\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{er-myla-simplified-2020-06-04.pdf}}%
+    \put(0.09987516,0.20538292){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Users\end{tabular}}}}%
+    \put(0.00749064,0.17417193){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{user\_id}\end{tabular}}}}%
+    \put(0.00749064,0.14171251){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}username\end{tabular}}}}%
+    \put(0.00749064,0.10925308){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}password\end{tabular}}}}%
+    \put(0.00749064,0.07679366){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}session\_id\end{tabular}}}}%
+    \put(0.00749064,0.04433423){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}is\_admin\end{tabular}}}}%
+    \put(0.00749064,0.0118748){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}pw\_change\_required\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

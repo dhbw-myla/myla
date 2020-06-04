@@ -11,6 +11,7 @@
       1. REST
       1. Microservices
       1. Fragebogen
+      1. Prototyping
       1. Relationale Datenbanken
       1. Learning Analytics
    1. Technische Grundlagen
@@ -64,13 +65,14 @@
 | Aufbau                                     |                    |              |              |              |              | :red_circle: |                                                         |
 | **<u>Grundlagen</u>**                      |                    |              |              |              |              |              |                                                         |
 | Theoretische Grundlagen                    |                    |              |              |              |              |              |                                                         |
-| ____REST                                   |                    |              | :red_circle: | :red_circle: |              |              |                                                         |
-| ____Microservices                          |                    |              |              | :red_circle: |              |              |                                                         |
+| ____REST                                   |                    |              | :red_circle: | :white_check_mark: |              |              |                                                         |
+| ____Microservices                          |                    |              |              | :white_check_mark: |              |              |                                                         |
 | ____Fragebogen                             |                    |              |              |              | :red_circle: |              |                                                         |
+| ____Prototyping                          |                    |              |              | :white_check_mark: |              |              |                                                         |
 | ____Relationale Datenbanken                |                    | :red_circle: | :red_circle: |              |              |              |                                                         |
 | ____Learning Analytics                     |                    |              | :red_circle: |              |              |              |                                                         |
 | Technische Grundlagen                      |                    |              |              |              |              |              |                                                         |
-| ____Docker                                 |                    |              |              | :red_circle: |              |              |                                                         |
+| ____Docker                                 |                    |              |              | :white_check_mark: |              |              |                                                         |
 | ____PostgreSQL                             |                    | :red_circle: | :red_circle: |              |              |              |                                                         |
 | ____React                                  |                    | :red_circle: |              |              |              |              |                                                         |
 | **<u>Anforderungsanalyse</u>**             |                    |              |              |              |              |              |                                                         |
