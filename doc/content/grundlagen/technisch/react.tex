@@ -48,6 +48,11 @@ Quelltext \vref{lst:ReactKomponente} stellt eine Begrüßungs-Komponente dar, di
 	}
 \end{lstlisting}
 
+Um dieses Beispiel vereinfacht darzustellen, stellt man sich mehrere Studenten vor. 
+Diese Studenten unterscheiden sich z.B. in Vor-, Nachname, Alter, Matrikelnummer. 
+In React würde es eine Komponente \jinline|Student| geben, welche die o.g. Attribute als Parameter erhält. 
+Somit würde man über einen allgemeinen Studenten einen spezifischen Studenten bekommen. 
+
 Dieses Vorgehen wird bei React als \emph{deklarative Komponente} bezeichnet und deshalb oft auch unter dem Begriff \texttt{UI as a Function} wiederzufinden. \autocite[ ][]{hartmann2019react} 
 Wird eine Komponente in der \acs{SPA} geladen, wird der \acs{DOM} angepasst. 
 Hierbei werden nur die tatsächlichen Änderungen vorgenommen und nicht die komplette Seite geladen. \newline
