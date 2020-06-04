@@ -6,12 +6,12 @@ Gerade die bekannten Internetunternehmen wie Google\autocite{MS-GoogleLLC.2020},
 Allein Google betreut über 100 verschiedene öffentliche \acp{API}\autocite{rf-google-api-alle}.
 Durch die Verwendung einer \ac{API} ist es möglich, Software an einer Microservice-Architektur auszurichten und somit die Wartbarkeit und Langlebigkeit zu verbessern.\autocite{rf-fowler2015microservices}
 
-Der wohl bekannteste und derzeit aktuellste Schnittstellentyp ist \ac{REST}. 
+Der wohl bekannteste und derzeit verbreiteste Schnittstellentyp ist \ac{REST}.
 \ac{REST} basiert dabei auf dem \ac{REST}-Paradigma, welches von Roy Thomas Fielding in seiner Dissertation\autocite{MS-Fielding.} vorgestellt wurde. Allgemein hat das \ac{REST}-Paradigma sechs Grundprinzipien, die bei der Entwicklung einer \ac{REST}-basierten \ac{API} beachtet werden müssen. 
 Aus diesem Grund gilt \ac{REST} auch nicht als Standard, sondern es gibt eine grobe Richtung für die Entwicklung von \acp{API} vor.
 Im Nachfolgenden werden die sechs Grundprinzipien genauer erläutert:
 
-Das erste Prinzip beruht auf einer Client-Server-Architektur, bei der die Benutzerschnittstelle von der Datenhaltung entkoppelt wird.
+Das erste Prinzip beruht auf einer Client-Server-Architektur, bei der die Benutzerschnittstelle von der Datenhaltung entkoppelt wird. % ref zum kommenden Kapitel?
 Hierdurch soll die Skalierbarkeit und Portabilität der Software verbessert werden.
 Als zweites Grundprinzip wird die Zustandslosigkeit angesehen.
 Damit ist gemeint, dass alle Anfragen vom Client an den Server stets alle nötigen Informationen beinhalten, die der Server benötigt.
@@ -42,6 +42,6 @@ Diese Unterscheidung ermöglicht, dass eine statische Ressource jederzeit densel
 Da \ac{REST} selbst kein Standard sondern ein Rahmenwerk für die Architektur von Schnittstellen darstellt gibt es verschiedene Formen, wie eine Umsetzung erfolgen kann. 
 Oftmals wird für die Umsetzung von \ac{REST}-basierten \acp{API} das \ac{HTTP} verwendet.
 \ac{HTTP} bringt viele Eigenschaften mit, die das \ac{REST}-Paradigma voraussetzt und stellt deshalb eine denkbar perfekte Grundlage für die Implementierung von \ac{REST}-\acp{API} dar. 
-Durch die in \ac{HTTP}implementierten Methoden wie GET, POST, PUT und DELETE ist es möglich die im Paradigma beschriebenen Ressourcen zu verwalten.
-Die Übertragung der Nutzdaten erfolgt dabei meist in \ac{JSON}- oder \ac{XML}-Format.\autocite[Vgl.][S. 97]{MS-Tilkov.2015} 
+Durch die in \ac{HTTP} implementierten Methoden wie GET, POST, PUT und DELETE ist es möglich die im Paradigma beschriebenen Ressourcen zu verwalten.
+Die Übertragung der Nutzdaten erfolgt dabei meist im \ac{JSON}- oder \ac{XML}-Format.\autocite[Vgl.][S. 97]{MS-Tilkov.2015} 
 
