@@ -41,5 +41,34 @@ Der \texttt{SurveyMaster} entspricht dabei einer Art Vorlage, in der die einzeln
 Der \texttt{Survey} stellt dann eine konkrete Umfrage dar, die auf genau einem solchen \texttt{SurveyMaster} basiert.
 Dadurch ist es möglich mehrere Umfragen mit genau denselben Fragen durchzuführen.
 
-% TODO: Grafik (ER-Modell) hier oder im Anhang einbinden
+Das entsprechende vereinfachte \acs{ER-Modell} ist in Abbildung~\vref{fig:er-model-simplified} dargestellt.
+Zusätzlich befindet sich im Anhang auf Seite~\pageref{fig:er-model} noch Abbildung~\ref{fig:er-model}, die das vollständige \acs{ER-Modell} zeigt.
 
+\begin{figure}[ht]
+	\centering
+	\def\svgscale{0.72}
+	\graphicspath{{img/backend/database/}}
+	\scriptsize{\input{img/backend/database/er-myla-simplified-2020-06-04.pdf_tex}}
+	\caption{Vereinfachtes \acs{ER-Modell}}
+	\label{fig:er-model-simplified}
+\end{figure}
+
+Bereits das vereinfachte \acs{ER-Modell} zeigt die Trennung von \texttt{SurveyMaster} und \texttt{Survey} sehr gut.
+Die Fragen, die bei jeder solchen Umfrage gleich sein sollen, sind mit dem \texttt{SurveyMaster} verknüpft.
+Die Antworten hingegen beziehen sich stets auf die konkrete Umfrage.
+Für eine Frage wird ein \acs{JSON} in Textform gespeichert, sodass das Format hier anpassbar ist und vom Front-End festgelegt werden kann.
+Bei einer Antwort wird neben der Antwort als solcher noch ein Zeitstempel gespeichert.
+
+Zusätzlich zu den Antworten wird je \texttt{Survey} gezählt, wie viele Teilnahmen es gab.
+Dies ermöglicht die Erkennung von Enthaltungen bei Fragen, die nicht verpflichtend beantwortet werden müssen.
+Um eine Umfrage für die gewünschten Teilnehmer zugänglich zu machen, zugleich aber sicherzustellen, dass die Umfrage nicht öffentlich verfügbar ist und von jedem beantwortet werden kann, gibt es einen \texttt{survey\_code}.
+Hierbei handelt es sich um eine zufällige Zeichenkette, z.~B. \texttt{W3VFG5NHY}, unter der zugegriffen werden kann.
+So kann beispielsweise eine Lehrperson nach dem Erstellen einer Umfrage diesen Code mit den Studierenden teilen.
+
+Um einerseits das Thema einer Umfrage für die Teilnehmer erkenntlich zu machen und andererseits auch um Nutzern, die Umfragen erstellen, die Möglichkeit zu geben, Umfragen ordentlich und übersichtlich zu verwalten, haben diese einen Titel.
+Dabei gibt es einerseits einen allgemeinen Titel sowie eine Beschreibung auf Ebene des \texttt{SurveyMasters}, z.~B. \enquote{Umfrage Zufriedenheit Vorlesung}.
+Zudem ist auf Ebene des \texttt{Surveys} für jede einzelne Umfrage noch ein weiterer Titel gespeichert, um die einzelnen Umfragen auseinanderhalten zu können.
+Hier kann beispielsweise das Datum oder der Name des Kurses verwendet werden.
+
+Zudem ist jeder \texttt{SurveyMaster} und somit auch jeder \texttt{Survey} einem angemeldeten Nutzer zugeordnet.
+Auf die entsprechenden Details wird im folgenden Abschnitt~\ref{sec:konzept-sicherheit} zum Thema Sicherheit ab Seite~\pageref{sec:authentifizierung} etwas näher eingegangen.
