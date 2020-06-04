@@ -1,12 +1,19 @@
 \subsection{Signup}
-\label{ssec:Signup}
-Um an einer Umfrage partizipieren zu können, muss zuvor ein Nutzerkonto erstellt werden. 
-Hierfür wählt der Benutzer wie in Abb. \myRefGeneral{fig:MockSignup} dargestellt das Formfeld mit seinem Benutzernamen wie z.B. \emph{\texttt{Martin}}, den Registerkey, der vom Administrator der Software eingetragen wurde. Dieser könnte \emph{\texttt{DemoKey}} sein.
+\label{ssec:konzept:client:signup}
+Um eine Umfrage erstellen zu können, an der Umfrageteilnehmer partizipieren können, muss zuvor ein Nutzerkonto erstellt werden. 
+Hierfür wählt der Benutzer wie in Abb. \ref{fig:MockSignup} dargestellt das Formfeld mit seinem Benutzernamen wie z.B. \emph{\texttt{Martin}}. 
+Danach wird die E-Mail des Benutzers verlangt, um die Person verifizieren zu können. 
+Inwiefern die Identifizierung von den Benutzern geschieht, ist zum Zeitpunkt der Erstellung der Mockups noch nicht klar. 
+Eine Möglichkeit, worauf sich in diesem Mockup bezogen wird, ist jedoch die Authentifizierung über die E-Mail-Adresse der DHBW. 
 Anschließend wählt der Benutzer ein Passwort seiner Wahl. 
-Ist das gewählte Passwort konkludent, so soll der Benutzer auf die \emph{Result-Seite} weitergeleitet, da diese im späteren Verlauf u.a. das Kernstück darstellt (siehe Kap. \vref{ssec:ResultDashboard}). 
+Ist das gewählte Passwort konkludent, so wird der Benutzer angelegt.
+Durch das wiederholte eingeben des Passwortes wird sichergestellt, dass es zu keiner Verwirrung bezüglich des gesetzten Passwortes kommt. 
+Mit der wiederholten Eingabe des Kennwortes, wird der Nutzer bei unkonkludenten Passwörtern mit einer Fehlermeldung darauf hingewiesen.
 
-\begin{figure}
-	\missingfigure{Signup 1}
-	\caption[Signup 1]{Signup 1 \\ \quelle}
-	\label{fig:MockSignup}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/konzeption/client/register}
+	\captionsetup{justification=centering, format=plain}
+	\caption[Mock-Up der Startseite]{Mock-Up der Registierungsseite \\\figma}
+	\label{fig:MockRegister}
 \end{figure}
