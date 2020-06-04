@@ -3,14 +3,17 @@
 \subsection{Administrationsbereich}
 \label{ssec:Administrationsbereich}
 
-Um eine solche Anwendung zu benutzen und zu pflegen, benötigt es einen Adminstator. 
-Deshalb wurde in disem Zuge ein Administrationsbereich erstellt (vgl. \vref{fig:AdministrationsoberflaecheImplement}), der es ermöglichen soll: 
+Um eine solche Anwendung zu benutzen und zu pflegen, benötigt es einen Adminstator.
+Dass man als Adminstator am System angemeldet ist wird ebenfalls in der Navigationsleiste der Bereich \emph{Admin} als interagierbar dargestellt.
+Dieser soll u.a. die Benutzer verwalten können. 
+Deshalb wurde in diesem Zuge ein Administrationsbereich erstellt (vgl. \vref{fig:AdministrationsoberflaecheImplement}), der es ermöglichen soll: 
+%
 \begin{itemize}
     \item Den Registierungsschlüssel einzusehen und zu ändern,
     \item Einen neuen Benutzer anzulegen,
     \item Sowie alle Benutzer in der Anwendung anzuzeigen. 
 \end{itemize}
-
+%
 \begin{figure}[hp]
 	\centering
 	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/Admin.png}
@@ -18,7 +21,7 @@ Deshalb wurde in disem Zuge ein Administrationsbereich erstellt (vgl. \vref{fig:
 	\caption[\acf{UI}: Administrationsoberfläche]{\acf{UI}: Administrationsoberfläche \\ \quelleScreenshot}
 	\label{fig:AdministrationsoberflaecheImplement}
 \end{figure}
-
+%
 \input{content/implementierung/client/admin/registerkey.tex}
 
 \input{content/implementierung/client/admin/createUser.tex}
