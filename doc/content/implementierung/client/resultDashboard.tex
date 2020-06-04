@@ -1,21 +1,49 @@
+% !TeX root = ../../../master.tex
+
 \subsection{Result-Dashboard}
-\label{ssec:ResultDashboard}
+\label{ssec:ResultDashboardImplement}
 
-Das Result-Dashboard soll eine wichtige Komponente dieser Anwendung sein. 
-Wie der Name schon sagt, sollen hier die Resultate der zuvor erstellten Umfragen auswählbar sein. 
+Wie bereits der User-Journey aus Kapitel \myRefGeneral{sec:UserJourney} dargestellt wurde, ist das Result-Dashboard eine wichtige Komponente dieser Anwendung. 
+Deshalb wird nach dem \emph{Login} der Benutzer auf diese Seite geleitet. 
+
+Wie der Name schon sagt, sollen hier die Resultate der zuvor erstellten Umfragen einsehbar sein. 
 Um eine Ansprechende \acsu*{UI} zu generieren, soll hier auf ein \emph{Card-Design} verwendet werden. 
-Über eine Button auf der Karte soll es möglich sein auf ein detaillierte Auswertung zu kommen. 
+Über eine Button auf der Karte ist es möglich auf ein detaillierte Auswertung zu gelangen. \newline
+\abb \vref{fig:SurveyResultDashboardImplement} zeigt drei erstelle Umfragen des Benutzers: 
+% 
+\begin{itemize}
+	\item Kurzes Beispiel - WWI19SEC
+	\item Projektmanagement - WWI19SEC
+	\item Projektmanagement - WWI17SEC
+\end{itemize}
+% 
+Jede Umfrage besitzt einen individuellen einzigartigen \emph{Sourveycode} wie z.B. \emph{\texttt{QSDQO6EP0T}}. 
+Dieser lässt sich über das Icon \faClipboard\xspace den \emph{Sourveycode} in die \emph{Zwischenablage} kopieren. 
+Ferner hat der Benutzer eine Übersicht, wie viele Teilnehmer \engl{Participations} bzgl. diese Umfrage getätigt haben. 
+Über den Button \jinline|Show Survey Results| kann der Benutzer die Ergebnisse dieser Umfrage ansehen. 
 
-Diese detaillierte Auswertung soll dann je nach Frageart ein bestimmtes Diagramm erstellen. 
-
-\begin{figure}
-	\missingfigure{ResultDashboard}
-	\caption[Result-Dashboard]{Result-Dashboard \\ \quelle}
-	\label{fig:MockResultDashboard}
+\begin{figure}[hp]
+	\centering
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/SurveyResultDashboard.png}
+	\captionsetup{justification=centering, format=plain}
+	\caption[\acf{UI}: Registrierung]{\acf{UI}: Registrierung \\ \quelleScreenshot}
+	\label{fig:SurveyResultDashboardImplement}
 \end{figure}
 
-\begin{figure}
-	\missingfigure{ResultDetail}
-	\caption[Result-Detail]{Result-Detail \\ \quelle}
-	\label{fig:MockResultDetail}
+\subsubsection*{Detaillierte Auswertung}
+Hat der Benutzer die detaillierte Auswertung ausgwählt, soll je nach Frageart ein bestimmtes Diagramm erstellen werden. 
+Die Diagramme werden mit Hilfe von \emph{react-chartjs-2} generiert.\footnote{\url{https://www.npmjs.com/package/react-chartjs-2}} 
+
+\abb \myRefGeneral{fig:SurveyResultDetailImplement} zeigt einen Ausschnitt der Auswertung der Umfrage zur Projektmanagement-Vorlesung. 
+Hier wird exemplarisch eine \emph{Tortendiagramm} ausgegeben. 
+Die verwendeten Farben wurden zuvor definiert. 
+Der Benutzer hat die Möglichkeit über das \emph{Tortendiagramm} mit seiner Maus zu fahren (hovern).
+Hier erhält er den jeweiligen Wert über einen \emph{Tooltip} angezeigt.
+
+\begin{figure}[hp]
+	\centering
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/SurveyResultDetail2.png}
+	\captionsetup{justification=centering, format=plain}
+	\caption[\acf{UI}: Auswertung der Umfrage]{\acf{UI}: Auswertung der Umfrage aus Abb. \vref{fig:SurveyResultDashboardImplement} \\ \quelleScreenshot}
+	\label{fig:SurveyResultDetailImplement}
 \end{figure}

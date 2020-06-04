@@ -1,12 +1,27 @@
-\subsection{Umfrage}
-\label{ssec:Umfrage}
-Wie in Abb. \vref{fig:MockUmfrage} dargestellt, soll der Teilnehmer hier auf den zuvor erstellten Frageboge geleitet werden. 
+% !TeX root = ../../../master.tex
+
+\subsection{Teilnahme Umfrage}
+\label{ssec:UmfrageImplement}
+
+Wie in Abb. \vref{fig:UmfrageImplement} dargestellt, soll der Teilnehmer hier auf den zuvor erstellten Frageboge geleitet werden. 
 Hier kann dieser diesen ausfüllen und nach Beendigung über einen Button abschicken. 
-Der Teilnehmer soll ein Feedback erhalten, ob seine Teilnahme erfolgreich war. 
+Der Teilnehmer erhält am Ende ein Feedback, dass seine Teilnahme erfolgreich war.
 
+Abb. \vref{fig:UmfrageImplement}  stellt eine Umfrage zur Projektmanagement-Vorlesung dar, inder der Teilnehmer drei Fragen beantworten soll. 
+Exemplarisch sind hier bei drei Fragetypen angeführt: 
+\begin{itemize}
+	\item Multiple Choice: Auswahl der Notationsart für zukünftige Projekte
+	\item Skala: Benotung der Vorlesung auf einer Skala von 1 - 5
+	\item Ja/Nein: Ob der Teilnehmer die Vorlesung erneut besuchen würde 
+\end{itemize}
 
-\begin{figure}
-	\missingfigure{Mockup 1}
-	\caption[Mockup 1]{Mockup 1 \\ \quelle}
-	\label{fig:MockUmfrage}
+Über den Button \jinline|Complete| kann der Teilnehmer die Umfrage beenden. 
+Er erhält ein visuelles Feedback über seine Teilnahme.
+
+\begin{figure}[hp]
+	\centering
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/TeilnahmeUmfrage.png}
+	\captionsetup{justification=centering, format=plain}
+	\caption[\acf{UI}: Umfrage basierend auf der Vorlage]{\acf{UI}: Umfrage basierend auf der Vorlage \\ \quelleScreenshot}
+	\label{fig:UmfrageImplement}
 \end{figure}
