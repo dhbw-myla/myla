@@ -3,21 +3,23 @@
 
 Eine Vielzahl von Anforderungen bestimmte das Vorgehen im Projekt.
 
-Ein wesentlicher Grundsatz war, dass diese App eine Lernapp darstellt, welche für Umfragen genutzt wird.
+Ein wesentlicher Grundsatz war, dass diese App eine Lernapp darstellt, welche für Umfragen genutzt wird. Die Applikation sollte in Form einer Webanwendung umgesetzt werden, um somit einen geräteunabhängigen Zugriff zu ermöglichen.
+Damit sollte auch gewährleistet werden, dass ein Zugriff via mobilem Endgerät ermöglicht wird. 
 Um diese Applikation auch einsetzen zu können, galten bestimmte Vorgaben.
 
-Zum einen sollten neue Accounts über einen Anmeldeschlüssel erstellt werden können.
+Zum einen sollten neue Accounts über einen Anmeldeschlüssel erstellt werden können, dieser Anmeldeschlüssel soll dabei von einem Administrator festgelegt und verändert werden können.
 
-Eine weitere Anforderung war, dass Dozenten nach dem ersten Login ein neues Passwort für ihren Account festlegen sollten.
-Zusätzlich ist es für sie möglich, Umfragen zu erstellen und zu gruppieren sowie Umfrageergebnisse einzusehen.
-Bei der Erstellung der Umfragen soll es ermöglicht werden, dass diese über mehrere Zeiträume und Vorlesungen wiederverwendet werden können.
-Dabei sollen diese Umfragen einige Fragearten, namentlich offene Fragen, Fragen mit festgelegten Antwortmöglichkeiten, also Multiple-Choice- beziehungsweise Single-Choice-Fragen, sowie Fragen mit einer Skala oder Bewertungen, beinhalten können.
-Die erstellte Umfrage kann nachfolgend verfügbar gemacht werden.
+Eine weitere Anforderung war, dass Dozenten nach dem ersten Login ein neues Passwort für ihren Account festlegen sollten, da die zu Beginn genutzten Passwörter vom Admin festgelegt wurden und die Festlegung eines eigenen Passwort eine höhere Sicherheit bietet.
+Zusätzlich sollte es für sie möglich sein, Umfragen zu erstellen und zu gruppieren sowie Umfrageergebnisse einzusehen.
+Bei der Erstellung der Umfragen soll es ermöglicht werden, dass diese über mehrere Zeiträume und Vorlesungen wiederverwendet werden können, dadurch muss die Umfrage nur einmal verwirklicht werden und kann für mehrere Kurse und im Verlauf einer Vorlesung freigeschaltet werden, ohne sie erneut erstellen zu müssen.
 
-Teilnehmer der Umfrage sollen anonym an den Umfragen partizipieren können. Dabei kann via Link die entsprechende Umfrageseite aufgerufen werden. Am Ende einer Umfrage sollte den Teilnehmern die Möglichkeit gegeben werden, anonym darunter kommentieren zu können.
+Dabei sollten diese Umfragen einige Fragearten, namentlich offene Fragen, Fragen mit festgelegten Antwortmöglichkeiten, also Multiple-Choice- beziehungsweise Single-Choice-Fragen, sowie Fragen mit einer Skala oder Bewertungen, beinhalten können, dadurch wird eine vielfältige und abwechslungsreiche Umfrage ermöglicht.
+Die erstellte Umfrage sollte nachfolgend verfügbar gemacht werden können, um Studenten und andere Nutzer an der veröffentlichten Umfrage teilnehmen zu lassen.
 
-Nach einer Umfrage soll es einem Dozenten ermöglicht werden, die Ergebnisse der Umfrage direkt einzusehen, wobei es ihm dabei ermöglicht wird, die Ergebnisse im zeitlichen Verlauf zu betrachten, um den Lernfortschritt der Studenten überblicken zu können.
-Außerdem soll er verschiedene Ansichten nutzen können und es soll ihm ermöglicht werden, die Ergebnisse grafisch anschaulich in einem Diagramm zu betrachten.
+Teilnehmer der Umfrage sollen anonym an den Umfragen partizipieren können, damit keine Rückschlüsse auf deren Personen gezogen werden können und um datenschutzrechtliche Bestimmungen einhalten zu können. Dabei kann via Link oder über einen 10-stelligen Code, der auf der Startseite eingegeben wird, die entsprechende Umfrageseite aufgerufen werden. Dadurch wird es ermöglicht, dass ein Dozent einen Code analog im Frontalunterricht vorgeben kann und den Studenten diesen nicht elektronisch zusenden muss.
+
+Nach einer Umfrage sollte es einem Dozenten ermöglicht werden, die Ergebnisse der Umfrage direkt einzusehen, wobei es ihm dabei ermöglicht wird, die Ergebnisse sämtlicher anhand einer einmalig erstellten Umfragevorlage veröffentlichter Umfragen einsehen zu können, um den Lernfortschritt der Studenten besser zu überblicken und eventuellen Nachholbedarf zu offenbaren.
+Außerdem sollte dieser verschiedene Ansichten nutzen können und es soll ihm ermöglicht werden, die Ergebnisse grafisch anschaulich in einem Diagramm zu betrachten, um einen verständlicheren Überblick über die Beantwortungen der Umfrage zu erhalten.
 
 
 % VORSCHLAG - Tabularx ist irgndwie broke im repo hier - bst durch andere anpassungen in der config.. sollte man nochmal drüber schauen! falls fragen sind, einfach mich fragn - Rene
@@ -29,6 +31,10 @@ Außerdem soll er verschiedene Ansichten nutzen können und es soll ihm ermögli
       {Bezeichnung} & {Art} & {Beschreibung} \\
       \hline \hline
       {\label{Anf:A1}A1} & fachlich & Lernapp entwickeln, welche für Umfragen genutzt wird \\
+      \hline
+      {\label{Anf:A1}A1} & fachlich und technisch & Zugriff auf Lernapp via PC und Laptop \\
+      \hline
+      {\label{Anf:A1}A1} & fachlich und technisch & Zugriff auf Lernapp via mobilem Endgerät \\
       \hline
       {\label{Anf:A2}A2} & technisch & Erstellen neuer Accounts über einen Anmeldeschlüssel \\
       \hline
@@ -66,10 +72,10 @@ Außerdem soll er verschiedene Ansichten nutzen können und es soll ihm ermögli
       \hline
       {\label{Anf:A10}A10} & fachlich und technisch & Teilnehmer sollen anonym an den Umfragen partizipieren können \\
       \hline
-      {\label{Anf:A11}A11} & fachlich und technisch & Die Umfrageseite soll via Link aufgerufen werden können \\
+      {\label{Anf:A11a}A11a} & fachlich und technisch & Der Umfrage soll via Link beigetreten werden können \\
       \hline
-      {\label{Anf:A12}A12} & fachlich und technisch & Teilnehmer sollen am Ende einer Umfrage anonym kommentieren können \\
-      \hline
+      {\label{Anf:A11b}A11b} & fachlich und technisch & Der Umfrage soll mittels 10-stelligen Code beigetreten werden können \\
+      \bottomrule
     %   ... weiter für weitere Anforderungen
     \end{tabularx}
     \caption{Anforderungen}
