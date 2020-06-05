@@ -36,7 +36,7 @@ Das Body-Objekt ist ein Kind vom Head-Objekt. Jedes Eltern-Objekt kann mehrere K
 % https://books.google.de/books?id=2zrCDwAAQBAJ&printsec=frontcover&dq=react+hartmann&hl=de&sa=X&ved=0ahUKEwirn-u66uDpAhVExKYKHefEAPsQ6AEIKjAA#v=onepage&q=react%20hartmann&f=false 
 React\footnote{\url{https://reactjs.org}} ist ein solches Framework. Es ist eine Open-Source-JavaScript-Bibliothek mit deren Hilfe man sog. \acfp{SPA} erstellen kann.\autocite[ ][]{hartmann2019react} 
 Das Hauptaugenmerkt von React ist der komponentenbasierte Aufbau. Eine Komponente stellt den Zustand der \acs{SPA} dar. 
-Sie repräsentiert einen fachlichen Teil wie z.B. ein \enquote{einfaches} Eingabefeld \jinline|(Input)| oder auch komplexere Komponenten wie ein Formular.
+Sie repräsentiert einen fachlichen Teil wie \zb ein \enquote{einfaches} Eingabefeld \jinline|(Input)| oder auch komplexere Komponenten wie ein Formular.
 Durch den komponentenbasierten Aufbau kann React nicht nur für Webanwendungen sondern auch für iOS oder auch Android entwickelt werden. 
 Quelltext \vref{lst:ReactKomponente} stellt eine Begrüßungs-Komponente dar, die einen Namen als Parameter \jinline|(props)| übergeben bekommt. 
 
@@ -49,14 +49,14 @@ Quelltext \vref{lst:ReactKomponente} stellt eine Begrüßungs-Komponente dar, di
 \end{lstlisting}
 
 Um dieses Beispiel vereinfacht darzustellen, stellt man sich mehrere Studenten vor. 
-Diese Studenten unterscheiden sich z.B. in Vor-, Nachname, Alter, Matrikelnummer. 
+Diese Studenten unterscheiden sich \zb in Vor-, Nachname, Alter, Matrikelnummer. 
 In React würde es eine Komponente \jinline|Student| geben, welche die o.g. Attribute als Parameter erhält. 
 Somit würde man über einen allgemeinen Studenten einen spezifischen Studenten bekommen. 
 
 Dieses Vorgehen wird bei React als \emph{deklarative Komponente} bezeichnet und deshalb oft auch unter dem Begriff \texttt{UI as a Function} wiederzufinden. \autocite[ ][]{hartmann2019react} 
 Wird eine Komponente in der \acs{SPA} geladen, wird der \acs{DOM} angepasst. 
 Hierbei werden nur die tatsächlichen Änderungen vorgenommen und nicht die komplette Seite geladen. \newline
-Komponenten können einen internen Zustand haben \jinline|state| oder über externe Zustände \jinline|(properties)| verändert werden. So kann z.B. ein Komponente Account einen \jinline|state| 
+Komponenten können einen internen Zustand haben \jinline|state| oder über externe Zustände \jinline|(properties)| verändert werden. So kann \zb ein Komponente Account einen \jinline|state| 
 
 Wie in Quelltext \vref{lst:ReactKomponente} zu erkennen ist, hat die Komponente im Return-Statement eine \jinline|{ }|. 
 Diese ist eine typisches React-Syntax. 
