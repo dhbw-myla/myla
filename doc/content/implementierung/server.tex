@@ -7,7 +7,7 @@ Bei Node.js handelt es sich um eine JavaScript-Laufzeitumgebung, die die servers
 Express ist ein Framework für Node.js, um Webanwendungen und \acsp{API} zu entwickeln und wegen der Einfachheit weit verbreitet.\autocite[Vgl.][]{nl-strongloop2017express}
 
 Für die Datenhaltung wird PostgreSQL, ein \ac{RDBMS}, verwendet.
-Wie bei allen \acsp{RDBMS} können Daten über die Sprache \acs{SQL} abgefragt und editiert werden.
+Wie bei allen \acs{RDBMS} können Daten über die Sprache \acs{SQL} abgefragt und editiert werden. % for some unknown reason \acsp doesn't create a hyperlink here
 Mithilfe eines entsprechenden Moduls kann sich innerhalb der Node.js-Anwendung mit der PostgreSQL-Datenbank verbunden werden, sodass \acs{SQL}-Befehle ausgeführt werden können.\autocite[Vgl.][]{nl-carlson2020nodepostgres}
 
 Für jeden \acs{API}-Endpunkt wird jeweils eine Funktion aufgerufen, die die übergebenen Daten entgegennimmt, prüft und daraufhin auf die Datenbank zugreift.
@@ -23,28 +23,12 @@ Für die tatsächliche Zugriffskontrolle im Back-End werden, wie bereits in der 
 Bei der Registrierung oder einer Anmeldung wird eine solche Session-ID ausgestellt.
 Bei jedem Zugriff auf einen der \acs{API}-Endpunkte wird, bevor überhaupt irgendeine Aktion ausgeführt wird, die Korrektheit dieser Session-ID geprüft.
 Damit ist sichergestellt, dass eine entsprechende Prüfung nicht versehentlich beim Implementieren eines einzelnen \acs{API}-Endpunkts vergessen werden kann.
-Diese entsprechende Funktion ist in Quelltext~\vref{implementation-server-auth-check} abgebildet.
 
-\begin{lstlisting}[language=javascript, caption={Standardmäßige Authentifizierung}, label={lst:implementation-server-auth-check}]
-exports.checkUserAuthorization = function (request, callback) {
-	const { username, sessionId } = request.body;
-	if (username === undefined || sessionId === undefined)
-		return callback(false);
-	db.query('SELECT * FROM users WHERE lower(username) = lower($1) AND session_id = $2;', [username, sessionId], (err, dbResult) => {
-		if (err || dbResult.rows.length !== 1) {
-			callback(false);
-		} else if (dbResult.rows[0].password_change_required) {
-			callback(false, "Error: Password change required");
-		} else {
-			callback(true);
-		}
-	});
-};
-\end{lstlisting}
-
-So wird zunächst der Nutzername und die Session-ID ausgelesen.
+So wird dabei zunächst der Nutzername und die Session-ID ausgelesen aus der Anfrage an das Back-End ausgelesen.
 Daraufhin kann nach einem entsprechenden Eintrag in der Datenbank gesucht werden.
-Wird kein Ergebnis gefunden oder ist ein Passwortwechsel gefordert, so wird der Zugriff verwehrt.
+Wird kein Ergebnis gefunden, ist die übergebene Session-ID also nicht für den entsprechenden Benutzer gespeichert, so ist der Nutzer nicht berechtigt und die Anfrage wird zurückgewiesen.
+Der Zugriff wird auch dann verwehrt, wenn ein Passwortwechsel gefordert ist.
+Somit wird dieser Passwortwechsel, z.~B. nach einem Zurücksetzen des Passworts, durchgesetzt und kann nicht umgangen werden.
 
 Selbstverständlich gibt es auch \acs{API}-Endpunkte, auf die Zugriffe ohne Autorisierung möglich sein müssen.
 Dies umfasst einerseits das Beantworten von Umfragen und andererseits das Registrieren, Passwortwechseln und Anmelden, bei dem Nutzer logischerweise noch keine gültige Session-ID besitzen, da sie diese ja dadurch erst erhalten wollen.
@@ -53,3 +37,6 @@ Auch hierbei steht im Vordergrund, dass \acs{API}-Endpunkte standardmäßig gesc
 
 Darüber hinaus wird bei jeder Aktion die Berechtigung geprüft.
 Bei der Bearbeitung eines \texttt{SurveyMasters} wird zum Beispiel zuerst einmal validiert, ob dieser auch dem angemeldeten Nutzer zugeordnet ist.
+
+Ebenso gibt es Aktionen, die nur durch Administratoren durchgeführt werden können.
+Dies umfasst das Lesen, Aktivieren, Bearbeiten und Deaktivieren des Registrierungsschlüssels, das Erstellen von Benutzern, das Zurücksetzen von Passwörtern und das Erstellen weiterer Administratoren.
