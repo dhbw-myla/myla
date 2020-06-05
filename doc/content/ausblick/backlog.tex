@@ -13,7 +13,7 @@ Diese wurde bereits während der Testphase überprüft.
 
 Eine Neuerung wäre eine spezielle Ansicht des Front-Ends angepasst an die Bedürfnisse der Mitarbeiter.
 Hierzu zählen eine einfache Übersicht der aktuell laufenden Filme, eine simple und schnelle Suche nach Reservierungen und ein Kalendersteuerelement der nächsten 14 Spieltage im Kino. \\
-Die Anordnung der Filme auf der Startseite des Mitarbeiters sollte nach dessen Belieben z.B. nach aktueller Uhrzeit erfolgen, sodass Primetime-Filme eine bestimmte Zeit vor Start des Blockbusters, aber auch zur jeweiligen Tageszeit eine passende Filmauswahl angezeigt werden. \\
+Die Anordnung der Filme auf der Startseite des Mitarbeiters sollte nach dessen Belieben \zb nach aktueller Uhrzeit erfolgen, sodass Primetime-Filme eine bestimmte Zeit vor Start des Blockbusters, aber auch zur jeweiligen Tageszeit eine passende Filmauswahl angezeigt werden. \\
 Dies sollte den Buchungsvorgang vor Ort erheblich erleichtern und Teilzeitkräften sowie Ferienarbeitern den Einsteig in das System auch ohne eine lange Einarbeitungszeit ermöglichen. \\
 
 Sobald ein Mitarbeiter eine Vorstellung ausgewählt hat, bekommen er und der Kunde vor Ort einen aktuellen Saalplan angezeigt.
@@ -45,11 +45,11 @@ Nach Möglichkeit wäre hier dann auch ein E-Mail-Versand der Bestätigung denkb
 \authorsection{\authorSG}
 Durch den vierten Sprint soll dem Kinoreservierungssystem ein Benutzerkonto hinzugefügt werden.
 Somit hätte der Kunde die Perspektive, sich in sein zuvor erstelltes Benutzerkonto einzuloggen.
-Hier hätte er u.a. die Chance sein Passwort zu ändern und eine Übersicht über seine getätigtem Reservierungen zu haben.\
+Hier hätte er \ua die Chance sein Passwort zu ändern und eine Übersicht über seine getätigtem Reservierungen zu haben.\
 Hierbei bestünde dann die Aussicht, dass er auch eine getätigte Reservierung wieder stornieren kann.
 Schlussendlich könnte man dem Kunden noch die Perspektive bieten, alle von ihm verfassten getätigten Rezensionen anzuzeigen.
 
-Hierfür müssten lediglich neue \acs{REST}-Schnittstellen wie z.B. \jinline|reservation/customer| definiert werden, die für die Auswertung der getätigten Reservierungen verantwortlich wären.
+Hierfür müssten lediglich neue \acs{REST}-Schnittstellen wie \zb \jinline|reservation/customer| definiert werden, die für die Auswertung der getätigten Reservierungen verantwortlich wären.
 Ebenfalls müssten im \jinline|CustomerService| die entsprechenden Methoden implementiert werden, sodass die aufgerufene Ressource das Ergebnis übermitteln kann.
 
 Wie auch im dritten Sprint sollen hier kleine Verbesserungen sowie Fehlerbeseitigungen durchgeführt werden.
@@ -97,5 +97,5 @@ Durch eine zufällige in der Datenbank gespeicherte Nummer (Nonce), die neben de
 \label{ssssec:stornieren_und_verwalten}
 Einhergehend zur Reservierung, sollte eine Stornierung dieser, als auch eine Buchung möglich sein.
 
-Um Reservierungen und Buchungen für einen passionierten Kinogänger einsehbar und verwaltbar (u.a. Stornierung) zu gestalten, wird ein Login eingerichtet.
+Um Reservierungen und Buchungen für einen passionierten Kinogänger einsehbar und verwaltbar (\ua Stornierung) zu gestalten, wird ein Login eingerichtet.
 Über diesen kann eine Personalisierung der Darstellung sowie Filmempfehlungen die User Experience verbessern.
