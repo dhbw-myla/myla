@@ -1,0 +1,59 @@
+% create free field for chapter
+\makeatletter
+\newcommand{\freechapterauthor}[1]{%
+	{\parindent0pt\vspace*{-25pt}%
+		\linespread{1.1}\large\scshape#1%
+		\par\nobreak\vspace*{35pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create author for chapter
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+	{\parindent0pt\vspace*{-25pt}%
+		\linespread{1.1}\large\scshape Autor: #1%
+		\par\nobreak\vspace*{35pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create multiple author for chapter
+\makeatletter
+\newcommand{\chaptermulitpleauthor}[2]{%
+	{\parindent0pt\vspace*{-25pt}%
+		\linespread{1.1}\large\scshape Autoren: #1, #2%
+		\par\nobreak\vspace*{35pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create free for section
+\makeatletter
+\newcommand{\freeauthorsection}[1]{%
+	{\parindent0pt\vspace*{0 pt}%
+		\linespread{1.1}\scshape#1%
+		\par\nobreak\vspace*{15pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create author for section
+\makeatletter
+\newcommand{\authorsection}[1]{%
+	{\parindent0pt\vspace*{0 pt}%
+		\linespread{1.1}\scshape Autor: #1%
+		\par\nobreak\vspace*{15pt}}
+	\@afterheading%
+}
+\makeatother
+
+% create multiple author for section
+\makeatletter
+\newcommand{\multipleauthorsection}[2]{%
+	{\parindent0pt\vspace*{0 pt}%
+		\linespread{1.1}\scshape Autoren: #1, #2%
+		\par\nobreak\vspace*{15pt}}
+	\@afterheading%
+}
+\makeatother
