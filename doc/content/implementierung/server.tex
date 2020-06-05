@@ -10,7 +10,21 @@ Für die Datenhaltung wird PostgreSQL, ein \ac{RDBMS}, verwendet.
 Wie bei allen \acs{RDBMS} können Daten über die Sprache \acs{SQL} abgefragt und editiert werden. % for some unknown reason \acsp doesn't create a hyperlink here
 Mithilfe eines entsprechenden Moduls kann sich innerhalb der Node.js-Anwendung mit der PostgreSQL-Datenbank verbunden werden, sodass \acs{SQL}-Befehle ausgeführt werden können.\autocite[Vgl.][]{nl-carlson2020nodepostgres}
 
+\subsection{Implementierung der einzelnen Routen}
 Für jeden \acs{API}-Endpunkt wird jeweils eine Funktion aufgerufen, die die übergebenen Daten entgegennimmt, prüft und daraufhin auf die Datenbank zugreift.
+Diese Routen sind dabei am \acs{REST}-Paradigma orientiert.
+Allerdings wird von diesem Muster an einigen Stellen abgewichen.
+Dies hängt damit zusammen, dass die Nutzung der Schnittstelle dadurch für das Front-End bzw. den Client vereinfacht werden soll.
+So kann der Client zum Beispiel neben einer Liste von Umfragen auch noch weitere Details hierzu erhalten.
+Dies widerspricht zwar den Grundsätzen von \acs{REST}, reduziert allerdings den Aufwand für den Client erheblich, da je Ansicht im Front-End lediglich ein \acs{API}-Aufruf durchgeführt werden muss und nicht mehrere.
+
+Die Routen bestehen dabei einerseits aus den standardmäßigen und für \acs{REST} typischen Aktionen, wie zum Beispiel dem Erstellen, Lesen, Bearbeiten und Löschen von Umfragen.
+Andererseits gibt es eben weitere Routen, die in enger Abstimmung mit dem Front-End erstellt wurden.
+Für alle diese Routen existiert im git-Repository eine ausführliche technische Dokumentation, die genau die entsprechenden Details je Route auflistet.
+Dies umfasst die Anfrage und die entsprechenden Antworten.
+Je nachdem, ob eine Anfrage erfolgreich durchgeführt werden konnte oder nicht, unterscheidet sich die Antwort nämlich.
+Hierfür werden \acs{HTTP}-Statuscodes genutzt, bei denen \texttt{200} zum Beispiel angibt, dass alles erfolgreich durchgeführt werden konnte.
+Darüber hinaus kann dem Client so auch mitgeteilt werden, dass die Übergabeparameter ungültig waren, der Nutzen nicht autorisiert ist oder ein interner unerwarteter Fehler aufgetreten ist.\autocite[Vgl.][S. 51 ff]{nl-rfc7231}
 
 \subsection{Zugriffskontrolle}
 Die Zugriffskontrolle erfolgt im Back-End.

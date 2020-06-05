@@ -8,8 +8,9 @@ Der Server soll nach außen eine \acs{API} mit einzelnen Endpunkten bieten.
 Jeder dieser \acs{API}-Endpunkte soll dann für die Ausführung einer speziellen Aktion zuständig sein.
 Der Client soll dann auf diese zugreifen können.
 
-Die \acs{API} soll dabei einerseits in Anlehnung an das Programmierparadigma \ac{REST} entwickelt werden, andererseits soll es für den Client auch einfach sein, benötigte Daten zu beschaffen oder Aktionen auszuführen.
-Wenn daher nach dem \acs{REST}-Paradigma auch manchmal getrennte \acs{API}-Endpunkte erforderlich sind, sollen diese aus Gründen der Einfachheit zu einem zusammengefasst werden.
+Dabei soll die Implementierung der Routen am Programmierparadigma \acs{REST} orientiert werden.
+Dabei bietet der Server über die \acs{HTTP}-Methoden die \acs{CRUD}-Operationen an, da er vorwiegend zur Datenhaltung dient.
+Hinzu kommt selbstverständlich die Geschäftslogik, die das Erstellen, Durchführen und Auswerten der Umfragen ermöglicht.
 
 % PLAGIAT
 %Die \acf{API} dient zur Kommunikation zwischen Client und Server, dabei soll dem Client ermöglichen werden auf Ressourcen des Servers zuzugreifen.
