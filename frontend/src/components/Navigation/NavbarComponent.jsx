@@ -1,20 +1,10 @@
-import {
-   MDBCollapse,
-   MDBIcon,
-   MDBNavbar,
-   MDBNavbarBrand,
-   MDBNavbarNav,
-   MDBNavbarToggler,
-   MDBNavItem,
-   MDBNavLink,
-   MDBTooltip,
-} from 'mdbreact';
+import { MDBCollapse, MDBIcon, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBNavItem, MDBNavLink, MDBTooltip } from 'mdbreact';
 import React, { Component, Fragment } from 'react';
 import { logout } from '../../api/auth';
 import DHBWLogo from '../../assets/DHBW-Logo_neu.png';
 import { clearSessionStorage, getStoredUser, isUserAdmin, verifySession } from '../../auth/verifyPw';
 import * as swalHelper from '../../util/swalHelper';
-import { ADMIN, DASHBOARD, MY_ACCOUNT, NOT_YET_IMPLEMENTED, SURVEY } from '../constants';
+import { ADMIN, DASHBOARD, MY_ACCOUNT, SURVEY } from '../constants';
 import './Navigation.css';
 
 class NavbarComponent extends Component {
@@ -44,6 +34,10 @@ class NavbarComponent extends Component {
          this.forceUpdate();
       });
    };
+
+   showSupport = () => {
+      swalHelper.error('Support', 'Not yet implemented!', true);
+   }
 
    componentWillMount() {
       isUserAdmin().then((resp) => this.setState({ isAdmin: resp }));
@@ -112,11 +106,11 @@ class NavbarComponent extends Component {
                      </MDBNavItem>
                      <MDBNavItem className="mr-2">
                         <MDBTooltip placement="bottom" domElement style={{ display: 'block' }}>
-                           <a className="nav-link Ripple-parent" href={'/' + NOT_YET_IMPLEMENTED} target="_blank" rel="noopener noreferrer">
+                           <div className="nav-link Ripple-parent" onClick={this.showSupport}>
                               <strong>
                                  <MDBIcon icon="question-circle" />
                               </strong>
-                           </a>
+                           </div>
                            <span>SUPPORT</span>
                         </MDBTooltip>
                      </MDBNavItem>
