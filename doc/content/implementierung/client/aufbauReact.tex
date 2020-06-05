@@ -10,11 +10,11 @@ Dieser erlaubt es Zugriff auf die übermittelten \props.
 
 Die Hauptmethode einer Komponente ist die \render-Funktion. 
 Sie definiert das Aussehen der Komponente, welches deskriptiv über \acs{HTML} oder weitere Kind-Kompo\-nente(n) beschrieben wird. 
-Wichtig zu verstehen ist hierbei, dass beim Laden einer solchen Komponente mind. zwei interne Funktionen aufgerufen werden. 
+Wichtig zu verstehen ist hierbei, dass beim Laden einer solchen Komponente mindestens zwei interne Funktionen aufgerufen werden. 
 Zum einen wird beim Laden die Funktion \cwm aufgerufen, die Änderungen vor dem kompletten Laden der Komponente vollzieht.
 Dies sollte jedoch ab der Version 17 nicht mehr verwendet werden. 
 Zum zweiten wird nach dem Erstellen der Komponente die Funktion \cdm aufgerufen. 
-Diese ermöglicht es z.B. den \state  der Anwendung zu verändern. 
+Diese ermöglicht es \zb den \state  der Anwendung zu verändern. 
 Ein Beispiel hierfür wäre das Formularfeld, welches als \props den Vor-, Nachname und Alter eines Studenten erhält. 
 Diese Änderungen erfolgt lediglich auf der zu änderten Komponente über den virtuellen \acs{DOM}. 
 Das Ändern des \state wird über eine Funktion \exampleState durchgeführt, welches die neuen Parameter in der Komponente setzt.
