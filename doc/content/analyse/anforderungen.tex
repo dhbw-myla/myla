@@ -6,7 +6,7 @@ Die Anforderungen an das zu entwerfende und entwickelnde System lassen sich in m
 
 Die Anwendung soll unabhängig des Endnutergeräts funktionieren.
 So soll ein Student mit seinem mobilen Endgerät eine Umfrage ausfüllen können, während etwa ein Dozent die Umfrage am Desktop-Computer erstellt.
-Daraus ergibt sich Anforderung [A1], die Endgeräteunabhängige Nutzung der Anwendung.
+Daraus ergibt sich Anforderung [A1], die endgeräteunabhängige Nutzung der Anwendung.
 
 Die Registrierung neuer Nutzer soll geschützt werden, um eine zu hohe Auslastung des Systems bzw. Angriffe zu verhindern.
 Zudem sollen bereits registrierte und explizit dazu berechtigte Nutzer neue Konten anlegen können.
@@ -32,38 +32,44 @@ Dies ergibt die Anforderungen [A10], die manuelle Veröffentlichung der Umfrage,
 Die Teilnahme an Umfragen soll anonym erfolgen und für die Teilnehmer so simpel wie möglich sein.
 Dies stellt die letzten Anforderungen [A14], die anonyme Teilnahme an Umfragen, sowie [A15], der Möglichkeit zur einfachen Teilnahme, dar.
 
-\begin{tabularx}{\textwidth}{|l|k|r|}
-  \hline
-  {Nr.} & {Art} & {Beschreibung} \\
-  \hline
-  {\label{Anf:A1}A1} & funktionale Anforderung & Endgeräteunabhängige Nutzung\\
-  \hline
-  {\label{Anf:A2}A2} & funktionale Anforderung & Registrieren mit Registrierungsschlüssel \\
-  \hline
-  {\label{Anf:A3}A3} & funktionale Anforderung & Manuelles Registrieren neuer Nutzer \\
-  \hline
-  {\label{Anf:A4}A4} & funktionale Anforderung & Möglichkeit zur Passwortänderung \\
-  \hline
-  {\label{Anf:A5}A5} & funktionale Anforderung & Pflicht zur Passwortänderung bei manueller Registierung \\
-  \hline
-  {\label{Anf:A6}A6} & funktionale Anforderung & Pflicht zur Passwortänderung bei zurückgesetztem Passwort \\
-  \hline
-  {\label{Anf:A7}A7} & funktionale Anforderung & Erstellen von Umfragen \\
-  \hline
-  {\label{Anf:A8}A8} & funktionale Anforderung & Verwalten von Umfragen \\
-  \hline
-  {\label{Anf:A9}A9} & funktionale Anforderung & Verwendung verschiedener Fragetypen \\
-  \hline
-  {\label{Anf:A10}A10} & funktionale Anforderung & Manuelle Veröffentlichung der Umfragen \\
-  \hline
-  {\label{Anf:A11}A11} & funktionale Anforderung & Bearbeitbarkeit unveröffentlichter Umfragen \\
-  \hline
-  {\label{Anf:A12}A12} & funktionale Anforderung & Wiederholbarkeit von Umfragen \\
-  \hline
-  {\label{Anf:A13}A13} & funktionale Anforderung & Grafische Darstellung der Umfrageergebnisse \\
-  \hline
-  {\label{Anf:A14}A14} & funktionale Anforderung & Anonyme Teilnahme an Umfragen \\
-  \hline
-  {\label{Anf:A15}A15} & funktionale Anforderung & Möglichkeit zur einfachen Teilnahme an Umfragen \\
-  \bottomrule
-\end{tabularx}
+\begin{table}
+  \setlength\extrarowheight{3pt}
+\centering
+  \begin{tabular}{|C{1cm}|C{1cm}|L{12cm}|}
+    \hline
+    \textbf{Nr.} & \textbf{Art} & \textbf{Beschreibung} \\
+    \hline
+    {\label{Anf:A1}A1} & f & Endgeräteunabhängige Nutzung \\
+    \hline
+    {\label{Anf:A2}A2} & f & Registrieren mit Registrierungsschlüssel \\
+    \hline
+    {\label{Anf:A3}A3} & f & Manuelles Registrieren neuer Nutzer \\
+    \hline
+    {\label{Anf:A4}A4} & f & Möglichkeit zur Passwortänderung \\
+    \hline
+    {\label{Anf:A5}A5} & f & Pflicht zur Passwortänderung bei manueller Registierung \\
+    \hline
+    {\label{Anf:A6}A6} & f & Pflicht zur Passwortänderung bei zurückgesetztem Passwort \\
+    \hline
+    {\label{Anf:A7}A7} & f & Erstellen von Umfragen \\
+    \hline
+    {\label{Anf:A8}A8} & f & Verwalten von Umfragen \\
+    \hline
+    {\label{Anf:A9}A9} & f & Verwendung verschiedener Fragetypen \\
+    \hline
+    {\label{Anf:A10}A10} & f & Manuelle Veröffentlichung der Umfragen \\
+    \hline
+    {\label{Anf:A11}A11} & f & Bearbeitbarkeit unveröffentlichter Umfragen \\
+    \hline
+    {\label{Anf:A12}A12} & f & Wiederholbarkeit von Umfragen \\
+    \hline
+    {\label{Anf:A13}A13} & f & Grafische Darstellung der Umfrageergebnisse \\
+    \hline
+    {\label{Anf:A14}A14} & f & Anonyme Teilnahme an Umfragen \\
+    \hline
+    {\label{Anf:A15}A15} & f & Möglichkeit zur einfachen Teilnahme an Umfragen \\
+    \hline
+  \end{tabular}
+  \caption{Übersicht der Anforderungen}
+  \label{tab:Anforderungen}
+\end{table}
