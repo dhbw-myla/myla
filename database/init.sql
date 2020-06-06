@@ -458,7 +458,7 @@ ALTER TABLE ONLY public.survey
 --
 
 ALTER TABLE ONLY public.users
-    ADD CONSTRAINT unique_username UNIQUE (lower(username));
+    ADD CONSTRAINT unique_username UNIQUE (username);
 
 --
 -- TOC entry 2743 (class 2606 OID 17174)

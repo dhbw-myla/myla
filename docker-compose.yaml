@@ -48,17 +48,18 @@ services:
       - 8080:80
     logging:
       driver: none
-  
+
   nginx: 
-    image: nginx:latest
+    image: my-nginx
     hostname: nginx
-    container_name: nginx
+    build:
+      context: ./nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
     networks:
-     - myla
+      - myla
     depends_on: 
       - postgres
       - myla-frontend
