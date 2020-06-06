@@ -3,18 +3,25 @@
 \label{sec:IstAnalyse}
 
 Zum Zeitpunkt dieser Arbeit besitzt die \acs{DHBW} kein eigenes Tool, um Online-Umfragen jedem Dozierenden oder Studierenden der Hochschule zugänglich zu machen.
-Jedoch wurde im Rahmen einer ähnlichen zuvor durchgeführten Seminararbeit 
+Jedoch wurde im Rahmen einer ähnlichen, zuvor durchgeführten Seminararbeit bereits versucht, eine ähnliche Anwendung zu entwickeln.
+Bei dieser lag der Fokus auf der Erhebung von Daten im Verlauf einer Vorlesung, was ebenfalls über Umfragen realisiert werden sollte.
+Nach einer näheren Analyse dieser bereits existierenden Anwendung konnte festgestellt werden, dass diese nicht betriebsfähig ist.
 
-eine solche Anwendung zu entwickeln.
+Das Vorgängermodells wurde als Webanwendung prototypisch realisiert und basiert auf dem bekannten Framework \emph{Angular 6+}.
+Zudem wurde zur Entwicklung die von Google bereitgestellte Entwicklungs-Plattform \emph{Firebase} verwendet.
+Bereits vorgefertigte native Funktionalitäten wie ein Chat-Tool wurden dabei eingebunden.
 
-Bevor die Anforderungen an die Anwendung formuliert sind, wurde die vorhergehende Umsetzung einer Learning-Analytics-Software analysiert.
+Das Vorgängermodell hat dabei äußerlich den Anschein einer funktionsfähigen Software erweckt, jedoch sind viele Bestandteile nur zu Demonstrationszwecken entwickelt worden.
+Von diesen Bestandteile wurden viele Funktionalitäten bzw. Ergebnisse dieser fest einprogrammiert, unabhängig von den Eingaben des Benutzers.
+Dies wird zum Beispiel daran deutlich, dass ein Student zwar Bewertungen vornehmen kann und diese selbst sieht, allerdings keine Persistenz stattfindet, sodass der Dozent diese nicht einsehen kann.
+Der Dozent sieht lediglich eine fest eingestellte Auswertung.
+Somit kann der angestrebte Nutzen, die Verwendung der Daten zur Unterstützung der Learning Analytics, nicht gewährleistet werden.
+Das Ziel der Arbeit wurde dementsprechend verfehlt.
 
-Hierbei konnte zum einen ermittelt werden, dass die Seite via Google Firebase umgesetzt und zur Verfügung gestellt wurde.
-Dabei ist jedoch festzuhalten, dass der vorhandene Code einen sehr niedrigen Umfang hatte, sowie unsauber war.
-Dadurch wurde eine Weiterentwicklung oder eine Umsetzung, die auf dem vorangegangenen Projekt aufbaut, deutlich erschwert.
+Eine Weiterentwicklung der alten Software ist ebenfalls nicht ratsam, da neben der kommerziellen Lösung Firebase auch weitere Pakete verwendet wurden, deren Benutzungsrechte unklar sind.
+Eine rechtliche Absicherung und somit die Nutzungslizenzen aller verwendeten Module ist deshalb nicht vorhanden.
+Somit ist die Weiterentwicklung der nicht funktionsfähigen Software zunächst mit der Aufschlüsselung aller Module und deren Lizenzen sowie Verhandlungen über etwaige Nutzungsrechte verbunden.
+Der hierfür nötige Aufwand überschreitet den einer funktionsfähigen Neuentwicklung bei Weitem.
 
-Hinzu kommt, dass die Visualisierung sehr generisch war und keine individuellen Anpassungen an die Gegebenheiten aufwies. Wodurch diese ebenfalls nicht weiter verwendet werden konnte.
-
-Die erstellten und aufrufbaren Seiten boten keinerlei Funktionalitäten, da sämtliche Eingaben nicht persistent gespeichert, sondern bei dem nächsten Start der Anwendung überschrieben wurden.
-Dies hat zur Folge, dass kein Bestandteil der vorherrschenden Anwendung für die Umsetzung der neuen Applikation verwendet werden konnte.
-Somit mussten für diese Anwendung vollständig neue Anforderungen formuliert, sowie sämtliche Entwicklungsschritte wie beispielsweise die Konzeption und Verwirklichung vollständig neu begonnen werden.
+Dies wird auch durch die Dokumentation der Software verdeutlicht, da diese praktisch nicht vorhanden ist.
+Zwar wurde eine Seminararbeit verfasst, eine detaillierte oder zumindest grundlegende Beschreibung auf technischer Ebene liegt allerdings nicht vor.
