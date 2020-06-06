@@ -1,10 +1,41 @@
 % !TEX root =  ../../master.tex
 \section{Aufbau}
 
-In der nachfolgenden Dokumentation werden diverse theoretische und technische Grundlagen vermittelt.
-Dabei wird im theoretischen Part genauer darauf eingegangen, was man unter Representational State Transfer versteht, was ein Microservice ist, wie ein Fragebogen verwirklicht wird, was eine relationale Datenbank kennzeichnet und wodurch der Bereich der Learning Analytics charakterisiert ist.
-In den technischen Grundlagen wird die Containervirtualisierungssoftware Docker, das relationale Datenbankmanagementsystem PostgreSQL, sowie die Frontend-Softwarebibliothek React erläutert.
- 
+Zunächst werden die theoretischen Grundlagen, wie \ac{REST} in den Kapitel \vref{sec:theoretisch}, den Grundlagenteil, gelegt.
+Anschließend daran folgen Ausführungen zu den Techniken hinter Microservices und Prototyping.
+Weiterhin werden die theoretischen Erläuterungen mit der Dokumentation von dem Konzept der relationalen Datenbank und Fragebogentheoretischen Ausführungen. 
+Abschließend wird auf die Idee und die Verwendung von Learning Analytics im allgemeinen eingegangen. 
+
+Im Folgenden werden in Kapitel \vref{sec:technisch}, die technischen Grundlagen gelegt, um ein Verständnis für die verwendeten Technologien zu schaffen. 
+Den Anfang bildet die Technologie Docker, dabei wird auf die Container-Virtualisierung eingegangen und diese für die Verwendung evaluiert. % ??
+Um einen Bezug zu den theoretischen Grundlagen zu haben, bildet das Kapitel über PostgreSQL ein reales Anwendungsbeispiel für eine relationale Datenbank.  
+Schlussendlich werden die Grundlagen mit einem Ausblick in das verwendete Front-End-Framework, React, abgeschlossen. 
+
+
+Darauf folgend wird im Kaptitel \vref{ch:analyse} eine Ist-Analyse der bestehenden Learning-Analytics-Software durchgeführt. 
+Dabei wird näher darauf eingegangen, inwiefern die vorherige Lösung in die neue Implementierung eines Umfragetools für Studierende und Dozierende mit einwirken kann. 
+Um einen klar abgegrenzten Start in die Implementierung zu legen, werden die Anforderungen an das neue Tool detailliert aufgeführt. 
+Nachdem die Anforderungen evaluiert sind, werden alternative bestehende Lösungen analysiert und abgegerenzt, inwiefern die Konzepte aus anderen Lösungen mit in die eigene Implementierung integriert werden können. 
+
+In dem Kapitel \vref{ch:konzeption}, wird auf die Konzeption eingegangen. 
+Zuerst wird gesamtheitlich auf das Konzept eingegangen, inwiefern die Teile der Software miteinander zusammenspielen sollen. 
+Anschließend werden konzeptionell die einzelnen Komponenten Server, Client und Sicherheit, beschreiben. 
+
+Nach der ausführlichen Erläuterung der Konzeption wird nun in Kapitel \vref{ch:implementierung} auf die Implementierung dieser Komponenten eingegangen. 
+Ebenfalls wird auf das verwendete Docker-Netzwerk eingegangen, welches die Komponenten miteinander verbindet und die Kommunikation dieser in einem abgesicherten System ermöglicht.
+Die Implementierung orientiert sich dabei an die konzeptionierten Ideen, jedoch sind im Verlauf des Projektes einige Abweichungen entstanden.
+Diese Abweichungen wurde auf Grund von Zeitgründen nicht noch einmal in den vorgesehen Mock-Ups angepasst.
+
+\vref{ch:}
+
+% 6 User-Journes (eigentlich auch Nutzerhandbuch)
+% 6.1 Personas
+% 6.2 Nutzerhandbuch
+
+% 7 Ausblick
+% 7.1 Fazit zur Gruppen- und Seminararbeit
+% 7.2 Ausblick
+
 Die gestellten Anforderungen werden analysiert und wiedergegeben. Zusätzlich werden User Stories dargestellt.
 
 Nachfolgend wird auf die Konzeption eingegangen, wobei das Gesamtkonzept, dessen Architektur, Server und Clients spezifischer dargestellt werden.

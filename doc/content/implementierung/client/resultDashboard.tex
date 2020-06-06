@@ -3,11 +3,11 @@
 \subsection{Result-Dashboard}
 \label{ssec:ResultDashboardImplement}
 
-Wie bereits der User-Journey aus Kapitel \myRefGeneral{sec:UserJourney} dargestellt wurde, ist das Result-Dashboard eine wichtige Komponente dieser Anwendung. 
-Deshalb wird nach dem \emph{Login} der Benutzer auf diese Seite geleitet. 
+Das Result-Dashboard soll die zentrale Anlaufstelle dieser Anwendung sein. 
+Deshalb wird der Benutzers nach dem \emph{Login} auf diese Seite geleitet. 
 
-Wie der Name schon sagt, sollen hier die Resultate der zuvor erstellten Umfragen einsehbar sein. 
-Um eine Ansprechende \acsu*{UI} zu generieren, soll hier auf ein \emph{Card-Design} verwendet werden. 
+Wie der Name schon sagt, sollen hier die Resultate der zuvor erstellten Umfragen einsehbar sein (vgl. Kap. \vref{ssec:UmfrageErstellen}).  
+Um eine Ansprechende \ac{UI} zu generieren, soll hier auf ein \emph{Card-Design} verwendet werden. 
 Über eine Button auf der Karte ist es möglich auf ein detaillierte Auswertung zu gelangen. \newline
 \abb \vref{fig:SurveyResultDashboardImplement} zeigt drei erstelle Umfragen des Benutzers: 
 % 
@@ -18,15 +18,15 @@ Um eine Ansprechende \acsu*{UI} zu generieren, soll hier auf ein \emph{Card-Desi
 \end{itemize}
 % 
 Jede Umfrage besitzt einen individuellen einzigartigen \emph{Sourveycode} wie \zb \emph{\texttt{QSDQO6EP0T}}. 
-Dieser lässt sich über das Icon \faClipboard\xspace den \emph{Sourveycode} in die \emph{Zwischenablage} kopieren. 
-Ferner hat der Benutzer eine Übersicht, wie viele Teilnehmer \engl{Participations} bzgl. diese Umfrage getätigt haben. 
+Dieser lässt sich über das Icon \faClipboard\xspace in die \emph{Zwischenablage} kopieren. 
+Ferner hat der Benutzer eine Übersicht, wie viele Teilnehmer \engl{Participations} bereits an dieser Umfrage teilgenommen haben. 
 Über den Button \jinline|Show Survey Results| kann der Benutzer die Ergebnisse dieser Umfrage ansehen. 
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/SurveyResultDashboard.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[\acf{UI}: Registrierung]{\acf{UI}: Registrierung \\ \quelleScreenshot}
+	\caption[\acf{UI}: Result-Dashboard]{\acf{UI}: Result-Dashboard \\ \quelleScreenshot}
 	\label{fig:SurveyResultDashboardImplement}
 \end{figure}
 
@@ -37,8 +37,8 @@ Die Diagramme werden mit Hilfe von \emph{react-chartjs-2} generiert.\footnote{\u
 \abb \myRefGeneral{fig:SurveyResultDetailImplement} zeigt einen Ausschnitt der Auswertung der Umfrage zur Projektmanagement-Vorlesung. 
 Hier wird exemplarisch eine \emph{Tortendiagramm} ausgegeben. 
 Die verwendeten Farben wurden zuvor definiert. 
-Der Benutzer hat die Möglichkeit über das \emph{Tortendiagramm} mit seiner Maus zu fahren (hovern).
-Hier erhält er den jeweiligen Wert über einen \emph{Tooltip} angezeigt.
+Der Benutzer hat die Möglichkeit über das \emph{Tortendiagramm} mit seiner Maus zu bewegen (hovern).
+Hierbei erhält er den jeweiligen Wert über einen \emph{Tooltip}\footnote{Es öffnet sich ein kleines Fenster, welches Informationen zum ausgewählten Element beinhaltet.} angezeigt.
 
 \begin{figure}[!htb]
 	\centering
