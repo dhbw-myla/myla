@@ -1,9 +1,10 @@
 \subsubsection*{Neuen Benutzer hinzufügen \faUsers}
 
-Darüber hinaus kann er über den Button \jinline|Create| einen neuen Benutzer anlegen. 
+Darüber hinaus kann er über den Button \jinline|Create| einen neuen Benutzer dem System anfügen. 
 \abb \myRefGeneral{fig:AdminCreateUserImplement} zeigt die Eingabeform. 
 Der Administrator muss hier den Benutzername und ein zufälliges Passwort wählen. 
 Erstellte Benutzer durch den Administrator oder beim Zurücksetzen eines Passwortes erhalten als Sicherheitsfeature seitens der Datenbank \todo{Ref Niko, Ref Sicherheit FE} den Eintrag \jinline|isPasswordChangeRequiered|. 
+Dies bedeutet, dass beim Einloggen der Benutzer auf die Seite zum Ändern des Passwortes geleitet wird und sich ansonsten nicht im System bewegen kann, bis er sein Passwort geändert hat. 
 
 \begin{figure}[hp]
 	\centering
