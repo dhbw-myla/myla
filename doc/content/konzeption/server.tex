@@ -17,7 +17,7 @@ Dies umfasst beispielsweise die Umfragen, die zugehörigen Fragen und die darauf
 Hierfür sind relationale Datenbanken weit verbreitet, sodass auch hier, für die im Rahmen dieser Seminararbeit entwickelte Anwendung, eine solche Form der Datenhaltung genutzt wird.
 Im Folgenden wird nun das Datenmodell näher vorgestellt.
 
-Da es gemäß der Anforderungen möglich sein soll, Umfragen mehrfach durchzuführen, wird sich entschieden für Umfragen zwei Entitäten einzuführen.
+Da es gemäß der Anforderung~\ref{Anf:A12} möglich sein soll, Umfragen mehrfach durchzuführen, wird sich entschieden für Umfragen zwei Entitäten einzuführen.
 So gibt es zum einen den sogenannten \texttt{SurveyMaster} und zum anderen einen \texttt{Survey}.
 Der \texttt{SurveyMaster} entspricht dabei einer Art Vorlage, in der die einzelnen Fragen definiert werden.
 Der \texttt{Survey} stellt dann eine konkrete Umfrage dar, die auf genau einem solchen \texttt{SurveyMaster} basiert.
@@ -39,6 +39,7 @@ Bereits das vereinfachte \acs{ER-Modell} zeigt die Trennung von \texttt{SurveyMa
 Die Fragen, die bei jeder solchen Umfrage gleich sein sollen, sind mit dem \texttt{SurveyMaster} verknüpft.
 Die Antworten hingegen beziehen sich stets auf die konkrete Umfrage.
 Für eine Frage wird ein \acs{JSON} in Textform gespeichert, sodass das Format hier anpassbar ist und vom Front-End festgelegt werden kann.
+Dadurch können, wie in Anforderung~\ref{Anf:A9} gefordert, verschiedene Fragetypen genutzt werden, sogar ohne dass dafür Anpassungen im Back-End notwendig sind.
 Bei einer Antwort wird neben der Antwort als solcher noch ein Zeitstempel gespeichert.
 
 Zusätzlich zu den Antworten wird je \texttt{Survey} gezählt, wie viele Teilnahmen es gab.
