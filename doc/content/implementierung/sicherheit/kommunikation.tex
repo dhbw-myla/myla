@@ -1,19 +1,14 @@
 % !TEX root =  ../sicherheit.tex
 \subsection{Kommunikation}
 
-% VORSCHLAG - Rene aus BA:
-
-% PLAGIAT
 \subsubsection{Transferprotokoll}\label{chapter:https}
 
-Zur erhöhten Sicherheit bei der Kommunikation werden Anfragen ausschließlich über \ac{HTTPS} zugelassen, wodurch die Kommunikation zwischen Server und Client verschlüsselt wird.
-Dies erhöht die Vertraulichkeit der Daten und stellt deren Integrität sicher.
-Diese zwei Schutzziele dienen dazu einen \ac*{MITM}-Angriff oder einen Lauschangriff zu verhindern, da der Inhalt der Kommunikationspakete nicht mitgelesen werden kann und eine Veränderung der Pakete durch eine fehlerhafte Ent- und erneute Verschlüsselung bemerkt wird.
+Um die Sicherheit während der Kommunikation zu erhöhen dürfen Anfragen an den Webserver der Anwendung ausschließlich über \ac{HTTPS} zugelassen werden, sodass  die Kommunikation zwischen Server und Client verschlüsselt wird.
+Dies stellt die Integrität der Daten sicher und erhöht damit ebenfalls ihre Vertraulichkeit.
+Diese zwei Schutzziele dienen dazu einen potentiellen Angriff, wie etwa einen \ac*{MITM}-Angriff oder einen Lauschangriff, zu verhindern, indem das Ausspähen des Inhalts der Kommunikationspakete durch die vorhandene Verschlüsselung verhindert wird oder etwaige Veränderung der Pakete durch eine fehlerhafte Ent- und erneute Verschlüsselung bemerkt wird.
 
-\ac{HTTPS} verwendet dabei \ac{TLS} zur Verschlüsselung und unterscheidet sich, außer über die \ac{URL}, welche bei der Verwendung von \ac{HTTPS} mit \enquote{https://} beginnt, und die standardmäßige Nutzung des Port 443, nicht weiter von \ac{HTTP}.
+Zur Verschlüsselung verwendet \ac{HTTPS} die \ac{TLS} und unterscheidet sich grundlegend, neben der \ac{URL}, welche bei der Verwendung von \ac{HTTPS} mit \enquote{https://} beginnt, und der standardmäßigen Nutzung des Port 443, nicht weiter von \ac{HTTP}.
 
-\ac{TLS} setzt auf eine asymmetrische Verschlüsselung, welche zunächst einen Schlüsselaustausch zwischen Client und Server vorsieht.
-Dies geschieht nach der Version \ac{TLS} 1.3 über drei verschiedene Wege, welche jeweils aufgrund ihrer gewährleisteten Zukunftssicherheit ausgewählt wurden.
-Diese Zukunftssicherheit dient dazu, dass nicht alle potentiell von einem Angreifer abgefangenen \ac{TLS}-Sessions entschlüsselt werden können, sobald der private Schlüssel einer Session gefunden wurde.
-
-Im Rahmen der Arbeit soll aus diesem Grund \ac{TLS} 1.3 zur Sicherung der \ac{API} verwendet werden, sodass die sensiblen Daten des \ac{ERP}-Systems nicht durch einen potentiellen Angriff an Dritte weitergegeben werden.\autocite{rf-RFC8446}
+\ac{TLS} setzt dabei auf eine asymmetrische Verschlüsselung, wobei im ersten Schritt ein Schlüsselaustausch zwischen Client und Server vorgesehen ist.
+Dies geschieht nach der Version \ac{TLS} 1.3 über drei verschiedene Wege, die aufgrund ihrer Zukunftssicherheit ausgewählt wurden.
+Diese Zukunftssicherheit dient dazu, auch langfristige Angriffe zu verhindern, da so nicht alle potentiell von einem Angreifer abgefangenen \ac{TLS}-Sessions entschlüsselt werden können, sobald der private Schlüssel einer Session gefunden wurde.\autocite{rf-RFC8446}
