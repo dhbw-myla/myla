@@ -4,83 +4,66 @@
 
 Die Anforderungen an das zu entwerfende und entwickelnde System lassen sich in mehrere Bereiche aufteilen.
 
-%Ein wesentlicher Grundsatz war, dass diese App eine Lernapp darstellt, welche für Umfragen genutzt wird. Die Applikation sollte in Form einer Webanwendung umgesetzt werden, um somit einen geräteunabhängigen Zugriff zu ermöglichen.
-%Damit sollte auch gewährleistet werden, dass ein Zugriff via mobilem Endgerät ermöglicht wird. 
-%Um diese Applikation auch einsetzen zu können, galten bestimmte Vorgaben.
-%
-%Zum einen sollten neue Accounts über einen Anmeldeschlüssel erstellt werden können, dieser Anmeldeschlüssel soll dabei von einem Administrator festgelegt und verändert werden können.
-%
-%Eine weitere Anforderung war, dass Dozenten nach dem ersten Login ein neues Passwort für ihren Account festlegen sollten, da die zu Beginn genutzten Passwörter vom Admin festgelegt wurden und die Festlegung eines eigenen Passwort eine höhere Sicherheit bietet.
-%Zusätzlich sollte es für sie möglich sein, Umfragen zu erstellen und zu gruppieren sowie Umfrageergebnisse einzusehen.
-%Bei der Erstellung der Umfragen soll es ermöglicht werden, dass diese über mehrere Zeiträume und Vorlesungen wiederverwendet werden können, dadurch muss die Umfrage nur einmal verwirklicht werden und kann für mehrere Kurse und im Verlauf einer Vorlesung freigeschaltet werden, ohne sie erneut erstellen zu müssen.
-%
-%Dabei sollten diese Umfragen einige Fragearten, namentlich offene Fragen, Fragen mit festgelegten Antwortmöglichkeiten, also Multiple-Choice- beziehungsweise Single-Choice-Fragen, sowie Fragen mit einer Skala oder Bewertungen, beinhalten können, dadurch wird eine vielfältige und abwechslungsreiche Umfrage ermöglicht.
-%Die erstellte Umfrage sollte nachfolgend verfügbar gemacht werden können, um Studenten und andere Nutzer an der veröffentlichten Umfrage teilnehmen zu lassen.
-%
-%Teilnehmer der Umfrage sollen anonym an den Umfragen partizipieren können, damit keine Rückschlüsse auf deren Personen gezogen werden können und um datenschutzrechtliche Bestimmungen einhalten zu können. Dabei kann via Link oder über einen 10-stelligen Code, der auf der Startseite eingegeben wird, die entsprechende Umfrageseite aufgerufen werden. Dadurch wird es ermöglicht, dass ein Dozent einen Code analog im Frontalunterricht vorgeben kann und den Studenten diesen nicht elektronisch zusenden muss.
-%
-%Nach einer Umfrage sollte es einem Dozenten ermöglicht werden, die Ergebnisse der Umfrage direkt einzusehen, wobei es ihm dabei ermöglicht wird, die Ergebnisse sämtlicher anhand einer einmalig erstellten Umfragevorlage veröffentlichter Umfragen einsehen zu können, um den Lernfortschritt der Studenten besser zu überblicken und eventuellen Nachholbedarf zu offenbaren.
-%Außerdem sollte dieser verschiedene Ansichten nutzen können und es soll ihm ermöglicht werden, die Ergebnisse grafisch anschaulich in einem Diagramm zu betrachten, um einen verständlicheren Überblick über die Beantwortungen der Umfrage zu erhalten.
-
 Die Anwendung soll unabhängig des Endnutergeräts funktionieren.
 So soll ein Student mit seinem mobilen Endgerät eine Umfrage ausfüllen können, während etwa ein Dozent die Umfrage am Desktop-Computer erstellt.
 Daraus ergibt sich Anforderung [A1], die Endgeräteunabhängige Nutzung der Anwendung.
 
-Die Registrierung neuer Nutzer soll geschützt werden, um eine Auslastung des Systems zu verhindern.
-Zudem sollen bereits registrierte und besonders berechtigte Nutzer
-Somit ergibt sich Anforderungen [A2] und [A3], die Verwendung eines Registrierungsschlüssels bei der Registrierung.
+Die Registrierung neuer Nutzer soll geschützt werden, um eine zu hohe Auslastung des Systems bzw. Angriffe zu verhindern.
+Zudem sollen bereits registrierte und explizit dazu berechtigte Nutzer neue Konten anlegen können.
+Somit ergibt sich Anforderungen [A2] und [A3], die Verwendung eines Registrierungsschlüssels bei der eigenen Registrierung sowie die Möglichkeit Nutzer durch bestehende Nutzer anzulegen.
 
-    \begin{tabularx}{\textwidth}{|l|k|r|}
-      \hline
-      {Nr.} & {Art} & {Beschreibung} \\
-      \hline
-      {\label{Anf:A1}A1} & funktionale Anforderung & Endgeräteunabhängige Nutzung\\
-      \hline
-      {\label{Anf:A2}A2} & funktionale Anforderung & Registrieren mit Registrierungsschlüssel \\
-      \hline
-      {\label{Anf:A3}A3} & funktionale Anforderung & Dozenten sollen nach dem ersten Login ein neues Passwort für ihren Account festlegen \\
-      \hline
-      {\label{Anf:A4}A4} & funktionale Anforderung & Dozenten sollen Umfragen erstellen können\\
-      \hline
-      {\label{Anf:A5}A5} & funktionale Anforderung & Dozenten sollen Umfragen gruppieren können\\
-      \hline
-      {\label{Anf:A6}A6} & funktionale Anforderung & Dozenten sollen Umfrageergebnisse einsehen können\\
-      \hline
-      {\label{Anf:A6a}A6a} & funktionale Anforderung & Dozenten sollen Umfrageergebnisse im zeitlichen Verlauf miteinander vergleichen können\\
-      \hline
-      {\label{Anf:A6b}A6b} & funktionale Anforderung & Dozenten sollen Umfrageergebnisse in verschiedenen Ansichten betrachten können\\
-      \hline
-      {\label{Anf:A6c}A6c} & funktionale Anforderung & Dozenten sollen Umfrageergebnisse grafisch, in Form von Diagrammen, einsehen können\\
-      \hline
-      {\label{Anf:A7}A7} & funktionale Anforderung & Umfragen sollen für unterschiedliche Szenarien verfügbar gemacht werden können \\
-      \hline
-      {\label{Anf:A7a}A7a} & funktionale Anforderung & Umfragen sollen über mehrere Zeiträume verfügbar gemacht werden können \\
-      \hline
-      {\label{Anf:A7b}A7b} & funktionale Anforderung & Umfragen sollen für mehrere Vorlesungen verfügbar gemacht werden können \\
-      \hline
-      {\label{Anf:A7c}A7c} & funktionale Anforderung & Umfragen sollen für mehrere Kurse verfügbar gemacht werden können \\
-      \hline
-      {\label{Anf:A8}A8} & funktionale Anforderung & in den Umfragen sollen unterschiedliche Fragetypen eingebunden werden \\
-      \hline
-      {\label{Anf:A8a}A8a} & funktionale Anforderung & offene Fragen sollen in Umfragen verwendet werden können \\
-      \hline
-      {\label{Anf:A8b}A8b} & funktionale Anforderung & Single-Choice-Fragen sollen in Umfragen verwendet werden können \\
-      \hline
-      {\label{Anf:A8c}A8c} & funktionale Anforderung & Multiple-Choice-Fragen sollen in Umfragen verwendet werden können \\
-      \hline
-      {\label{Anf:A8d}A8d} & funktionale Anforderung & Fragen mit Bewertung sollen in Umfragen verwendet werden können \\
-      \hline
-      {\label{Anf:A8e}A8e} & funktionale Anforderung & Fragen mit Skala sollen in Umfragen verwendet werden können \\
-      \hline
-      {\label{Anf:A9}A9} & funktionale Anforderung & erstellte Umfragen können veröffentlicht werden \\
-      \hline
-      {\label{Anf:A10}A10} & funktionale Anforderung & Teilnehmer sollen anonym an den Umfragen partizipieren können \\
-      \hline
-      {\label{Anf:A11}A11} & funktionale Anforderung & An der Umfrage soll teilgenommen werden können \\
-      \hline
-      {\label{Anf:A11a}A11a} & funktionale Anforderung & einer Umfrage soll via Link beigetreten werden können \\
-      \hline
-      {\label{Anf:A11b}A11b} & funktionale Anforderung & einer Umfrage soll mittels 10-stelligem Code beigetreten werden können \\
-      \bottomrule
-    %   ... weiter für weitere Anforderungen
-  \end{tabularx}
+Manuell angelegte Nutzer sollen sich bei ihrer ersten Anmeldung ein neues Passwort setzen müssen, um eine erhöhte Sicherheit zu gewährleisten.
+Ebenfalls sollten Nutzer, deren Passwörter zurückgesetzt wurden, diese erneut setzen müssen.
+Dazu ist eine Passwortänderungsseite erforderlich, was wiederum als Passwortänderung für normale Nutzer verwendet werden kann.
+Dies stellen die Anforderungen [A4], die Möglichkeit zur Passwortänderung, [A5], die Pflicht der Passwortänderung bei manueller Registrierung, sowie [A6], die Pflicht zur Passwortänderung bei manuell zurückgesetzten Passwörtern, dar.
+
+Angemeldete Nutzer sollen in der Lage sein, sowohl neue Umfrage zu erstellen als auch bereits selbst erstellte Umfragen zu verwalten.
+Die Umfragen sollen dabei mehrere Fragetypen beinhalten können, welche sich aus offenen Fragen, Single-Choice-Fragen, Multiple-Choice-Fragen sowie Bewertungen verschiedener Aussagen mit Hilfe anpassbarer Skalen zusammensetzen.
+Daraus ergeben sich die Anforderungen [A7], der Erstellung von Umfragen, [A8], der Verwaltung dieser, sowie [A9] der Verwendung verschiedener Fragetypen.
+
+Erstellte Umfragen sollen dabei nicht automatisiert veröffentlicht werden, sondern nur auf Anfrage des Nutzers.
+Dadurch soll es Dozenten möglich sein, Umfragen in Ruhe im Voraus vorzubereiten.
+Diese unveröffentlichten Umfragen sollen zudem bearbeitbar sein, sodass vorher erkannte Fehler ausgebessert werden können.
+Nach der Veröffentlichung sollen Umfragen wiederholt werden können.
+Die Wiederholung soll dabei für mehrere Zeiträume, mehrere Kurse sowie mehrere Vorlesungen erfolgen können.
+Die Ergebnisse der angelegten Umfragen sollen grafisch einsehbar sein.
+Dies ergibt die Anforderungen [A10], die manuelle Veröffentlichung der Umfrage, [A11], die Bearbeitbarkeit unveröffentlichter Umfragen, [A12], die Wiederholbarkeit der Umfragen, und [A13], der grafischen Darstellung der Umfrageergebnisse.
+
+Die Teilnahme an Umfragen soll anonym erfolgen und für die Teilnehmer so simpel wie möglich sein.
+Dies stellt die letzten Anforderungen [A14], die anonyme Teilnahme an Umfragen, sowie [A15], der Möglichkeit zur einfachen Teilnahme, dar.
+
+\begin{tabularx}{\textwidth}{|l|k|r|}
+  \hline
+  {Nr.} & {Art} & {Beschreibung} \\
+  \hline
+  {\label{Anf:A1}A1} & funktionale Anforderung & Endgeräteunabhängige Nutzung\\
+  \hline
+  {\label{Anf:A2}A2} & funktionale Anforderung & Registrieren mit Registrierungsschlüssel \\
+  \hline
+  {\label{Anf:A3}A3} & funktionale Anforderung & Manuelles Registrieren neuer Nutzer \\
+  \hline
+  {\label{Anf:A4}A4} & funktionale Anforderung & Möglichkeit zur Passwortänderung \\
+  \hline
+  {\label{Anf:A5}A5} & funktionale Anforderung & Pflicht zur Passwortänderung bei manueller Registierung \\
+  \hline
+  {\label{Anf:A6}A6} & funktionale Anforderung & Pflicht zur Passwortänderung bei zurückgesetztem Passwort \\
+  \hline
+  {\label{Anf:A7}A7} & funktionale Anforderung & Erstellen von Umfragen \\
+  \hline
+  {\label{Anf:A8}A8} & funktionale Anforderung & Verwalten von Umfragen \\
+  \hline
+  {\label{Anf:A9}A9} & funktionale Anforderung & Verwendung verschiedener Fragetypen \\
+  \hline
+  {\label{Anf:A10}A10} & funktionale Anforderung & Manuelle Veröffentlichung der Umfragen \\
+  \hline
+  {\label{Anf:A11}A11} & funktionale Anforderung & Bearbeitbarkeit unveröffentlichter Umfragen \\
+  \hline
+  {\label{Anf:A12}A12} & funktionale Anforderung & Wiederholbarkeit von Umfragen \\
+  \hline
+  {\label{Anf:A13}A13} & funktionale Anforderung & Grafische Darstellung der Umfrageergebnisse \\
+  \hline
+  {\label{Anf:A14}A14} & funktionale Anforderung & Anonyme Teilnahme an Umfragen \\
+  \hline
+  {\label{Anf:A15}A15} & funktionale Anforderung & Möglichkeit zur einfachen Teilnahme an Umfragen \\
+  \bottomrule
+\end{tabularx}
