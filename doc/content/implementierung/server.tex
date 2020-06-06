@@ -18,7 +18,7 @@ Dies hängt damit zusammen, dass die Nutzung der Schnittstelle dadurch für das 
 So kann der Client zum Beispiel neben einer Liste von Umfragen auch noch weitere Details hierzu erhalten.
 Dies widerspricht zwar den Grundsätzen von \acs{REST}, reduziert allerdings den Aufwand für den Client erheblich, da je Ansicht im Front-End lediglich ein \acs{API}-Aufruf durchgeführt werden muss und nicht mehrere.
 
-Die Routen bestehen dabei einerseits aus den standardmäßigen und für \acs{REST} typischen Aktionen, wie zum Beispiel dem Erstellen, Lesen, Bearbeiten und Löschen von Umfragen.
+Die Routen bestehen dabei also einerseits aus den standardmäßigen und für \acs{REST} typischen Aktionen, wie zum Beispiel dem Erstellen, Lesen, Bearbeiten und Löschen von Umfragen.
 Andererseits gibt es eben weitere Routen, die in enger Abstimmung mit dem Front-End erstellt wurden.
 Für alle diese Routen existiert im git-Repository eine ausführliche technische Dokumentation, die genau die entsprechenden Details je Route auflistet.
 Dies umfasst die Anfrage und die entsprechenden Antworten.
@@ -54,3 +54,4 @@ Bei der Bearbeitung eines \texttt{SurveyMasters} wird zum Beispiel zuerst einmal
 
 Ebenso gibt es Aktionen, die nur durch Administratoren durchgeführt werden können.
 Dies umfasst das Lesen, Aktivieren, Bearbeiten und Deaktivieren des Registrierungsschlüssels, das Erstellen von Benutzern, das Zurücksetzen von Passwörtern und das Erstellen weiterer Administratoren.
+Hierbei wird folglich vor dem Ausführen irgendeiner Aktion geprüft, ob der angemeldete Nutzer in der Datenbank als Administrator gekennzeichnet ist.
