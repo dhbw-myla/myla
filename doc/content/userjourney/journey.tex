@@ -1,16 +1,13 @@
 % !TeX root = ../../master.tex
 
-\section{Nutzerhandbuch} % Nutzerhandbuch?
-\label{sec:Nutzerhandbuch}
-
-\subsection{Allgemein}
+\section{Allgemein}
 
 Das folgende Nutzerhandbuch wurde auf die drei vorgestellten Personas gemünzt, welche jeweils verschiedene Use-Cases der Anwendung darstellen sollen.
 Dabei sind die Personas als Repräsentanten für echte Benutzer geplant.
 
 So soll \duzi den Dozent darstellen, der gleichzeitig auch Administrator des Tools ist.
 Dieser Dozent meldet sich dabei zunächst in der Anwendung, wie in \myRefGeneral{ssec:Einloggen} beschrieben, an.
-Anschließend stehen ihm verschiendene Möglichkeiten zum weiteren Vorgehen zur Verfügung.
+Anschließend stehen ihm verschiedene Möglichkeiten zum weiteren Vorgehen zur Verfügung.
 So kann er zunächst seine eigens erstellten und veröffentlichten Umfragen einsehen und sich die dazugehörigen Ergebnisse betrachten, wie es in \myRefGeneral{ssec:ResultDashboard} beschrieben wird.
 Außerdem kann er über das \emph{Survey Master Paradise}, beschrieben in \myRefGeneral{ssec:SurveyMasterParadise}, seine Umfrage-Vorlagen verwalten und neue Vorlagen erstellen.
 Das Erstellen neuer Vorlagen wird in \myRefGeneral{ssec:CreateMaster} näher beschrieben.
@@ -31,7 +28,7 @@ Die meisten Funktionen, welche eine Änderung des Datenzustands zur Folge haben,
 Ein paar Beispiele dazu wurden in Kapitel \myRefGeneral{ssec:Meldungen} aufgezeigt.
 Diese decken alle vorhandenen Meldungstypen ab, die Inhalte können jedoch abweichen.
 
-\subsection{Einloggen}
+\section{Einloggen}
 \label{ssec:Einloggen}
 
 In jedem Use-Case der Anwendung beginnt mit der in Abbildung \myRefGeneral{fig:EingabemaskeSurveycode} dargestellten Startansicht.
@@ -55,7 +52,7 @@ Danach erfolgt eine automatische Weiterleitung zur in \myRefGeneral{ssec:ResultD
 	\label{fig:Einloggen}
 \end{figure} 
 
-\subsection{Nutzer anlegen}
+\section{Nutzer anlegen}
 \label{ssec:NutzerAnlegen}
 
 Ein Nutzer kann über zwei Arten angelegt werden.
@@ -72,7 +69,7 @@ Andererseits kann ein Administrator einen Nutzer anlegen, was jedoch genauer im 
 	\label{fig:Register}
 \end{figure}
 
-\subsection{Passwort ändern}
+\section{Passwort ändern}
 
 Jeder Nutzer ist in der Lage sein Passwort zu ändern, dies kann er über sein Profil, zu finden über der Navigationsleiste, die in Kapitel \myRefGeneral{ssec:NavBar} beschrieben wird, erledigen.
 Dabei muss der Nutzer zunächst, wie in \myRefGeneral{fig:ChangeOwnPassword} dargestellt, sein altes Passwort in \desOne angeben und in \desTwo sowie \desThree sein neues einfügen und wiederholen.
@@ -96,7 +93,7 @@ Sofern der Nutzer sich nun mit dem neu festgelegten Passwort anmeldet, wird dies
 	\label{fig:ChangePasswordOfUser}
 \end{figure}
 
-\subsection{Result Dashboard}
+\section{Result Dashboard}
 \label{ssec:ResultDashboard}
 
 Sobald ein Nutzer sich anmeldet landet er auf der Übersicht der aktiven Umfragen, dargestellt in Abbildung \myRefGeneral{fig:ResultDashboard}.
@@ -117,7 +114,7 @@ Des Weiteren wird der Surveycode besonders hervorgehoben, um auch zu vorbereitet
 \end{figure}
 
 
-\subsection{Teilnahme an einer Umfrage}
+\section{Teilnahme an einer Umfrage}
 \label{ssec:TeilnahmeAnEinerUmfrage}
 
 Um an einer Umfrage teilzunehmen, muss der Partizipant, wie in Schritt \desOne in \abb \myRefGeneral{fig:EingabemaskeSurveycode} dargestellt, einen \emph{Surveycode} eingeben.
@@ -151,7 +148,7 @@ Er erhält ein visuelles Feedback.
 	\label{fig:Teilnehmermaske}
 \end{figure}
 
-\subsection{Erstellen einer Umfrage}
+\section{Erstellen einer Umfrage}
 \label{ssec:CreateMaster}
 
 Das Kernelement dieser Anwenndung ist das Erstellen von Umfragen. 
@@ -187,7 +184,7 @@ Er erhält ein visuelles Feedback.
 	\label{fig:Umfrageeditor}
 \end{figure}
 
-\subsection{Administrator Tools}
+\section{Administrator Tools}
 \label{ssec:AdministratorTools}
 
 \abb \vref{fig:AdminSpace} zeigt den Administrationsbereich der Anwendung. 
@@ -239,7 +236,7 @@ Der Benutzer kann hier, wie in \desOne dargestellt, den Registrierungsschlüssel
 
 
 %%%%%%%%% --------------------- %%%%%%%%%%%%%%%
-\subsection{Eigener Account}
+\section{Eigener Account}
 \label{ssec:EigenerAccount}
 
 Ziele es für die angemeldeten Benutzer wie \duzi oder die Studentin \ariane ihren Account verwalten können. 
@@ -268,7 +265,7 @@ Alternativ können sie über den Zurück-Button \desFour wieder auf den Account 
 \end{figure}
 % 
 %%%%%%%%% --------------------- %%%%%%%%%%%%%%%
-\subsection{Survey Master Paradise}
+\section{Survey Master Paradise}
 \label{ssec:SurveyMasterParadise}
 Survey Master Paradise ist einer der Hauptkomponenten dieser Anwendung. 
 Hier können die Benutzer der Anwendung, wie \duzi und die Studentin \ariane, ihre erstellen Umfragen einsehen. 
@@ -304,7 +301,7 @@ zur Verfügung.
 \end{figure}
 
 %%%%%%%%% --------------------- %%%%%%%%%%%%%%%
-\subsection{Navigationsbereich}
+\section{Navigationsbereich}
 \label{ssec:NavBar}
 
 Die \abb \vref{fig:NavBar} stellt den für die angemeldeten Benutzer wie \zb den Dozenten \duzi oder die Studentin \ariane zur Verfügung stehende Funktionen dar. 
@@ -326,7 +323,7 @@ Ferner zeigt die Navigationsleiste den Status \emph{Admin} \desThree, im Falle, 
 \end{figure}
 
 %%%%%%%%% --------------------- %%%%%%%%%%%%%%%
-\subsection{Meldungen}
+\section{Meldungen}
 \label{ssec:Meldungen}
 
 Nachfolgend sind alle Meldungsarten mit Beispielen dargestellt.
