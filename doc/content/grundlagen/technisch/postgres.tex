@@ -1,25 +1,24 @@
-% !TEX root =  ../technisch.tex
+% !TEX root =  ../../../master.tex
 \subsection{PostgreSQL}
 \label{ssec:PostgreSQL}
 
-\enquote{PostgreSQL}, kurz Postgres, ist ein unter der PostgreSQL Lizenz\autocite{rf-psqllicense} veröffentlichtes \ac{ORDBMS}, was es zu einem Open-Source-Projekt macht.\footnote{\url{https://www.postgresql.org/}} 
-Aktuell liegt das Projekt in der Version 12.3 vor.\footnote{\url{https://www.postgresql.org/docs/12/release-12-3.html}} 
-Das \ac{ORDBMS} verwendet die Datenbanksprache \ac{SQL} zur Ausführung der vom Benutzer angegebenen \ac{CRUD}-Befehlen.\todo{!} %TODO: bitte SQL quelle anfügen
+\enquote{PostgreSQL}, kurz Postgres, ist ein unter der PostgreSQL-Lizenz\autocite{rf-psqllicense} veröffentlichtes \ac{ORDBMS}, was es zu einem Open-Source-Projekt macht.\footnote{\url{https://www.postgresql.org/}}
+Aktuell liegt das Projekt in der Version 12.3 vor.\footnote{\url{https://www.postgresql.org/docs/12/release-12-3.html}}
+Das \ac{ORDBMS} verwendet die Datenbanksprache \ac{SQL} zur Ausführung der vom Benutzer angegebenen \ac*{CRUD}-Befehlen.
 Dabei setzt Postgres auf ein umfangreiches Transaktionskonzept, welches auch besondere Verfahren, wie die \ac*{MVCC} zur effizienten Verarbeitung konkurrierender Zugriffe auf die Datenbank, beinhaltet.
-Unter anderem durch dieses Transaktionskonzept ist PostgreSQL vollständig \ac*{ACID}-konform \todo{!} %TODO: Quelle draus machen: https://www.postgresql.org/about/featurematrix/
+Unter anderem durch dieses Transaktionskonzept ist PostgreSQL vollständig \ac*{ACID}-konform.\autocite[Vgl.][]{rf-psqlfeatures}
 
-Neben den allgemeinen Funktionalitäten, die durch den \ac{SQL}-Standard vorgegeben sind, verwendet PostgreSQL auch eigene spezifische Verbesserungen und Weiterentwicklungen und bietet ein breites Angebot an selbst- sowie aufgrund der Strutkur als Open-Source-Projekt fremderstellten Erweiterungen.
+Neben den allgemeinen Funktionalitäten, die durch den \ac{SQL}-Standard vorgegeben sind, verwendet PostgreSQL auch eigene spezifische Verbesserungen und Weiterentwicklungen des Standards.
+Zudem bietet PostgreSQL ein breites Angebot an selbst- sowie aufgrund der Strutkur als Open-Source-Projekt fremderstellten Erweiterungen.
 Zur Benutzung bietet PostgreSQL einerseits nativ ein Kommandozeileninterface mit dem Namen \emph{PSQL} sowie andererseits ein graphisches Interface zur Verwaltung des \ac{ORDBMS} mit dem Namen \emph{pgAdmin}.
-Postgres wird in der Regel als Bestandteil des Servers im Client-Server-Modell eingesetzt (vgl. Kap. \myRefGeneral{ssec:Architektur}).
+Postgres wird in der Regel als Bestandteil des Servers im Client-Server-Modell eingesetzt (vgl. Kapitel \myRefGeneral{ssec:Architektur}).
 
-Ein großer Vorteil von Postgres ist das Erstellen von sogenannten \emph{Views}. 
-Über diese können dem Benutzer schnell Auswertungen zur Verfügung gestellt werden. 
-Zudem kann auch auf diesen weitere Berechnungen durchgeführt werden. Ähnlich Common Table Expressions, auf die hier nicht weiter eingegangen wird. \newline
-Beim Einfügen von Tupeln (Datensätzen) können Validierungen (Checks) durchgeführt werden wie \zb, ob ein Wert zwischen 0 und 5 liegt. 
-Über einen Zwang bzw. Restriktion \engl{constraints} können Attribute einzigartig sein (unique). 
-Dies würde \ua helfen, wenn sich Benutzer bei einer Anwendung registrieren und sich einen Benutzernamen auswählen sollen. 
+Ein großer Vorteil von Postgres ist das Erstellen von sogenannten \emph{Views}.
+Über diese können dem Benutzer besondere Sichten, insbesondere wenn diese mehrfach verwendet werden, zur Verfügung gestellt werden.
+Zudem können auf diesen weitere Berechnungen durchgeführt werden.
+Beim Einfügen von Tupeln können Validierungen durchgeführt werden, \zb ob ein Wert zwischen 0 und 5 liegt.
+Über eine Restriktion \engl{constraint} können Attribute einzigartig (\emph{unique}) sein.
+Dies hilft \ua dann, wenn sich Benutzer bei einer Anwendung registrieren und sich einen Benutzernamen auswählen sollen, der nicht doppelt belegt werden darf.
 
-
-%Hier was über die Lizenz schreiben
-Die zu Beginn erwähnte Lizenz von Postgres ist der MIT-Lizenz oder der BSD-Lizenz\todo{!} ähnlich und erlaubt nicht nur die Nutzung, sondern das Kopieren, Erweitern und Verteilen der Software oder der Dokumentation dieser für jegliche Zwecke. %TODO: Quellen?
-Diese Verwendungszwecke unterliegen keinerlei Auflagen und erfordern ebenfalls keinerlei Abgaben von Gebühren, weshalb das \ac{ORDBMS} sich für die Nutzung in diesem Projekt sehr gut eignet.\autocite{rf-psqllicense}
+Die zu Beginn erwähnte Lizenz von Postgres ist der MIT-Lizenz und der BSD-Lizenz ähnlich und erlaubt daher nicht nur die Nutzung, sondern auch das Kopieren, Erweitern und Verteilen der Software oder der Dokumentation dieser für jegliche Zwecke.
+Diese Verwendungszwecke unterliegen keinerlei Auflagen und erfordern ebenfalls keinerlei Abgaben von Gebühren, weshalb das \ac{ORDBMS} sich für die Nutzung in diesem Projekt sehr gut eignet.\autocite[Vgl.][]{rf-psqllicense}
