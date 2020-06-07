@@ -1,14 +1,2 @@
 % !TEX root =  ../sicherheit.tex
 \subsection{Kommunikation}
-
-\subsubsection{Transferprotokoll}\label{chapter:https}
-
-Um die Sicherheit während der Kommunikation zu erhöhen dürfen Anfragen an den Webserver der Anwendung ausschließlich über \ac{HTTPS} zugelassen werden, sodass  die Kommunikation zwischen Server und Client verschlüsselt wird.
-Dies stellt die Integrität der Daten sicher und erhöht damit ebenfalls ihre Vertraulichkeit.
-Diese zwei Schutzziele dienen dazu einen potentiellen Angriff, wie etwa einen \ac*{MITM}-Angriff oder einen Lauschangriff, zu verhindern, indem das Ausspähen des Inhalts der Kommunikationspakete durch die vorhandene Verschlüsselung verhindert wird oder etwaige Veränderung der Pakete durch eine fehlerhafte Ent- und erneute Verschlüsselung bemerkt wird.
-
-Zur Verschlüsselung verwendet \ac{HTTPS} die \ac{TLS} und unterscheidet sich grundlegend, neben der \ac{URL}, welche bei der Verwendung von \ac{HTTPS} mit \enquote{https://} beginnt, und der standardmäßigen Nutzung des Port 443, nicht weiter von \ac{HTTP}.
-
-\ac{TLS} setzt dabei auf eine asymmetrische Verschlüsselung, wobei im ersten Schritt ein Schlüsselaustausch zwischen Client und Server vorgesehen ist.
-Dies geschieht nach der Version \ac{TLS} 1.3 über drei verschiedene Wege, die aufgrund ihrer Zukunftssicherheit ausgewählt wurden.
-Diese Zukunftssicherheit dient dazu, auch langfristige Angriffe zu verhindern, da so nicht alle potentiell von einem Angreifer abgefangenen \ac{TLS}-Sessions entschlüsselt werden können, sobald der private Schlüssel einer Session gefunden wurde.\autocite{rf-RFC8446}

@@ -104,8 +104,8 @@
 | **<u>Nutzerhandbuch</u>**      |                         |                         |                         |                         |                         |        |                                                         |
 | User-Journey / Handbuch        |                         | :ballot_box_with_check: | :ballot_box_with_check: |                         |                         |        | Screenshots mit Markierung + BPMN                       |
 | **<u>Fazit und Ausblick</u>**  |                         |                         |                         |                         |                         |        |                                                         |
-| Fazit                          |                         |                         |                         |                         |                         |        |                                                         |
-| Ausblick                       |                         |                         |                         |                         |                         |        |                                                         |
+| Fazit                          | :ballot_box_with_check: | :ballot_box_with_check: | :ballot_box_with_check: | :ballot_box_with_check: | :ballot_box_with_check: |        |                                                         |
+| Ausblick                       | :ballot_box_with_check: | :ballot_box_with_check: | :ballot_box_with_check: | :ballot_box_with_check: | :ballot_box_with_check: |        |                                                         |
 
 Legende:
 - :red_circle: verantwortlich/Interesse, aber noch kein nennenswerter Fortschritt

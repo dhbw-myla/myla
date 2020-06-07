@@ -3,11 +3,13 @@
 
 Um die Sicherheit der Daten auch während der Übertragung zwischen Server und Client zu gewährleisten, sollten diese hierbei verschlüsselt werden.
 Hierfür bietet sich das Kommunikationsprotokoll \acs{HTTPS} an, das das Protokoll \acs{HTTP} um Vertraulichkeit, Integrität und Authentizität erweitert.
+Dazu wird \ac{TLS} verwendet.
 
 Ohne eine Verschlüsselung der übertragenen Daten sind alle Überlegungen zum Datenschutz hinfällig, da ein Angreifer die Daten sonst ohne Weiteres auslesen könnte und somit Zugriff auf äußerst schützenswerten Daten hätte.
 Auch die geplanten Sicherheitsvorkehrungen, insbesondere der Schutz der gespeicherten Passwörter, bliebe wirkungslos, wenn die Daten ungeschützt übertragen werden.
 Ein Angreifer könnte sowohl Passwörter als auch Session-IDs abfangen.
 Folglich wäre die Zugangssicherung ohne großen Aufwand zu brechen.
 
+Bei der Verwendung von \acs{HTTP} besteht außerdem die Gefahr von \ac*{MITM}-Angriffen.
 Daher muss bei einem tatsächlichen Betrieb ein Zertifikat erstellt und \acs{HTTPS} eingerichtet werden.
 Der dafür benötigte Implementierungsaufwand ist nicht nennenswert.

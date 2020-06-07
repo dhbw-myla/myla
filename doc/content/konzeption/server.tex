@@ -1,23 +1,23 @@
 % !TEX root =  ../../master.tex
 \section{Server}
-
+\label{sec:konzept:server}
 \subsection{\acl{API}}
 Der Server soll nach außen eine \acs{API} mit einzelnen Endpunkten bieten.
-Jeder dieser \acs{API}-Endpunkte soll dann für die Ausführung einer speziellen Aktion zuständig sein.
-Der Client soll dann auf diese zugreifen können.
+Jeder dieser \acs{API}-Endpunkte soll für die Ausführung einer speziellen Aktion zuständig sein.
+Der Client soll auf die dementsprechenden Endpunkte zugreifen können, um die gewünschten Funktionen abzurufen.
 
-Dabei soll die Implementierung der Routen am Programmierparadigma \acs{REST} orientiert werden.
+Dabei soll die Implementierung der Routen am Programmierparadigma \acs{REST} orientiert werden (siehe Abschnitt \ref{sec:grundlagen:rest}).
 Dabei bietet der Server über die \acs{HTTP}-Methoden die \acs{CRUD}-Operationen an, da er vorwiegend zur Datenhaltung dient.
-Hinzu kommt selbstverständlich die Geschäftslogik, die das Erstellen, Durchführen und Auswerten der Umfragen ermöglicht.
+Hinzu kommt die Geschäftslogik, die das Erstellen, Durchführen und Auswerten der Umfragen ermöglicht.
 
 \subsection{Datenhaltung und Datenmodell}
 Um die entsprechenden \acs{API}-Endpunkte mit den zugehörigen Aktionen anbieten zu können, müssen serverseitig Daten gespeichert werden.
-Dies umfasst beispielsweise die Umfragen, die zugehörigen Fragen und die darauf gegebenen Antworten.
+Dies umfasst beispielsweise die Umfragen, inklusive der dazugehörigen Fragen und der gegebenen Antworten.
 
-Hierfür sind relationale Datenbanken weit verbreitet, sodass auch hier, für die im Rahmen dieser Seminararbeit entwickelte Anwendung, eine solche Form der Datenhaltung genutzt wird.
+Hierfür sind relationale Datenbanken (siehe Abschnitt \ref{sec:grundlagen:reldb}) weit verbreitet, weshalb auch für die im Rahmen dieser Seminararbeit entwickelte Anwendung, eine solche Form der Datenhaltung genutzt wird.
 Im Folgenden wird nun das Datenmodell näher vorgestellt.
 
-Da es gemäß der Anforderung~\ref{Anf:A12} möglich sein soll, Umfragen mehrfach durchzuführen, wird sich entschieden für Umfragen zwei Entitäten einzuführen.
+Da es gemäß der Anforderung~\hyperref[Anf:A12]{A12} möglich sein soll, Umfragen mehrfach durchzuführen, wird sich entschieden, für Umfragen zwei Entitäten einzuführen.
 So gibt es zum einen den sogenannten \texttt{SurveyMaster} und zum anderen einen \texttt{Survey}.
 Der \texttt{SurveyMaster} entspricht dabei einer Art Vorlage, in der die einzelnen Fragen definiert werden.
 Der \texttt{Survey} stellt dann eine konkrete Umfrage dar, die auf genau einem solchen \texttt{SurveyMaster} basiert.
@@ -31,29 +31,30 @@ Zusätzlich befindet sich im Anhang auf Seite~\pageref{fig:er-model} noch Abbild
 	\def\svgscale{0.72}
 	\graphicspath{{img/backend/database/}}
 	\scriptsize{\input{img/backend/database/er-myla-simplified-2020-06-04.pdf_tex}}
-	\caption{Vereinfachtes \acs{ER-Modell}}
+	\captionsetup{format=plain, justification=centering}
+	\caption[Vereinfachtes \acs{ER-Modell}]{Vereinfachtes \acs{ER-Modell}\\Quelle: Eigene Darstellung} MiTtElS DrAw.Io
 	\label{fig:er-model-simplified}
 \end{figure}
 
-Bereits das vereinfachte \acs{ER-Modell} zeigt die Trennung von \texttt{SurveyMaster} und \texttt{Survey} sehr gut.
+Bereits das vereinfachte \acs{ER-Modell} verdeutlicht die Trennung von \texttt{SurveyMaster} und \texttt{Survey}.
 Die Fragen, die bei jeder solchen Umfrage gleich sein sollen, sind mit dem \texttt{SurveyMaster} verknüpft.
 Die Antworten hingegen beziehen sich stets auf die konkrete Umfrage.
 Für eine Frage wird ein \acs{JSON} in Textform gespeichert, sodass das Format hier anpassbar ist und vom Front-End festgelegt werden kann.
-Dadurch können, wie in Anforderung~\ref{Anf:A9} gefordert, verschiedene Fragetypen genutzt werden, sogar ohne dass dafür Anpassungen im Back-End notwendig sind.
+Dadurch können, wie in Anforderung~\hyperref[Anf:A9]{A9} gefordert, verschiedene Fragetypen genutzt werden, ohne dass dafür Anpassungen im Back-End notwendig sind.
 Bei einer Antwort wird neben der Antwort als solcher noch ein Zeitstempel gespeichert.
 
-Zusätzlich zu den Antworten wird je \texttt{Survey} gezählt, wie viele Teilnahmen es gab.
+Zusätzlich zu den Antworten werden je \texttt{Survey} die Teilnahmen gezählt.
 Dies ermöglicht die Erkennung von Enthaltungen bei Fragen, die nicht verpflichtend beantwortet werden müssen.
 Außerdem kann dadurch je Umfrage die Zahl der Teilnahmen dargestellt werden, was für Benutzer eine sinnvolle und hilfreiche Information darstellt.
 
-Um eine Umfrage für die gewünschten Teilnehmer zugänglich zu machen, zugleich aber sicherzustellen, dass die Umfrage nicht öffentlich verfügbar ist und von jedem beantwortet werden kann, gibt es einen \texttt{survey\_code}.
-Hierbei handelt es sich um eine zufällige Zeichenkette, z.~B. \texttt{W3VFG5NHY}, unter der auf die Umfrage zugegriffen werden kann.
+Um eine Umfrage für die gewünschten Teilnehmenden zugänglich zu machen, zugleich aber sicherzustellen, dass die Umfrage nicht öffentlich verfügbar ist und von jedem beantwortet werden kann, gibt es einen \texttt{survey\_code}.
+Hierbei handelt es sich um eine zufällige Zeichenkette, \zb \texttt{W3VFG5NHY}, mithilfe dieser auf die Umfrage zugegriffen werden kann.
 So kann beispielsweise eine Lehrperson nach dem Erstellen einer Umfrage diesen Code mit den Studierenden teilen.
 
-Um einerseits das Thema einer Umfrage für die Teilnehmer erkenntlich zu machen und andererseits auch um Nutzern, die Umfragen erstellen, die Möglichkeit zu geben, Umfragen ordentlich und übersichtlich zu verwalten, haben diese einen Titel.
-Dabei gibt es einerseits einen allgemeinen Titel sowie eine Beschreibung auf Ebene des \texttt{SurveyMasters}, z.~B. \enquote{Umfrage Zufriedenheit Vorlesung}.
-Zudem ist auf Ebene des \texttt{Surveys} für jede einzelne Umfrage noch ein weiterer Titel gespeichert, um die einzelnen Umfragen auseinanderhalten zu können.
-Hier kann beispielsweise das Datum oder der Name des Kurses verwendet werden.
+Um einerseits das Thema einer Umfrage für die Teilnehmenden erkenntlich zu machen und andererseits auch um Nutzern, die Umfragen erstellen, die Möglichkeit zu geben, Umfragen ordentlich und übersichtlich zu verwalten, haben diese einen Titel.
+Dabei gibt es einen allgemeinen Titel sowie eine Beschreibung auf Ebene des \texttt{SurveyMasters}, \zb \enquote{Umfrage Zufriedenheit Vorlesung}.
+Zudem ist auf Ebene des \texttt{Surveys} für jede konkrete Umfrage noch ein weiterer Titel gespeichert, um die einzelnen Umfragen auseinanderhalten zu können.
+Hier kann beispielsweise das Datum oder der Name des Kurses in Verbindung mit dem allgemeinen Titel verwendet werden.
 
-Zudem ist jeder \texttt{SurveyMaster} und somit auch jeder \texttt{Survey} einem angemeldeten Nutzer zugeordnet.
-Auf die entsprechenden Details wird im folgenden Abschnitt~\ref{sec:konzept-sicherheit} zum Thema Sicherheit ab Seite~\pageref{sec:authentifizierung} etwas näher eingegangen.
+Des Weiteren ist jeder \texttt{SurveyMaster} und somit auch jeder \texttt{Survey} einem angemeldeten Nutzer zugeordnet.
+Auf die entsprechenden Details wird im folgenden Abschnitt~\ref{sec:konzept-sicherheit} zum Thema Sicherheit ab Seite~\pageref{sec:authentifizierung} näher eingegangen.

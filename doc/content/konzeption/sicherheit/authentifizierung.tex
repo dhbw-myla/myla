@@ -2,14 +2,14 @@
 \subsection{Authentifizierung}
 \label{sec:authentifizierung}
 
-Um einen angemessen Schutz der gespeicherten Daten zu gewährleisten, soll jeder Benutzer nur seine eigenen Daten einsehen können.
-Ebenso sind auch die ausführbaren Aktionen auf den Benutzer zu beschränken, auf den sich diese beziehen.
+Um einen angemessenen Schutz der gespeicherten Daten zu gewährleisten, soll jeder Benutzer nur seine eigenen Daten einsehen können.
+Ebenso sind auch die ausführbaren Aktionen auf den Benutzer zu beschränken, auf denen sich diese beziehen.
 Dies bedeutet, dass ein angemeldeter Benutzer nur die Ergebnisse seiner eigenen Umfragen sehen kann, nicht aber die Ergebnisse von Umfragen anderer Benutzer.
 
 Daher muss ein Benutzer vom System identifiziert werden können.
 Die erstellten Umfragen können dann einer solchen digitalen Identität zugeordnet werden.
 Zum Anlegen dieser digitalen Identität erfolgt eine Registrierung mit Nutzername und Passwort.
-Zusätzlich muss gemäß Anforderung~\ref{Anf:A2} ein Registrierungsschlüssel angegeben werden, sodass lediglich befugte Personen Benutzer erstellen können.
+Zusätzlich muss gemäß Anforderung~\hyperref[Anf:A2]{A2} ein Registrierungsschlüssel angegeben werden, sodass lediglich befugte Personen Benutzer erstellen können.
 
 Das geheime Passwort ist nur dem jeweiligen Nutzer bekannt, sodass dieser sich damit authentisieren kann.
 Der Server speichert das Passwort in der Datenbank, damit bei einer Anmeldung geprüft werden kann, ob der Nutzer auch der ist, der er vorgibt zu sein.
@@ -36,18 +36,17 @@ Dadurch ist es möglich, dass selbst wenn zwei Benutzer dasselbe Passwort gewäh
 Ebenso erschwert es das Knacken der Passworthashes, da ein Angreifer die Hashes nicht im Voraus berechnen kann.
 Der Pepper ist für alle Nutzer derselbe und außerhalb der Datenbank gespeichert.
 Dieser wird in einer Konfigurationsdatei definiert und entsprechend vom Programm geladen.
-Dies erschwert ebenso Angriffe auf die Hashwerte, da ein Angreifer, der lediglich Zugang zur Datenbank hat, den Pepper nicht kennt, sodass das Knacken deutlich schwieriger wird.
+Dadurch sollen ebenso Angriffe auf die Hashwerte erschwert werden, da ein Angreifer, der lediglich Zugang zur Datenbank hat, den Pepper nicht kennt, sodass das Knacken deutlich schwieriger wird.
 
 Nutzer, die sich registriert oder angemeldet haben, erhalten eine sogenannte Session-ID.
 Diese wird dann bei \acs{API}-Aufrufen zur Authentifizierung genutzt, sodass hier nicht jedes Mal, dass Passwort genutzt werden muss.
-
 Sollte ein Nutzer sein Passwort vergessen, kann dieses von Administratoren zurückgesetzt werden.
-Es muss danach allerdings, wie in Anforderung~\ref{Anf:A6} beschrieben, direkt wieder vom Nutzer geändert werden.
+Es muss danach allerdings, wie in Anforderung~\hyperref[Anf:A6]{A6} beschrieben, direkt wieder vom Nutzer geändert werden.
 
-Wenn die Nutzung eines Registrierungsschlüssels von den Administratoren als zu unsicher angesehen wird, können Sie Nutzer gemäß Anforderung~\ref{Anf:A3} auch manuell erstellen.
-Auch hier muss ein vom Administrator festgelegtes Passwort, wie in Anforderung~\ref{Anf:A5} gefordert, direkt beim nächsten Anmelden angepasst werden.
+Wenn die Nutzung eines Registrierungsschlüssels von den Administratoren als zu unsicher angesehen wird, können Sie Nutzer gemäß Anforderung~\hyperref[Anf:A3]{A3} auch manuell erstellen.
+Auch hier muss ein vom Administrator festgelegtes Passwort, wie in Anforderung~\hyperref[Anf:A5]{A5} gefordert, direkt beim nächsten Anmelden angepasst werden.
 
-Auf der anderen Seite müssen sich Personen, die Umfragen beantworten, gemäß Anforderung~\ref{Anf:A14} nicht anmelden.
+Auf der anderen Seite müssen sich Personen, die Umfragen beantworten, gemäß Anforderung~\hyperref[Anf:A14]{A14} nicht anmelden.
 Entsprechend haben Sie nur eine sehr eingeschränkte Sicht.
-Sie können auf Umfragen lediglich über einen zehnstelligen Code zugreifen.
+Sie können auf Umfragen lediglich über einen zehnstelligen Code, welcher in Abschnitt \ref{sec:konzept:server} bereits erwähnt wurde zugreifen.
 Dadurch ist es auch nur schwer bis gar nicht möglich auf Umfragen zuzugreifen, die nicht mit einem geteilt wurden.
