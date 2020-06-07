@@ -5,34 +5,44 @@
 Diese Arbeit bzw. dieses Dokument erhebt nicht den Anspruch einer wissenschaftlichen Arbeit, sondern spiegelt lediglich den Entwicklungsprozess der erstellten Software wieder. 
 Hierzu werden entsprechende Grundlagen vermittelt.}
 
-Zunächst werden die theoretischen Grundlagen, wie \ac{REST} in den Kapitel \vref{sec:theoretisch}, den Grundlagenteil, gelegt.
-Anschließend daran folgen Ausführungen zu den Techniken hinter Microservices und Prototyping.
-Weiterhin werden die theoretischen Erläuterungen mit der Dokumentation von dem Konzept der relationalen Datenbank und Fragebogentheoretischen Ausführungen. 
-Abschließend wird auf die Idee und die Verwendung von Learning Analytics im allgemeinen eingegangen. 
+Diese werden im nächsten Kapitel vorgestellt.
+Zunächst werden hierbei die theoretischen Grundlagen in Abschnitt~\vref{sec:theoretisch} beschrieben.
+Zu Beginn wird hier das Programmierparadigma \acs{REST} vorgestellt.
+Anschließend daran folgen Ausführungen zu den Techniken hinter Microservices sowie der Methodik des Prototyping.
+Ebenso werden Grundlagen zu relationalen Datenbanken, die in dieser Arbeit Anwendung finden, kurz erläutert.
+Danach wird die Theorie zum Erstellen von Fragebögen behandelt.
+Abschließend wird allgemeine Aspekte von Learning Analytics eingegangen. 
 
-Im Folgenden werden in Kapitel \vref{sec:technisch}, die technischen Grundlagen gelegt, um ein Verständnis für die verwendeten Technologien zu schaffen. 
-Den Anfang bildet die Technologie Docker, dabei wird auf die Container-Virtualisierung eingegangen und diese für die Verwendung evaluiert. % ??
-Um einen Bezug zu den theoretischen Grundlagen zu haben, bildet das Kapitel über PostgreSQL ein reales Anwendungsbeispiel für eine relationale Datenbank.  
-Schlussendlich werden die Grundlagen mit einem Ausblick in das verwendete Front-End-Framework, React, abgeschlossen. 
+Im Folgenden werden in Abschnitt~\vref{sec:technisch} die technischen Grundlagen gelegt, um ein Verständnis für die verwendeten Technologien zu schaffen. 
+Den Anfang bildet die Technologie Docker.
+Dabei wird insbesondere auf die Container-Virtualisierung eingegangen.
+Um einen Bezug zu den theoretischen Grundlagen der relationalen Datenbanken zu schaffen, bildet der Abschnitt über PostgreSQL ein reales Anwendungsbeispiel für eben diese.
+Schlussendlich werden die Grundlagen mit einem Einblick in das verwendete Front-End-Framework React abgeschlossen. 
 
-Darauf folgend wird im Kaptitel \vref{ch:analyse} eine Ist-Analyse der bestehenden Learning-Analytics-Software durchgeführt. 
-Dabei wird näher darauf eingegangen, inwiefern die vorherige Lösung in die neue Implementierung eines Umfragetools für Studierende und Dozierende mit einwirken kann. 
-Um einen klar abgegrenzten Start in die Implementierung zu legen, werden die Anforderungen an das neue Tool detailliert aufgeführt. 
-Nachdem die Anforderungen evaluiert sind, werden alternative bestehende Lösungen analysiert und abgegerenzt, inwiefern die Konzepte aus anderen Lösungen mit in die eigene Implementierung integriert werden können. 
-Zum Abschluss der Analyse werden drei Personas als mögliche Nutzer der Software vorgestellt.
+Darauf folgend wird im Kapitel~\vref{ch:analyse} eine Ist-Analyse der bestehenden Learning-Analytics-Software durchgeführt. 
+Dabei wird näher darauf eingegangen, inwiefern die vorherige Lösung in die neue Implementierung eines Umfragetools für Studierende und Dozierende mit einwirken kann.
+Um einen klar abgegrenzten Start in die Implementierung zu legen, werden die Anforderungen an die neue Software detailliert aufgeführt. 
+Nachdem die Anforderungen evaluiert sind, werden alternative bestehende Lösungen analysiert und gegenüber der im Nachgang zu entwickelnden Software abgegrenzt.
+Zum Abschluss der Analyse werden drei Personas als mögliche Nutzer der Software vorgestellt, um basierend auf diesen ein Konzept für die Anwendung zu entwickeln.
 
-In dem Kapitel \vref{ch:konzeption}, wird auf die Konzeption eingegangen. 
-Zuerst wird gesamtheitlich auf das Konzept eingegangen, inwiefern die Teile der Software miteinander zusammenspielen sollen. 
-Anschließend werden konzeptionell die einzelnen Komponenten Server, Client und Sicherheit, beschreiben. 
+In dem Kapitel~\vref{ch:konzeption} wird auf die Konzeption eingegangen. 
+Zuerst wird die grundlegende Architektur der Software beschrieben.
+Im Speziellen wird geklärt, inwiefern die Bestandteile der Software miteinander interagieren sollen.
+Anschließend werden die einzelnen Komponenten, Server und Client, konzeptionell beschreiben.
+Es wird dabei noch einmal explizit auf die Sicherheit der Anwendung eingegangen.
 
-Nach der ausführlichen Erläuterung der Konzeption wird nun in Kapitel \vref{ch:implementierung} auf die Implementierung dieser Komponenten eingegangen. 
-Ebenfalls wird auf das verwendete Docker-Netzwerk eingegangen, welches die Komponenten miteinander verbindet und die Kommunikation dieser in einem abgesicherten System ermöglicht.
-Die Implementierung orientiert sich dabei an die konzeptionierten Ideen, jedoch sind im Verlauf des Projektes einige Abweichungen entstanden.
-Diese Abweichungen wurde auf Grund von Zeitgründen nicht noch einmal in den vorgesehen Mock-Ups angepasst.
+Nach der ausführlichen Erläuterung der Konzeption wird in Kapitel~\vref{ch:implementierung} auf die Implementierung der Software-Bestandteile eingegangen. 
+Ebenfalls wird auf das verwendete Docker-Netzwerk eingegangen, welches diese miteinander verbindet und die Kommunikation in einem abgesicherten System ermöglicht.
+Die Implementierung orientiert sich dabei an den zuvor konzeptionierten Ideen.
+Jedoch sind im Verlauf des Projektes einige Abweichungen entstanden.
+Überwiegend ist dies in den Erfahrungen, die bei der Entwicklung gesammelt wurden, begründet.
+Darüber hinaus konnten mangels Zeit nicht alle geplanten Features vollständig eingearbeitet werden.
 
-Nach dem erfolgreichen Durchführen des Projektes wird ein Nutzerhandbuch im Kapitel \vref{ch:nutzerhandbuch} vorgestellt, in dem wesentliche Nutzungsaspekte im Detail erläutert werden.
-Dabei wird beispielsweise beschrieben, wie Umfragersteller sich bei der Software registrieren und anmelden können.
+Nach der erfolgreichen Implementierung wird im Kapitel~\vref{ch:nutzerhandbuch} ein Nutzerhandbuch vorgestellt. 
+In diesem werden die wesentlichen Nutzungsaspekte im Detail erläutert.
+Dabei wird beispielsweise beschrieben, wie Umfrageersteller sich bei der Software registrieren und anmelden können.
 
-Die Dokumentation wird dem Kapitel \vref{ch:ausblick} zum Abschluss gebracht. 
-Durch ein Fazit zur Gruppen- und Seminararbeit wird abschließend ein Überblick zur Arbeit gegeben. 
-Um den weiteren Verlauf und die möglichen Anhaltspunkte für Weiterentwicklungen abzugrenzen, wird der Abschluss mit einem Ausblick gemacht.
+Die Dokumentation wird in dem Kapitel~\vref{ch:ausblick} zum Abschluss gebracht. 
+Dabei wird ein Fazit zur Gruppen- und Seminararbeit gezogen.
+Hierbei wird insbesondere Bezug auf das Ergebnis, also die entwickelte Software zur Durchführung von Umfragen, genommen.
+Zuletzt werden im Ausblick dieser Arbeit die möglichen Aspekte für eine Weiterentwicklung beleuchtet.

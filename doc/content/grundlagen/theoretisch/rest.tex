@@ -8,40 +8,40 @@ Durch die Verwendung einer \ac{API} ist es möglich, Software an einer Microserv
 
 Der wohl bekannteste und derzeit verbreiteste Schnittstellentyp ist \ac{REST}.
 \ac{REST} basiert dabei auf dem \ac{REST}-Paradigma, welches von Roy Thomas Fielding in seiner Dissertation\autocite{MS-Fielding.} vorgestellt wurde. Allgemein hat das \ac{REST}-Paradigma sechs Grundprinzipien, die bei der Entwicklung einer \ac{REST}-basierten \ac{API} beachtet werden müssen. 
-Aus diesem Grund gilt \ac{REST} auch nicht als Standard, sondern es gibt eine grobe Richtung für die Entwicklung von \acp{API} vor.
+Aus diesem Grund gilt \ac{REST} auch nicht als Standard, sondern gibt eine grobe Richtung für die Entwicklung von \acp{API} vor.
 Im Nachfolgenden werden die sechs Grundprinzipien genauer erläutert:
 
 Das erste Prinzip beruht auf einer Client-Server-Architektur, bei der die Benutzerschnittstelle von der Datenhaltung entkoppelt wird. % ref zum kommenden Kapitel?
 Hierdurch soll die Skalierbarkeit und Portabilität der Software verbessert werden.
 Als zweites Grundprinzip wird die Zustandslosigkeit angesehen.
 Damit ist gemeint, dass alle Anfragen vom Client an den Server stets alle nötigen Informationen beinhalten, die der Server benötigt.
-Dabei werden Aktionen bzw. Anfragen isoliert betrachtet, was sowohl das Nachvollziehen dieser erleichtert, als auch die Zuverlässigkeit des Systems verbessert.
+Dabei werden Aktionen bzw. Anfragen isoliert betrachtet, was sowohl das Nachvollziehen dieser erleichtert als auch die Zuverlässigkeit des Systems verbessert.
 
 Der dritte Grundsatz nach \citeauthor{MS-Fielding.} ist der Cache. 
 Laut diesem Prinzip sollen die Daten als \enquote{cachable} oder \enquote{not cachable} markiert werden.
 Dadurch wird festgelegt, ob Antworten vom Server gespeichert und erneut verwendet werden dürfen, was die Effizienz des Systems erhöht und redundante Anfrage unterbindet.
 Das nächste Prinzip bezieht sich auf die Gestaltung der Schnittstellen. 
-Diese sollen möglichst einheitlich aufgebaut sein, sodass es dem Nutzer ermöglicht wird schnell die Struktur der Schnittstellen zu verstehen. 
+Diese sollen möglichst einheitlich aufgebaut sein, sodass es dem Nutzer ermöglicht wird, schnell die Struktur der Schnittstellen zu verstehen. 
 Dies hilft den Code allgemein zu vereinfachen bzw. Arbeitsschritte nachvollziehbar zu gestalten.
 
 Das fünfte Prinzip nach \citeauthor{MS-Fielding.} ist die hierarchische Strukturierung des Gesamtsystems in verschiedene Schichten. 
 Die Schichten sollen ermöglichen, dass jede Komponente nur die direkten Nachbarkomponenten kennt und keine Daten oder Funktionalitäten aus anderen Schichten auslesen und verwenden kann.
 Dadurch können Komponenten von der Außenwelt abgekapselt bzw. isoliert werden.
 Weiterhin kann dadurch eine bessere Lastverteilung über verschiedene Netzwerke ermöglicht werden.
-Der letzte Grundbaustein des \ac{REST}-Paradigmas sind optional nachladbare Funktionalitäten.
+Der letzte Grundbaustein des \ac{REST}-Paradigmas sind nachladbare Funktionalitäten.
 Dieses Prinzip ist optional und bezieht sich darauf, dass die Client-Funktionalität durch das Herunterladen von ausführbarem Code erweitert werden kann. 
 
 Neben den gerade genannten sechs Prinzipien beschreibt \citeauthor{MS-Fielding.} in seiner Dissertation noch die zu \ac{REST} gehörigen Datenelemente. 
 Dabei spielt das Datenelement namens Ressource eine zentrale Rolle.
 Eine Ressource verkörpert in \ac{REST} eine Abstraktion der Information in jeglicher Form.
-Es ist dabei egal, ob es sich um ein Bild, Dokument oder um komplexe Sachverhalte handelt. 
+Es ist dabei egal, ob es sich um ein Bild, ein Dokument oder um komplexe Sachverhalte handelt. 
 Wichtig ist jedoch, dass das Ziel einer Hypertext-Referenz mit der Definition einer Ressource übereinstimmt.
 Ressourcen selbst können entweder statisch oder dynamisch sein.
 Diese Unterscheidung ermöglicht, dass eine statische Ressource jederzeit denselben Zielwert zurückliefert, während eine nicht statische Ressource verwendet werden kann, um beispielsweise die aktuellste Version des Wertes zurück zu geben.\autocite[Vgl.][S. 86-90]{MS-Fielding.}$^,$\autocite{rf-richardson2013restful}
 
-Da \ac{REST} selbst kein Standard sondern ein Rahmenwerk für die Architektur von Schnittstellen darstellt gibt es verschiedene Formen, wie eine Umsetzung erfolgen kann. 
+Da \ac{REST} selbst kein Standard, sondern ein Rahmenwerk für die Architektur von Schnittstellen darstellt gibt es verschiedene Formen, wie eine Umsetzung erfolgen kann. 
 Oftmals wird für die Umsetzung von \ac{REST}-basierten \acp{API} das \ac{HTTP} verwendet.
 \ac{HTTP} bringt viele Eigenschaften mit, die das \ac{REST}-Paradigma voraussetzt und stellt deshalb eine denkbar perfekte Grundlage für die Implementierung von \ac{REST}-\acp{API} dar. 
-Durch die in \ac{HTTP} implementierten Methoden wie GET, POST, PUT und DELETE ist es möglich die im Paradigma beschriebenen Ressourcen zu verwalten.
-Die Übertragung der Nutzdaten erfolgt dabei meist im \ac{JSON}- oder \ac{XML}-Format.\autocite[Vgl.][S. 97]{MS-Tilkov.2015} 
+Durch die in \ac{HTTP} implementierten Methoden wie \emph{GET}, \emph{POST}, \emph{PUT} und \emph{DELETE} ist es möglich, die im Paradigma beschriebenen Ressourcen zu verwalten.
+Die Übertragung der Nutzdaten erfolgt dabei meist im \acs{JSON}- oder \acs{XML}-Format.\autocite[Vgl.][S. 97]{MS-Tilkov.2015} 
 
