@@ -20,7 +20,7 @@
 \newcommand{\Kurs}[1]{\def\DieKursbezeichnung{#1}}
 
 
-%\usepackage{microtype}% verbesserter Randausgleich
+\usepackage{microtype}% verbesserter Randausgleich
 %\setlength\emergencystretch{1em}
 % correct superscripts
 \usepackage{fnpct}
@@ -54,24 +54,24 @@
 \newenvironment{barchart}[1]{ % The only parameter is the maximum bar width, in cm
 	\newcommand{\barwidth}{0.35}
 	\newcommand{\barsep}{0.55}
-	
+
 	% Command to add a bar to the bar chart
 	\newcommand{\baritem}[2]{ % The first argument is the bar label and the second is the percentage the current bar should take up of the total width
 		\pgfmathparse{##2}
 		\let\perc\pgfmathresult
-		
+
 		\pgfmathparse{#1}
 		\let\barsize\pgfmathresult
-		
+
 		\pgfmathparse{\barsize*##2/5}
 		\let\barone\pgfmathresult
-		
+
 		\pgfmathparse{(\barwidth*\thebarcount)+(\barsep*\thebarcount)}
 		\let\barx\pgfmathresult
-		
+
 		\filldraw[fill=none, draw=black!] (0,-\barx) rectangle (5,-\barx-\barwidth);
 		\filldraw[fill=black!90, draw=black!90] (0,-\barx) rectangle (\barone,-\barx-\barwidth);
-		
+
 		\node [label=180:{\textcolor{black}{##1: ##2/5}}] at (0,-\barx-0.175) {};
 		\addtocounter{barcount}{1}
 	}
@@ -79,19 +79,19 @@
 	\newcommand{\baritemNL}[2]{ % The first argument is the bar label and the second is the percentage the current bar should take up of the total width
 		\pgfmathparse{##2}
 		\let\perc\pgfmathresult
-		
+
 		\pgfmathparse{#1}
 		\let\barsize\pgfmathresult
-		
+
 		\pgfmathparse{\barsize*##2/5}
 		\let\barone\pgfmathresult
-		
+
 		\pgfmathparse{(\barwidth*\thebarcount)+(\barsep*\thebarcount)}
 		\let\barx\pgfmathresult
-		
+
 		\filldraw[fill=none, draw=black!] (0,-\barx) rectangle (5,-\barx-\barwidth);
 		\filldraw[fill=black!90, draw=black!90] (0,-\barx) rectangle (\barone,-\barx-\barwidth);
-		
+
 		\node [label=180:{}] at (0,-\barx) {};
 		\addtocounter{barcount}{1}
 	}
@@ -107,7 +107,7 @@
 \usetikzlibrary{shapes, backgrounds}
 \tikzset{x=1cm, y=1cm} % Default tikz units
 
-%%% Uncomment the following lines to support hard URL breaks in bibliography 
+%%% Uncomment the following lines to support hard URL breaks in bibliography
 \apptocmd{\UrlBreaks}{\do\f\do\m}{}{}
 \setcounter{biburllcpenalty}{9000}% Kleinbuchstaben
 \setcounter{biburlucpenalty}{9000}% Großbuchstaben

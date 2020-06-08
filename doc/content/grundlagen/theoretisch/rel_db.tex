@@ -10,7 +10,7 @@ Sie soll dem Benutzer einen einfachen Zugriff auf die Daten bieten und muss verh
 Der Benutzer muss die Möglichkeit haben, die Daten anzupassen, ohne dass Anwendungsprogramme angepasst werden müssen.\autocite[Vgl.][S. 5 f.]{Book_DB_2}
 
 Grundlegend dienen die Datenbanksysteme somit zur Datenverwaltung mithilfe von Tabellen, auch als \enquote{Relationen} bezeichnet.
-Neue Relationen können dabei jederzeit hinzugefügt werden. 
+Neue Relationen können dabei jederzeit hinzugefügt werden.
 Dadurch ist das Datenbanksystem ständig erweiterbar und nicht an eine im Voraus festgelegte Struktur gebunden.
 Jede Spalte einer Tabelle besitzt einen Bezeichner, etwa \enquote{Nachname}, wie es beispielhaft in der Relation \emph{Student} (siehe Tabelle~\vref{tab:RelStudent}) dargestellt wird.
 Jede Spalte stellt dabei ein Attribut der Relation dar.
@@ -37,7 +37,7 @@ Zeilen einer Relation werden jeweils als Tupel bezeichnet und bestehen aus mehre
 \label{ssec:Datenbanken_Bestandteile}
 Datenbanksysteme sind immer nach einem Schema ausgerichtet, dass ihren Aufbau definiert.
 So beinhaltet jedes Datenbanksystem ein \ac{DBMS} und eine Datenbank.
-Das \ac{DBMS} ist für die logische Datenverwaltung der Datenbank verantwortlich, die aus einer oder mehreren Datenbanken bestehen kann. 
+Das \ac{DBMS} ist für die logische Datenverwaltung der Datenbank verantwortlich, die aus einer oder mehreren Datenbanken bestehen kann.
 Programme können nur über bestimmte Schnittstellen des \ac{DBMS} auf die Datenbanken zugreifen, \zb mittels der Datenbanksprache \ac{SQL}.\autocite{Book_DB_1}\autocite{Book_DB_2}
 Der Vorteil, über ein normiertes Interface eines \ac{DBMS} auf die Datenbank zuzugreifen, liegt darin, dass der Programmierer keine Kenntnis über die innerliche Struktur der Daten haben muss.
 Dies übernimmt das \ac{DBMS}.\autocite[Vgl.][S. 4]{Schicker2017DatenbankenSQL}
@@ -53,12 +53,12 @@ Da die Suche über den Primary Key jedoch mit der Größe dessen komplexer wird,
 
 
 \subsubsection{\acl{ER-Modell}}
-Der Aufbau einer Datenbank kann mithilfe eines \acs{ER-Modell}s graphisch abgebildet werden. 
+Der Aufbau einer Datenbank kann mithilfe eines \acs{ER-Modell}s graphisch abgebildet werden.
 Dazu werden Entitäten \engl{Entities}, welche die Relationen repräsentieren, und Beziehungen \engl{Relationships} zwischen den Entitäten in einer standardisierten Form dargestellt.
 Eine Entität bildet dabei Dinge aus der realen Welt ab (Umfrage, Student, Gruppenarbeit) und besitzt Eigenschaften bzw. Attribute, die sie beschreiben (Name, Alter, Geschlecht, Umfrageart, Anzahl der Mitglieder).
 Ein Sonderfall einer Entität ist dabei die sogenannte \enquote{schwache} Entität.
 Ein Objekt wird schwache Entität genannt, wenn sie abhängig von einer anderen ist und gleichzeitig ohne diese nicht existieren kann.
-Beispielhaft kann ein Raum nicht ohne ein Gebäude existieren, was ihn zu einer schwachen Entität macht. 
+Beispielhaft kann ein Raum nicht ohne ein Gebäude existieren, was ihn zu einer schwachen Entität macht.
 Die Beziehungen zwischen den Entitäten werden über drei Beziehungswerte, \texttt{1}, \texttt{c = \{0, 1\}} sowie \texttt{n} (bzw. \texttt{m}), abgebildet.
 Daraus resultieren diese Beziehungen:
 
