@@ -1,25 +1,24 @@
 % !TEX root =  ../../master.tex
-\section{Fazit zur Gruppen- und Seminararbeit}
+\section{Fazit zur Seminar- und Gruppenarbeit}
 \label{sec:Fazit}
 
-Bei der Arbeit handelt es sich um die Dokumentation der Verwendung und Neuentwicklung einer Webanwendung.
-Von den verwendten Grundlagen, sowohl aus technischer als auch theoretischer Sicht, bis hin zu einem Nutzerhandbuch, wurden alle Schritte zur Erstellung der Anwendung beschrieben.
-
 Im Rahmen dieser Seminararbeit wurde eine Webanwendung zur Umfrageerstellung, -verwaltung und -ausführung erstellt.
-Dazu wurden zunächst alle verwendeten Grundlagen, sowohl aus technischer als auch theoretischer Sicht, erläutert.
-Anschließend wurde die Konzeption der Webanwendung beschrieben.
+Dazu wurden zunächst alle verwendeten Grundlagen, sowohl aus technischer als auch aus theoretischer Sicht, erläutert.
+Darauf aufbauend folgte eine Ist-Analyse des vorhergehenden Systems inklusive der verwendeten Technologien.
+Anschließend wurde neben den Anforderungen und einer kurzen Vorstellung der für Nutzer des Systems repräsentativen Personas die Konzeption der Webanwendung beschrieben.
 Dabei wurde die Client-Server-Architektur näher erläutert.
-Dazu wurde im Bereich des Servers auf die Gestaltung der zugrundeliegenden Datenbank und der \acp{API} in einer \ac{REST}-Struktur eingegangen.
-Zudem wurden erste Mock-Ups der Benutzeroberfläche entworfen und vorgestellt, die einen Anhaltspunkt für die Implementierung geliefert haben.
-Weiterhin wurden wesentliche Punkte bezüglich sicherheitskritscher Aspekte, nämlich der Authentifizierung sowie der Autorisierung und dem zu verwendeden Transferprotokoll, verdeutlicht.
-Dem folgt die Implementierung, welche die zuvor geschriebene Konzeption mit Hilfe der Front-End-Bibliothek \emph{React} zur Visualisierung und der JavaScript-Laufzeitumgebung \emph{Node.js} und dem Framework \emph{Express} verwirklicht wurden.
+
+Im Bereich des Servers wurde auf die Gestaltung der zugrundeliegenden Datenbank und der \ac{API}, welche einer \ac{REST}-Struktur folgt, eingegangen.
+Zudem wurden erste Mock-Ups der Benutzeroberfläche entworfen und vorgestellt, die einen Anhaltspunkt für die Implementierung lieferten.
+Weiterhin wurden wesentliche Punkte bezüglich sicherheitskritischer Aspekte, der Authentifizierung, der Autorisierung und dem zu verwendenden Transferprotokoll, verdeutlicht.
+Dem folgt die Implementierung, welche die zuvor geschriebene Konzeption mit Hilfe der Front-End-Bibliothek \emph{React} zur Visualisierung, der JavaScript-Laufzeitumgebung \emph{Node.js} und dem Framework \emph{Express} verwirklichte.
 Zu guter Letzt wird die Benutzung der Software durch ein \emph{Nutzerhandbuch} sehr detailliert erläutert, sodass jegliche Funktionalität, die vom Nutzer verwendet werden kann, beschrieben wird.
 
 Dadurch konnten alle zu Beginn der Arbeit beschriebenen und gestellten Anforderungen an die Applikation erfüllt werden.
 Mithilfe der erstellten Software, welche durch Docker einfach bereitzustellen ist, können Umfragen erstellt, verwaltet und ausgewertet werden.
 Dozenten können dies entsprechend nutzen, um die Interaktivität und den Abwechslungsreichtum von Vorlesungen zu steigern.
 Gleichzeitig können Studierende über die angebotene Plattform an Umfragen teilnehmen, was bei korrekter Nutzung des Systems als Datengrundlage für Learning Analytics verwendet werden kann.
-Darüberhinaus können auch Studenten solche Umfragen für ihre Bachelorarbeit mit Hilfe der Applikation erstellen.
+Darüber hinaus können auch Studenten solche Umfragen für ihre Bachelorarbeit mit Hilfe der Applikation erstellen.
 
 Durch das Zusammenspiel eines etablierten Teams, welches sich in den vergangenen drei Jahren entwickelte, wussten die beteiligten Autoren, dass sie sich aufeinander verlassen können.
 Ferner kannte jeder Student die Stärken und Schwächen der jeweils anderen.
@@ -28,9 +27,15 @@ Nur so konnte die bis jetzt entwickelte Anwendung auf ein solches Niveau gehoben
 Zu Beginn war es für manche Teammitglieder schwer, sich mit diesem Projekt zu identifizieren, da bereits andere Plattformen wie \enquote{Moodle} potenzielle Features möglich machen.
 Jedoch fand das Team schnell einen gemeinsamen, ganzheitlichen Ansatz zum Entwickeln einer solchen Applikation.
 Gemeinsam wurden Datenbankentwürfe erstellt und auf deren Richtigkeit überprüft.
-Es wurden Konzepte erstellt, wie es möglich ist, eine geeignet Umfrage-Applikation zu entwerfen, die es möglich macht, individuelle Umfragen zu erstellen und diese anschließend graphisch darzustellen.
-Gemeinsam mit den Stakeholdern wurden die Anforderungen besprochen.
+Es wurden Konzepte erstellt, wie es möglich ist, eine geeignete Umfrage-Applikation zu entwerfen, die es möglich macht, individuelle Umfragen zu erstellen und diese anschließend graphisch darzustellen.
 
-Auch bedingt durch die Corona-Krise haben sich die Autoren nicht beeinträchtigen lassen. 
-Vielmehr wurde hierdurch der Teamspirit gestärkt. 
-Dies zeigte sich \ua dadurch, dass das Team auch auf Dinge verzichtete und eine Vielzahl an Mehrstunden in Kauf nahm, um das Projekt zu dem zu machen was es nun ist. 
+Auch bedingt durch die Corona-Krise haben sich die Autoren nicht beeinträchtigen lassen.
+Vielmehr wurde hierdurch der Teamspirit gestärkt.
+Dies zeigte sich \ua dadurch, dass das Team auch auf Dinge verzichtete und eine Vielzahl an Mehrstunden in Kauf nahm, um das Projekt zu dem zu machen, was es nun ist.
+
+% Betonung, dass alles gut gegliedert und sauber dokumentiert ist, sodass einer Fortführung durch andere Nutzer nichts im Weg steht
+Bei dem Projekt wurde sehr viel Wert auf eine saubere und nachvollziehbare Dokumentation des Aufbaus der Client-Server-Architektur gelegt.
+Ferner wurde bei der Implementierung Wert auf das Stichwort \emph{Separation of Concerns} gelegt, welches dem Team bzw. den Autoren, die das Projekt weiterentwickeln, helfen soll. 
+Darüber hinaus wurde ein \emph{Repository} auf \url{https://github.com/} angelegt, um eine Nachvollziehbarkeit der Entwicklung zu gewährleisten.
+Hier liegt zusätzlich zu dieser Seminararbeit eine vollständige technische Dokumentation vor, die alle Einzelheiten zur Schnittstelle definiert.
+Dadurch kann das Projekt auch von bisher unbeteiligten Entwicklern fortgeführt werden.

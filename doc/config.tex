@@ -10,7 +10,8 @@
 \usepackage{xcolor}
 
 % hyperlinks
-\PassOptionsToPackage{hyphens}{url}\usepackage[hidelinks=true]{hyperref}
+%\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks=true]{hyperref}
 
 % commands for author and title
 \newcommand{\TitelDerArbeit}[1]{\def\DerTitelDerArbeit{#1}\hypersetup{pdftitle={#1}}}
@@ -107,9 +108,9 @@
 \tikzset{x=1cm, y=1cm} % Default tikz units
 
 %%% Uncomment the following lines to support hard URL breaks in bibliography 
-%\apptocmd{\UrlBreaks}{\do\f\do\m}{}{}
-%\setcounter{biburllcpenalty}{9000}% Kleinbuchstaben
-%\setcounter{biburlucpenalty}{9000}% Großbuchstaben
+\apptocmd{\UrlBreaks}{\do\f\do\m}{}{}
+\setcounter{biburllcpenalty}{9000}% Kleinbuchstaben
+\setcounter{biburlucpenalty}{9000}% Großbuchstaben
 
 \setlength{\bibparsep}{\parskip}	% add some space between biblatex entries in the bibliography
 \addbibresource{bibliography-martin.bib}	% add file bibliography.bib as biblatex resource

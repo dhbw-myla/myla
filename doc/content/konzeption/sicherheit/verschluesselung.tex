@@ -1,15 +1,18 @@
-% !TEX root =  ../../../master.tex
+ !TEX root =  ../../../master.tex
 \subsection{Verschlüsselung}
 
-Um die Sicherheit der Daten auch während der Übertragung zwischen Server und Client zu gewährleisten, sollten diese hierbei verschlüsselt werden.
+Um die Sicherheit der Daten auch während der Übertragung zwischen Client und Server zu gewährleisten, sollten diese hierbei verschlüsselt werden.
 Hierfür bietet sich das Kommunikationsprotokoll \acs{HTTPS} an, das das Protokoll \acs{HTTP} um Vertraulichkeit, Integrität und Authentizität erweitert.
-Dazu wird \ac{TLS} verwendet.
+\acs{HTTPS} verwendet dabei \acs{TLS} zur Verschlüsselung und unterscheidet sich, außer über die \acs{URL}, welche bei der Verwendung von \acs{HTTPS} mit \enquote{https://} beginnt, und die standardmäßige Nutzung des Port 443, nicht weiter von \acs{HTTP}.
+\acs{TLS} setzt auf eine asymmetrische Verschlüsselung, welche zunächst einen Schlüsselaustausch zwischen Client und Server vorsieht.
+Dies geschieht der Version \acs{TLS} 1.3 nach über drei verschiedene Wege, welche jeweils aufgrund ihrer gewährleisteten Zukunftssicherheit ausgewählt wurden.
+Diese Zukunftssicherheit dient dazu, dass nicht alle potentiell von einem Angreifer abgefangenen \acs{TLS}-Sessions entschlüsselt werden können, sobald der private Schlüssel einer Session gefunden wurde.\autocite{rf-RFC8446}
 
-Ohne eine Verschlüsselung der übertragenen Daten sind alle Überlegungen zum Datenschutz hinfällig, da ein Angreifer die Daten sonst ohne Weiteres auslesen könnte und somit Zugriff auf äußerst schützenswerten Daten hätte.
+Ohne eine Verschlüsselung der übertragenen Daten sind alle Überlegungen zum Datenschutz hinfällig, da ein Angreifer die Daten sonst ohne Weiteres auslesen könnte und somit Zugriff auf äußerst schützenswerte Daten hätte.
 Auch die geplanten Sicherheitsvorkehrungen, insbesondere der Schutz der gespeicherten Passwörter, bliebe wirkungslos, wenn die Daten ungeschützt übertragen werden.
 Ein Angreifer könnte sowohl Passwörter als auch Session-IDs abfangen.
 Folglich wäre die Zugangssicherung ohne großen Aufwand zu brechen.
 
-Bei der Verwendung von \acs{HTTP} besteht außerdem die Gefahr von \ac*{MITM}-Angriffen.
+Bei der Verwendung von \acs{HTTP} besteht außerdem die Gefahr von \ac{MITM}-Angriffen.
 Daher muss bei einem tatsächlichen Betrieb ein Zertifikat erstellt und \acs{HTTPS} eingerichtet werden.
-Der dafür benötigte Implementierungsaufwand ist nicht nennenswert.
+Der dafür benötigte Implementierungsaufwand ist jedoch nicht nennenswert.

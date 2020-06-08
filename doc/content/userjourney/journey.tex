@@ -2,45 +2,50 @@
 
 \section{Allgemein}
 
-Das folgende Nutzerhandbuch wurde auf die drei vorgestellten Personas gemünzt, welche jeweils verschiedene Use-Cases der Anwendung darstellen sollen.
-Dabei sind die Personas als Repräsentanten für echte Benutzer geplant.
+Das folgende Nutzerhandbuch wurde auf die drei vorgestellten Personas angepasst, welche jeweils verschiedene Use-Cases der Anwendung darstellen sollen.
+Dabei repräsentieren die Personas echte Benutzer der Anwendung.
 
-So soll \dutzi den Dozent darstellen, der gleichzeitig auch Administrator des Tools ist.
-Dieser Dozent meldet sich dabei zunächst in der Anwendung, wie in \myRefGeneral{ssec:Einloggen} beschrieben, an.
+So soll \dutzi den Dozenten darstellen, der gleichzeitig auch Administrator des Tools ist.
+Dieser meldet sich dabei zunächst in der Anwendung, wie in Abschnitt~\myRefGeneral{ssec:Einloggen} beschrieben, an.
 Anschließend stehen ihm verschiedene Möglichkeiten zum weiteren Vorgehen zur Verfügung.
-So kann er zunächst seine eigens erstellten und veröffentlichten Umfragen einsehen und sich die dazugehörigen Ergebnisse betrachten, wie es in \myRefGeneral{ssec:ResultDashboard} beschrieben wird.
-Außerdem kann er über das \emph{Survey Master Paradise}, beschrieben in \myRefGeneral{ssec:SurveyMasterParadise}, seine Umfrage-Vorlagen verwalten und neue Vorlagen erstellen.
-Das Erstellen neuer Vorlagen wird in \myRefGeneral{ssec:CreateMaster} näher beschrieben.
+So kann er zunächst seine eigenen veröffentlichten Umfragen einsehen und die dazugehörigen Ergebnisse betrachten, wie es in Abschnitt~\myRefGeneral{ssec:ResultDashboard} beschrieben wird.
+Andererseits kann er über das \emph{Survey Master Paradise}, beschrieben in Abschnitt~\myRefGeneral{ssec:SurveyMasterParadise}, seine Umfrage-Vorlagen verwalten, neue Vorlagen erstellen und diese als konkrete Umfrage veröffentlichen.
+Das Erstellen neuer Vorlagen wird in Abschnitt~\myRefGeneral{ssec:CreateMaster} näher beschrieben.
 
-Als Administrator besitzt \dutzi ebenfalls besondere Rechte, so kann er den Registrierungsschlüssel, näheres dazu in Kapitel \myRefGeneral{ssec:AdministratorTools}, anzeigen oder ändern.
-Ebenfalls kann er einen neuen Nutzer anlegen, sofern Personen, die den Registrierungsschlüssel nicht erhalten dürfen, einen Account erhalten sollen, wie es etwa bei der Persona \ariane der Fall ist. 
-Zudem kann ein Administrator alle im System vorhandene Personen einsehen, das Passwort dieser zurücksetzen oder diese zum Admin ernennen.
+Als Administrator besitzt \dutzi ebenfalls besondere Rechte.
+So ist es ihm möglich den Registrierungsschlüssel, näheres dazu in Abschnitt~\myRefGeneral{ssec:AdministratorTools}, anzuzeigen oder zu ändern.
+Ebenfalls ist er imstande, einen neuen Nutzer anzulegen.
+Dies ist notwendig, sofern Personen, die den Registrierungsschlüssel nicht erhalten dürfen, einen Account erhalten sollen, wie es etwa bei der Persona \ariane der Fall ist.
+Zudem kann ein Administrator alle im System vorhandenen Personen einsehen, gegebenenfalls das Passwort dieser zurücksetzen oder diese zum Administrator ernennen.
 
 Als zweite Persona wurde die Studentin \ariane vorgestellt.
-Diese möchte neben der Beantwortung von Umfragen, wie in \myRefGeneral{ssec:TeilnahmeAnEinerUmfrage} erläutert, auch selbst Umfragen erstellen, was näher in \myRefGeneral{ssec:CreateMaster} beschrieben wird.
-Aufgrund von Personas wie \ariane ist es notwendig die SurveyMaster nur für den jeweiligen Ersteller sichtbar zu machen, sodass \textit{externe} Nutzer kein Zugriff auf potentiell geschützte Umfrage-Templates erhalten können.
+Diese möchte neben der Beantwortung von Umfragen, was in Abschnitt~\myRefGeneral{ssec:TeilnahmeAnEinerUmfrage} erläutert wird, auch selbst Umfragen erstellen, was in Abschnitt~\myRefGeneral{ssec:CreateMaster} näher beschrieben wird.
 
-Zu guter Letzt stellt die dritte Persona, \weigert, den Standardstudenten dar, der lediglich an einer Umfrage teilnehmen möchte und somit nur die Schritte, welche in Kapitel \myRefGeneral{ssec:TeilnahmeAnEinerUmfrage} beschrieben werden, befolgen muss.
-Dabei ist der benötigte Aufwand so gering wie möglich, dass der Student die Umfrage schnell findet und einfach beantworten kann.
-Zudem wird der Schutz der Daten des Teilnehmers einer solchen Umfrage besonders in den Vordergrund gerückt, da ein Rückschluss auf den Teilnehmer nur bei Umfragen, welche einer begrenzten Teilnehmerzahl zur Verfügung standen, grob möglich ist.
+Schlussendlich stellt die dritte Persona, \weigert, den typischen Studierenden dar, der lediglich an einer Umfrage teilnehmen möchte.
+Dazu muss er nur die Schritte, welche in Abschnitt~\myRefGeneral{ssec:TeilnahmeAnEinerUmfrage} beschrieben werden, befolgen.
+Dabei ist der benötigte Aufwand so gering wie möglich.
+Der Student soll die Umfrage schnell finden und einfach beantworten können.
+Zudem wird der Schutz der Daten des Teilnehmers einer solchen Umfrage besonders in den Vordergrund gerückt.
+Dies liegt darin begründet, dass ein Rückschluss auf den Teilnehmer nur bei Umfragen, welche einer begrenzten Teilnehmeranzahl zur Verfügung standen, grob möglich ist.
 
 Die meisten Funktionen, welche eine Änderung des Datenzustands zur Folge haben, besitzen zudem eine zum Anwendungsfall passende Benachrichtigung.
-Ein paar Beispiele dazu wurden in Kapitel \myRefGeneral{ssec:Meldungen} aufgezeigt.
-Diese decken alle vorhandenen Meldungstypen ab, die Inhalte können jedoch abweichen.
+Einige Beispiele dazu sind in Abschnitt~\myRefGeneral{ssec:Meldungen} aufgezeigt.
+Diese illustrieren alle vorhandenen Meldungstypen, die Inhalte können jedoch abweichen.
 
 \section{Einloggen}
 \label{ssec:Einloggen}
 
-In jedem Use-Case der Anwendung beginnt mit der in Abbildung \myRefGeneral{fig:EingabemaskeSurveycode} dargestellten Startansicht.
-Um sich nun anzumelden muss zunächst der mit \desTwo markierte Knopf gedrückt werden, um zur in Abbildung \myRefGeneral{fig:Einloggen} dargestellten Seite, dem Login, zu kommen.
-Anschließend muss der Nutzer sein vorher in \myRefGeneral{ssec:NutzerAnlegen} festgelegten Nutzernamen sowie Passwort in die jeweiligen Felder (\desOne, \desTwo) eintragen und über den \emph{Login}-Knopf anmelden.
-Danach erfolgt eine automatische Weiterleitung zur in \myRefGeneral{ssec:ResultDashboard} abgebildeten Übersicht der offenen Umfragen.
+Jeder Use-Case der Anwendung beginnt mit der in Abbildung~\myRefGeneral{fig:EingabemaskeSurveycode} dargestellten Startansicht.
+Um sich anzumelden, muss zunächst der mit \desTwo markierte Knopf gedrückt werden.
+Hierdurch kann zur in Abbildung~\myRefGeneral{fig:Einloggen} dargestellten Seite, dem Login, gelangt werden.
+Anschließend muss der Nutzer seinen vorher festgelegten Nutzernamen sowie das Passwort in die jeweiligen Felder (\desOne, \desTwo) eintragen und sich über den \emph{Login}-Knopf anmelden.
+Danach erfolgt eine automatische Weiterleitung zur in Abschnitt~\myRefGeneral{ssec:ResultDashboard} abgebildeten Übersicht, der offenen Umfragen.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/SurveyCode.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Eingabemaske Surveycode]{Eingabemaske des Surveycodes \\\quelleScreenshot}
+	\caption[Eingabemaske: Surveycodes]{Eingabemaske: Surveycodes \\\quelleScreenshot}
 	\label{fig:EingabemaskeSurveycode}
 \end{figure}
 
@@ -48,40 +53,41 @@ Danach erfolgt eine automatische Weiterleitung zur in \myRefGeneral{ssec:ResultD
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/Login.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Eingabemaske Einloggen]{Eingabemaske Einloggen \\\quelleScreenshot}
+	\caption[Eingabemaske: Einloggen]{Eingabemaske: Einloggen \\\quelleScreenshot}
 	\label{fig:Einloggen}
 \end{figure} 
 
 \section{Nutzer anlegen}
 \label{ssec:NutzerAnlegen}
 
-Ein Nutzer kann über zwei Arten angelegt werden.
-Einerseits ist es einer Person, die den Registrierungsschlüssel kennt, möglich sich selbst zu Registrieren, wie es in Abbildung \myRefGeneral{fig:Register} gekennzeichnet wird.
-Dabei muss der Nutzer in \desOne seinen gewünschten Nutzernamen eingeben, in \desTwo den festgelegten Registrierungsschlüssel und anschließend in \desThree und \desFour das gewünschte Passwort.
-Falls der Registrierungsvorgang abgebrochen werden soll, kann der durch \desFive markierte Zurück-Knopf verwendet werden, welcher den Nutzer zurück auf die Startseite leitet.
-Andererseits kann ein Administrator einen Nutzer anlegen, was jedoch genauer im Kapitel \myRefGeneral{ssec:AdministratorTools} beschrieben wird.
+Ein Nutzer kann über verschiedene Arten angelegt werden.
+Einerseits ist es einer Person, die den Registrierungsschlüssel kennt, möglich, sich selbst zu registrieren, wie es in Abbildung~\myRefGeneral{fig:Register} gekennzeichnet wird.
+Dabei muss der Nutzer in \desOne seinen gewünschten Nutzernamen, in \desTwo den festgelegten Registrierungsschlüssel und anschließend in \desThree und \desFour das gewünschte Passwort eingeben.
+Falls der Registrierungsvorgang abgebrochen werden soll, kann der markierte Zurück-Knopf \desFive verwendet werden, welcher den Nutzer zurück auf die Startseite leitet.
+Andererseits kann ein Administrator einen Nutzer anlegen, was jedoch genauer im Kapitel~\myRefGeneral{ssec:AdministratorTools} beschrieben wird.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/Register.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Eingabemaske Registrierung]{Eingabemaske des Surveycodes \\\quelleScreenshot}
+	\caption[Eingabemaske: Registrierung]{Eingabemaske: Registrierung \\\quelleScreenshot}
 	\label{fig:Register}
 \end{figure}
 
 \section{Passwort ändern}
 
-Jeder Nutzer ist in der Lage sein Passwort zu ändern, dies kann er über sein Profil, zu finden über der Navigationsleiste, die in Kapitel \myRefGeneral{ssec:NavBar} beschrieben wird, erledigen.
-Dabei muss der Nutzer zunächst, wie in \myRefGeneral{fig:ChangeOwnPassword} dargestellt, sein altes Passwort in \desOne angeben und in \desTwo sowie \desThree sein neues einfügen und wiederholen.
+Jeder Nutzer ist in der Lage, sein Passwort zu ändern.
+Dies kann er über sein Profil erledigen, welche über eine Funktion in der Navigationsleiste, die in Abschnitt~\myRefGeneral{ssec:NavBar} beschrieben wird, möglich ist.
+Dabei muss der Nutzer zunächst, wie in Abbildung~\myRefGeneral{fig:ChangeOwnPassword} dargestellt, sein altes Passwort in \desOne angeben und in \desTwo sowie \desThree sein neues Kennwort einfügen bzw. wiederholen.
 Sofern ein Nutzer sein Passwort vergisst, kann ein Administrator dieses zurücksetzen.
-Dazu wählt er im Administrationsbereich \myRefGeneral{ssec:AdministratorTools} den jeweiligen Nutzer aus und setzt dessen Password über das in Abbildung \myRefGeneral{fig:ChangePasswordOfUser} gezeigte Popup neu.
-Sofern der Nutzer sich nun mit dem neu festgelegten Passwort anmeldet, wird dieser zur eigenständigen Aktualisierung des Passworts über die vorher beschriebene Art gezwungen.
+Dazu wählt dieser im Administrationsbereich \myRefGeneral{ssec:AdministratorTools} den jeweiligen Nutzer aus und setzt dessen Passwort über das in Abbildung~\myRefGeneral{fig:ChangePasswordOfUser} gezeigte Pop-Up neu.
+Sofern der Nutzer sich mit dem neu festgelegten Passwort anmeldet, wird dieser zur eigenständigen Aktualisierung des Passworts über die vorher beschriebene Art gezwungen.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/ChangeOwnPassword.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Eingabemaske eigenes Passwort ändern]{Eingabemaske eigenes Passwort ändern \\\quelleScreenshot}
+	\caption[Eingabemaske: Eigene Passwortänderung]{Eingabemaske: Eigene Passwortänderung \\\quelleScreenshot}
 	\label{fig:ChangeOwnPassword}
 \end{figure}
 
@@ -89,27 +95,27 @@ Sofern der Nutzer sich nun mit dem neu festgelegten Passwort anmeldet, wird dies
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/ChangePassword.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Eingabemaske Passwort zurücksetzen]{Eingabemaske Passwort zurücksetzen \\\quelleScreenshot}
+	\caption[Eingabemaske: Passwort zurücksetzen]{Eingabemaske: Passwort zurücksetzen \\\quelleScreenshot}
 	\label{fig:ChangePasswordOfUser}
 \end{figure}
 
 \section{Result Dashboard}
 \label{ssec:ResultDashboard}
 
-Sobald ein Nutzer sich anmeldet landet er auf der Übersicht der aktiven Umfragen, dargestellt in Abbildung \myRefGeneral{fig:ResultDashboard}.
-Hier sieht der Nutzer zunächst, wie auf jeder weiteren Hauptseite, den aktuellen Seitennamen, welcher in der Abbildung durch \desOne markiert wird.
-\desTwo markiert eine Suchleiste, in der bestimmte Umfragen aus allen dargestellten Umfragen herausgefiltert werden können, sodass auch Nutzer, die bereits eine große Anzahl an Umfragen erstellt haben, alle schnell finden können.
+Sobald sich ein Nutzer anmeldet, wird dieser auf die Übersicht der aktiven Umfragen geleitet, dargestellt in Abbildung~\myRefGeneral{fig:ResultDashboard}.
+Hier sieht der Nutzer zunächst den aktuellen Seitennamen, welcher in der Abbildung durch \desOne markiert wird.
+\desTwo markiert eine Suchleiste, in der bestimmte Umfragen aus allen dargestellten Umfragen herausgefiltert werden können, sodass auch Nutzer, die bereits eine große Anzahl an Umfragen erstellt haben, ausgewählte schnell finden können.
 Umfragen sind auf dieser Ansicht allgemein als Karten aufgebaut, wie \desThree zeigt.
 Dabei besitzen diese einen eigenen Titel sowie den Titel der Vorlage und die Beschreibung dieser.
-Zudem wird die Teilnehmeranzahl der aktiven Umfrage angezeigt, sodass der aktuelle Stand der Umfrage beobachtet werden kann, ohne die Ergebnisse auswerten zu müssen.
+Zudem wird die Teilnehmeranzahl der aktiven Umfrage angezeigt, sodass der aktuelle Stand der Umfrage beobachtet werden kann, ohne die Ergebnisse explizit auswerten zu müssen.
 Des Weiteren wird der Surveycode besonders hervorgehoben, um auch zu vorbereiteten Umfragen die Codes griffbereit zu haben.
-\faClipboard\xspace ermöglicht es zudem den Direktlink zur Umfrage automatisch in die Zwischenablage zu kopieren, um diesen an die potentiellen Teilnehmer weiterleiten zu können.
+\faClipboard\xspace ermöglicht es zudem den Direktlink zur Umfrage automatisch in die Zwischenablage zu kopieren, um diesen an die potenziellen Teilnehmer weiterleiten zu können.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/ResultDashboard.png}
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/guide/ResultDashboard.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Übersicht aktive Umfragen]{Übersicht aktive Umfragen \\\quelleScreenshot}
+	\caption[Übersicht aktiver Umfragen]{Übersicht aktiver Umfragen \\\quelleScreenshot}
 	\label{fig:ResultDashboard}
 \end{figure}
 
@@ -117,202 +123,197 @@ Des Weiteren wird der Surveycode besonders hervorgehoben, um auch zu vorbereitet
 \section{Teilnahme an einer Umfrage}
 \label{ssec:TeilnahmeAnEinerUmfrage}
 
-Um an einer Umfrage teilzunehmen, muss der Partizipant, wie in Schritt \desOne in \abb \myRefGeneral{fig:EingabemaskeSurveycode} dargestellt, einen \emph{Surveycode} eingeben.
-Da das Partizipieren ein Kernpunkt der Anwendung darstellt, ist dies als Startseite.
-Der Benutzer bzw. Teilnehmer hat zudem die Möglichkeit über den Button \enquote{Login} \desTwo auf die Login-Seite zu navigieren (Kap. \vref{ssec:Login}). 
-Oder alternativ über den Button \enquote{Sign Up} \desThree, die Registrierungsseite (Kap. \vref{ssec:NutzerAnlegen}) aufrufen.
-
-% \desFour, \desFive, \desSix, \desSeven, \desEight, \desNine
+Um an einer Umfrage teilzunehmen, muss der Partizipant, wie in Schritt \desOne in Abbildung~\myRefGeneral{fig:EingabemaskeSurveycode} dargestellt, einen \emph{Surveycode} eingeben.
+Da das Teilnehmen an Umfragen einen Kernpunkt der Anwendung darstellt, ist dies das zentrale Element der Startseite.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/SurveyCode.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Eingabemaske Surveycode]{Eingabemaske des Surveycodes \\\quelleScreenshot}
+	\caption[Eingabemaske: Surveycode]{Eingabemaske: Surveycode \\\quelleScreenshot}
 	\label{fig:EingabemaskeSurveycode}
 \end{figure}
 
-\abb \myRefGeneral{fig:Teilnehmermaske} stellt die Teilnehmermaske der Umfrage durch. 
-\desOne zeigt den Titel der Umfrage (hier: Projektmanagement -- WWI17SEB). 
-\desTwo zeigt die Beschreibung der Umfrage (hier: Dies ist eine Umfrage zur Projektmanagement-Vorlesung). 
-\desThree ist das Hauptelement der Seite.
-Sie zeigt die eigentliche Umfrage.
-Über den Button \enquote{Complete} kann der Teilnehmer die Umfrage abschließen. 
-Er erhält ein visuelles Feedback. 
-
+Abbildung~\myRefGeneral{fig:Teilnehmermaske} stellt die Teilnehmermaske der Umfrage dar.
+\desOne zeigt den Titel der Umfrage (hier: Projektmanagement -- WWI17SEB).
+\desTwo zeigt die Beschreibung der Umfrage (hier: Dies ist eine Umfrage zur Projektmanagement-Vorlesung).
+\desThree ist das Hauptelement der Seite, was die Umfrage darstellt.
+Über den Knopf \enquote{Complete} kann der Teilnehmer die Umfrage abschließen.
+Er erhält im Anschluss ein visuelles Feedback.
+% 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.70\textwidth, keepaspectratio]{img/guide/SurveyParticipate.png}
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/guide/SurveyParticipate.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Teilnehmermaske]{Teilnehmermaske \\\quelleScreenshot}
+	\caption[Eingabemaske: Benutzerumfrage]{Eingabemaske: Benutzerumfrage \\\quelleScreenshot}
 	\label{fig:Teilnehmermaske}
 \end{figure}
-
+% 
 \section{Erstellen einer Umfrage}
 \label{ssec:CreateMaster}
 
-Das Kernelement dieser Anwenndung ist das Erstellen von Umfragen. 
-\abb \myRefGeneral{fig:Umfrageeditor} zeigt den Editor zum Erstellen oder Bearbeiten einer Umfrage. \newline
-Der Benutzer kann hier einen Titel und Beschreibung für seine Umfrage wählen. 
-Über den in der linken Seite befindlichen Navigationsbereich kann der Benutzer verschiedene Elemente wie \ua: 
+Das Kernelement dieser Anwendung ist das Erstellen von Umfragen.
+Abbildung~\myRefGeneral{fig:Umfrageeditor} zeigt den Editor zum Erstellen oder Bearbeiten einer Umfrage. \newline
+Der Benutzer kann hier einen Titel und eine Beschreibung für seine Umfrage wählen.
+Über den in der linken Seite befindlichen Navigationsbereich kann der Benutzer verschiedene Elemente wie \ua:
 % 
 \begin{itemize}
-    \item Single-/Multiple Choice
-    \item Ja/Nein Antworten
-    \item Freitextfelder
-    \item Bewertungsskala (Skala frei wählbar)
-    \item Singleinput
+    \item Single-/Multiple Choice,
+    \item Ja/Nein Antworten,
+    \item Freitextfeld (Single-Input),
+    \item Bewertungsskala (Skala frei wählbar),
     \item Auswahl von Bildern
 \end{itemize}
 % 
+verwenden.
 
-Im oberen Bereich des Editors befindet sich die Pagination. 
-Der Benutzer kann hier seine Umfrage strukturieren, indem er eine neue Seite der Umfrage hinzufügt. 
-Darüber hinaus kann er stets zwischen den Seiten auswählen. 
+Im oberen Bereich des Editors befindet sich die Seitenverwaltung.
+Der Benutzer kann hier seine Umfrage strukturieren, indem er der Umfrage eine neue Seite hinzufügt.
+Darüber hinaus kann er stets zwischen den Seiten wechseln.
 
-Den im rechten Teil befindlichen Navigationsbereich beinhaltet die \ua die Menüsprache (hier: englisch). 
-Darüber hinaus können Zeitintervalle festgelegt werden, indem die Umfrage zu bewerten ist (Timer). 
+Der im rechten Teil befindliche Navigationsbereich beinhaltet \ua die Menüsprache (hier: Englisch).
+Darüber hinaus können Beantwortungszeiten festgelegt werden, die die maximale Dauer zum Ausfüllen der Umfrage definieren.
 
-Über den Button \enquote{Save Survey} kann der Benutzer seine Umfrage speichern. 
-Er erhält ein visuelles Feedback. 
+Über den Knopf \enquote{Save Survey} kann der Benutzer seine Umfrage speichern.
+Er erhält ein entsprechendes visuelles Feedback.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/guide/SurveyTemplate.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Umfrageeditor]{Umfrageeditor \\\quelleScreenshot}
+	\caption[\acl{UI}: Umfrageeditor]{\acl{UI}: Umfrageeditor \\\quelleScreenshot}
 	\label{fig:Umfrageeditor}
 \end{figure}
 
-\section{Administrator Tools}
+\section{Administrator-Tools}
 \label{ssec:AdministratorTools}
 
-\abb \vref{fig:AdminSpace} zeigt den Administrationsbereich der Anwendung. 
-Der Benutzer kann hier, wie in \desOne dargestellt, den Registrierungsschlüssel zum Registrieren eines neuen Benutzers einsehen oder neu vergeben (vgl. Abb. \vref{fig:EditRegisterKey} \& Abb. \vref{fig:NewRegisterkey}). \newline
-\desTwo zeigt die Möglichkeit des Erstellens eines neuen Benutzers (vgl. Kap. \vref{fig:NeuenBenutzerAnlegen}). 
-Über das in \desThree dargestellte Karte kann der Administrator alle Benutzer im System anzeigen (vgl. Kap. \vref{fig:UserSpace}).
+Abbildung~\vref{fig:AdminSpace} zeigt den Administrationsbereich der Anwendung.
+Der Benutzer kann hier, wie durch \desOne markiert, den Registrierungsschlüssel zum Registrieren eines neuen Benutzers einsehen oder neu festlegen (vgl. Abbildung~\vref{fig:EditRegisterKey} sowie Abbildung~\vref{fig:NewRegisterkey}). \newline
+\desTwo zeigt die Möglichkeit des Erstellens eines neuen Benutzers (vgl. Abbildung~\vref{fig:NeuenBenutzerAnlegen}).
+Über die mit \desThree hervorgehobene Karte kann der Administrator alle Benutzer im System anzeigen lassen (vgl. Abbildung~\vref{fig:UserSpace}).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.70\textwidth, keepaspectratio]{img/guide/AdminSpace.png}
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/guide/AdminSpace.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Administrationsbereich]{Administrationsbereich \\\quelleScreenshot}
+	\caption[\acl{UI}: Administrationsbereich]{\acl{UI}: Administrationsbereich \\\quelleScreenshot}
 	\label{fig:AdminSpace}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/RegisterKey.png}
+
+	\includegraphics[width=0.5\textwidth, keepaspectratio, trim=2mm 0 2mm 0, clip]{img/guide/RegisterKey.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Neuer Registrierungsschlüssel]{Neuer Registrierungsschlüssel \\\quelleScreenshot}
+	\caption[Meldung: Neuer Registrierungsschlüssel]{Meldung: Neuer Registrierungsschlüssel \\\quelleScreenshot}
 	\label{fig:NewRegisterkey}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/UserSpace.png}
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/guide/UserSpace.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[In der Anwendung befindliche Personen]{In der Anwendung befindliche Personen \\\quelleScreenshot}
+	\caption[\acl{UI}: Auflistung der Nutzer]{\acl{UI}: Auflistung der Nutzer \\\quelleScreenshot}
 	\label{fig:UserSpace}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/NewUser.png}
+	\includegraphics[width=0.50\textwidth, keepaspectratio]{img/guide/NewUser.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Neuen Benutzer anlegen]{Neuen Benutzer anlegen \\\quelleScreenshot}
+	\caption[Eingabemaske: Neuen Benutzer anlegen]{Eingabemaske: Neuen Benutzer anlegen \\\quelleScreenshot}
 	\label{fig:NeuenBenutzerAnlegen}
 \end{figure}
-
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/EditRegisterKey.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Editieren des Registrierungsschlüssel]{Editieren des Registrierungsschlüssel \\\quelleScreenshot}
+	\caption[Eingabemaske: Editieren des Registrierungsschlüssels]{Eingabemaske: Editieren des Registrierungsschlüssels \\\quelleScreenshot}
 	\label{fig:EditRegisterKey}
 \end{figure}
 
 
 
 %%%%%%%%% --------------------- %%%%%%%%%%%%%%%
-\section{Eigener Account}
+\section{My Account}
 \label{ssec:EigenerAccount}
 
-Ziele es für die angemeldeten Benutzer wie \dutzi oder die Studentin \ariane ihren Account verwalten können. 
-\abb \myRefGeneral{fig:MyAccount} zeigt die Benutzeroberfläche. \newline
-Hier können sie ihr Passwort ändern. 
-\abb \myRefGeneral{fig:ChangeOwnPassword} zeigt die Passwortwechsel-Oberfläche. 
-Um das Ändern des Passworts zu bestätigen, müssen diese wie in \desOne zu erst ihr altes Passwort eingeben. 
-Anschließend wählen sie wie in \desTwo das neue Passwort und bestätigen dies in \desThree. 
-Über den Button \enquote{Change Password} können die Protagonisten das Passwort wechseln. 
-Alternativ können sie über den Zurück-Button \desFour wieder auf den Account navigieren. 
+Zur Verwaltung des Benutzerkontos von etwa \dutzi oder \ariane, kann die in Abbildung~\myRefGeneral{fig:MyAccount} dargestellte Benutzeroberfläche verwendet werden.
+In der Oberfläche können Nutzer \ua ihr Passwort ändern.
+Abbildung~\myRefGeneral{fig:ChangeOwnPassword} zeigt die Passwortwechsel-Oberfläche.
+Um das Ändern des Passworts zu bestätigen, müssen diese in \desOne zuerst ihr altes Passwort eingeben.
+Anschließend muss in \desTwo das neue Passwort eingegeben und in \desThree bestätigt werden.
+Über den Knopf \enquote{Change Password} wird die Aktion dann ausgeführt.
+Alternativ kann über den Zurück-Knopf \desFour wieder auf die Benutzeroberfläche navigiert werden.
 % 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/MyAccount.png}
+	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/guide/MyAccount.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Account]{Account\\\quelleScreenshot}
+	\caption[\acl{UI}: My Account]{\acl{UI}: My Account\\\quelleScreenshot}
 	\label{fig:MyAccount}
 \end{figure}
-% 
+%
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/ChangeOwnPassword.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Passwortändern (Benutzeransicht)]{Passwortändern (Benutzeransicht)\\\quelleScreenshot}
+	\caption[Eingabemaske: Passwortänderung (Benutzeransicht)]{Passwortänderung (Benutzeransicht)\\\quelleScreenshot}
 	\label{fig:ChangeOwnPassword}
 \end{figure}
 % 
 %%%%%%%%% --------------------- %%%%%%%%%%%%%%%
 \section{Survey Master Paradise}
 \label{ssec:SurveyMasterParadise}
-Survey Master Paradise ist einer der Hauptkomponenten dieser Anwendung. 
-Hier können die Benutzer der Anwendung, wie \dutzi und die Studentin \ariane, ihre erstellen Umfragen einsehen. 
-\abb \vref{fig:SurveyMasterParadise} zeigt die Umfrage Seite. 
-Hintergrund dieser Seite ist, dass \dutzi verschiedene Umfragen erstellen kann, die er in seinen verschiedenen Kursen wie \zb \emph{WWWI17SEB} oder \emph{WWWI18SEA} zur Beantwortung heranziehen kann. % sorry kopf is mad: s
-Da die Protagonisten, \dutzi und die Studentin \ariane, durch ihren vielen Umfragen an einer renomierten Universität, im Laufe der Zeit viele Umfragen erstellt. 
-\desTwo bietet den Benutzern die Möglichkeit ihre Vorlagen nach Umfragename wie \zb \emph{Projektmanagement Template} zu filtern. 
-Über \desThree können die Benutzer eine neue Vorlage erstellen (vgl. Kap. \vref{ssec:CreateMaster}). \newline
-Über die in \desFour können die Benutzer ihre Vorlagen unter einem bestimmten Titel für die Teilnehmer wie \weigert publiziert werden (Publish Survey). 
-Die Anzahl der Publikation ist für die Protagonisten ersichtlicht (Times published). \newline
-Die Icons wie in \desFive dargestellt, bieten dem Benutzer die Möglichkeit, sofern er noch keine Umfrage publiziert hat:
-% 
+Survey Master Paradise ist eine der Hauptkomponenten dieser Anwendung.
+Hier können die Benutzer der Anwendung, wie \dutzi oder \ariane, ihre erstellen Umfragen einsehen.
+Abbildung~\vref{fig:SurveyMasterParadise} zeigt die Umfrageseite. \newline
+Die Ansicht dient dazu, eine Übersicht zu angelegten Umfragen zu geben.
+Zudem können Umfragen veröffentlicht werden, welche zuvor benannt werden müssen.
+Aufgrund der Vielzahl an Umfragen, die nach einer gewissens Nutzungszeit entstanden sind, wurde die Suchfunktion \desTwo eingefügt, welche Vorlagen nach dem Umfragenamen wie \zb \emph{Projektmanagement Template} filtert.
+Über \desThree können die Benutzer eine neue Vorlage erstellen (vgl. Abschnitt~\vref{ssec:CreateMaster}). \newline
+Mit Hilfe von \desFour werden Vorlagen unter einem bestimmten Titel publiziert (Publish Survey).
+Die Anzahl der Publikationen ist für die Nutzer ersichtlich (Times published). \newline
+Die Icons, wie in \desFive dargestellt, bieten dem Benutzer die Möglichkeit, sofern er noch keine Umfrage publiziert hat:
+%
 \begin{itemize}
     \item seine Umfrage zu editieren \faEdit
     \item seine Umfrage zu kopieren \faCopy
     \item oder zu löschen \faTrash.
 \end{itemize}
-% 
+%
 Hat \zb \dutzi mindestens eine Umfrage, basierend auf seiner Vorlage, publiziert, so stehen ihm noch die Funktionen:
+%
 \begin{itemize}
     \item Umfrage kopieren \faCopy
     \item und \faIdCard
-\end{itemize} 
-
-zur Verfügung. 
-
+\end{itemize}
+%
+zur Verfügung.
+%
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/guide/SurveyMasterParadise.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Survey Master Paradise]{Survey Master Paradise \\\quelleScreenshot}
+	\caption[\acl{UI}: Survey Master Paradise]{\acl{UI}: Survey Master Paradise \\\quelleScreenshot}
 	\label{fig:SurveyMasterParadise}
 \end{figure}
-
+%
 %%%%%%%%% --------------------- %%%%%%%%%%%%%%%
 \section{Navigationsbereich}
 \label{ssec:NavBar}
 
-Die \abb \vref{fig:NavBar} stellt den für die angemeldeten Benutzer wie \zb den Dozenten \dutzi oder die Studentin \ariane zur Verfügung stehende Funktionen dar. 
-Die Benutzer können wie in \desOne auf ihre Ergebnissumfragen navigieren (vgl. Kap. \vref{ssec:ResultDashboard}). 
-Dies könnte \ua wichtig für \ariane sein, um die Umfrageergebnisse ihrer Bachelorarbeit zu validieren. 
-Oder über den in \desTwo dargestelltn Link auf ihre Umfragevorlagen (vgl. Kap. \vref{ssec:SurveyMasterParadise}). 
-Hier kann \zb \dutzi eine weitere Vorlage für seinen neuen Kurs \emph{WWWI20-MAC} anlegen und publizieren. 
- 
+In Abbildung~\vref{fig:NavBar} ist ein Ausschnitt der oberen Navigationsleiste sichtbar.
+Die Benutzer können über \desOne zu ihren Umfrageergebnissen navigieren (vgl. Abschnitt~\vref{ssec:ResultDashboard}).
+\ariane könnte hier zum Beispiel die Ergebnisse ihrer Bachelorarbeit validieren.
+Der mit \desTwo markierte Link führt auf die Umfragevorlagen (vgl. Abschnitt~\vref{ssec:SurveyMasterParadise}).
+Hier kann \dutzi \zb eine weitere Vorlage anlegen und für seinen neuen Kurs \emph{WWWI20MAC} publizieren.
+
 Ferner zeigt die Navigationsleiste den Status \emph{Admin} \desThree, im Falle, dass der Benutzer ein administrative Rolle hat. \newline
-Über das Icon \faUser[regular]\xspace \desFour kann der Benutzer zu seinem Account navigieren (vgl. Kap. \vref{ssec:EigenerAccount}). \newline
-Über \desFive, dem Logout-Icon \faSignOut*\xspace, kann sich \dutzi oder die Studentin \ariane vom System abmelden. 
+Über das Icon \faUser[regular]\xspace \desFour kann der Benutzer zu seinem Account navigieren (vgl. Abschnitt~\vref{ssec:EigenerAccount}). \newline
+Über \desFive das Logout-Icon \faSignOut*\xspace können sich \dutzi oder die Studentin \ariane vom System abmelden.
 
 \begin{figure}[H]
 	\centering
@@ -327,28 +328,29 @@ Ferner zeigt die Navigationsleiste den Status \emph{Admin} \desThree, im Falle, 
 \label{ssec:Meldungen}
 
 Nachfolgend sind alle Meldungsarten mit Beispielen dargestellt.
-Zunächst wird in \myRefGeneral{fig:approve} eine kurzzeitig eingeblendete Bestätigung dargestellt, welche eine Nachricht, die an den aktuellen Kontext angepasst ist beinhaltet.
-Bestätigungen werden in den meisten Fällen automatisch ein- und ausgeblendet, um den Benutzerfluss nicht zu durchbrechen.
-Im Beispiel wird dem Administrator bestätigt, dass er einen weiteren Nutzer zu einem neuen Administrator ernannt hat.
+Zunächst wird in Abbildung~\myRefGeneral{fig:approve} eine kurzzeitig eingeblendete Bestätigung dargestellt, welche eine Nachricht, die an den aktuellen Kontext angepasst ist, beinhaltet.
+Bestätigungen werden in den meisten Fällen automatisch ein- und ausgeblendet, um den Benutzerfluss nicht zu stören.
+Im Beispiel wird dem Administrator bestätigt, dass er einen weiteren Nutzer zum Administrator ernannt hat.
 
 Auch abgelehnte oder abgebrochene Auftrage werden mit einer Nachricht versehen.
-Diese beinhalten jedoch immer ein Knopf zur Bestätigung, sodass Fehlermeldungen auch notiert oder weiteren Personen gezeigt werden können.
-Im Beispiel \myRefGeneral{fig:deny} wurde der Passwortänderungsauftrag des Nutzers \emph{Jansky} abgebrochen.
+Diese beinhalten jedoch immer einen Knopf zur Bestätigung, sodass Fehlermeldungen auch wahrgenommen oder weiteren Personen gezeigt werden können.
+Ein Beispiel hierfür wird in Abbildung~\myRefGeneral{fig:deny} gezeigt.
+Bei diesem wird die Passwortänderung des Nutzers \emph{Jansky} abgebrochen.
 
-Auch Warnungen erhaltene eine besondere Darstellung.
-Hierbei werden Änderungen, die eine Nutzereingabe benötigen, oder generelle Infos, die weder als negative noch als positive Benachrichtigung zählen, dargestellt.
-Dazu wird in der Regel ebenfalls eine Bestätigung durch ein \emph{OK} oder eine explizite Auswahl, repräsentiert durch zwei Knöpfe, welche Kontextsensitiv sind, zur Bestätigung verwendet.
-Im Beispiel \myRefGeneral{fig:warn} wird eine Umfrage veröffentlicht, welche einen eigenen Titel benötigt und somit ein Eingabefeld beinhaltet.
+Auch Warnungen erhalten eine besondere Darstellung.
+Hierbei werden Änderungen, die eine Nutzereingabe benötigen, oder generelle Infos, die weder als negative noch als positive Benachrichtigung zu zählen sind, dargestellt.
+Dazu wird ebenfalls eine Bestätigung durch ein \emph{OK} oder eine explizite Auswahl, repräsentiert durch zwei Knöpfe, welche kontextsensitiv sind, zur Bestätigung verwendet.
+In der nachfolgenden Abbildung~\ref{fig:warn} wird ein Beispiel gezeigt, bei dem eine Umfrage veröffentlicht wird, welche einen eigenen Titel benötigt und somit ein Eingabefeld beinhaltet.
 
 Zu guter Letzt gibt es weitere Sonderbenachrichtigungen, die wiederum kontextabhängig sind.
-So ist etwa \abb \myRefGeneral{fig:special} die Bestätigung einer veröffentlichten Umfrage, welche nicht automatisch ausgeblendet wird, sondern aufgrund des besonderen Inhalts länger dargestellt wird und vom Nutzer selbst ausgeblendet werden muss.
+So ist in der nachfolgenden Abbildung~\ref{fig:special} die Bestätigung einer veröffentlichten Umfrage, welche nicht automatisch ausgeblendet wird, sondern aufgrund des besonderen Inhalts länger dargestellt wird und vom Nutzer selbst ausgeblendet werden muss, dargestellt.
 Hierbei werden ebenfalls besondere Bestandteile visuell hervorgehoben, wie etwa der Surveycode in der Beispiel-Abbildung.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/Angenommen.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Beispiel Bestätigung]{Beispiel Bestätigung \\\quelleScreenshot}
+	\caption[Meldung: Bestätigung]{Beispiel: Bestätigung \\\quelleScreenshot}
 	\label{fig:approve}
 \end{figure}
 
@@ -356,7 +358,7 @@ Hierbei werden ebenfalls besondere Bestandteile visuell hervorgehoben, wie etwa 
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/Abgelehnt.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Beispiel Ablehnung]{Beispiel Ablehnung \\\quelleScreenshot}
+	\caption[Meldung: Ablehnung]{Beispiel: Ablehnung \\\quelleScreenshot}
 	\label{fig:deny}
 \end{figure}
 
@@ -364,7 +366,7 @@ Hierbei werden ebenfalls besondere Bestandteile visuell hervorgehoben, wie etwa 
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/Publish.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Beispiel Warnung mit Input]{Beispiel Warnung mit Input \\\quelleScreenshot}
+	\caption[Meldung: Warnung mit Input]{Beispiel: Warnung mit Input \\\quelleScreenshot}
 	\label{fig:warn}
 \end{figure}
 
@@ -372,9 +374,6 @@ Hierbei werden ebenfalls besondere Bestandteile visuell hervorgehoben, wie etwa 
 	\centering
 	\includegraphics[width=0.5\textwidth, keepaspectratio]{img/guide/Published.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[Beispiel Bestätigung mit Zusatz]{Beispiel Bestätigung mit Zusatz \\\quelleScreenshot}
+	\caption[Meldung: Bestätigung mit Zusatz]{Beispiel: Bestätigung mit Zusatz \\\quelleScreenshot}
 	\label{fig:special}
 \end{figure}
-
-
-

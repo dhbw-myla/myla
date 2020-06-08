@@ -2,24 +2,40 @@
 \section{Ausblick}
 \label{sec:Ausblick}
 
-Die Applikation hat noch nicht ihren vollen Umfang erreicht.
-Sie zeigt derzeit einen soliden Stand mit dem Hauptaugenmerk des Erstellen von Umfragen von verschiedenen Benutzern.
+Die Anwendung hat zum aktuellen Stand noch ein großes Potenzial für Erweiterungen und Optimierungen.
+Sie zeigt derzeit einen soliden Stand mit dem Hauptaugenmerk des Erstellens von Umfragen von verschiedenen Benutzern.
 
-\subsubsection*{Forum}
-Sinnvoll wäre es, eine Art Forum, ähnlich einem Diskussionsforum der Applikation, anzufügen.
-Hintergrund ist, dass \zb Dozenzen wie \dutzi ein Forumseintrag machen können, um hier Diskussionen zu führen.
+Es erscheint sinnvoll, der Applikation eine Art Forum, ähnlich einem Diskussionsforum, anzufügen.
+Hintergrund ist, dass \zb Dozenten wie \dutzi ein Forumseintrag erstellen können, um hier Diskussionen zu führen.
 So könnten die Teilnehmer aus dem Kurs wie \weigert über die Fragestellung diskutieren.
-Andererseits könnten sich Studierende dort auch über verschiedene Themenbereich zur Prüfungsvorbereitung austauschen und hier Dokumente teilen. \newline
-Um dies zu realisieren, müssten Datenbankanpassungen vorgenommen werden, um das Forum darzustellen und auch weitere Benutzer als Student dem System hinzufügen.
-Wichtig hierbei ist, dass es zu jedem Forum mehrere Forumseinträge geben kann.
-Jeder Forumseintrag wird von einem Benutzer verfasst. \newline
-So kann \dutzi sehen ob \weigert einen Eintrag gestellt hat.
-Gegebenenfalls könnten \dutzi und \weigert auch direkt miteinander schreiben.
+Andererseits könnten sich Studierende dort auch über verschiedene Themenbereiche zur Prüfungsvorbereitung austauschen und hier Dokumente teilen. \newline
+Um dies zu realisieren, müssten Datenbankanpassungen vorgenommen werden, damit das Forum dargestellt werden kann und auch Studenten einen Benutzer mit Systemzugang erhalten.
 
-\subsubsection*{Individual-Chat \& Gruppenchat}
-Ein interessantes Themenfeld ist das Thema Chat in einer Anwendung.
-So ist vorstellbar, dass die Anwendung über eine Chatfunktion verfügt.
-Studierende könnten sich hier in Gruppenchats oder per Direktchat austauschen.
-Ein weiteres denkbares Feature ist der 1:1-Chat von Dozierenden und Studierenden.
-So könnte sich \weigert mit seinen Fragen an \dutzi wenden, um kleinere Fragen zu stellen. \newline
-Hierfür sollten die Benutzer über einen geeigneten Benutzernamen verfügen, um auch bei einer Abwesenheit auf seine Chatnachrichten zuzugreifen.
+% - Back-End hat bereits weitere Funktionen implementiert, die nun nach und nach im Front-End nachgezogen werden können
+Das Back-End wurde bereits um eine Vielzahl an Funktionen ergänzt, welche lediglich im Front-End nachgezogen werden müssen.
+Dazu zählen, dass:
+% 
+\begin{itemize}
+    \item Umfragevorlagen \zb nach Vorlesungen gruppiert,
+    \item Kommentare zu Umfragen hinzugefügt, 
+    \item Start- und Endzeitpunkt von Umfragen festgelegt
+    \item und Umfragevorlagen und Fragen öffentlich als Template für andere zur Verfügung gestellt
+\end{itemize}
+% 
+werden können.
+
+Die Anwendung wurde ganzheitlich in englischer Sprache umgesetzt.
+Sie könnte mittels Internationalisierung effizient um die Unterstützung weiterer Sprachen erweitert werden.
+Dazu muss lediglich für jede Sprache eine Datei angelegt werden, die die Übersetzungen der einzelnen verwendeten Textbausteine auflistet.
+Neben einem manuellen Wechsel der Sprache kann hier standardmäßig die vom Benutzer präferierte Sprache angezeigt werden, wenn dieser seinen Webbrowser bzw. sein System entsprechend eingestellt hat.
+
+Zur Optimierung der Auswertung wäre es von Nutzen, Umfrageergebnisse, die auf derselben Vorlage beruhen, miteinander zu vergleichen.
+Dies umfasst auf der einen Seite die Darstellung des zeitlichen Verlaufs von Umfrageergebnissen, die wiederholt in einem Kurs durchgeführt werden (Panel).
+Auf der anderen Seite können ebenfalls mehrere Kurse untereinander verglichen werden.
+
+Ein zusätzliches Feature der Anwendung wäre das Speichern und Exportieren der Resultate zur weiteren Verarbeitung im \acs{CSV}- oder \acs{PDF}-Format.
+
+Des Weiteren könnte eine Ergänzung weitere Informationen rund um die Umfrage und deren Resultate beinhalten.
+So könnte etwa ein Stichprobenrechner hilfreich sein, um den benötigten Stichprobenumfang einer Umfrage zu errechnen, sodass die Umfrage als repräsentativ im gewünschten Fall zu bewerten ist.
+Dabei werden Kennzahlen wie die Größe der Grundgesamtheit, das Konfidenzniveau und die Fehlermarge als Errechnungsgrundlage benötigt.
+In diesem Zusammenhang können auch direkt die Auswertungsoptionen im Front-End um weitere Diagrammtypen erweitert werden.

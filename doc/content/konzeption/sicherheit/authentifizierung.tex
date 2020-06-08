@@ -7,16 +7,15 @@ Ebenso sind auch die ausführbaren Aktionen auf den Benutzer zu beschränken, au
 Dies bedeutet, dass ein angemeldeter Benutzer nur die Ergebnisse seiner eigenen Umfragen sehen kann, nicht aber die Ergebnisse von Umfragen anderer Benutzer.
 
 Daher muss ein Benutzer vom System identifiziert werden können.
-Die erstellten Umfragen können dann einer solchen digitalen Identität zugeordnet werden.
+Die erstellten Umfragen können anschließend einer solchen digitalen Identität zugeordnet werden.
 Zum Anlegen dieser digitalen Identität erfolgt eine Registrierung mit Nutzername und Passwort.
-Zusätzlich muss gemäß Anforderung~\hyperref[Anf:A2]{A2} ein Registrierungsschlüssel angegeben werden, sodass lediglich befugte Personen Benutzer erstellen können.
+Zusätzlich muss gemäß Anforderung~\hyperref[Anf:A2]{A2} ein Registrierungsschlüssel angegeben werden, sodass lediglich befugte Personen einen Benutzer registrieren können.
 
 Das geheime Passwort ist nur dem jeweiligen Nutzer bekannt, sodass dieser sich damit authentisieren kann.
 Der Server speichert das Passwort in der Datenbank, damit bei einer Anmeldung geprüft werden kann, ob der Nutzer auch der ist, der er vorgibt zu sein.
-
 Aus Sicherheitsgründen wird das Passwort allerdings nicht im Klartext gespeichert.
-Andernfalls wären alle Nutzerpasswörter in der Datenbank für alle, die auf diese Zugriff haben, einsehbar.
-Sowohl potenzielle Angreifer, die möglicherweise durch Sicherheitslücken Zugang erhalten, als auch einfach die Betreiber der hier entwickelten Webanwendung hätten somit also Kenntnis von den Passwörtern aller Nutzer.
+Andernfalls wären sämtliche Nutzerpasswörter in der Datenbank für alle, die auf diese Zugriff haben, einsehbar.
+Sowohl potenzielle Angreifer, die möglicherweise durch Sicherheitslücken Zugang erhalten, als auch die Betreiber der hier entwickelten Webanwendung hätten somit Kenntnis von den Passwörtern aller Nutzer.
 Dies ist insbesondere deswegen kritisch, da viele Nutzer dieselben oder ähnliche Passwörter bei mehreren Diensten verwenden.
 Aufgrund der sich hieraus ergebenden Gefahren muss das Passwort also anders gespeichert werden.
 
@@ -29,7 +28,7 @@ Es ist allerdings nicht beziehungsweise nur mit einem enorm großen Aufwand mög
 Das bedeutet für die Speicherung des Passworts, dass dieses praktisch nicht aus dem Hash ermittelt werden kann.
 Bei einer Anmeldung kann die Korrektheit jedoch geprüft werden, indem der gespeicherte Hashwert mit dem Hash des eingegebenen Passworts abgeglichen wird.
 
-Als weitere Sicherheitsmaßnahmen werden Salt und Pepper genutzt.
+Als weitere Sicherheitsmaßnahmen werden \emph{Salt} und \emph{Pepper} genutzt.
 Dabei handelt es sich um weitere zufällige Zeichenketten, die dem Passwort angehangen werden, um Angriffe zu erschweren.
 Der Salt ist für jeden Benutzer spezifisch und wird neben dem Passworthash in der Datenbank gespeichert.
 Dadurch ist es möglich, dass selbst wenn zwei Benutzer dasselbe Passwort gewählt haben, die Hashwerte verschieden sind.
@@ -39,14 +38,14 @@ Dieser wird in einer Konfigurationsdatei definiert und entsprechend vom Programm
 Dadurch sollen ebenso Angriffe auf die Hashwerte erschwert werden, da ein Angreifer, der lediglich Zugang zur Datenbank hat, den Pepper nicht kennt, sodass das Knacken deutlich schwieriger wird.
 
 Nutzer, die sich registriert oder angemeldet haben, erhalten eine sogenannte Session-ID.
-Diese wird dann bei \acs{API}-Aufrufen zur Authentifizierung genutzt, sodass hier nicht jedes Mal, dass Passwort genutzt werden muss.
-Sollte ein Nutzer sein Passwort vergessen, kann dieses von Administratoren zurückgesetzt werden.
+Diese wird bei \acs{API}-Anfragen zur Authentifizierung genutzt, um eine häufige Verwendung des Passworts zu vermeiden.
+Sollte ein Nutzer sein Passwort vergessen, kann dieses vom Administrator zurückgesetzt werden.
 Es muss danach allerdings, wie in Anforderung~\hyperref[Anf:A6]{A6} beschrieben, direkt wieder vom Nutzer geändert werden.
 
-Wenn die Nutzung eines Registrierungsschlüssels von den Administratoren als zu unsicher angesehen wird, können Sie Nutzer gemäß Anforderung~\hyperref[Anf:A3]{A3} auch manuell erstellen.
-Auch hier muss ein vom Administrator festgelegtes Passwort, wie in Anforderung~\hyperref[Anf:A5]{A5} gefordert, direkt beim nächsten Anmelden angepasst werden.
+Wenn die Nutzung eines Registrierungsschlüssels von den Administratoren als zu unsicher angesehen wird, können diese ebenfalls Nutzer gemäß Anforderung~\hyperref[Anf:A3]{A3} manuell erstellen.
+Auch hier muss ein vom Administrator festgelegtes Passwort, wie in Anforderung~\hyperref[Anf:A5]{A5} verlangt, direkt beim nächsten Anmelden angepasst werden.
 
 Auf der anderen Seite müssen sich Personen, die Umfragen beantworten, gemäß Anforderung~\hyperref[Anf:A14]{A14} nicht anmelden.
 Entsprechend haben Sie nur eine sehr eingeschränkte Sicht.
-Sie können auf Umfragen lediglich über einen zehnstelligen Code, welcher in Abschnitt \ref{sec:konzept:server} bereits erwähnt wurde zugreifen.
-Dadurch ist es auch nur schwer bis gar nicht möglich auf Umfragen zuzugreifen, die nicht mit einem geteilt wurden.
+Sie können auf Umfragen lediglich über einen zehnstelligen Code, welcher in Abschnitt \ref{sec:konzept:server} bereits erwähnt wurde, zugreifen.
+Dadurch ist es auch nur schwer bis gar nicht möglich an Umfragen teilzunehmen, die nicht mit einem geteilt wurden.

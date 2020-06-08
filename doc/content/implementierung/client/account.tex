@@ -3,22 +3,19 @@
 \subsection{Benutzerkonto}
 \label{ssec:Benutzerkonto}
 
-Um einem Benutzer der Anwendung die Möglichkeit zu bieten sein Passwort zu ändern, wurde eigens hierfür ein eigener Bereich implementiert.
-Der Benutzer kann dies über das Icon \faUser[regular]\xspace in der Navigationsleiste dort hin navigieren.
-\abb \myRefGeneral{fig:AccountImplement} zeigt das Benutzerkonto. \newline
-Der Benutzer sieht in der Kartenansicht mit dem Icon \faUser[regular]\xspace seinen Benutzernamen (hier: admin).
-Er kann sein Passwort selbstständig ändern.
-Dadurch wird Anforderung~\hyperref[Anf:A4]{A4}, die Möglichkeit zur Passwortänderung, erfüllt.\newline
-Ferner kann er über den Button \jinline|Show Published Surveys| wieder auf das Result-Dashboard navigieren (siehe Kap. \vref{ssec:ResultDashboardImplement}).
-Über den Button \jinline|Show Survey Masters| kann der Benutzer auf seine Umfrage-Dashboard gelangen (siehe Kap. \vref{ssec:UmfrageDashboard}).
+Jeder Nutzer erhält die Möglichkeit sein eigenes Passwort zu ändern, was als Funktion im Benutzerkonto eingebunden ist.
+Zum Benutzerkonto gelangt der Benutzer über das Icon \faUser[regular]\xspace in der Navigationsleiste.
+Abbildung~\myRefGeneral{fig:AccountImplement} zeigt dabei beispielhaft ein Benutzerkonto.
+Das Passwort kann nun über die eigene Account-Karte geändert werden, wodurch die Anforderung~\hyperref[Anf:A4]{A4}, die Möglichkeit zur Passwortänderung, erfüllt wird.
+
+Zudem kann der Nutzer über den Knopf \jinline|Show Published Surveys| der zweiten Karte auf das Result-Dashboard navigieren (siehe Kapitel~\vref{ssec:ResultDashboardImplement}).
+Die dritte Karte führt den Nutzer bei Betätigung des Knopfes \jinline|Show Survey Masters| auf das Umfrage-Dashboard (siehe Kapitel~\vref{ssec:UmfrageDashboard}).
 Wahlweise kann der Benutzer auch über die Navigationsleiste die zuvor genannten Bereiche ansteuern.
 
 \begin{figure}[hp]
 	\centering
 	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/Account.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[\acf{UI}: Benutzerkonto]{\acf{UI}: Benutzerkonto \\ \quelleScreenshot}
+	\caption[\acl{UI}: Benutzerkonto]{\acl{UI}: Benutzerkonto \\ \quelleScreenshot}
 	\label{fig:AccountImplement}
 \end{figure}
-
-

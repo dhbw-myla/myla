@@ -1,49 +1,40 @@
 \subsubsection*{Show users \faUsers}
 
-Um dem Administrator einen Überblick über die in der Anwendung befindlichen Benutzern zu geben, wurde wie in \abb \vref{fig:AdminShowUsersImplement} dargestellt, alle Benutzer der Anwendung aufgeführt.
-Aufgrund der besseren Übersichtlichkeit wurde eine Suchleiste implementiert.
-Diese ermöglich das Suchen nach Benutzername oder das Auswählen des Benutzernamens über ein Dropdown.
-Darüber hinaus erfährt der Administrator den aktuellen Status der in der Anwendung befindlichen Benutzern, wie \zb, ob er ein Administrator oder ein Benutzer ist.
+Der Administrator erhält zur Benutzerverwaltung, wie in Abbildung~\vref{fig:AdminShowUsersImplement} dargestellt, eine Übersicht über alle im System vorhandenen Benutzer.
+Zur erleichterten Suche von Benutzern wurde eine Suchleiste in der Übersicht hinzugefügt.
+Diese ermöglicht das Suchen von Benutzernamen oder das Auswählen des Benutzers über ein Dropdown-Menü.
+Darüber hinaus erfährt der Administrator den aktuellen Status der in der Anwendung befindlichen Benutzer, wie etwa den Administratorenstatus.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/AdminShowUsers.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[\acf{UI}: Alle Benutzer der Anwendung anzeigen]{\acf{UI}: Alle Benutzer der Anwendung anzeigen \\ \quelleScreenshot}
+	\caption[\acl{UI}: Benutzerübersicht]{\acl{UI}: Benutzerübersicht \\ \quelleScreenshot}
 	\label{fig:AdminShowUsersImplement}
 \end{figure}
 
-Bei dem Card-Design wurde wert daraufgelegt, dass der Benutzer, der gerade angemeldet ist, farblich anders dargestellt wird.
-Dieser wird als \faUser\xspace dargestellt, wohingegen andere Benutzer nur das Icon \faUser[regular]\xspace (Silhouette) haben. \newline
-Das es vergleichsweise oft vorkommt, dass Benutzer ihr Passwort vergessen\autocite[vgl.][]{statistaPasswortVergessen}, wurde hier das Feature des neuen Setzens des Passworts des Benutzers implementiert.
-Dadurch wird Anforderung~\ref{Anf:A6}, die Pflicht zur Passwortänderung bei zurückgesetztem Passwort, erfüllt.
-Dies geschieht über den Button \jinline|Set Password|. \abb \vref{fig:AdminSetNewPasswordImplement} stellt das neue Setzen des Passworts über ein Popup dar.
+Der eigene Nutzer wird dabei besonders als \faUser\xspace hervorgehoben, wohingegen andere Benutzer lediglich durch das Icon \faUser[regular]\xspace (Silhouette) dargestellt werden. \newline
+Zudem wurde hier das Zurücksetzen des Passworts des Benutzers implementiert, da Benutzer ihr Passwort regelmäßig vergessen.\autocite[Vgl.][]{statistaPasswortVergessen}
+Dadurch wird Anforderung~\hyperref[Anf:A6]{A6}, die Pflicht zur Passwortänderung bei zurückgesetztem Passwort, umgesetzt.
+Abbildung~\vref{fig:AdminSetNewPasswordImplement} stellt das Zurücksetzen des Passworts über ein Pop-up dar.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/AdmiSetPasswordOfUser.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[\acf{UI}: Setzen eines neuen Passworts]{\acf{UI}: Setzen eines neuen Passworts \\ \quelleScreenshot}
+	\caption[\acl{UI}: Zurücksetzen des Passworts]{\acl{UI}: Zurücksetzen des Passworts \\ \quelleScreenshot}
 	\label{fig:AdminSetNewPasswordImplement}
 \end{figure}
 
-Ein weiteres Feature der Anwendung ist das Ernennen eines Benutzers zum Administrator.
-Hierzu muss der angemeldete Administrator den Button \jinline|Promote To Admin|, wie in \abb \vref{fig:AdminPromoteToAdminImplement} dargestellt, drücken.
-Hat sich der Administrator aus versehen falsch geklickt, wird dies durch eine \emph{Dialog} abgefangen.
-In diesem Dialog wird ihm nochmal seine Aktion, die er durchführen möchte, dargelegt.
-Er muss mit \jinline|Yes| oder \jinline|No| antworten.
-Um einen \enquote{Trott} des \jinline|Yes|-Buttons bei einem Benutzer zu verhindern (immer auf der linken Seite), wurde extra die Buttons vertauscht (siehe Abb. \vref{fig:AdminPromoteToAdminImplement}).\newline
-Wird der Dialog mit \jinline|Yes| beantwortet, so wird dies nach Rückmeldung der Datenbank sofort angezeigt.
-Der Button \jinline|Promote To Admin| gibt es nicht mehr.
-Dieser ist nun zu Button \jinline|Is Admin| gewechselt.
+Ein weiteres Feature der Anwendung ist das Ernennen von Administratoren.
+Dies geschieht über den Knopf \jinline|Promote To Admin|, welcher in Abbildung~\vref{fig:AdminPromoteToAdminImplement} dargestellt ist.
+Zusätzlich dazu muss der Nutzer diese Beförderung über einen weiteren Dialog bestätigen, um Fehler zu vermeiden.
+Visuell werden Administratoren hervorgehoben, da der Knopf \jinline|Promote To Admin| durch \jinline|Is Admin| ersetzt wird.
 
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.95\textwidth, keepaspectratio]{img/client/AdminPromoteToAdmin.png}
 	\captionsetup{justification=centering, format=plain}
-	\caption[\acf{UI}: Benutzer zum Administrator ernennen]{\acf{UI}: Benutzer zum Administrator ernennen \\ \quelleScreenshot}
+	\caption[\acl{UI}: Administrator-Ernennung]{\acl{UI}: Administrator-Ernennung \\ \quelleScreenshot}
 	\label{fig:AdminPromoteToAdminImplement}
 \end{figure}
-
-
-

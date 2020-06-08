@@ -2,7 +2,7 @@
 \subsection{Docker}
 \label{sec:grundlagen:docker}
 Bei der heutigen Softwareentwicklung spielt die Art und Weise, wie eine Software bereitgestellt wird, eine zentrale Rolle.
-Gerade bei der Entwicklung einer verteilten Architektur wie die der Microservices\footnote{siehe \ref{ch:microservice}} ist dies besonders wichtig, da die einzelnen Schritte dieses Prozesses weitestgehend automatisch durchgeführt werden sollen.
+Gerade bei der Entwicklung einer verteilten Architektur wie die der Microservices (siehe Kapitel~\ref{sec:grundlagen:microservices}) ist dies besonders wichtig, da die einzelnen Schritte dieses Prozesses weitestgehend automatisch durchgeführt werden sollen.
 Weiterhin benötigen Microservices in der Regel nur sehr wenige Hardware-Ressourcen und arbeiten autonom.
 Aus diesen Gründen ist es sinnvoll, die vorhandenen Ressourcen eines Servers zu verteilen und gleichzeitig eine isolierte Umgebung für die einzelnen Microservices zu schaffen.
 
@@ -19,14 +19,14 @@ Vielmehr wird eine isolierte Umgebung für eine spezifische Anwendung zur Verfü
 	\captionsetup{justification=centering, format=plain}
 	\subfigure[Container-Virtualisierung]{\includegraphics[width=0.45\textwidth]{img/grundlagen/technisch/docker_container}}\hspace{1cm}
 	\subfigure[Virtuelle Maschine]{\includegraphics[width=0.45\textwidth]{img/grundlagen/technisch/docker_hypervisor}}
-	\caption[Vergleich Container-Virtualisierung vs. virtuelle Maschine]{\label{fig:docker_container}Vergleich Container-Virtualisierung vs. virtuelle Maschine, \\Quelle: \cite{MS-DockerInc..05.03.2019}}
+	\caption[Vergleich Container-Virtualisierung vs. virtuelle Maschine]{\label{fig:docker_container}Vergleich Container-Virtualisierung vs. virtuelle Maschine, \\\quelle \cite{MS-DockerInc..05.03.2019}}
 \end{figure}
 
 Abbildung~\ref{fig:docker_container} visualisiert die Architektur einer Container-Virtualisierung und zeigt einen Vergleich zur Hardware-Virtualisierung.\autocite[Vgl.][]{MS-ChrissiKraus.27.07.2018}\autocite[Vgl.][]{MS-MicrosoftCorporation.31.08.2018}
 Wie zu sehen ist, setzt Docker auf dem zugrunde liegenden Betriebssystem auf, wohingegen eine virtuelle Maschine als Gast-System agiert.
 Dabei verwaltet und verteilt bei virtuellen Maschinen ein Hypervisor die Ressourcen, welche die Gast-Systeme zur Verfügung gestellt bekommen.
 Ein Hypervisor ist also ein Manager für virtuelle Maschinen.\autocite[Vgl.][]{MS-ReneBust.06.04.2010}
-Docker-Container bekommen hingegen ihrere Ressourcen vom zugrunde liegenden Betriebssystem bereitgestellt.
+Docker-Container bekommen hingegen ihre Ressourcen vom zugrunde liegenden Betriebssystem bereitgestellt.
 
 Vorteile von Docker sind zum einen das hohe Maß an Integration und zum anderen eine gute Skalierbarkeit von Anwendungen.
 Dabei können die Docker-Container sehr einfach erzeugt, gestartet und gestoppt werden.
