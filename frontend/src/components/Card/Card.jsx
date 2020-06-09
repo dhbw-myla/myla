@@ -14,7 +14,8 @@ class Card extends Component {
                <MDBIcon
                   className="specialIcons material-tooltip-main"
                   icon="clipboard"
-                  onClick={() => navigator.clipboard.writeText(PATH_SERVER_URL + SURVEY_PARTICIPATE + surveyCode)}
+                  onClick={() => navigator.clipboard.writeText(window.location.origin + '/' + SURVEY_PARTICIPATE + surveyCode)}
+                  
                />
             </span>
          );
