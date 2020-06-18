@@ -11,8 +11,8 @@ Aus diesem Grund sollten die Erweiterungen diese nicht untergraben, da sonst rec
 ## Weitere Möglichkeiten
 
 - Erweiterung um ein Forum/Diskussionsboard &rarr; Bereich auf Moodle für die Anwendung
-- zeitlicher Vergleich der Umfragen ermöglichen
-- Vergleich von zwei Umfragen der selben Vorlage
+- zeitlichen Vergleich von Umfragen ermöglichen
+- Vergleich von zwei Umfragen derselben Vorlage (z. B. in unterschiedlichen Kursen)
 - Option Umfrageergebnisse als CSV zu exportieren
   - Auswertung in Excel erweitern
   - Grundlage für weitere Berechnungen
